@@ -99,6 +99,13 @@ methods of specifying sRGB colors, and conversions between them:
 This module does not support ``hsl()`` triplets, nor does it support
 opacity/alpha-channel information via ``rgba()`` or ``hsla()``.
 
+If you need to convert between RGB-specified colors and HSL-specified
+colors, or colors specified via other means, consult `the colorsys
+module`_ in the Python standard library, which can perform conversions
+amongst several common color spaces.
+
+.. _the colorsys module: http://docs.python.org/library/colorsys.html
+
 
 Normalization
 =============
