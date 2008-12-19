@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='webcolors',
-      version='1.0',
+      version='1.1',
       description='A library for working with sRGB color specifications as used in HTML and CSS.',
       author='James Bennett',
       author_email='james@b-list.org',
