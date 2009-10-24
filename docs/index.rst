@@ -9,9 +9,18 @@
 webcolors
 =========
 
-This module provides a number of simple utilities for working with the
-color names and color value formats defined by the HTML and CSS
-specifications.
+This module provides utility functions for working with the color
+names and color value formats defined by the HTML and CSS
+specifications for use in documents on the Web.
+
+The home page, and development repository, of this module is
+<http://bitbucket.org/ubernostrum/webcolors/>. It can be installed by
+downloading a package from the "Downloads" tab there (and then running
+``setup.py install`` from the package), or by downloading from the
+Python Package Index
+(<http://pypi.python.org/pypi/webcolors/>). Automated tools such as
+``easy_install`` and ``pip`` can also be used (``easy_install
+webcolors`` or ``pip install webcolors``).
 
 
 An overview of HTML and CSS colors
@@ -46,9 +55,9 @@ three new ways to specify sRGB colors;
   is equivalent to ``#0099cc``.
 
 * The string "rgb", followed by parentheses, between which are three
-  numeric values each between 0 and 255, inclusive, which are taken to
-  be the values of the red, green and blue components in that order;
-  for example, ``rgb(0, 153, 204)``.
+  base-10 integers each between 0 and 255, inclusive, which are taken
+  to be the values of the red, green and blue components in that
+  order; for example, ``rgb(0, 153, 204)``.
 
 * The same as above, except using percentages instead of numeric
   values; for example, ``rgb(0%, 60%, 80%)``.
@@ -65,22 +74,22 @@ for sixteen named colors, identical to the set found in HTML 4.
 The CSS 2.1 revision did not add any new methods of specifying sRGB
 colors, but did define `one additional named color`_: ``orange``.
 
-`The CSS 3 color module`_ (currently a W3C Working Draft) added one
-new way to specify colors:
+`The CSS 3 color module`_ (currently a W3C Working Draft) adds one new
+way to specify colors:
 
 * A hue-saturation-lightness triple (HSL), using the construct
   ``hsl()``.
 
-CSS 3 also added support for variable opacity of colors, by allowing
+CSS 3 also adds support for variable opacity of colors, by allowing
 the specification of alpha-channel information through the ``rgba()``
 and ``hsla()`` constructs. These are used similarly to the ``rgb()``
 and ``hsl()`` constructs, except a fourth value is supplied indicating
 the level of opacity from ``0.0`` (completely transparent) to ``1.0``
 (completely opaque). Though not technically a color, the keyword
-``transparent`` was also made available in lieu of a color value, and
+``transparent`` is also made available in lieu of a color value, and
 corresponds to ``rgba(0,0,0,0)``.
 
-Finally, CSS 3 defined a new set of color names. This set was taken
+Finally, CSS 3 defines a new set of color names. This set is taken
 directly from `the named colors defined for SVG (Scalable Vector
 Graphics)`_ markup, and is a proper superset of the named colors
 defined in CSS 2.1. This set also has significant overlap with
@@ -99,6 +108,7 @@ not equivalent to X11's ``green``; the color which X11 designates
 .. _one additional named color: http://www.w3.org/TR/CSS21/changes.html#q2
 .. _The CSS 3 color module: http://www.w3.org/TR/css3-color/
 .. _the named colors defined for SVG (Scalable Vector Graphics): http://www.w3.org/TR/SVG11/types.html#ColorKeywords
+
 
 What this module supports
 -------------------------
@@ -122,7 +132,7 @@ opacity/alpha-channel information via ``rgba()`` or ``hsla()``.
 If you need to convert between RGB-specified colors and HSL-specified
 colors, or colors specified via other means, consult `the colorsys
 module`_ in the Python standard library, which can perform conversions
-amongst several common color spaces.
+amongst several common color systems.
 
 .. _the colorsys module: http://docs.python.org/library/colorsys.html
 
@@ -210,13 +220,13 @@ Module contents
 
    Examples::
 
-       >>> normalize_hex('#09c')
-       '#0099cc'
        >>> normalize_hex('#0099cc')
        '#0099cc'
-       >>> normalize_hex('#09C')
-       '#0099cc'
        >>> normalize_hex('#0099CC')
+       '#0099cc'
+       >>> normalize_hex('#09c')
+       '#0099cc'
+       >>> normalize_hex('#09C')
        '#0099cc'
        >>> normalize_hex('0099cc')
        Traceback (most recent call last):
@@ -224,6 +234,8 @@ Module contents
        ValueError: '0099cc' is not a valid hexadecimal color value.
 
    :param hex_value: The hexadecimal color value to normalize.
+   :type hex_value: str
+   :rtype: str
 
 
 Constants
@@ -297,21 +309,24 @@ Conversions from color names to other formats
 
    Examples::
 
-       >>> name_to_rgb('white')
-       (255, 255, 255)
-       >>> name_to_rgb('navy')
-       (0, 0, 128)
-       >>> webcolors.name_to_rgb('goldenrod')
-       (218, 165, 32)
-       >>> name_to_rgb('goldenrod', spec='html4')
-       Traceback (most recent call last):
-           ...
-       ValueError: 'goldenrod' is not defined as a named color in html4.
+    >>> name_to_hex('white')
+    '#ffffff'
+    >>> name_to_hex('navy')
+    '#000080'
+    >>> name_to_hex('goldenrod')
+    '#daa520'
+    >>> name_to_hex('goldenrod', spec='html4')
+    Traceback (most recent call last):
+        ...
+    ValueError: 'goldenrod' is not defined as a named color in html4.
 
    :param name: The color name to convert.
+   :type name: str
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: str
 
 .. function:: name_to_rgb(name, spec='css3')
 
@@ -324,17 +339,20 @@ Conversions from color names to other formats
 
    Examples::
 
-       >>> name_to_rgb_percent('white')
-       ('100%', '100%', '100%')
-       >>> name_to_rgb_percent('navy')
-       ('0%', '0%', '50%')
-       >>> name_to_rgb_percent('goldenrod')
-       ('85.49%', '64.71%', '12.5%')
+       >>> name_to_rgb('white')
+       (255, 255, 255)
+       >>> name_to_rgb('navy')
+       (0, 0, 128)
+       >>> name_to_rgb('goldenrod')
+       (218, 165, 32)
 
    :param name: The color name to convert.
+   :type name: str
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: 3-tuple of integers
 
 .. function:: name_to_rgb_percent(name, spec='css3')
 
@@ -355,9 +373,12 @@ Conversions from color names to other formats
        ('85.49%', '64.71%', '12.5%')
 
    :param name: The color name to convert.
+   :type name: str
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: 3-tuple of strings
 
 
 Conversions from hexadecimal color values to other formats
@@ -374,6 +395,10 @@ Conversions from hexadecimal color values to other formats
 
    Examples::
 
+       >>> hex_to_name('#ffffff')
+       'white'
+       >>> hex_to_name('#fff')
+       'white'
        >>> hex_to_name('#000080')
        'navy'
        >>> hex_to_name('#daa520')
@@ -384,9 +409,12 @@ Conversions from hexadecimal color values to other formats
        ValueError: '#daa520' has no defined color name in html4.
 
    :param hex_value: The hexadecimal color value to convert.
+   :type hex_value: str
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: str
 
 .. function:: hex_to_rgb(hex_value)
 
@@ -397,12 +425,14 @@ Conversions from hexadecimal color values to other formats
 
    Examples::
 
-       >>> hex_to_rgb(#'fff')
+       >>> hex_to_rgb('#fff')
        (255, 255, 255)
        >>> hex_to_rgb('#000080')
        (0, 0, 128)
 
    :param hex_value: The hexadecimal color value to convert.
+   :type hex_value: str
+   :rtype: 3-tuple of integers
 
 .. function:: hex_to_rgb_percent(hex_value)
 
@@ -420,6 +450,8 @@ Conversions from hexadecimal color values to other formats
        ('0%', '0%', '50%')
 
    :param hex_value: The hexadecimal color value to convert.
+   :type hex_value: str
+   :rtype: 3-tuple of strings
 
 
 Conversions from integer ``rgb()`` triplets to other formats
@@ -438,16 +470,18 @@ Conversions from integer ``rgb()`` triplets to other formats
 
    Examples::
 
-       >>> rgb_to_name((0, 0, 0))
-       'black'
+       >>> rgb_to_name((255, 255, 255))
+       'white'
        >>> rgb_to_name((0, 0, 128))
        'navy'
 
-   :param rgb_triplet: The ``rgb()`` triplet, as a three-tuple of
-      integers.
+   :param rgb_triplet: The ``rgb()`` triplet
+   :type rgb_triplet: 3-tuple of integers
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: str
 
 .. function:: rgb_to_hex(rgb_triplet)
 
@@ -461,8 +495,9 @@ Conversions from integer ``rgb()`` triplets to other formats
        >>> rgb_to_hex((0, 0, 128))
        '#000080'
 
-   :param rgb_triplet: The ``rgb()`` triplet, as a three-tuple of
-      integers.
+   :param rgb_triplet: The ``rgb()`` triplet.
+   :type rgb_triplet: 3-tuple of integers
+   :rtype: str
 
 .. function:: rgb_to_rgb_percent(rgb_triplet)
 
@@ -478,17 +513,18 @@ Conversions from integer ``rgb()`` triplets to other formats
    used and rounded to two decimal places, which may result in a loss
    of precision for some values.
 
-   Examples:
+   Examples::
 
        >>> rgb_to_rgb_percent((255, 255, 255))
        ('100%', '100%', '100%')
        >>> rgb_to_rgb_percent((0, 0, 128))
        ('0%', '0%', '50%')
-       >>> webcolors.rgb_to_rgb_percent((218, 165, 32))
+       >>> rgb_to_rgb_percent((218, 165, 32))
        ('85.49%', '64.71%', '12.5%')
 
-   :param rgb_triplet: The ``rgb()`` triplet, as a three-tuple of
-      integers.
+   :param rgb_triplet: The ``rgb()`` triplet.
+   :type rgb_triplet: 3-tuple of integers
+   :rtype: 3-tuple of strings
 
 
 Conversions from percentage ``rgb()`` triplets to other formats
@@ -514,11 +550,13 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> rgb_percent_to_name(('85.49%', '64.71%', '12.5%'))
        'goldenrod'
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet, as a three-tuple
-      of strings giving percentage values.
+   :param rgb_percent_triplet: The ``rgb()`` triplet.
+   :type rgb_percent_triplet: 3-tuple of strings
    :param spec: The specification from which to draw the list of color
       names; valid values are ``html4``, ``css2``, ``css21`` and
       ``css3``. Default is ``css3``.
+   :type spec: str
+   :rtype: str
 
 .. function:: rgb_percent_to_hex(rgb_percent_triplet)
 
@@ -535,8 +573,9 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> rgb_percent_to_hex(('85.49%', '64.71%', '12.5%'))
        '#daa520'
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet, as a three-tuple
-      of strings giving percentage values.
+   :param rgb_percent_triplet: The ``rgb()`` triplet.
+   :type rgb_percent_triplet: 3-tuple of strings
+   :rtype: str
 
 .. function:: rgb_percent_to_rgb(rgb_percent_triplet)
 
@@ -560,5 +599,17 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> webcolors.rgb_percent_to_rgb(('85.49%', '64.71%', '12.5%'))
        (218, 165, 32)
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet, as a three-tuple
-      of strings giving percentage values.
+   :param rgb_percent_triplet: The ``rgb()`` triplet.
+   :type rgb_percent_triplet: 3-tuple of strings
+   :rtype: 3-tuple of integers
+
+
+Known issues
+------------
+
+Due to the use of floats to handle percentages, some precision may be
+lost when converting to or from percentage ``rgb()`` triplets; see
+:func:`rgb_to_rgb_percent` and :func:`rgb_percent_to_rgb` for details.
+
+Bugs should be reported to `the issue tracker on Bitbucket
+<http://bitbucket.org/ubernostrum/webcolors/issues/>`_.
