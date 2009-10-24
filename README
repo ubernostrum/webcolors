@@ -16,5 +16,11 @@ the Python standard library):
 
 * Percentage rgb() triplet
 
+For example::
+
+    >>> import webcolors
+    >>> webcolors.hex_to_name('#daa520')
+    'goldenrod'
+
 Full documentation is `available online
 <http://docs.b-list.org/webcolors/1.3.1/`_.
