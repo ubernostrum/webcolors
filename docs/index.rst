@@ -309,16 +309,16 @@ Conversions from color names to other formats
 
    Examples::
 
-    >>> name_to_hex('white')
-    '#ffffff'
-    >>> name_to_hex('navy')
-    '#000080'
-    >>> name_to_hex('goldenrod')
-    '#daa520'
-    >>> name_to_hex('goldenrod', spec='html4')
-    Traceback (most recent call last):
-        ...
-    ValueError: 'goldenrod' is not defined as a named color in html4.
+       >>> name_to_hex('white')
+       '#ffffff'
+       >>> name_to_hex('navy')
+       '#000080'
+       >>> name_to_hex('goldenrod')
+       '#daa520'
+       >>> name_to_hex('goldenrod', spec='html4')
+       Traceback (most recent call last):
+           ...
+       ValueError: 'goldenrod' is not defined as a named color in html4.
 
    :param name: The color name to convert.
    :type name: str
@@ -596,7 +596,7 @@ Conversions from percentage ``rgb()`` triplets to other formats
        (255, 255, 255)
        >>> rgb_percent_to_rgb(('0%', '0%', '50%'))
        (0, 0, 128)
-       >>> webcolors.rgb_percent_to_rgb(('85.49%', '64.71%', '12.5%'))
+       >>> rgb_percent_to_rgb(('85.49%', '64.71%', '12.5%'))
        (218, 165, 32)
 
    :param rgb_percent_triplet: The ``rgb()`` triplet.
