@@ -23,8 +23,8 @@ Python Package Index
 webcolors`` or ``pip install webcolors``).
 
 
-An overview of HTML and CSS colors
-----------------------------------
+An overview of colors on the Web
+--------------------------------
 
 Colors on the Web are specified in `the sRGB color space`_, where each
 color is made up of a red component, a green component and a blue

@@ -1,7 +1,7 @@
 """
-Utility functions for with the color names and color value formats
-defined by the HTML and CSS specifications for use in documents on the
-Web.
+Utility functions for working with the color names and color value
+formats defined by the HTML and CSS specifications for use in
+documents on the Web.
 
 
 What this module supports
