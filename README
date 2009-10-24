@@ -6,6 +6,8 @@ Support is included for the following formats (RGB colorspace only;
 conversion to/from HSL can be handled by the ``colorsys`` module in
 the Python standard library):
 
+* Specification-defined color names
+
 * Six-digit hexadecimal
 
 * Three-digit hexadecimal
@@ -13,16 +15,6 @@ the Python standard library):
 * Integer rgb() triplet
 
 * Percentage rgb() triplet
-
-And for the defined color names of the following specifications:
-
-* HTML 4
-
-* CSS 2
-
-* CSS 2.1
-
-* SVG/CSS 3
 
 Full documentation is `available online
 <http://docs.b-list.org/webcolors/1.3.1/`_.
