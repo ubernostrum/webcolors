@@ -48,7 +48,7 @@ The HTML 4 specification defined `two ways to specify sRGB colors`_:
   such colors.
 
 In `its description of color units`_, the CSS 1 specification added
-three new ways to specify sRGB colors;
+three new ways to specify sRGB colors:
 
 * A hash mark followed by three hexadecimal digits, which is expanded
   into three hexadecimal pairs by repeating each digit; thus ``#09c``
