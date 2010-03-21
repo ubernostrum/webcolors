@@ -143,7 +143,7 @@ def _reversedict(d):
     dictionary, returns a new dictionary with keys and values swapped.
 
     """
-    return dict(zip(d.values(), d.keys()))
+    return dict(list(zip(list(d.values()), list(d.keys()))))
 
 
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
@@ -378,7 +378,7 @@ def normalize_hex(hex_value):
     except AttributeError:
         raise ValueError("'%s' is not a valid hexadecimal color value." % hex_value)
     if len(hex_digits) == 3:
-        hex_digits = ''.join(map(lambda s: 2 * s, hex_digits))
+        hex_digits = ''.join([2 * s for s in hex_digits])
     return '#%s' % hex_digits.lower()
 
 
@@ -537,8 +537,7 @@ def hex_to_rgb(hex_value):
 
     """
     hex_digits = normalize_hex(hex_value)
-    return tuple(map(lambda s: int(s, 16),
-                     (hex_digits[1:3], hex_digits[3:5], hex_digits[5:7])))
+    return tuple([int(s, 16) for s in (hex_digits[1:3], hex_digits[3:5], hex_digits[5:7])])
 
 
 def hex_to_rgb_percent(hex_value):
@@ -631,8 +630,7 @@ def rgb_to_rgb_percent(rgb_triplet):
     # from 0 through 4, as well as 0 itself.
     specials = {255: '100%', 128: '50%', 64: '25%',
                  32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple(map(lambda d: specials.get(d, '%.02f%%' % ((d / 255.0) * 100)),
-                     rgb_triplet))
+    return tuple([specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) for d in rgb_triplet])
 
 
 # Conversions from percentage rgb() triplets to various formats.
