@@ -174,6 +174,19 @@ and for functions which perform intermediate conversion to a
 predefined name before returning a result in another format, this
 module always normalizes such values to be entirely lower-case.
 
+For colors specified via ``rgb()`` triplets, values contained in the
+triplets will be normalized via clipping in accordance with CSS:
+
+* Integer values less than 0 will be normalized to 0, and percentage
+  values less than 0% will be normalized to 0%.
+
+* Integer values greater than 255 will be normalized to 255, and
+  percentage values greater than 100% will be normalized to 100%.
+
+The functions :func:`normalize_integer_triplet` and
+:func:`normalize_percent_triplet` in this module can be used to
+perform this normalization manually if desired.
+
 For purposes of identifying the specification from which to draw the
 selection of defined color names, this module recognizes the following
 identifiers:
@@ -236,6 +249,44 @@ Module contents
    :param hex_value: The hexadecimal color value to normalize.
    :type hex_value: str
    :rtype: str
+
+.. function:: normalize_integer_triplet(rgb_triplet)
+
+    Normalize an integer ``rgb()`` triplet so that all values are
+    within the range 0-255 inclusive.
+
+    Examples::
+
+        >>> normalize_integer_triplet((128, 128, 128))
+        (128, 128, 128)
+        >>> normalize_integer_triplet((0, 0, 0))
+        (0, 0, 0)
+        >>> normalize_integer_triplet((255, 255, 255))
+        (255, 255, 255)
+        >>> normalize_integer_triplet((270, -20, 128))
+        (255, 0, 128)
+    
+    :param rgb_triplet: The integer ``rgb()`` triplet to normalize.
+    :type rgb_triplet: 3-tuple of integers
+    :rtype: 3-tuple of integers
+
+.. function:: normalize_percent_triplet(rgb_triplet)
+
+    Normalize a percentage ``rgb()`` triplet to that all values are
+    within the range 0%-100% inclusive.
+
+    Examples::
+
+        >>> normalize_percent_triplet(('50%', '50%', '50%'))
+        ('50%', '50%', '50%')
+        >>> normalize_percent_triplet(('0%', '100%', '0%'))
+        ('0%', '100%', '0%')
+        >>> normalize_percent_triplet(('-10%', '250%', '500%'))
+        ('0%', '100%', '100%')
+    
+    :param rgb_triplet: The percentage ``rgb()`` triplet to normalize.
+    :type rgb_triplet: 3-tuple of strings
+    :rtype: 3-tuple of strings
 
 
 Constants

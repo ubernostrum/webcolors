@@ -66,6 +66,19 @@ and for functions which perform intermediate conversion to a
 predefined name before returning a result in another format, this
 module always normalizes such values to be entirely lower-case.
 
+For colors specified via ``rgb()`` triplets, values contained in the
+triplets will be normalized via clipping in accordance with CSS:
+
+* Integer values less than 0 will be normalized to 0, and percentage
+  values less than 0% will be normalized to 0%.
+
+* Integer values greater than 255 will be normalized to 255, and
+  percentage values greater than 100% will be normalized to 100%.
+
+The functions :func:`normalize_integer_triplet` and
+:func:`normalize_percent_triplet` in this module can be used to
+perform this normalization manually if desired.
+
 For purposes of identifying the specification from which to draw the
 selection of defined color names, this module recognizes the following
 identifiers:
@@ -382,29 +395,29 @@ def normalize_hex(hex_value):
     return '#%s' % hex_digits.lower()
 
 
-def normalize_triplet(rgb_triplet):
+def normalize_integer_triplet(rgb_triplet):
     """
-    Normalize an ``rgb()`` triplet so that all values are within the
-    range 0-255 inclusive.
+    Normalize an integer ``rgb()`` triplet so that all values are
+    within the range 0-255 inclusive.
 
     Examples:
 
-    >>> normalize_triplet((128, 128, 128))
+    >>> normalize_integer_triplet((128, 128, 128))
     (128, 128, 128)
-    >>> normalize_triplet((0, 0, 0))
+    >>> normalize_integer_triplet((0, 0, 0))
     (0, 0, 0)
-    >>> normalize_triplet((255, 255, 255))
+    >>> normalize_integer_triplet((255, 255, 255))
     (255, 255, 255)
-    >>> normalize_triplet((270, -20, 128))
+    >>> normalize_integer_triplet((270, -20, 128))
     (255, 0, 128)
     
     """
-    return tuple([_normalize_rgb(value) for value in rgb_triplet])
+    return tuple([_normalize_integer_rgb(value) for value in rgb_triplet])
 
 
-def _normalize_rgb(value):
+def _normalize_integer_rgb(value):
     """
-    Normalize ``value`` for use in an ``rgb()`` triplet, as follows:
+    Normalize ``value`` for use in an integer ``rgb()`` triplet, as follows:
     
     * If ``value`` is less than 0, convert to 0.
     
@@ -412,15 +425,15 @@ def _normalize_rgb(value):
 
     Examples:
 
-    >>> _normalize_rgb(0)
+    >>> _normalize_integer_rgb(0)
     0
-    >>> _normalize_rgb(255)
+    >>> _normalize_integer_rgb(255)
     255
-    >>> _normalize_rgb(128)
+    >>> _normalize_integer_rgb(128)
     128
-    >>> _normalize_rgb(-20)
+    >>> _normalize_integer_rgb(-20)
     0
-    >>> _normalize_rgb(270)
+    >>> _normalize_integer_rgb(270)
     255
     
     """
@@ -430,6 +443,60 @@ def _normalize_rgb(value):
         return 0
     if value > 255:
         return 255
+
+
+def normalize_percent_triplet(rgb_triplet):
+    """
+    Normalize a percentage ``rgb()`` triplet to that all values are
+    within the range 0%-100% inclusive.
+
+    Examples:
+
+    >>> normalize_percent_triplet(('50%', '50%', '50%'))
+    ('50%', '50%', '50%')
+    >>> normalize_percent_triplet(('0%', '100%', '0%'))
+    ('0%', '100%', '0%')
+    >>> normalize_percent_triplet(('-10%', '250%', '500%'))
+    ('0%', '100%', '100%')
+    
+    """
+    return tuple([_normalize_percent_rgb(value) for value in rgb_triplet])
+    
+
+def _normalize_percent_rgb(value):
+    """
+    Normalize ``value`` for use in a percentage ``rgb()`` triplet, as
+    follows:
+
+    * If ``value`` is less than 0%, convert to 0%.
+
+    * If ``value`` is greater than 100%, convert to 100%.
+
+    Examples:
+
+    >>> _normalize_percent_rgb('0%')
+    '0%'
+    >>> _normalize_percent_rgb('100%')
+    '100%'
+    >>> _normalize_percent_rgb('62%')
+    '62%'
+    >>> _normalize_percent_rgb('-5%')
+    '0%'
+    >>> _normalize_percent_rgb('250%')
+    '100%'
+    >>> _normalize_percent_rgb('85.49%')
+    '85.49%'
+    
+    """
+    percent = value.split('%')[0]
+    percent = float(percent) if '.' in percent else int(percent)
+    
+    if 0 <= percent <= 100:
+        return '%s%%' % percent
+    if percent < 0:
+        return '0%'
+    if percent > 100:
+        return '100%'
     
 
 # Conversions from color names to various formats.
@@ -632,7 +699,7 @@ def rgb_to_name(rgb_triplet, spec='css3'):
     'navy'
 
     """
-    return hex_to_name(rgb_to_hex(normalize_triplet(rgb_triplet)), spec=spec)
+    return hex_to_name(rgb_to_hex(normalize_integer_triplet(rgb_triplet)), spec=spec)
 
 
 def rgb_to_hex(rgb_triplet):
@@ -648,7 +715,7 @@ def rgb_to_hex(rgb_triplet):
     '#000080'
 
     """
-    return '#%02x%02x%02x' % normalize_triplet(rgb_triplet)
+    return '#%02x%02x%02x' % normalize_integer_triplet(rgb_triplet)
 
 
 def rgb_to_rgb_percent(rgb_triplet):
@@ -681,7 +748,7 @@ def rgb_to_rgb_percent(rgb_triplet):
     specials = {255: '100%', 128: '50%', 64: '25%',
                  32: '12.5%', 16: '6.25%', 0: '0%'}
     return tuple([specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) \
-                  for d in normalize_triplet(rgb_triplet)])
+                  for d in normalize_integer_triplet(rgb_triplet)])
 
 
 # Conversions from percentage rgb() triplets to various formats.
@@ -710,7 +777,7 @@ def rgb_percent_to_name(rgb_percent_triplet, spec='css3'):
     'goldenrod'
 
     """
-    return rgb_to_name(rgb_percent_to_rgb(rgb_percent_triplet), spec=spec)
+    return rgb_to_name(rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)), spec=spec)
 
 
 def rgb_percent_to_hex(rgb_percent_triplet):
@@ -729,7 +796,7 @@ def rgb_percent_to_hex(rgb_percent_triplet):
     '#daa520'
 
     """
-    return rgb_to_hex(rgb_percent_to_rgb(rgb_percent_triplet))
+    return rgb_to_hex(rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)))
 
 
 def _percent_to_integer(percent):
@@ -766,7 +833,7 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
     (218, 165, 32)
 
     """
-    return tuple(map(_percent_to_integer, rgb_percent_triplet))
+    return tuple(map(_percent_to_integer, normalize_percent_triplet(rgb_percent_triplet)))
 
 
 if __name__ == '__main__':
