@@ -527,6 +527,10 @@ def name_to_hex(name, spec='css3'):
     Traceback (most recent call last):
         ...
     ValueError: 'goldenrod' is not defined as a named color in html4.
+    >>> name_to_hex('goldenrod', spec='css5')
+    Traceback (most recent call last):
+        ...
+    TypeError: 'css5' is not a supported specification for color name lookups; supported specifications are: html4, css2, css21, css3.
 
     """
     if spec not in SUPPORTED_SPECIFICATIONS:
@@ -625,6 +629,10 @@ def hex_to_name(hex_value, spec='css3'):
     Traceback (most recent call last):
         ...
     ValueError: '#daa520' has no defined color name in html4.
+    >>> hex_to_name('#daa520', spec='css5')
+    Traceback (most recent call last):
+        ...
+    TypeError: 'css5' is not a supported specification for color name lookups; supported specifications are: html4, css2, css21, css3.
 
     """
     if spec not in SUPPORTED_SPECIFICATIONS:
