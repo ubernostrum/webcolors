@@ -382,6 +382,56 @@ def normalize_hex(hex_value):
     return '#%s' % hex_digits.lower()
 
 
+def normalize_triplet(rgb_triplet):
+    """
+    Normalize an ``rgb()`` triplet so that all values are within the
+    range 0-255 inclusive.
+
+    Examples:
+
+    >>> normalize_triplet((128, 128, 128))
+    (128, 128, 128)
+    >>> normalize_triplet((0, 0, 0))
+    (0, 0, 0)
+    >>> normalize_triplet((255, 255, 255))
+    (255, 255, 255)
+    >>> normalize_triplet((270, -20, 128))
+    (255, 0, 128)
+    
+    """
+    return tuple([_normalize_rgb(value) for value in rgb_triplet])
+
+
+def _normalize_rgb(value):
+    """
+    Normalize ``value`` for use in an ``rgb()`` triplet, as follows:
+    
+    * If ``value`` is less than 0, convert to 0.
+    
+    * If ``value`` is greater than 255, convert to 255.
+
+    Examples:
+
+    >>> _normalize_rgb(0)
+    0
+    >>> _normalize_rgb(255)
+    255
+    >>> _normalize_rgb(128)
+    128
+    >>> _normalize_rgb(-20)
+    0
+    >>> _normalize_rgb(270)
+    255
+    
+    """
+    if 0 <= value <= 255:
+        return value
+    if value < 0:
+        return 0
+    if value > 255:
+        return 255
+    
+
 # Conversions from color names to various formats.
 #################################################################
 
@@ -582,7 +632,7 @@ def rgb_to_name(rgb_triplet, spec='css3'):
     'navy'
 
     """
-    return hex_to_name(rgb_to_hex(rgb_triplet), spec=spec)
+    return hex_to_name(rgb_to_hex(normalize_triplet(rgb_triplet)), spec=spec)
 
 
 def rgb_to_hex(rgb_triplet):
@@ -598,7 +648,7 @@ def rgb_to_hex(rgb_triplet):
     '#000080'
 
     """
-    return '#%02x%02x%02x' % rgb_triplet
+    return '#%02x%02x%02x' % normalize_triplet(rgb_triplet)
 
 
 def rgb_to_rgb_percent(rgb_triplet):
@@ -630,7 +680,8 @@ def rgb_to_rgb_percent(rgb_triplet):
     # from 0 through 4, as well as 0 itself.
     specials = {255: '100%', 128: '50%', 64: '25%',
                  32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple([specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) for d in rgb_triplet])
+    return tuple([specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) \
+                  for d in normalize_triplet(rgb_triplet)])
 
 
 # Conversions from percentage rgb() triplets to various formats.
