@@ -1,3 +1,15 @@
+"""
+Conformance tests which do not require an internet connection or HTML
+parsing libraries, and so can be run as part of the normal test suite
+of webcolors.
+
+For tests which extract the relevant values, during the test run, from
+the online standards documents (and so require both an internet
+connection and an HTML parsing library), see the file
+``definitions.py`` in this directory.
+
+"""
+
 import unittest
 
 import webcolors
