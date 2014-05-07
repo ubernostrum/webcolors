@@ -1,6 +1,11 @@
-Support is included for the following formats (RGB colorspace only;
-conversion to/from HSL can be handled by the ``colorsys`` module in
-the Python standard library):
+.. -*-restructuredtext-*-
+
+``webcolors`` is a simple Python module for working with HTML/CSS
+colors.
+
+Support is included for normalizing and converting between the
+following formats (RGB colorspace only; conversion to/from HSL can be
+handled by the ``colorsys`` module in the Python standard library):
 
 * Specification-defined color names
 
@@ -8,9 +13,9 @@ the Python standard library):
 
 * Three-digit hexadecimal
 
-* Integer rgb() triplet
+* Integer ``rgb()`` triplet
 
-* Percentage rgb() triplet
+* Percentage ``rgb()`` triplet
 
 For example::
 
@@ -19,4 +24,4 @@ For example::
     'goldenrod'
 
 Full documentation is `available online
-<http://docs.b-list.org/webcolors/1.4/>`_.
+<https://webcolors.readthedocs.org/en/latest/>`_.
