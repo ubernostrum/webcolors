@@ -39,9 +39,9 @@ supported specifications are: %s." % (', '.join(SUPPORTED_SPECIFICATIONS))
 #
 # http://www.w3.org/TR/html401/types.html#h-6.5
 #
-# The file tests/conformance.py in the source distribution of this
-# module includes an exact copy of that document's color definitions,
-# and verifies that the hex values below are correct.
+# The file tests/definitions.py in the source distribution of this
+# module downloads a copy of the HTML 4 standard and parses out the
+# color names to ensure the values below are correct.
 HTML4_NAMES_TO_HEX = {
     'aqua': '#00ffff',
     'black': '#000000',
@@ -75,12 +75,17 @@ CSS21_NAMES_TO_HEX = dict(HTML4_NAMES_TO_HEX, orange='#ffa500')
 #
 # http://www.w3.org/TR/SVG11/types.html#ColorKeywords
 #
+# CSS 3 also provides definitions of these colors, in both rgb() and
+# hexdecimal formats:
+#
+# http://www.w3.org/TR/css3-color/#svg-color
+#
 # That document provides the definitions as RGB triplets. Since hex
 # values are more common in real-world HTML and CSS, the mapping below
-# is to hex values instead. The file tests/conformance.py in the
-# source distribution of this module includes an exact copy of the RGB
-# triplet values in the SVG specification, and verifies that the hex
-# values below are correct.
+# is to hex values instead. The file tests/definitions.py in the
+# source distribution of this module downloads a copy of the CSS 3
+# color module and parses out the color names to ensure the values
+# below are correct.
 CSS3_NAMES_TO_HEX = {
     'aliceblue': '#f0f8ff',
     'antiquewhite': '#faebd7',
