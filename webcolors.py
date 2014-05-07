@@ -80,12 +80,13 @@ CSS21_NAMES_TO_HEX = dict(HTML4_NAMES_TO_HEX, orange='#ffa500')
 #
 # http://www.w3.org/TR/css3-color/#svg-color
 #
-# That document provides the definitions as RGB triplets. Since hex
-# values are more common in real-world HTML and CSS, the mapping below
-# is to hex values instead. The file tests/definitions.py in the
-# source distribution of this module downloads a copy of the CSS 3
-# color module and parses out the color names to ensure the values
-# below are correct.
+# SVG provides the definitions as RGB triplets. CSS 3 provides them
+# both as RGB triplets and as hexadecimal. Since hex values are more
+# common in real-world HTML and CSS, the mapping below is to hex
+# values instead. The file tests/definitions.py in the source
+# distribution of this module downloads a copy of the CSS 3 color
+# module and parses out the color names to ensure the values below are
+# correct.
 CSS3_NAMES_TO_HEX = {
     'aliceblue': '#f0f8ff',
     'antiquewhite': '#faebd7',
