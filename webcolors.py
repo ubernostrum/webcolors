@@ -524,10 +524,6 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
 
     Some precision may be lost in this conversion. See the note
     regarding precision for ``rgb_to_rgb_percent()`` for details.
-    However, the following is true for any 3-tuple ``t`` of integers
-    in the range 0...255::
-
-        t == rgb_percent_to_rgb(rgb_to_rgb_percent(t))
 
     """
     return tuple(map(_percent_to_integer,
