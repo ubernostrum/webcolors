@@ -643,8 +643,8 @@ def html5_parse_legacy_color(input):
     #    characters of input are all ASCII hex digits, then run these
     #    substeps:
     if len(input) == 4 and \
-           input.startswith('#') and \
-           all(c in 'ABCDEFabcedf' for c in input[1:]):
+       input.startswith('#') and \
+       all(c in 'ABCDEFabcedf' for c in input[1:]):
         # 1. Let result be a simple color.
         #
         # 2. Interpret the second character of input as a hexadecimal
