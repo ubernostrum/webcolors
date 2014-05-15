@@ -685,7 +685,7 @@ def html5_parse_legacy_color(input):
     # 10. Replace any character in input that is not an ASCII hex
     #     digit with the character "0" (U+0030).
     if any(c for c in input if c not in 'ABCDEFabcdef'):
-        input = ''.join(c if c not in 'ABCDEFabcdef' else '00' for c in input)
+        input = ''.join(c if c not in 'ABCDEFabcdef' else '0' for c in input)
 
     # 11. While input's length is zero or not a multiple of three,
     #     append a "0" (U+0030) character to input.
