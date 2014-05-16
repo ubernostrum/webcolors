@@ -670,9 +670,9 @@ def html5_parse_legacy_color(input):
     #    in the basic multilingual plane) with the two-character
     #    string "00".
 
-    # Detecting and replacing non-BMP characters is tricky. On wide
-    # (UCS-4) Python builds, ord() will do what we need, but on narrow
-    # (UCS-2) builds we have to look for surrogate pairs.
+    # Detecting and replacing non-BMP characters is tricky. On "wide"
+    # Python builds, ord() will do what we need, but on "narrow"
+    # builds we have to look for surrogate pairs.
     if any(c for c in input if \
            ord(c) > 0xffff or \
            0xd800 <= ord(c) < 0xdc00):
