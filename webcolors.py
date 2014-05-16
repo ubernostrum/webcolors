@@ -669,8 +669,17 @@ def html5_parse_legacy_color(input):
     #    point greater than U+FFFF (i.e. any characters that are not
     #    in the basic multilingual plane) with the two-character
     #    string "00".
-    if any(c for c in input if ord(c) > 0xffff):
-        input = ''.join(c if ord(c) <= 0xffff else '00' for c in input)
+
+    # Detecting and replacing non-BMP characters is tricky. On wide
+    # (UCS-4) Python builds, ord() will do what we need, but on narrow
+    # (UCS-2) builds we have to look for surrogate pairs.
+    if any(c for c in input if \
+           ord(c) > 0xffff or \
+           0xd800 <= ord(c) < 0xdc00):
+        input = ''.join('00' if ord(c) > 0xffff or \
+                             0xd800 <= ord(c) < 0xdc00 else \
+                             '' if 0xdc00 <= ord(c) < 0xe000 else \
+                             c for c in input)
 
     # 8. If input is longer than 128 characters, truncate input,
     #    leaving only the first 128 characters.
