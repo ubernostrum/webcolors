@@ -135,7 +135,7 @@ Normalization functions
 .. function:: normalize_integer_triplet(rgb_triplet)
 
     Normalize an integer ``rgb()`` triplet so that all values are
-    within the range 0-255 inclusive.
+    within the range 0..255.
 
     Examples::
 
@@ -155,7 +155,7 @@ Normalization functions
 .. function:: normalize_percent_triplet(rgb_triplet)
 
     Normalize a percentage ``rgb()`` triplet to that all values are
-    within the range 0%-100% inclusive.
+    within the range 0%..100%.
 
     Examples::
 
@@ -172,7 +172,7 @@ Normalization functions
 
 
 Conversions from color names to other formats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------
 
 .. function:: name_to_hex(name, spec='css3')
 
@@ -325,7 +325,7 @@ Conversion from hexadecimal color values to other formats
 
 
 Conversions from integer ``rgb()`` triplets to other formats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------------------------------
 
 .. function:: rgb_to_name(rgb_triplet, spec='css3')
 
@@ -396,7 +396,7 @@ Conversions from integer ``rgb()`` triplets to other formats
 
 
 Conversions from percentage ``rgb()`` triplets to other formats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------------
 
 .. function:: rgb_percent_to_name(rgb_percent_triplet, spec='css3')
 
@@ -465,3 +465,76 @@ Conversions from percentage ``rgb()`` triplets to other formats
    :param rgb_percent_triplet: The ``rgb()`` triplet.
    :type rgb_percent_triplet: 3-tuple of ``str``
    :rtype: 3-tuple of ``int``
+
+
+HTML5 color algorithms
+----------------------
+
+.. warning:: These functions are experimental, and based on a
+   not-yet-finalized standard.  These functions implement the HTML5
+   color algorithms as given in `section 2.4.6 of the Candidate
+   Recommendation of 29 April 2014
+   <http://www.w3.org/TR/html5/infrastructure.html#colors>`_.
+
+.. function:: html5_parse_simple_color(input)
+
+   Apply the HTML5 simple color parsing algorithm.
+
+   Examples::
+
+       >>> html5_parse_simple_color('#ffffff')
+       (255, 255, 255)
+       >>> html5_parse_simple_color('#fff')
+       Traceback (most recent call last):
+           ...
+       ValueError: An HTML5 simple color must be a string exactly seven characters long.
+
+   :param input: The color to parse.
+   :type input: seven-character ``str``, which must consist of exactly the
+       character ``#`` followed by six hexadecimal digits
+   :rtype: 3-tuple of ``int``, each in the range 0..255.
+
+.. function:: html5_serialize_simple_color(simple_color)
+
+   Apply the HTML5 simple color serialization algorithm.
+
+   Examples::
+
+       >>> html5_serialize_simple_color((0, 0, 0))
+       '#000000'
+       >>> html5_serialize_simple_color((255, 255, 255))
+       '#ffffff'
+
+   :param simple_color: The color to serialize.
+   :type simple_color: 3-tuple of ``int``, each in the range 0..255
+   :rtype: A valid lowercase simple color, which is a ``str``, exactly
+      seven characters long, beginning with ``#`` and followed by six
+      lowercase hexadecimal digits.
+
+.. function:: html5_parse_legacy_color(input)
+
+   Apply the HTML5 legacy color parsing algorithm.
+
+   Note that, since this algorithm is intended to handle many types of
+   malformed color values present in real-world Web documents, it is
+   *extremely* forgiving of input, but the results of parsing inputs
+   with high levels of "junk" (i.e., text other than a color value)
+   may be surprising.
+
+   Note also that ``input`` *must* be a Unicode string -- on Python 2,
+   bytestrings will not be accepted.
+
+   Examples::
+
+       >>> html5_parse_legacy_color('black')
+       (0, 0, 0)
+       >>> html5_parse_legacy_color('G')
+       (0, 0, 0)
+       >>> html5_parse_legacy_color('currentColor')
+       (192, 224, 0)
+       >>> html5_parse_legacy_color('#b\l~=y5H=#Jy(6FwH5]jU;6D')
+       (176, 0, 5)
+
+   :param input: The color to parse.
+   :type input: ``str`` on Python 3, ``unicode`` on Python 2
+   :rtype: 3-tuple of ``int``, each in the range 0..255

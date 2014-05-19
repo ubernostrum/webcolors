@@ -19,6 +19,12 @@ try:
 except NameError:
     unichr = chr
 
+# Python 2's unicode is Python 3's str.
+try:
+    unicode
+except NameError:
+    unicode = str
+
 
 def _reversedict(d):
     """
@@ -626,7 +632,7 @@ def html5_parse_legacy_color(input):
     
     """
     # 1. Let input be the string being parsed.
-    if not isinstance(input, str):
+    if not isinstance(input, unicode):
         raise ValueError("HTML5 legacy color parsing requires a string as input.")
 
     # 2. If input is the empty string, then return an error.
@@ -689,7 +695,7 @@ def html5_parse_legacy_color(input):
     #  representing the actual Unicode codepoints in input. From
     #  there, doing the replace is easy)
     encoded_input = input.encode('utf_32_le')
-    codepoints = struct.unpack('<'+('L'*(len(encoded_input)/4)),
+    codepoints = struct.unpack('<'+('L'*(int(len(encoded_input)/4))),
                                encoded_input)
     input = ''.join('00' if c > 0xffff \
                          else unichr(c) \
@@ -708,7 +714,7 @@ def html5_parse_legacy_color(input):
     # 10. Replace any character in input that is not an ASCII hex
     #     digit with the character "0" (U+0030).
     if any(c for c in input if c not in ASCII_HEX_DIGITS):
-        input = ''.join(c if c not in ASCII_HEX_DIGITS else '0' for c in input)
+        input = ''.join(c if c in ASCII_HEX_DIGITS else '0' for c in input)
 
     # 11. While input's length is zero or not a multiple of three,
     #     append a "0" (U+0030) character to input.
