@@ -10,6 +10,14 @@ details of the supported formats and conversions.
 
 import math
 import re
+import struct
+
+
+# Python 2's unichr() is Python 3's chr().
+try:
+    unichr
+except NameError:
+    unichr = chr
 
 
 def _reversedict(d):
@@ -24,6 +32,8 @@ def _reversedict(d):
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
 SUPPORTED_SPECIFICATIONS = ('html4', 'css2', 'css21', 'css3')
+
+ASCII_HEX_DIGITS = '0123456789ABCDEFabcdef'
 
 SPECIFICATION_ERROR_TEMPLATE = "'%%s' is not a supported specification for color name lookups; \
 supported specifications are: %s." % (', '.join(SUPPORTED_SPECIFICATIONS))
@@ -555,7 +565,7 @@ def html5_parse_simple_color(input):
     #
     # 2. If input is not exactly seven characters long, then return an
     #    error.
-    if not isinstance(input, str) or len(str) < 7:
+    if not isinstance(input, str) or len(input) != 7:
         raise ValueError("An HTML5 simple color must be a string exactly seven characters long.")
 
     # 3. If the first character in input is not a U+0023 NUMBER SIGN
@@ -565,7 +575,7 @@ def html5_parse_simple_color(input):
 
     # 4. If the last six characters of input are not all ASCII hex
     #    digits, then return an error.
-    if not all(c in 'ABCDEFabcdef' for c in input[1:]):
+    if not all(c in ASCII_HEX_DIGITS for c in input[1:]):
         raise ValueError("An HTML5 simple color must contain exactly six ASCII hex digits.")
 
     # 5. Let result be a simple color.
@@ -644,7 +654,7 @@ def html5_parse_legacy_color(input):
     #    substeps:
     if len(input) == 4 and \
        input.startswith('#') and \
-       all(c in 'ABCDEFabcdef' for c in input[1:]):
+       all(c in ASCII_HEX_DIGITS for c in input[1:]):
         # 1. Let result be a simple color.
         #
         # 2. Interpret the second character of input as a hexadecimal
@@ -670,16 +680,20 @@ def html5_parse_legacy_color(input):
     #    in the basic multilingual plane) with the two-character
     #    string "00".
 
-    # Detecting and replacing non-BMP characters is tricky. On "wide"
-    # Python builds, ord() will do what we need, but on "narrow"
-    # builds we have to look for surrogate pairs.
-    if any(c for c in input if \
-           ord(c) > 0xffff or \
-           0xd800 <= ord(c) < 0xdc00):
-        input = ''.join('00' if ord(c) > 0xffff or \
-                             0xd800 <= ord(c) < 0xdc00 else \
-                             '' if 0xdc00 <= ord(c) < 0xe000 else \
-                             c for c in input)
+    # (This one's a bit weird due to the existence of "wide" and
+    #  "narrow" builds of Python. "Narrow" builds have UCS-2 strings,
+    #  meaning surrogate pairs for anything outside the BMP, while
+    #  "wide" builds are UCS-4 and don't use surrogate pairs. To
+    #  handle this step of the process, we encode over to UTF-32, then
+    #  do a binary unpack to get a tuple of four-byte integers
+    #  representing the actual Unicode codepoints in input. From
+    #  there, doing the replace is easy)
+    encoded_input = input.encode('utf_32_le')
+    codepoints = struct.unpack('<'+('L'*(len(encoded_input)/4)),
+                               encoded_input)
+    input = ''.join('00' if c > 0xffff \
+                         else unichr(c) \
+                         for c in codepoints)
 
     # 8. If input is longer than 128 characters, truncate input,
     #    leaving only the first 128 characters.
@@ -693,8 +707,8 @@ def html5_parse_legacy_color(input):
 
     # 10. Replace any character in input that is not an ASCII hex
     #     digit with the character "0" (U+0030).
-    if any(c for c in input if c not in 'ABCDEFabcdef'):
-        input = ''.join(c if c not in 'ABCDEFabcdef' else '0' for c in input)
+    if any(c for c in input if c not in ASCII_HEX_DIGITS):
+        input = ''.join(c if c not in ASCII_HEX_DIGITS else '0' for c in input)
 
     # 11. While input's length is zero or not a multiple of three,
     #     append a "0" (U+0030) character to input.
