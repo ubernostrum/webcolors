@@ -32,7 +32,7 @@ def _reversedict(d):
     dictionary, returns a new dictionary with keys and values swapped.
 
     """
-    return dict(list(zip(list(d.values()), list(d.keys()))))
+    return dict(zip(d.values(), d.keys()))
 
 
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
