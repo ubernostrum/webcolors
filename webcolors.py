@@ -291,7 +291,7 @@ def normalize_hex(hex_value):
     except AttributeError:
         raise ValueError("'%s' is not a valid hexadecimal color value." % hex_value)
     if len(hex_digits) == 3:
-        hex_digits = ''.join([2 * s for s in hex_digits])
+        hex_digits = ''.join(2 * s for s in hex_digits)
     return '#%s' % hex_digits.lower()
 
 
@@ -315,7 +315,7 @@ def normalize_integer_triplet(rgb_triplet):
     within the range 0-255 inclusive.
     
     """
-    return tuple([_normalize_integer_rgb(value) for value in rgb_triplet])
+    return tuple(_normalize_integer_rgb(value) for value in rgb_triplet)
 
 
 def _normalize_percent_rgb(value):
@@ -341,7 +341,7 @@ def normalize_percent_triplet(rgb_triplet):
     within the range 0%-100% inclusive.
     
     """
-    return tuple([_normalize_percent_rgb(value) for value in rgb_triplet])
+    return tuple(_normalize_percent_rgb(value) for value in rgb_triplet)
     
 
 # Conversions from color names to various formats.
@@ -492,8 +492,8 @@ def rgb_to_rgb_percent(rgb_triplet):
     # special-case them.
     specials = {255: '100%', 128: '50%', 64: '25%',
                  32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple([specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) \
-                  for d in normalize_integer_triplet(rgb_triplet)])
+    return tuple(specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) \
+                 for d in normalize_integer_triplet(rgb_triplet))
 
 
 # Conversions from percentage rgb() triplets to various formats.
