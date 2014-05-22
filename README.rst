@@ -21,5 +21,3 @@ For example::
     >>> webcolors.hex_to_name('#daa520')
     'goldenrod'
 
-Full documentation is `available online
-<https://webcolors.readthedocs.org/en/latest/>`_.
