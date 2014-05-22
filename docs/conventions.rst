@@ -15,12 +15,13 @@ Hexadecimal color values
 ------------------------
 
 For colors specified via hexadecimal values, this module will accept
-strings (Python ``str``) in the following formats:
+strings (Python ``str``, regardless of Python version) in the
+following formats:
 
-* A hash mark (#, U+0023) followed by three hexadecimal digits, where
+* The character ``#`` followed by three hexadecimal digits, where
   digits A-F may be upper- or lowercase.
 
-* A hash mark (#, U+0023) followed by six hexadecimal digits, where
+* The character ``#`` followed by six hexadecimal digits, where
   digits A-F may be upper- or lowercase (i.e., what HTML5 designates a
   "valid simple color" when all digits are uppercase, and a "valid
   lowercase simple color" when all digits are lowercase).
@@ -30,9 +31,9 @@ and for functions which perform intermediate conversion to hexadecimal
 before returning a result in another format, this module always
 normalizes such values to a string in the following format:
 
-* A hash mark (#, U+0023) followed by six hexadecimal digits, with
-  digits A-F forced to lowercase (what HTML5 designates a "valid
-  lowercase simple color").
+* The character ``#`` followed by six hexadecimal digits, with digits
+  A-F forced to lowercase (what HTML5 designates a "valid lowercase
+  simple color").
 
 The function :func:`~webcolors.normalize_hex` in this module can be used to
 perform this normalization manually if desired.

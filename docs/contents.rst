@@ -6,7 +6,7 @@
 Module contents
 ===============
 
-The contents of the ``webcolors`` module fall into three categories:
+The contents of the ``webcolors`` module fall into four categories:
 
 1. Constants which provide mappings between color names and values.
 
@@ -14,6 +14,13 @@ The contents of the ``webcolors`` module fall into three categories:
    prior to conversion or output.
 
 3. Conversion functions between each method of specifying colors.
+
+4. Implementations of the color parsing and serialization algorithms
+   in HTML5.
+
+See :ref:`the documentation regarding conventions <conventions>` for
+information regarding the types and representation of various color
+formats in ``webcolors``.
 
 All conversion functions which involve color names take an optional
 argument to determine which specification to draw color names
@@ -90,9 +97,9 @@ Mappings from hexadecimal values to names
    normalized names.
 
 The canonical names of these constants are as listed above, entirely
-in uppercase. For backwards compatibility with older versions of these
-modules, aliases are provided whose names are entirely lowercase (for
-example, ``html4_names_to_hex``).
+in uppercase. For backwards compatibility with older versions of
+``webcolors``, aliases are provided whose names are entirely lowercase
+(for example, ``html4_names_to_hex``).
 
 
 Normalization functions
@@ -100,8 +107,8 @@ Normalization functions
 
 .. function:: normalize_hex(hex_value)
 
-   Normalize a hexadecimal color value to a string consisting of a
-   hash mark ("#") followed by six lowercase hexadecimal digits (what
+   Normalize a hexadecimal color value to a string consisting of the
+   character ``#`` followed by six lowercase hexadecimal digits (what
    HTML5 terms a "valid lowercase simple color").
 
    If the supplied value cannot be interpreted as a hexadecimal color
@@ -229,8 +236,8 @@ Conversions from color names to other formats
 
 .. function:: name_to_rgb_percent(name, spec='css3')
 
-   Convert a color name to a 3-tuple of percentages (as strings)
-   suitable for use in an ``rgb()`` triplet specifying that color.
+   Convert a color name to a 3-tuple of percentages suitable for use
+   in an ``rgb()`` triplet specifying that color.
 
    The color name will be normalized to lower-case before being looked
    up.
@@ -306,9 +313,8 @@ Conversion from hexadecimal color values to other formats
 
 .. function:: hex_to_rgb_percent(hex_value)
 
-   Convert a hexadecimal color value to a 3-tuple of percentages (as
-   strings) suitable for use in an ``rgb()`` triplet representing that
-   color.
+   Convert a hexadecimal color value to a 3-tuple of percentages
+   suitable for use in an ``rgb()`` triplet representing that color.
 
    The hexadecimal value will be normalized before being converted.
 
@@ -370,8 +376,8 @@ Conversions from integer ``rgb()`` triplets to other formats
 .. function:: rgb_to_rgb_percent(rgb_triplet)
 
    Convert a 3-tuple of integers, suitable for use in an ``rgb()``
-   color triplet, to a 3-tuple of percentages (as strings) suitable
-   for use in representing that color.
+   color triplet, to a 3-tuple of percentages suitable for use in
+   representing that color.
 
    This function makes some trade-offs in terms of the accuracy of the
    final representation; for some common integer values, special-case

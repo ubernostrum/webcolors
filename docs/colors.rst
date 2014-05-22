@@ -4,12 +4,20 @@
 An overview of colors on the Web
 ================================
 
-Colors on the Web are specified in `the sRGB color space`_, where each
-color is made up of a red component, a green component and a blue
-component. This maps (fairly) cleanly to the red, green and blue
-components of pixels on a computer display, and to the cone cells of a
-human eye, which come in three sets roughly corresponding to the
-wavelengths of light associated with red, green and blue.
+Colors on the Web are typically specified in `the sRGB color space`_,
+where each color is made up of a red component, a green component and
+a blue component. This maps to the red, green and blue components of
+the pixels on a computer display, and to the three sets of cone cells
+in the human eye, which respond to (roughly) the wavelengths of light
+associated with red, green and blue.
+
+On the Web, sRGB colors are specified in formats which describe the
+color as a 24-bit integer, where the first 8 bits provide the red
+value, the second 8 bits the green value and the final 8 bits the blue
+value. This gives a total space of 256 * 256 * 256 or 16,777,216
+unique colors, though due to differences in display technology not all
+of these colors may be clearly distinguishable on any given physical
+display.
 
 
 HTML 4
@@ -17,13 +25,9 @@ HTML 4
 
 HTML 4 defined `two ways to specify sRGB colors`_:
 
-* A hash mark ('#') followed by three pairs of hexdecimal digits,
+* The character ``#`` followed by three pairs of hexdecimal digits,
   specifying values for red, green and blue components in that order;
-  for example, ``#0099cc``. Since each pair of hexadecimal digits can
-  express 256 different values, this allows up to 256**3 or 16,777,216
-  unique colors to be specified (though, due to differences in display
-  technology, not all of these colors may be clearly distinguished on
-  any given physical display).
+  for example, ``#0099cc``.
 
 * A set of predefined color names which correspond to specific
   hexadecimal values; for example, ``blue``. HTML 4 defines sixteen
@@ -36,12 +40,12 @@ CSS 1
 In `its description of color units`_, CSS 1 added
 three new ways to specify sRGB colors:
 
-* A hash mark followed by three hexadecimal digits, which is expanded
-  into three hexadecimal pairs by repeating each digit; thus ``#09c``
-  is equivalent to ``#0099cc``.
+* The character ``#`` followed by three hexadecimal digits, which is
+  expanded into three hexadecimal pairs by repeating each digit; thus
+  ``#09c`` is equivalent to ``#0099cc``.
 
-* The string "rgb", followed by parentheses, between which are three
-  base-10 integers each between 0 and 255, inclusive, which are taken
+* The string ``rgb``, followed by parentheses, between which are three
+  base-10 integers in the range 0..255, which are taken
   to be the values of the red, green and blue components in that
   order; for example, ``rgb(0, 153, 204)``.
 
@@ -88,17 +92,10 @@ the level of opacity from ``0.0`` (completely transparent) to ``1.0``
 ``transparent`` is also made available in lieu of a color value, and
 corresponds to ``rgba(0,0,0,0)``.
 
-CSS 3 also defines a new set of color names. This set is taken
+CSS 3 also defines a new set of 147 color names. This set is taken
 directly from `the named colors defined for SVG (Scalable Vector
 Graphics)`_ markup, and is a superset of the named colors defined in
-CSS 2.1. This set also has significant overlap with traditional X11
-color sets as defined by the ``rgb.txt`` file on many Unix and
-Unix-like operating systems, though the correspondence is not exact:
-the set of X11 colors is not standardized, and the set of CSS 3/SVG
-colors contains some definitions which diverge significantly from
-customary X11 definitions (for example, CSS 3/SVG's ``green`` is not
-equivalent to X11's ``green``; the color which X11 designates
-``green`` is designated ``lime`` in CSS 3/SVG).
+CSS 2.1.
 
 
 HTML5
@@ -107,7 +104,8 @@ HTML5
 As of the time of writing of this documentation, HTML5 is still under
 development, and the latest drafts do not introduce any new methods of
 specifying colors. Rather, those drafts deal only with defining
-algorithms for parsing six-digit hexadecimal colors and color names.
+algorithms for parsing six-digit hexadecimal colors and color names,
+and serializing color values to siex-digit hexadecimal format.
 
 .. _the sRGB color space: http://www.w3.org/Graphics/Color/sRGB
 .. _two ways to specify sRGB colors: http://www.w3.org/TR/html401/types.html#h-6.5

@@ -27,8 +27,7 @@ languages, uses `IEEE floating-point
 inherently imprecise for some values.
 
 This imprecision only appears when converting between integer and
-percentage ``rgb()`` triplets, and only when an integer value converts
-to a non-integer percentage.
+percentage ``rgb()`` triplets.
 
 To work around this, some common values (255, 128, 64, 32, 16 and 0)
 are handled as special cases, with hard-coded precise results. For all
@@ -54,6 +53,28 @@ HSL, HSV and YIQ color systems. If you need conversion to/from HSL or
 another color system, use ``colorsys``.
 
 .. _the colorsys module: http://docs.python.org/library/colorsys.html
+
+
+Why not use a more object-oriented design with classes for the colors?
+----------------------------------------------------------------------
+
+Representing color values with Python classes would introduce overhead
+for no real gain. Real-world use cases tend to simply involve working
+with the actual values, so settling on conventions for how to
+represent them as Python types, and then offering a function-based
+interface, accomplishes everything needed without the addtional
+indirection layer of having to instantiate and serialize a
+color-wrapping object.
+
+Keeping a simple function-based interface also maintains consistency
+with `Python's built-in colorsys module
+<https://docs.python.org/library/colorsys.html>`_, which has the same
+style of interface for converting amongst color spaces.
+
+Note that if an object-oriented interface is desired, `the third-party
+colormath module <https://pypi.python.org/pypi/colormath/>`_ does have
+a class-based interface (and rightly so, as it offers a wider range of
+color representation and manipulation options than ``webcolors``).
 
 
 How am I allowed to use this module?
