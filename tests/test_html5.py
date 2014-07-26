@@ -49,3 +49,17 @@ class HTML5Tests(unittest.TestCase):
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_serialize_simple_color(pair[0]))
+
+    def test_parse_legacy_color(self):
+        """
+        Test implementation of the HTML5 legacy color serialization
+        algorithm.
+        
+        """
+        test_pairs = ((u'chucknorris', (192, 0, 0)),
+                      (u'Window', (0, 13, 0)),
+                      (u'Z3STGWF1CF', (3, 0, 207)),
+                      (u'hZXpGxDtxE', (0, 13, 224)))
+        for pair in test_pairs:
+            self.assertEqual(pair[1],
+                             webcolors.html5_parse_legacy_color(pair[0]))

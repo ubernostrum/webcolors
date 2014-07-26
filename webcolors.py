@@ -560,6 +560,10 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
 # efficient or idiomatic way of accomplishing their tasks. This is
 # because, for compliance, these functions are written as literal
 # translations into Python of the algorithms in HTML5.
+#
+# For ease of understanding, the relevant steps of the algorithm from
+# the standard are included as comments interspersed in the
+# implementation.
 
 def html5_parse_simple_color(input):
     """
@@ -651,8 +655,9 @@ def html5_parse_legacy_color(input):
     #    keywords listed in the SVG color keywords section of the CSS3
     #    Color specification, then return the simple color
     #    corresponding to that keyword.
-    if input.lower() in CSS3_NAMES_TO_HEX:
-        return html5_parse_simple_color(CSS3_NAMES_TO_HEX[input.lower()])
+    color_keyword = CSS3_NAMES_TO_HEX.get(input.lower(), None)
+    if color_keyword is not None:
+        return html5_parse_simple_color(color_keyword)
 
     # 6. If input is four characters long, and the first character in
     #    input is a "#" (U+0023) character, and the last three
@@ -686,14 +691,28 @@ def html5_parse_legacy_color(input):
     #    in the basic multilingual plane) with the two-character
     #    string "00".
 
-    # (This one's a bit weird due to the existence of "wide" and
-    #  "narrow" builds of Python. "Narrow" builds have UCS-2 strings,
-    #  meaning surrogate pairs for anything outside the BMP, while
-    #  "wide" builds are UCS-4 and don't use surrogate pairs. To
-    #  handle this step of the process, we encode over to UTF-32, then
-    #  do a binary unpack to get a tuple of four-byte integers
-    #  representing the actual Unicode codepoints in input. From
-    #  there, doing the replace is easy)
+    # This one's a bit weird due to the existence of multiple internal
+    # Unicode string representations in different versions and builds
+    # of Python.
+    #
+    # From Python 2.2 through 3.2, Python could be compiled with
+    # "narrow" or "wide" Unicode strings (see PEP 261). Narrow builds
+    # handled Unicode strings with two-byte characters and surrogate
+    # pairs for non-BMP code points. Wide builds handled Unicode
+    # strings with four-byte characters and no surrogates. This means
+    # ord() is only sufficient to identify a non-BMP character on a
+    # wide build.
+    #
+    # Starting with Python 3.3, the internal string representation
+    # (see PEP 393) is now dynamic, and Python chooses an encoding --
+    # either latin-1, UCS-2 or UCS-4 -- wide enough to handle the
+    # highest code point in the string.
+    #
+    # The code below bypasses all of that for a consistently effective
+    # method: encode the string to little-endian UTF-32, then perform
+    # a binary unpack of it as four-byte integers. Those integers will
+    # be the Unicode code points, and from there filtering out non-BMP
+    # code points it easy.
     encoded_input = input.encode('utf_32_le')
     codepoints = struct.unpack('<'+('L'*(int(len(encoded_input)/4))),
                                encoded_input)
