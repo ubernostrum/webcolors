@@ -1,3 +1,5 @@
+.. -*-restructuredtext-*-
+
 ``webcolors`` is a simple Python module for working with HTML/CSS
 colors.
 

@@ -486,6 +486,9 @@ HTML5 color algorithms
 
    Apply the HTML5 simple color parsing algorithm.
 
+   Note that ``input`` *must* be a Unicode string -- on Python 2,
+   bytestrings will not be accepted.
+
    Examples::
 
        >>> html5_parse_simple_color('#ffffff')
@@ -496,8 +499,9 @@ HTML5 color algorithms
        ValueError: An HTML5 simple color must be a string exactly seven characters long.
 
    :param input: The color to parse.
-   :type input: seven-character ``str``, which must consist of exactly the
-       character ``#`` followed by six hexadecimal digits
+   :type input: seven-character ``str`` on Python 3, ``unicode`` on
+       Python 2, which must consist of exactly the character ``#``
+       followed by six hexadecimal digits
    :rtype: 3-tuple of ``int``, each in the range 0..255.
 
 .. function:: html5_serialize_simple_color(simple_color)
@@ -532,14 +536,12 @@ HTML5 color algorithms
 
    Examples::
 
-       >>> html5_parse_legacy_color('black')
+       >>> html5_parse_legacy_color(u'black')
        (0, 0, 0)
-       >>> html5_parse_legacy_color('G')
-       (0, 0, 0)
-       >>> html5_parse_legacy_color('currentColor')
-       (192, 224, 0)
-       >>> html5_parse_legacy_color('#b\l~=y5H=#Jy(6FwH5]jU;6D')
-       (176, 0, 5)
+       >>> html5_parse_legacy_color(u'chucknorris')
+       (192, 0, 0)
+       >>> html5_parse_legacy_color('Window')
+       (0, 13, 0)
 
    :param input: The color to parse.
    :type input: ``str`` on Python 3, ``unicode`` on Python 2

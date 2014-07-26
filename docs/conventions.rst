@@ -14,7 +14,7 @@ and for normalizing them.
 Hexadecimal color values
 ------------------------
 
-For colors specified via hexadecimal values, this module will accept
+For colors specified via hexadecimal values, ``webcolors`` will accept
 strings (Python ``str``, regardless of Python version) in the
 following formats:
 
@@ -28,15 +28,15 @@ following formats:
 
 For output which consists of a color specified via hexadecimal values,
 and for functions which perform intermediate conversion to hexadecimal
-before returning a result in another format, this module always
+before returning a result in another format, ``webcolors`` always
 normalizes such values to a string in the following format:
 
 * The character ``#`` followed by six hexadecimal digits, with digits
   A-F forced to lowercase (what HTML5 designates a "valid lowercase
   simple color").
 
-The function :func:`~webcolors.normalize_hex` in this module can be used to
-perform this normalization manually if desired.
+The function :func:`~webcolors.normalize_hex` can be used to perform
+this normalization manually if desired.
 
 
 Integer and percentage ``rgb()`` triplets

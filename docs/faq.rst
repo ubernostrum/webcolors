@@ -7,6 +7,23 @@ The following notes answer common questions, and may be useful to you
 when using ``webcolors``.
 
 
+What versions of Python are supported?
+--------------------------------------
+
+On Python 2, ``webcolors`` supports and is tested on Python 2.6 and
+2.7. Although ``webcolors`` may work on Python 2.5 or older versions,
+this is unintentional and unsupported.
+
+
+On Python 3, ``webcolors`` supports and is tested on Python 3.3 and
+3.4. Python 3.0, 3.1 and 3.2 are explicitly unsupported, and the
+``webcolors`` test suite will not execute on those versions. The
+minimum-3.3 version requirement is because Python 3.3 was both the
+first generally-adopted Python 3 release, and because Python 3.3
+greatly simplified the process of consistently handling both Python 2
+and Python 3 strings in the same codebase.
+
+
 How closely does this module follow the standards?
 --------------------------------------------------
 
