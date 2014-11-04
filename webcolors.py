@@ -91,8 +91,7 @@ CSS21_NAMES_TO_HEX = dict(HTML4_NAMES_TO_HEX, orange='#ffa500')
 #
 # http://www.w3.org/TR/SVG11/types.html#ColorKeywords
 #
-# CSS 3 also provides definitions of these colors, in both rgb() and
-# hexdecimal formats:
+# CSS 3 also provides definitions of these colors:
 #
 # http://www.w3.org/TR/css3-color/#svg-color
 #
@@ -744,7 +743,7 @@ def html5_parse_legacy_color(input):
     # method: encode the string to little-endian UTF-32, then perform
     # a binary unpack of it as four-byte integers. Those integers will
     # be the Unicode code points, and from there filtering out non-BMP
-    # code points it easy.
+    # code points is easy.
     encoded_input = input.encode('utf_32_le')
     codepoints = struct.unpack('<'+('L'*(int(len(encoded_input)/4))),
                                encoded_input)
