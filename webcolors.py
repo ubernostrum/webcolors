@@ -268,14 +268,21 @@ CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 
 # Aliases of the above mappings, for backwards compatibility.
 #################################################################
-(html4_names_to_hex, css2_names_to_hex,
- css21_names_to_hex, css3_names_to_hex) = (HTML4_NAMES_TO_HEX, CSS2_NAMES_TO_HEX,
-                                           CSS21_NAMES_TO_HEX, CSS3_NAMES_TO_HEX)
+(html4_names_to_hex,
+ css2_names_to_hex,
+ css21_names_to_hex,
+ css3_names_to_hex) = (HTML4_NAMES_TO_HEX,
+                       CSS2_NAMES_TO_HEX,
+                       CSS21_NAMES_TO_HEX,
+                       CSS3_NAMES_TO_HEX)
 
-(html4_hex_to_names, css2_hex_to_names,
- css21_hex_to_names, css3_hex_to_names) = (HTML4_HEX_TO_NAMES, CSS2_HEX_TO_NAMES,
-                                           CSS21_HEX_TO_NAMES, CSS3_HEX_TO_NAMES)
-
+(html4_hex_to_names,
+ css2_hex_to_names,
+ css21_hex_to_names,
+ css3_hex_to_names) = (HTML4_HEX_TO_NAMES,
+                       CSS2_HEX_TO_NAMES,
+                       CSS21_HEX_TO_NAMES,
+                       CSS3_HEX_TO_NAMES)
 
 
 # Normalization functions.
@@ -284,12 +291,14 @@ CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 def normalize_hex(hex_value):
     """
     Normalize a hexadecimal color value to 6 digits, lowercase.
-    
+
     """
     try:
         hex_digits = HEX_COLOR_RE.match(hex_value).groups()[0]
     except AttributeError:
-        raise ValueError("'%s' is not a valid hexadecimal color value." % hex_value)
+        raise ValueError(
+            "'%s' is not a valid hexadecimal color value." % hex_value
+        )
     if len(hex_digits) == 3:
         hex_digits = ''.join(2 * s for s in hex_digits)
     return '#%s' % hex_digits.lower()
@@ -299,7 +308,7 @@ def _normalize_integer_rgb(value):
     """
     Internal normalization function for clipping integer values into
     the permitted range (0-255, inclusive).
-        
+
     """
     if 0 <= value <= 255:
         return value
@@ -313,7 +322,7 @@ def normalize_integer_triplet(rgb_triplet):
     """
     Normalize an integer ``rgb()`` triplet so that all values are
     within the range 0-255 inclusive.
-    
+
     """
     return tuple(_normalize_integer_rgb(value) for value in rgb_triplet)
 
@@ -322,27 +331,27 @@ def _normalize_percent_rgb(value):
     """
     Internal normalization function for clipping percent values into
     the permitted range (0%-100%, inclusive).
-    
+
     """
     percent = value.split('%')[0]
     percent = float(percent) if '.' in percent else int(percent)
-    
+
     if 0 <= percent <= 100:
         return '%s%%' % percent
     if percent < 0:
         return '0%'
     if percent > 100:
         return '100%'
-    
+
 
 def normalize_percent_triplet(rgb_triplet):
     """
     Normalize a percentage ``rgb()`` triplet so that all values are
     within the range 0%-100% inclusive.
-    
+
     """
     return tuple(_normalize_percent_rgb(value) for value in rgb_triplet)
-    
+
 
 # Conversions from color names to various formats.
 #################################################################
@@ -369,7 +378,9 @@ def name_to_hex(name, spec='css3'):
                      'css3': CSS3_NAMES_TO_HEX,
                      'html4': HTML4_NAMES_TO_HEX}[spec][normalized]
     except KeyError:
-        raise ValueError("'%s' is not defined as a named color in %s." % (name, spec))
+        raise ValueError(
+            "'%s' is not defined as a named color in %s." % (name, spec)
+        )
     return hex_value
 
 
@@ -417,7 +428,9 @@ def hex_to_name(hex_value, spec='css3'):
                 'css3': CSS3_HEX_TO_NAMES,
                 'html4': HTML4_HEX_TO_NAMES}[spec][normalized]
     except KeyError:
-        raise ValueError("'%s' has no defined color name in %s." % (hex_value, spec))
+        raise ValueError(
+            "'%s' has no defined color name in %s." % (hex_value, spec)
+        )
     return name
 
 
@@ -491,8 +504,8 @@ def rgb_to_rgb_percent(rgb_triplet):
     # In order to maintain precision for common values,
     # special-case them.
     specials = {255: '100%', 128: '50%', 64: '25%',
-                 32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple(specials.get(d, '%.02f%%' % ((d / 255.0) * 100)) \
+                32: '12.5%', 16: '6.25%', 0: '0%'}
+    return tuple(specials.get(d, '%.02f%%' % ((d / 255.0) * 100))
                  for d in normalize_integer_triplet(rgb_triplet))
 
 
@@ -513,8 +526,11 @@ def rgb_percent_to_name(rgb_percent_triplet, spec='css3'):
     If there is no matching name, ``ValueError`` is raised.
 
     """
-    return rgb_to_name(rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)),
-                       spec=spec)
+    return rgb_to_name(
+        rgb_percent_to_rgb(
+            normalize_percent_triplet(
+                rgb_percent_triplet)),
+        spec=spec)
 
 
 def rgb_percent_to_hex(rgb_percent_triplet):
@@ -524,7 +540,9 @@ def rgb_percent_to_hex(rgb_percent_triplet):
     color.
 
     """
-    return rgb_to_hex(rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)))
+    return rgb_to_hex(
+        rgb_percent_to_rgb(
+            normalize_percent_triplet(rgb_percent_triplet)))
 
 
 def _percent_to_integer(percent):
@@ -569,24 +587,31 @@ def html5_parse_simple_color(input):
     """
     Apply the simple color parsing algorithm from section 2.4.6 of
     HTML5.
-    
+
     """
     # 1. Let input be the string being parsed.
     #
     # 2. If input is not exactly seven characters long, then return an
     #    error.
     if not isinstance(input, str) or len(input) != 7:
-        raise ValueError("An HTML5 simple color must be a string exactly seven characters long.")
+        raise ValueError(
+            "An HTML5 simple color must be a string "
+            "exactly seven characters long."
+        )
 
     # 3. If the first character in input is not a U+0023 NUMBER SIGN
     #    character (#), then return an error.
     if not input.startswith('#'):
-        raise ValueError("An HTML5 simple color must begin with the character '#' (U+0023).")
+        raise ValueError(
+            "An HTML5 simple color must begin with the character '#' (U+0023)."
+        )
 
     # 4. If the last six characters of input are not all ASCII hex
     #    digits, then return an error.
     if not all(c in ASCII_HEX_DIGITS for c in input[1:]):
-        raise ValueError("An HTML5 simple color must contain exactly six ASCII hex digits.")
+        raise ValueError(
+            "An HTML5 simple color must contain exactly six ASCII hex digits."
+        )
 
     # 5. Let result be a simple color.
     #
@@ -610,7 +635,7 @@ def html5_serialize_simple_color(simple_color):
     """
     Apply the serialization algorithm for a simple color from section
     2.4.6 of HTML5.
-    
+
     """
     red, green, blue = simple_color
 
@@ -628,20 +653,25 @@ def html5_serialize_simple_color(simple_color):
 
     # 3. Return result, which will be a valid lowercase simple color.
     return result
-    
+
+
 def html5_parse_legacy_color(input):
     """
     Apply the legacy color parsing algorithm from section 2.4.6 of
     HTML5.
-    
+
     """
     # 1. Let input be the string being parsed.
     if not isinstance(input, unicode):
-        raise ValueError("HTML5 legacy color parsing requires a string as input.")
+        raise ValueError(
+            "HTML5 legacy color parsing requires a string as input."
+        )
 
     # 2. If input is the empty string, then return an error.
     if input == "":
-        raise ValueError("HTML5 legacy color parsing forbids empty string as a value.")
+        raise ValueError(
+            "HTML5 legacy color parsing forbids empty string as a value."
+        )
 
     # 3. Strip leading and trailing whitespace from input.
     input = input.strip()
@@ -649,7 +679,9 @@ def html5_parse_legacy_color(input):
     # 4. If input is an ASCII case-insensitive match for the string
     #    "transparent", then return an error.
     if input.lower() == "transparent":
-        raise ValueError('HTML5 legacy color parsing forbids "transparent" as a value.')
+        raise ValueError(
+            'HTML5 legacy color parsing forbids "transparent" as a value.'
+        )
 
     # 5. If input is an ASCII case-insensitive match for one of the
     #    keywords listed in the SVG color keywords section of the CSS3
@@ -716,9 +748,9 @@ def html5_parse_legacy_color(input):
     encoded_input = input.encode('utf_32_le')
     codepoints = struct.unpack('<'+('L'*(int(len(encoded_input)/4))),
                                encoded_input)
-    input = ''.join('00' if c > 0xffff \
-                         else unichr(c) \
-                         for c in codepoints)
+    input = ''.join('00' if c > 0xffff
+                    else unichr(c)
+                    for c in codepoints)
 
     # 8. If input is longer than 128 characters, truncate input,
     #    leaving only the first 128 characters.
@@ -759,8 +791,8 @@ def html5_parse_legacy_color(input):
     # 14. While length is greater than two and the first character in
     #     each component is a "0" (U+0030) character, remove that
     #     character and reduce length by one.
-    while (length > 2) and (red[0] == '0' and \
-                            green[0] == '0' and \
+    while (length > 2) and (red[0] == '0' and
+                            green[0] == '0' and
                             blue[0] == '0'):
         red, green, blue = (red[1:],
                             green[1:],
