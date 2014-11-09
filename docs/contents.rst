@@ -476,10 +476,12 @@ Conversions from percentage ``rgb()`` triplets to other formats
 HTML5 color algorithms
 ----------------------
 
-.. warning:: These functions are experimental, and based on a
-   not-yet-finalized standard.  These functions implement the HTML5
-   color algorithms as given in `section 2.4.6 of the Candidate
-   Recommendation of 29 April 2014
+.. warning:: There are two versions of the HTML5 standard. Although
+   they have common origins and are extremely similar, one is a living
+   document (maintained by WHATWG) and the other is a W3C
+   Recommendation. The functions documented below implement the HTML5
+   color algorithms as given in `section 2.4.6 of the W3C HTML5
+   Recommendation
    <http://www.w3.org/TR/html5/infrastructure.html#colors>`_.
 
 .. function:: html5_parse_simple_color(input)

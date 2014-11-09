@@ -101,11 +101,50 @@ CSS 2.1.
 HTML5
 -----
 
-As of the time of writing of this documentation, HTML5 is still under
-development, and the latest drafts do not introduce any new methods of
-specifying colors. Rather, those drafts deal only with defining
-algorithms for parsing six-digit hexadecimal colors and color names,
-and serializing color values to siex-digit hexadecimal format.
+HTML5 exists in two forms: a living document maintained by WHATWG, and
+a W3C Recommendation. The two HTML5 documents, as of this writing,
+share a common definition of color values and parsing, and formalize
+the parsing and serialization of colors according to prior standards
+and real-world implementations in Web browsers.
+
+HTML5 does not introduce any new methods of specifying colors, but
+does simplify the description of colors and introduce useful
+terminology.
+
+* A set of three 8-bit numbers representing the red, blue and green
+  components of an sRGB color is termed a "simple color".
+
+* A seven-character string which begins with the character ``#``,
+  followed by six ASCII hex digits (i.e., ``A-Fa-f0-9``), representing
+  the red, green and blue components of an sRGB color, is a "valid
+  simple color".
+
+* A valid simple color expressed with only lowercase ASCII hex digits
+  (i.e., ``a-f0-9``) is a "valid lowercase simple color".
+
+HTML5 provides three algorithms related to colors:
+
+1. An algorithm for parsing simple color values, which works on any
+   string that is a valid simple color as defined above.
+
+2. An algorithm for serializing simple color values, which will always
+   produce a valid lowercase simple color.
+
+3. A legacy color-parsing algorithm, which will yield a valid simple
+   color from a variety of inputs, including inputs which are valid
+   simple colors, inputs which are valid for formats from other
+   standards, and certain types of "junk" inputs which were common in
+   real-world documents.
+
+The HTML5 legacy parsing algorithm does not support the non-color
+keyword ``transparent`` from CSS 3 and will produce an error for that
+input. It also does not recognize the CSS 2 "system color" keywords;
+it will convert each such keyword to simple color, consistently, but
+in a way which does not follow CSS 2's definitions of these keywords
+(which itself was system- and configuration-dependent).
+
+The implementations in this module are based on the definitions and
+algorithms of `the W3C HTML5 Recommendation's section on colors`_.
 
 .. _the sRGB color space: http://www.w3.org/Graphics/Color/sRGB
 .. _two ways to specify sRGB colors: http://www.w3.org/TR/html401/types.html#h-6.5
@@ -115,6 +154,7 @@ and serializing color values to siex-digit hexadecimal format.
 .. _one additional named color: http://www.w3.org/TR/CSS21/changes.html#q2
 .. _The CSS 3 color module: http://www.w3.org/TR/css3-color/
 .. _the named colors defined for SVG (Scalable Vector Graphics): http://www.w3.org/TR/SVG11/types.html#ColorKeywords
+.. _the W3C HTML5 Recommendation's section on colors: http://www.w3.org/TR/html5/infrastructure.html#colors
 
 
 .. _support:
