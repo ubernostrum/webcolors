@@ -7,12 +7,10 @@ class HexConversionTests(unittest.TestCase):
     """
     Test functions which convert from hex color codes to other
     formats.
-    
     """
     def test_hex_to_name(self):
         """
         Test conversion from hex to color name.
-        
         """
         test_pairs = (('#ffffff', 'white'),
                       ('#fff', 'white'),
@@ -28,7 +26,6 @@ class HexConversionTests(unittest.TestCase):
         A hex code which does not correspond to a named color, or does
         not correspond to a named color in the given specification,
         raises ValueError.
-        
         """
         # No name in any spec.
         self.assertRaises(ValueError,
@@ -44,11 +41,11 @@ class HexConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; using an
         unsupported specification raises ValueError.
-        
         """
         for supported_spec in ('html4', 'css2', 'css21', 'css3'):
             self.assertEqual('white',
-                             webcolors.hex_to_name('#ffffff', spec=supported_spec))
+                             webcolors.hex_to_name('#ffffff',
+                                                   spec=supported_spec))
 
         for unsupported_spec in ('css1', 'css4', 'html5'):
             self.assertRaises(ValueError,
@@ -58,20 +55,18 @@ class HexConversionTests(unittest.TestCase):
     def test_hex_to_rgb(self):
         """
         Test conversion from hex to integer RGB triplet.
-        
         """
         test_pairs = (('#fff', (255, 255, 255)),
                       ('#ffffff', (255, 255, 255)),
                       ('#000080', (0, 0, 128)))
 
         for pair in test_pairs:
-                      self.assertEqual(pair[1],
-                                       webcolors.hex_to_rgb(pair[0]))
+            self.assertEqual(pair[1],
+                             webcolors.hex_to_rgb(pair[0]))
 
     def test_hex_to_rgb_percent(self):
         """
         Test conversion from hex to percent RGB triplet.
-        
         """
         test_pairs = (('#fff', ('100%', '100%', '100%')),
                       ('#ffffff', ('100%', '100%', '100%')),

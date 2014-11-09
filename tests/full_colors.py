@@ -25,8 +25,6 @@ returns the original integer values, for consistenty.
 
 """
 
-from itertools import chain
-from itertools import repeat
 import unittest
 
 import webcolors
@@ -74,7 +72,8 @@ class FullColorTest(unittest.TestCase):
     def test_triplet_conversion(self):
         for int_triplet in int_colors():
             self.assertEqual(int_triplet,
-                             webcolors.rgb_percent_to_rgb(webcolors.rgb_to_rgb_percent(int_triplet)))
+                             webcolors.rgb_percent_to_rgb(
+                                 webcolors.rgb_to_rgb_percent(int_triplet)))
 
 
 if __name__ == '__main__':

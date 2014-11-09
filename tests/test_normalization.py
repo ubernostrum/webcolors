@@ -7,19 +7,17 @@ class NormalizationTests(unittest.TestCase):
     """
     Test both the publicly-exposed and internal normalization
     functions.
-    
     """
     def test_normalize_hex(self):
         """
         Hexadecimal normalization normalizes valid hex color codes to
         6 digits, lowercase.
-        
         """
         test_pairs = (('#0099cc', '#0099cc'),
                       ('#0099CC', '#0099cc'),
                       ('#09c', '#0099cc'),
                       ('#09C', '#0099cc'))
-        
+
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.normalize_hex(pair[0]))
@@ -27,7 +25,6 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_hex_format(self):
         """
         Hex normalization raises ValueError on invalid hex color code.
-        
         """
         test_values = ('0099cc',
                        '#0000gg',
@@ -41,7 +38,6 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_integer_rgb(self):
         """
         Integer normalization clips to 0-255.
-        
         """
         test_pairs = ((255, 255),
                       (0, 0),
@@ -57,7 +53,6 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_integer_triplet(self):
         """
         Integer triplet normalization clips all values to 0-255.
-        
         """
         test_pairs = (((128, 128, 128), (128, 128, 128)),
                       ((0, 0, 0), (0, 0, 0)),
@@ -72,7 +67,6 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_percent_rgb(self):
         """
         Percent normalization clips to 0%-100%.
-        
         """
         test_pairs = (('0%', '0%'),
                       ('100%', '100%'),
@@ -89,7 +83,6 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_percent_triplet(self):
         """
         Percent triplet normalization clips all values to 0%-100%.
-        
         """
         test_pairs = ((('50%', '50%', '50%'), ('50%', '50%', '50%')),
                       (('0%', '100%', '0%'), ('0%', '100%', '0%')),

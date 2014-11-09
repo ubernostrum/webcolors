@@ -6,13 +6,11 @@ import webcolors
 class HTML5Tests(unittest.TestCase):
     """
     Test functions which implement the HTML5 color algorithms.
-
     """
     def test_parse_simple_color(self):
         """
         Test implementation of the HTML5 simple color parsing
         algorithm.
-        
         """
         test_pairs = (('#ffffff', (255, 255, 255)),
                       ('#000080', (0, 0, 128)),
@@ -25,7 +23,6 @@ class HTML5Tests(unittest.TestCase):
         """
         Test error conditions of the HTML5 simple color parsing
         algorithm.
-        
         """
         test_values = ('0099cc',
                        '#09c',
@@ -41,7 +38,6 @@ class HTML5Tests(unittest.TestCase):
         """
         Test implementation of the HTML5 simple color serialization
         algorithm.
-
         """
         test_pairs = (((0, 0, 0), '#000000'),
                       ((0, 0, 128), '#000080'),
@@ -54,7 +50,6 @@ class HTML5Tests(unittest.TestCase):
         """
         Test implementation of the HTML5 legacy color serialization
         algorithm.
-        
         """
         test_pairs = ((u'chucknorris', (192, 0, 0)),
                       (u'Window', (0, 13, 0)),

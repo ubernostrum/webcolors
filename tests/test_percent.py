@@ -7,12 +7,10 @@ class PercentRGBConversionTests(unittest.TestCase):
     """
     Test functions which convert from percent RGB triplets to other
     formats.
-    
     """
     def test_rgb_percent_to_name(self):
         """
         Test conversion from percent RGB triplet to color name.
-
         """
         test_pairs = ((('100%', '100%', '100%'), 'white'),
                       (('0%', '0%', '50%'), 'navy'),
@@ -27,7 +25,6 @@ class PercentRGBConversionTests(unittest.TestCase):
         A percent RGB triplet which does not correspond to a named
         color, or does not correspond to a named color in the given
         specification, raises ValueError.
-        
         """
         # No name in any spec.
         self.assertRaises(ValueError,
@@ -43,14 +40,12 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; an
         unsupported specification raises ValueError.
-        
         """
         for supported_spec in ('html4', 'css2', 'css21', 'css3'):
             self.assertEqual('white',
-                             webcolors.rgb_percent_to_name(('100%',
-                                                            '100%',
-                                                            '100%'),
-                                                   spec=supported_spec))
+                             webcolors.rgb_percent_to_name(
+                                 ('100%', '100%', '100%'),
+                                 spec=supported_spec))
 
         for unsupported_spec in ('css1', 'css4', 'html5'):
             self.assertRaises(ValueError,
@@ -61,7 +56,6 @@ class PercentRGBConversionTests(unittest.TestCase):
     def test_rgb_percent_to_hex(self):
         """
         Test conversion from percent RGB triplet to hex.
-        
         """
         test_pairs = ((('100%', '100%', '0%'), '#ffff00'),
                       (('0%', '0%', '50%'), '#000080'),
@@ -75,7 +69,6 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         Test conversion from percent RGB triplet to integer RGB
         triplet.
-        
         """
         test_pairs = ((('100%', '100%', '0%'), (255, 255, 0)),
                       (('0%', '0%', '50%'), (0, 0, 128)),

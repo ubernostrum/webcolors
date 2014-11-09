@@ -7,12 +7,10 @@ class IntegerRGBConversionTests(unittest.TestCase):
     """
     Test functions which convert from integer RGB triplets to other
     formats.
-    
     """
     def test_rgb_to_name(self):
         """
         Test conversion from integer RGB triplet to color name.
-        
         """
         test_pairs = (((255, 255, 255), 'white'),
                       ((0, 0, 128), 'navy'),
@@ -22,13 +20,11 @@ class IntegerRGBConversionTests(unittest.TestCase):
             self.assertEqual(pair[1],
                              webcolors.rgb_to_name(pair[0]))
 
-    
     def test_rgb_to_name_unnamed(self):
         """
         An integer RGB triplet which does not correspond to a named
         color, or does not correspond to a named color in the given
         specification, raises ValueError.
-        
         """
         # No name in any spec.
         self.assertRaises(ValueError,
@@ -44,7 +40,6 @@ class IntegerRGBConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; an
         unsupported specification raises ValueError.
-        
         """
         for supported_spec in ('html4', 'css2', 'css21', 'css3'):
             self.assertEqual('white',
@@ -59,7 +54,6 @@ class IntegerRGBConversionTests(unittest.TestCase):
     def test_rgb_to_hex(self):
         """
         Test conversion from integer RGB triplet to hex.
-        
         """
         test_pairs = (((255, 255, 255), '#ffffff'),
                       ((0, 0, 128), '#000080'),
@@ -73,7 +67,6 @@ class IntegerRGBConversionTests(unittest.TestCase):
         """
         Test conversion from integer RGB triplet to percent RGB
         triplet.
-        
         """
         test_pairs = (((255, 255, 255), ('100%', '100%', '100%')),
                       ((0, 0, 128), ('0%', '0%', '50%')),

@@ -6,12 +6,10 @@ import webcolors
 class NameConversionTests(unittest.TestCase):
     """
     Test functions which convert from color names to other formats.
-    
     """
     def test_name_to_hex(self):
         """
         Test correct conversion of color names to hex.
-        
         """
         test_pairs = (('white', '#ffffff'),
                       ('navy', '#000080'),
@@ -26,7 +24,6 @@ class NameConversionTests(unittest.TestCase):
         A name which does not correspond to a color, or does not
         correspond to a color in the given specification, raises
         ValueError.
-        
         """
         test_values = (('goldenrod', 'html4'),
                        ('glue', 'css21'),
@@ -41,11 +38,11 @@ class NameConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; using an
         unsupported specification raises ValueError.
-        
         """
         for supported_spec in ('html4', 'css2', 'css21', 'css3'):
             self.assertEqual('#ffffff',
-                             webcolors.name_to_hex('white', spec=supported_spec))
+                             webcolors.name_to_hex('white',
+                                                   spec=supported_spec))
 
         for unsupported_spec in ('css1', 'css4', 'html5'):
             self.assertRaises(ValueError,
@@ -55,7 +52,6 @@ class NameConversionTests(unittest.TestCase):
     def test_name_to_rgb(self):
         """
         Test conversion from color name to integer RGB triplet.
-        
         """
         test_pairs = (('white', (255, 255, 255)),
                       ('navy', (0, 0, 128)),
@@ -68,7 +64,6 @@ class NameConversionTests(unittest.TestCase):
     def test_name_to_rgb_percent(self):
         """
         Test conversion from color name to percent RGB triplet.
-
         """
         test_pairs = (('white', ('100%', '100%', '100%')),
                       ('navy', ('0%', '0%', '50%')),
