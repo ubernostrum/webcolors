@@ -51,10 +51,14 @@ class HTML5Tests(unittest.TestCase):
         Test implementation of the HTML5 legacy color serialization
         algorithm.
         """
+        # One of these is the famous "chucknorris" value. Another is a
+        # CSS 2 system color. The final two are randomly-generated but
+        # believable junk strings. Correct output values obtained
+        # manually.
         test_pairs = ((u'chucknorris', (192, 0, 0)),
                       (u'Window', (0, 13, 0)),
-                      (u'Z3STGWF1CF', (3, 0, 207)),
-                      (u'hZXpGxDtxE', (0, 13, 224)))
+                      (u'RE|SXLuAse', (224, 0, 224)),
+                      (u'+=@FnnWL!Yb}5Dk', (0, 0, 176)))
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_parse_legacy_color(pair[0]))
