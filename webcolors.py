@@ -440,7 +440,7 @@ def hex_to_rgb(hex_value):
 
     """
     hex_value = normalize_hex(hex_value)
-    hex_value = int('0x%s' % hex_value[1:], 16)
+    hex_value = int(hex_value[1:], 16)
     return (hex_value >> 16,
             hex_value >> 8 & 0xff,
             hex_value & 0xff)
@@ -745,8 +745,9 @@ def html5_parse_legacy_color(input):
     # be the Unicode code points, and from there filtering out non-BMP
     # code points is easy.
     encoded_input = input.encode('utf_32_le')
-    codepoints = struct.unpack('<'+('L'*(int(len(encoded_input)/4))),
-                               encoded_input)
+    codepoints = struct.unpack('<' + ('L' * (
+        int(len(encoded_input)/4)
+        )), encoded_input)
     input = ''.join('00' if c > 0xffff
                     else unichr(c)
                     for c in codepoints)
