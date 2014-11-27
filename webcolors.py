@@ -472,8 +472,10 @@ def rgb_to_name(rgb_triplet, spec='css3'):
     If there is no matching name, ``ValueError`` is raised.
 
     """
-    return hex_to_name(rgb_to_hex(normalize_integer_triplet(rgb_triplet)),
-                       spec=spec)
+    return hex_to_name(
+        rgb_to_hex(
+            normalize_integer_triplet(rgb_triplet)),
+        spec=spec)
 
 
 def rgb_to_hex(rgb_triplet):
