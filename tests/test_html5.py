@@ -64,6 +64,14 @@ class HTML5Tests(unittest.TestCase):
             self.assertEqual(pair[1],
                              webcolors.html5_parse_legacy_color(pair[0]))
 
+    def test_parse_legacy_color_names(self):
+        """
+        Test the HTML5 legacy color parsing of SVG/CSS3 color names.
+        """
+        for name in webcolors.CSS3_NAMES_TO_HEX.keys():
+            self.assertEqual(webcolors.name_to_rgb(name),
+                             webcolors.html5_parse_legacy_color(name))
+
     def test_parse_legacy_color_error(self):
         """
         Test error conditions of the HTML5 legacy color parsing algorithm.
