@@ -69,6 +69,7 @@ class HTML5Tests(unittest.TestCase):
         Test error conditions of the HTML5 legacy color parsing algorithm.
         """
         test_values = (u'#000000'.encode('ascii'),
+                       u"transparent",
                        u'')
         for value in test_values:
             self.assertRaises(ValueError,
