@@ -587,7 +587,7 @@ def html5_parse_simple_color(input):
     #    error.
     if not isinstance(input, unicode) or len(input) != 7:
         raise ValueError(
-            "An HTML5 simple color must be a string "
+            "An HTML5 simple color must be a Unicode string "
             "exactly seven characters long."
         )
 
@@ -656,7 +656,7 @@ def html5_parse_legacy_color(input):
     # 1. Let input be the string being parsed.
     if not isinstance(input, unicode):
         raise ValueError(
-            "HTML5 legacy color parsing requires a string as input."
+            "HTML5 legacy color parsing requires a Unicode string as input."
         )
 
     # 2. If input is the empty string, then return an error.
