@@ -49,7 +49,7 @@ class HTML5Tests(unittest.TestCase):
 
     def test_parse_legacy_color(self):
         """
-        Test implementation of the HTML5 legacy color serialization
+        Test implementation of the HTML5 legacy color parsing
         algorithm.
         """
         # One of these is the famous "chucknorris" value. Another is a
