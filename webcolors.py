@@ -308,12 +308,9 @@ def _normalize_integer_rgb(value):
     the permitted range (0-255, inclusive).
 
     """
-    if 0 <= value <= 255:
-        return value
-    if value < 0:
-        return 0
-    if value > 255:
-        return 255
+    return 0 if value < 0 \
+        else 255 if value > 255 \
+        else value
 
 
 def normalize_integer_triplet(rgb_triplet):
@@ -334,12 +331,9 @@ def _normalize_percent_rgb(value):
     percent = value.split('%')[0]
     percent = float(percent) if '.' in percent else int(percent)
 
-    if 0 <= percent <= 100:
-        return '%s%%' % percent
-    if percent < 0:
-        return '0%'
-    if percent > 100:
-        return '100%'
+    return '0%' if percent < 0 \
+        else '100%' if percent > 100 \
+        else '%s%%' % percent
 
 
 def normalize_percent_triplet(rgb_triplet):
