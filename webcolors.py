@@ -291,12 +291,12 @@ def normalize_hex(hex_value):
     Normalize a hexadecimal color value to 6 digits, lowercase.
 
     """
-    try:
-        hex_digits = HEX_COLOR_RE.match(hex_value).groups()[0]
-    except AttributeError:
+    match = HEX_COLOR_RE.match(hex_value)
+    if match is None:
         raise ValueError(
             "'%s' is not a valid hexadecimal color value." % hex_value
         )
+    hex_digits = match.group(1)
     if len(hex_digits) == 3:
         hex_digits = ''.join(2 * s for s in hex_digits)
     return '#%s' % hex_digits.lower()
