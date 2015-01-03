@@ -364,12 +364,11 @@ def name_to_hex(name, spec='css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
     normalized = name.lower()
-    try:
-        hex_value = {'css2': CSS2_NAMES_TO_HEX,
-                     'css21': CSS21_NAMES_TO_HEX,
-                     'css3': CSS3_NAMES_TO_HEX,
-                     'html4': HTML4_NAMES_TO_HEX}[spec][normalized]
-    except KeyError:
+    hex_value = {'css2': CSS2_NAMES_TO_HEX,
+                 'css21': CSS21_NAMES_TO_HEX,
+                 'css3': CSS3_NAMES_TO_HEX,
+                 'html4': HTML4_NAMES_TO_HEX}[spec].get(normalized)
+    if hex_value is None:
         raise ValueError(
             "'%s' is not defined as a named color in %s." % (name, spec)
         )
@@ -414,12 +413,11 @@ def hex_to_name(hex_value, spec='css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
     normalized = normalize_hex(hex_value)
-    try:
-        name = {'css2': CSS2_HEX_TO_NAMES,
-                'css21': CSS21_HEX_TO_NAMES,
-                'css3': CSS3_HEX_TO_NAMES,
-                'html4': HTML4_HEX_TO_NAMES}[spec][normalized]
-    except KeyError:
+    name = {'css2': CSS2_HEX_TO_NAMES,
+            'css21': CSS21_HEX_TO_NAMES,
+            'css3': CSS3_HEX_TO_NAMES,
+            'html4': HTML4_HEX_TO_NAMES}[spec].get(normalized)
+    if name is None:
         raise ValueError(
             "'%s' has no defined color name in %s." % (hex_value, spec)
         )
