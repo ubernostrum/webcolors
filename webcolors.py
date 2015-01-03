@@ -679,7 +679,7 @@ def html5_parse_legacy_color(input):
     #    keywords listed in the SVG color keywords section of the CSS3
     #    Color specification, then return the simple color
     #    corresponding to that keyword.
-    color_keyword = CSS3_NAMES_TO_HEX.get(input.lower(), None)
+    color_keyword = CSS3_NAMES_TO_HEX.get(input.lower())
     if color_keyword is not None:
         return html5_parse_simple_color(color_keyword)
 
