@@ -10,6 +10,7 @@ details of the supported formats and conversions.
 
 import math
 import re
+import string
 import struct
 
 
@@ -38,8 +39,6 @@ def _reversedict(d):
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
 SUPPORTED_SPECIFICATIONS = ('html4', 'css2', 'css21', 'css3')
-
-ASCII_HEX_DIGITS = '0123456789ABCDEFabcdef'
 
 SPECIFICATION_ERROR_TEMPLATE = "'%%s' is not a supported specification for color name lookups; \
 supported specifications are: %s." % (', '.join(SUPPORTED_SPECIFICATIONS))
@@ -609,7 +608,7 @@ def html5_parse_simple_color(input):
 
     # 4. If the last six characters of input are not all ASCII hex
     #    digits, then return an error.
-    if not all(c in ASCII_HEX_DIGITS for c in input[1:]):
+    if not all(c in string.hexdigits for c in input[1:]):
         raise ValueError(
             "An HTML5 simple color must contain exactly six ASCII hex digits."
         )
@@ -698,7 +697,7 @@ def html5_parse_legacy_color(input):
     #    substeps:
     if len(input) == 4 and \
        input.startswith('#') and \
-       all(c in ASCII_HEX_DIGITS for c in input[1:]):
+       all(c in string.hexdigits for c in input[1:]):
         # 1. Let result be a simple color.
         #
         # 2. Interpret the second character of input as a hexadecimal
@@ -766,8 +765,8 @@ def html5_parse_legacy_color(input):
 
     # 10. Replace any character in input that is not an ASCII hex
     #     digit with the character "0" (U+0030).
-    if any(c for c in input if c not in ASCII_HEX_DIGITS):
-        input = ''.join(c if c in ASCII_HEX_DIGITS else '0' for c in input)
+    if any(c for c in input if c not in string.hexdigits):
+        input = ''.join(c if c in string.hexdigits else '0' for c in input)
 
     # 11. While input's length is zero or not a multiple of three,
     #     append a "0" (U+0030) character to input.
