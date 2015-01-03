@@ -12,9 +12,9 @@ class HTML5Tests(unittest.TestCase):
         Test implementation of the HTML5 simple color parsing
         algorithm.
         """
-        test_pairs = (('#ffffff', (255, 255, 255)),
-                      ('#000080', (0, 0, 128)),
-                      ('#daa520', (218, 165, 32)))
+        test_pairs = ((u'#ffffff', (255, 255, 255)),
+                      (u'#000080', (0, 0, 128)),
+                      (u'#daa520', (218, 165, 32)))
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_parse_simple_color(pair[0]))
@@ -24,11 +24,12 @@ class HTML5Tests(unittest.TestCase):
         Test error conditions of the HTML5 simple color parsing
         algorithm.
         """
-        test_values = ('0099cc',
-                       '#09c',
-                       '#0000',
-                       '#0000000',
-                       '#0000gg')
+        test_values = (u'0099cc',
+                       u'#09c',
+                       u'#0000',
+                       u'#0000000',
+                       u'#0000gg',
+                       u'#000000'.encode('ascii'))
         for value in test_values:
             self.assertRaises(ValueError,
                               webcolors.html5_parse_simple_color,

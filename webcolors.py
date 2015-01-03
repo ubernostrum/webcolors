@@ -585,7 +585,7 @@ def html5_parse_simple_color(input):
     #
     # 2. If input is not exactly seven characters long, then return an
     #    error.
-    if not isinstance(input, str) or len(input) != 7:
+    if not isinstance(input, unicode) or len(input) != 7:
         raise ValueError(
             "An HTML5 simple color must be a string "
             "exactly seven characters long."
