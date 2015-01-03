@@ -543,7 +543,7 @@ def _percent_to_integer(percent):
     between 0 and 255 inclusive.
 
     """
-    num = float(percent.split('%')[0]) / 100.0 * 255
+    num = float(percent.split('%')[0]) / 100 * 255
     e = num - math.floor(num)
     return e < 0.5 and int(math.floor(num)) or int(math.ceil(num))
 
