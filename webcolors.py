@@ -497,7 +497,7 @@ def rgb_to_rgb_percent(rgb_triplet):
     # special-case them.
     specials = {255: '100%', 128: '50%', 64: '25%',
                 32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple(specials.get(d, '%.02f%%' % ((d / 255.0) * 100))
+    return tuple(specials.get(d, '%.02f%%' % (d / 255.0 * 100))
                  for d in normalize_integer_triplet(rgb_triplet))
 
 
