@@ -63,3 +63,14 @@ class HTML5Tests(unittest.TestCase):
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_parse_legacy_color(pair[0]))
+
+    def test_parse_legacy_color_error(self):
+        """
+        Test error conditions of the HTML5 legacy color parsing algorithm.
+        """
+        test_values = (u'#000000'.encode('ascii'),
+                       u'')
+        for value in test_values:
+            self.assertRaises(ValueError,
+                              webcolors.html5_parse_legacy_color,
+                              value)
