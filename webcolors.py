@@ -741,9 +741,9 @@ def html5_parse_legacy_color(input):
 
     # Format string is '<' (for little-endian byte order), then a
     # sequence of 'L' characters (for 4-byte unsigned long integer)
-    # equal one-fourth the encoded length, which is also the length of
-    # the original string. For example, for a six-character input the
-    # generated format string will be '<LLLLLL'.
+    # equal to the length of the original string, which is also
+    # one-fourth the encoded length.  For example, for a six-character
+    # input the generated format string will be '<LLLLLL'.
     format_string = '<' + ('L' * (int(len(encoded_input) / 4)))
     codepoints = struct.unpack(format_string, encoded_input)
     input = ''.join('00' if c > 0xffff
