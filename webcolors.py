@@ -738,9 +738,14 @@ def html5_parse_legacy_color(input):
     # be the Unicode code points, and from there filtering out non-BMP
     # code points is easy.
     encoded_input = input.encode('utf_32_le')
-    codepoints = struct.unpack('<' + ('L' * (
-        int(len(encoded_input)/4)
-        )), encoded_input)
+
+    # Format string is '<' (for little-endian byte order), then a
+    # sequence of 'L' characters (for 4-byte unsigned long integer)
+    # equal one-fourth the encoded length, which is also the length of
+    # the original string. For example, for a six-character input the
+    # generated format string will be '<LLLLLL'.
+    format_string = '<' + ('L' * (int(len(encoded_input) / 4)))
+    codepoints = struct.unpack(format_string, encoded_input)
     input = ''.join('00' if c > 0xffff
                     else unichr(c)
                     for c in codepoints)
