@@ -72,6 +72,20 @@ class HTML5Tests(unittest.TestCase):
             self.assertEqual(webcolors.name_to_rgb(name),
                              webcolors.html5_parse_legacy_color(name))
 
+    def test_parse_legacy_color_hex(self):
+        """
+        Test the HTML5 legacy color parsing of three- and six-digit
+        hexadecimal color values.
+        """
+        test_values = (u'#000',
+                       u'#000000',
+                       u'#fff',
+                       u'#ffffff',
+                       u'#000080')
+        for value in test_values:
+            self.assertEqual(webcolors.hex_to_rgb(value),
+                             webcolors.html5_parse_legacy_color(value))
+
     def test_parse_legacy_color_error(self):
         """
         Test error conditions of the HTML5 legacy color parsing algorithm.
