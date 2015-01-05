@@ -679,9 +679,9 @@ def html5_parse_legacy_color(input):
     #    keywords listed in the SVG color keywords section of the CSS3
     #    Color specification, then return the simple color
     #    corresponding to that keyword.
-    color_keyword = CSS3_NAMES_TO_HEX.get(input.lower())
-    if color_keyword is not None:
-        return html5_parse_simple_color(color_keyword)
+    keyword_hex = CSS3_NAMES_TO_HEX.get(input.lower())
+    if keyword_hex is not None:
+        return html5_parse_simple_color(keyword_hex)
 
     # 6. If input is four characters long, and the first character in
     #    input is a "#" (U+0023) character, and the last three
