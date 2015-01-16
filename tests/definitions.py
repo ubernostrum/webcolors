@@ -58,7 +58,8 @@ class CSS21DefinitionTests(unittest.TestCase):
                                                 attrs={
                                                     'class': 'colorsquare'}):
             color_name, color_value = self.color_matching_re.match(
-                color_square.text).groups()
+                color_square.text
+                ).groups()
             self.css21_colors[color_name] = color_value
 
     def test_color_definitions(self):
