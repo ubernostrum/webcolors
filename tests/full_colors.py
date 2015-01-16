@@ -21,7 +21,7 @@ values.
 
 The only test performed here for percentage rgb() triplets is to
 ensure that converting an integer rgb() triplet to percentage and back
-returns the original integer values, for consistenty.
+returns the original integer values, for consistency.
 
 """
 
