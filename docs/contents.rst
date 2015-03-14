@@ -519,9 +519,10 @@ HTML5 color algorithms
 
    :param simple_color: The color to serialize.
    :type simple_color: 3-tuple of ``int``, each in the range 0..255
-   :rtype: A valid lowercase simple color, which is a ``str``, exactly
-      seven characters long, beginning with ``#`` and followed by six
-      lowercase hexadecimal digits.
+   :rtype: A valid lowercase simple color, which is a ``str`` on
+      Python 3, ``unicode`` on Python 2, exactly seven characters
+      long, beginning with ``#`` and followed by six lowercase
+      hexadecimal digits.
 
 .. function:: html5_parse_legacy_color(input)
 

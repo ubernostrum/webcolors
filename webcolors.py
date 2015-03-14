@@ -633,7 +633,7 @@ def html5_serialize_simple_color(simple_color):
 
     # 1. Let result be a string consisting of a single "#" (U+0023)
     #    character.
-    result = '#'
+    result = u'#'
 
     # 2. Convert the red, green, and blue components in turn to
     #    two-digit hexadecimal numbers using lowercase ASCII hex
