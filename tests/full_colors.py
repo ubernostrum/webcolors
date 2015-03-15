@@ -46,7 +46,7 @@ except NameError:
 
 
 def hex_colors():
-    HEX_TEMPLATE = "#%06x"
+    HEX_TEMPLATE = u"#%06x"
     for i in xrange(16777217):
         yield HEX_TEMPLATE % i
 

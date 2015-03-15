@@ -11,9 +11,9 @@ class NameConversionTests(unittest.TestCase):
         """
         Test correct conversion of color names to hex.
         """
-        test_pairs = (('white', '#ffffff'),
-                      ('navy', '#000080'),
-                      ('goldenrod', '#daa520'))
+        test_pairs = ((u'white', u'#ffffff'),
+                      (u'navy', u'#000080'),
+                      (u'goldenrod', u'#daa520'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -25,9 +25,9 @@ class NameConversionTests(unittest.TestCase):
         correspond to a color in the given specification, raises
         ValueError.
         """
-        test_values = (('goldenrod', 'html4'),
-                       ('glue', 'css21'),
-                       ('breen', 'css3'))
+        test_values = ((u'goldenrod', u'html4'),
+                       (u'glue', u'css21'),
+                       (u'breen', u'css3'))
 
         for value in test_values:
             self.assertRaises(ValueError,
@@ -39,12 +39,12 @@ class NameConversionTests(unittest.TestCase):
         Using one of the supported specifications succeeds; using an
         unsupported specification raises ValueError.
         """
-        for supported_spec in ('html4', 'css2', 'css21', 'css3'):
-            self.assertEqual('#ffffff',
-                             webcolors.name_to_hex('white',
+        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
+            self.assertEqual(u'#ffffff',
+                             webcolors.name_to_hex(u'white',
                                                    spec=supported_spec))
 
-        for unsupported_spec in ('css1', 'css4', 'html5'):
+        for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(ValueError,
                               webcolors.name_to_hex,
                               'white', spec=unsupported_spec)
@@ -53,9 +53,9 @@ class NameConversionTests(unittest.TestCase):
         """
         Test conversion from color name to integer RGB triplet.
         """
-        test_pairs = (('white', (255, 255, 255)),
-                      ('navy', (0, 0, 128)),
-                      ('goldenrod', (218, 165, 32)))
+        test_pairs = ((u'white', (255, 255, 255)),
+                      (u'navy', (0, 0, 128)),
+                      (u'goldenrod', (218, 165, 32)))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -65,9 +65,9 @@ class NameConversionTests(unittest.TestCase):
         """
         Test conversion from color name to percent RGB triplet.
         """
-        test_pairs = (('white', ('100%', '100%', '100%')),
-                      ('navy', ('0%', '0%', '50%')),
-                      ('goldenrod', ('85.49%', '64.71%', '12.5%')))
+        test_pairs = ((u'white', (u'100%', u'100%', u'100%')),
+                      (u'navy', (u'0%', u'0%', u'50%')),
+                      (u'goldenrod', (u'85.49%', u'64.71%', u'12.5%')))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],

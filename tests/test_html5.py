@@ -40,9 +40,9 @@ class HTML5Tests(unittest.TestCase):
         Test implementation of the HTML5 simple color serialization
         algorithm.
         """
-        test_pairs = (((0, 0, 0), '#000000'),
-                      ((0, 0, 128), '#000080'),
-                      ((218, 165, 32), '#daa520'))
+        test_pairs = (((0, 0, 0), u'#000000'),
+                      ((0, 0, 128), u'#000080'),
+                      ((218, 165, 32), u'#daa520'))
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_serialize_simple_color(pair[0]))

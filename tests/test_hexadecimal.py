@@ -12,10 +12,10 @@ class HexConversionTests(unittest.TestCase):
         """
         Test conversion from hex to color name.
         """
-        test_pairs = (('#ffffff', 'white'),
-                      ('#fff', 'white'),
-                      ('#000080', 'navy'),
-                      ('#daa520', 'goldenrod'))
+        test_pairs = ((u'#ffffff', u'white'),
+                      (u'#fff', u'white'),
+                      (u'#000080', u'navy'),
+                      (u'#daa520', u'goldenrod'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -35,19 +35,19 @@ class HexConversionTests(unittest.TestCase):
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(ValueError,
                           webcolors.hex_to_name,
-                          '#daa520', spec='html4')
+                          '#daa520', spec=u'html4')
 
     def test_hex_to_name_specs(self):
         """
         Using one of the supported specifications succeeds; using an
         unsupported specification raises ValueError.
         """
-        for supported_spec in ('html4', 'css2', 'css21', 'css3'):
-            self.assertEqual('white',
-                             webcolors.hex_to_name('#ffffff',
+        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
+            self.assertEqual(u'white',
+                             webcolors.hex_to_name(u'#ffffff',
                                                    spec=supported_spec))
 
-        for unsupported_spec in ('css1', 'css4', 'html5'):
+        for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(ValueError,
                               webcolors.hex_to_name,
                               '#ffffff', spec=unsupported_spec)
@@ -56,9 +56,9 @@ class HexConversionTests(unittest.TestCase):
         """
         Test conversion from hex to integer RGB triplet.
         """
-        test_pairs = (('#fff', (255, 255, 255)),
-                      ('#ffffff', (255, 255, 255)),
-                      ('#000080', (0, 0, 128)))
+        test_pairs = ((u'#fff', (255, 255, 255)),
+                      (u'#ffffff', (255, 255, 255)),
+                      (u'#000080', (0, 0, 128)))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -68,9 +68,9 @@ class HexConversionTests(unittest.TestCase):
         """
         Test conversion from hex to percent RGB triplet.
         """
-        test_pairs = (('#fff', ('100%', '100%', '100%')),
-                      ('#ffffff', ('100%', '100%', '100%')),
-                      ('#000080', ('0%', '0%', '50%')))
+        test_pairs = ((u'#fff', (u'100%', u'100%', u'100%')),
+                      (u'#ffffff', (u'100%', u'100%', u'100%')),
+                      (u'#000080', (u'0%', u'0%', u'50%')))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],

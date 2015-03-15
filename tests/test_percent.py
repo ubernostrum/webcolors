@@ -12,9 +12,9 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         Test conversion from percent RGB triplet to color name.
         """
-        test_pairs = ((('100%', '100%', '100%'), 'white'),
-                      (('0%', '0%', '50%'), 'navy'),
-                      (('85.49%', '64.71%', '12.5%'), 'goldenrod'))
+        test_pairs = (((u'100%', u'100%', u'100%'), u'white'),
+                      ((u'0%', u'0%', u'50%'), u'navy'),
+                      ((u'85.49%', u'64.71%', u'12.5%'), u'goldenrod'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -29,37 +29,37 @@ class PercentRGBConversionTests(unittest.TestCase):
         # No name in any spec.
         self.assertRaises(ValueError,
                           webcolors.rgb_percent_to_name,
-                          ('7.06%', '20.39%', '33.73%'))
+                          (u'7.06%', u'20.39%', u'33.73%'))
 
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(ValueError,
                           webcolors.rgb_percent_to_name,
-                          ('85.49%', '64.71%', '12.5%'), spec='html4')
+                          (u'85.49%', u'64.71%', u'12.5%'), spec=u'html4')
 
     def test_rgb_percent_to_name_specs(self):
         """
         Using one of the supported specifications succeeds; an
         unsupported specification raises ValueError.
         """
-        for supported_spec in ('html4', 'css2', 'css21', 'css3'):
-            self.assertEqual('white',
+        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
+            self.assertEqual(u'white',
                              webcolors.rgb_percent_to_name(
-                                 ('100%', '100%', '100%'),
+                                 (u'100%', u'100%', u'100%'),
                                  spec=supported_spec))
 
-        for unsupported_spec in ('css1', 'css4', 'html5'):
+        for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(ValueError,
                               webcolors.rgb_percent_to_name,
-                              ('100%', '100%', '100%'),
+                              (u'100%', u'100%', u'100%'),
                               spec=unsupported_spec)
 
     def test_rgb_percent_to_hex(self):
         """
         Test conversion from percent RGB triplet to hex.
         """
-        test_pairs = ((('100%', '100%', '0%'), '#ffff00'),
-                      (('0%', '0%', '50%'), '#000080'),
-                      (('85.49%', '64.71%', '12.5%'), '#daa520'))
+        test_pairs = (((u'100%', u'100%', u'0%'), u'#ffff00'),
+                      ((u'0%', u'0%', u'50%'), u'#000080'),
+                      ((u'85.49%', u'64.71%', u'12.5%'), u'#daa520'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -70,9 +70,9 @@ class PercentRGBConversionTests(unittest.TestCase):
         Test conversion from percent RGB triplet to integer RGB
         triplet.
         """
-        test_pairs = ((('100%', '100%', '0%'), (255, 255, 0)),
-                      (('0%', '0%', '50%'), (0, 0, 128)),
-                      (('85.49%', '64.71%', '12.5%'), (218, 165, 32)))
+        test_pairs = (((u'100%', u'100%', u'0%'), (255, 255, 0)),
+                      ((u'0%', u'0%', u'50%'), (0, 0, 128)),
+                      ((u'85.49%', u'64.71%', u'12.5%'), (218, 165, 32)))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],

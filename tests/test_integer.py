@@ -12,9 +12,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
         """
         Test conversion from integer RGB triplet to color name.
         """
-        test_pairs = (((255, 255, 255), 'white'),
-                      ((0, 0, 128), 'navy'),
-                      ((218, 165, 32), 'goldenrod'))
+        test_pairs = (((255, 255, 255), u'white'),
+                      ((0, 0, 128), u'navy'),
+                      ((218, 165, 32), u'goldenrod'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -34,19 +34,19 @@ class IntegerRGBConversionTests(unittest.TestCase):
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(ValueError,
                           webcolors.rgb_to_name,
-                          (218, 165, 32), spec='html4')
+                          (218, 165, 32), spec=u'html4')
 
     def test_rgb_to_name_specs(self):
         """
         Using one of the supported specifications succeeds; an
         unsupported specification raises ValueError.
         """
-        for supported_spec in ('html4', 'css2', 'css21', 'css3'):
-            self.assertEqual('white',
+        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
+            self.assertEqual(u'white',
                              webcolors.rgb_to_name((255, 255, 255),
                                                    spec=supported_spec))
 
-        for unsupported_spec in ('css1', 'css4', 'html5'):
+        for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(ValueError,
                               webcolors.rgb_to_name,
                               (255, 255, 255), spec=unsupported_spec)
@@ -55,9 +55,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
         """
         Test conversion from integer RGB triplet to hex.
         """
-        test_pairs = (((255, 255, 255), '#ffffff'),
-                      ((0, 0, 128), '#000080'),
-                      ((218, 165, 32), '#daa520'))
+        test_pairs = (((255, 255, 255), u'#ffffff'),
+                      ((0, 0, 128), u'#000080'),
+                      ((218, 165, 32), u'#daa520'))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],
@@ -68,9 +68,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
         Test conversion from integer RGB triplet to percent RGB
         triplet.
         """
-        test_pairs = (((255, 255, 255), ('100%', '100%', '100%')),
-                      ((0, 0, 128), ('0%', '0%', '50%')),
-                      ((218, 165, 32), ('85.49%', '64.71%', '12.5%')))
+        test_pairs = (((255, 255, 255), (u'100%', u'100%', u'100%')),
+                      ((0, 0, 128), (u'0%', u'0%', u'50%')),
+                      ((218, 165, 32), (u'85.49%', u'64.71%', u'12.5%')))
 
         for pair in test_pairs:
             self.assertEqual(pair[1],

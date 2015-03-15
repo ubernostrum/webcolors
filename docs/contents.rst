@@ -118,19 +118,19 @@ Normalization functions
 
    Examples::
 
-       >>> normalize_hex('#0099cc')
+       >>> normalize_hex(u'#0099cc')
        '#0099cc'
-       >>> normalize_hex('#0099CC')
+       >>> normalize_hex(u'#0099CC')
        '#0099cc'
-       >>> normalize_hex('#09c')
+       >>> normalize_hex(u'#09c')
        '#0099cc'
-       >>> normalize_hex('#09C')
+       >>> normalize_hex(u'#09C')
        '#0099cc'
-       >>> normalize_hex('#0099gg')
+       >>> normalize_hex(u'#0099gg')
        Traceback (most recent call last):
            ...
        ValueError: '#0099gg' is not a valid hexadecimal color value.
-       >>> normalize_hex('0099cc')
+       >>> normalize_hex(u'0099cc')
        Traceback (most recent call last):
            ...
        ValueError: '0099cc' is not a valid hexadecimal color value.
@@ -166,12 +166,12 @@ Normalization functions
 
     Examples::
 
-        >>> normalize_percent_triplet(('50%', '50%', '50%'))
-        ('50%', '50%', '50%')
-        >>> normalize_percent_triplet(('0%', '100%', '0%'))
-        ('0%', '100%', '0%')
-        >>> normalize_percent_triplet(('-10%', '-0%', '500%'))
-        ('0%', '0%', '100%')
+        >>> normalize_percent_triplet((u'50%', u'50%', u'50%'))
+        (u'50%', u'50%', u'50%')
+        >>> normalize_percent_triplet((u'0%', u'100%', u'0%'))
+        (u'0%', u'100%', u'0%')
+        >>> normalize_percent_triplet((u'-10%', u'-0%', u'500%'))
+        (u'0%', u'0%', u'100%')
     
     :param rgb_triplet: The percentage ``rgb()`` triplet to normalize.
     :type rgb_triplet: 3-tuple of ``str``
@@ -181,7 +181,7 @@ Normalization functions
 Conversions from color names to other formats
 ---------------------------------------------
 
-.. function:: name_to_hex(name, spec='css3')
+.. function:: name_to_hex(name, spec=u'css3')
 
    Convert a color name to a normalized hexadecimal color value.
 
@@ -190,13 +190,13 @@ Conversions from color names to other formats
 
    Examples::
 
-       >>> name_to_hex('white')
-       '#ffffff'
-       >>> name_to_hex('navy')
-       '#000080'
-       >>> name_to_hex('goldenrod')
-       '#daa520'
-       >>> name_to_hex('goldenrod', spec='html4')
+       >>> name_to_hex(u'white')
+       u'#ffffff'
+       >>> name_to_hex(u'navy')
+       u'#000080'
+       >>> name_to_hex(u'goldenrod')
+       u'#daa520'
+       >>> name_to_hex(u'goldenrod', spec=u'html4')
        Traceback (most recent call last):
            ...
        ValueError: 'goldenrod' is not defined as a named color in html4.
@@ -209,7 +209,7 @@ Conversions from color names to other formats
    :type spec: ``str``
    :rtype: ``str``
 
-.. function:: name_to_rgb(name, spec='css3')
+.. function:: name_to_rgb(name, spec=u'css3')
 
    Convert a color name to a 3-tuple of integers suitable for use in
    an ``rgb()`` triplet specifying that color.
@@ -219,11 +219,11 @@ Conversions from color names to other formats
 
    Examples::
 
-       >>> name_to_rgb('white')
+       >>> name_to_rgb(u'white')
        (255, 255, 255)
-       >>> name_to_rgb('navy')
+       >>> name_to_rgb(u'navy')
        (0, 0, 128)
-       >>> name_to_rgb('goldenrod')
+       >>> name_to_rgb(u'goldenrod')
        (218, 165, 32)
 
    :param name: The color name to convert.
@@ -234,7 +234,7 @@ Conversions from color names to other formats
    :type spec: ``str``
    :rtype: 3-tuple of ``int``
 
-.. function:: name_to_rgb_percent(name, spec='css3')
+.. function:: name_to_rgb_percent(name, spec=u'css3')
 
    Convert a color name to a 3-tuple of percentages suitable for use
    in an ``rgb()`` triplet specifying that color.
@@ -244,12 +244,12 @@ Conversions from color names to other formats
 
    Examples::
 
-       >>> name_to_rgb_percent('white')
-       ('100%', '100%', '100%')
-       >>> name_to_rgb_percent('navy')
-       ('0%', '0%', '50%')
-       >>> name_to_rgb_percent('goldenrod')
-       ('85.49%', '64.71%', '12.5%')
+       >>> name_to_rgb_percent(u'white')
+       (u'100%', u'100%', u'100%')
+       >>> name_to_rgb_percent(u'navy')
+       (u'0%', u'0%', u'50%')
+       >>> name_to_rgb_percent(u'goldenrod')
+       (u'85.49%', u'64.71%', u'12.5%')
 
    :param name: The color name to convert.
    :type name: ``str``
@@ -263,7 +263,7 @@ Conversions from color names to other formats
 Conversion from hexadecimal color values to other formats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. function:: hex_to_name(hex_value, spec='css3')
+.. function:: hex_to_name(hex_value, spec=u'css3')
 
    Convert a hexadecimal color value to its corresponding normalized
    color name, if any such name exists.
@@ -272,15 +272,15 @@ Conversion from hexadecimal color values to other formats
 
    Examples::
 
-       >>> hex_to_name('#ffffff')
-       'white'
-       >>> hex_to_name('#fff')
-       'white'
-       >>> hex_to_name('#000080')
-       'navy'
-       >>> hex_to_name('#daa520')
-       'goldenrod'
-       >>> hex_to_name('#daa520', spec='html4')
+       >>> hex_to_name(u'#ffffff')
+       u'white'
+       >>> hex_to_name(u'#fff')
+       u'white'
+       >>> hex_to_name(u'#000080')
+       u'navy'
+       >>> hex_to_name(u'#daa520')
+       u'goldenrod'
+       >>> hex_to_name(u'#daa520', spec=u'html4')
        Traceback (most recent call last):
            ...
        ValueError: '#daa520' has no defined color name in html4.
@@ -302,9 +302,9 @@ Conversion from hexadecimal color values to other formats
 
    Examples::
 
-       >>> hex_to_rgb('#fff')
+       >>> hex_to_rgb(u'#fff')
        (255, 255, 255)
-       >>> hex_to_rgb('#000080')
+       >>> hex_to_rgb(u'#000080')
        (0, 0, 128)
 
    :param hex_value: The hexadecimal color value to convert.
@@ -320,10 +320,10 @@ Conversion from hexadecimal color values to other formats
 
    Examples::
 
-       >>> hex_to_rgb_percent('#ffffff')
-       ('100%', '100%', '100%')
-       >>> hex_to_rgb_percent('#000080')
-       ('0%', '0%', '50%')
+       >>> hex_to_rgb_percent(u'#ffffff')
+       (u'100%', u'100%', u'100%')
+       >>> hex_to_rgb_percent(u'#000080')
+       (u'0%', u'0%', u'50%')
 
    :param hex_value: The hexadecimal color value to convert.
    :type hex_value: ``str``
@@ -333,7 +333,7 @@ Conversion from hexadecimal color values to other formats
 Conversions from integer ``rgb()`` triplets to other formats
 ------------------------------------------------------------
 
-.. function:: rgb_to_name(rgb_triplet, spec='css3')
+.. function:: rgb_to_name(rgb_triplet, spec=u'css3')
 
    Convert a 3-tuple of integers, suitable for use in an ``rgb()``
    color triplet, to its corresponding normalized color name, if any
@@ -345,9 +345,9 @@ Conversions from integer ``rgb()`` triplets to other formats
    Examples::
 
        >>> rgb_to_name((255, 255, 255))
-       'white'
+       u'white'
        >>> rgb_to_name((0, 0, 128))
-       'navy'
+       u'navy'
 
    :param rgb_triplet: The ``rgb()`` triplet
    :type rgb_triplet: 3-tuple of ``int``
@@ -365,9 +365,9 @@ Conversions from integer ``rgb()`` triplets to other formats
    Examples::
 
        >>> rgb_to_hex((255, 255, 255))
-       '#ffffff'
+       u'#ffffff'
        >>> rgb_to_hex((0, 0, 128))
-       '#000080'
+       u'#000080'
 
    :param rgb_triplet: The ``rgb()`` triplet.
    :type rgb_triplet: 3-tuple of ``int``
@@ -390,11 +390,11 @@ Conversions from integer ``rgb()`` triplets to other formats
    Examples::
 
        >>> rgb_to_rgb_percent((255, 255, 255))
-       ('100%', '100%', '100%')
+       (u'100%', u'100%', u'100%')
        >>> rgb_to_rgb_percent((0, 0, 128))
-       ('0%', '0%', '50%')
+       (u'0%', u'0%', u'50%')
        >>> rgb_to_rgb_percent((218, 165, 32))
-       ('85.49%', '64.71%', '12.5%')
+       (u'85.49%', u'64.71%', u'12.5%')
 
    :param rgb_triplet: The ``rgb()`` triplet.
    :type rgb_triplet: 3-tuple of ``int``
@@ -404,7 +404,7 @@ Conversions from integer ``rgb()`` triplets to other formats
 Conversions from percentage ``rgb()`` triplets to other formats
 ---------------------------------------------------------------
 
-.. function:: rgb_percent_to_name(rgb_percent_triplet, spec='css3')
+.. function:: rgb_percent_to_name(rgb_percent_triplet, spec=u'css3')
 
    Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
    color triplet, to its corresponding normalized color name, if any
@@ -415,12 +415,12 @@ Conversions from percentage ``rgb()`` triplets to other formats
 
    Examples::
 
-       >>> rgb_percent_to_name(('100%', '100%', '100%'))
-       'white'
-       >>> rgb_percent_to_name(('0%', '0%', '50%'))
-       'navy'
-       >>> rgb_percent_to_name(('85.49%', '64.71%', '12.5%'))
-       'goldenrod'
+       >>> rgb_percent_to_name((u'100%', u'100%', u'100%'))
+       u'white'
+       >>> rgb_percent_to_name((u'0%', u'0%', u'50%'))
+       u'navy'
+       >>> rgb_percent_to_name((u'85.49%', u'64.71%', u'12.5%'))
+       u'goldenrod'
 
    :param rgb_percent_triplet: The ``rgb()`` triplet. 
    :type rgb_percent_triplet: 3-tuple of ``str``
@@ -438,12 +438,12 @@ Conversions from percentage ``rgb()`` triplets to other formats
 
    Examples::
 
-       >>> rgb_percent_to_hex(('100%', '100%', '0%'))
-       '#ffff00'
-       >>> rgb_percent_to_hex(('0%', '0%', '50%'))
-       '#000080'
-       >>> rgb_percent_to_hex(('85.49%', '64.71%', '12.5%'))
-       '#daa520'
+       >>> rgb_percent_to_hex((u'100%', u'100%', u'0%'))
+       u'#ffff00'
+       >>> rgb_percent_to_hex((u'0%', u'0%', u'50%'))
+       u'#000080'
+       >>> rgb_percent_to_hex((u'85.49%', u'64.71%', u'12.5%'))
+       u'#daa520'
 
    :param rgb_percent_triplet: The ``rgb()`` triplet.
    :type rgb_percent_triplet: 3-tuple of ``str``
@@ -461,11 +461,11 @@ Conversions from percentage ``rgb()`` triplets to other formats
 
    Examples::
 
-       >>> rgb_percent_to_rgb(('100%', '100%', '100%'))
+       >>> rgb_percent_to_rgb((u'100%', u'100%', u'100%'))
        (255, 255, 255)
-       >>> rgb_percent_to_rgb(('0%', '0%', '50%'))
+       >>> rgb_percent_to_rgb((u'0%', u'0%', u'50%'))
        (0, 0, 128)
-       >>> rgb_percent_to_rgb(('85.49%', '64.71%', '12.5%'))
+       >>> rgb_percent_to_rgb((u'85.49%', u'64.71%', u'12.5%'))
        (218, 165, 32)
 
    :param rgb_percent_triplet: The ``rgb()`` triplet.
@@ -493,9 +493,9 @@ HTML5 color algorithms
 
    Examples::
 
-       >>> html5_parse_simple_color('#ffffff')
+       >>> html5_parse_simple_color(u'#ffffff')
        (255, 255, 255)
-       >>> html5_parse_simple_color('#fff')
+       >>> html5_parse_simple_color(u'#fff')
        Traceback (most recent call last):
            ...
        ValueError: An HTML5 simple color must be a string exactly seven characters long.
@@ -513,9 +513,9 @@ HTML5 color algorithms
    Examples::
 
        >>> html5_serialize_simple_color((0, 0, 0))
-       '#000000'
+       u'#000000'
        >>> html5_serialize_simple_color((255, 255, 255))
-       '#ffffff'
+       u'#ffffff'
 
    :param simple_color: The color to serialize.
    :type simple_color: 3-tuple of ``int``, each in the range 0..255
@@ -543,7 +543,7 @@ HTML5 color algorithms
        (0, 0, 0)
        >>> html5_parse_legacy_color(u'chucknorris')
        (192, 0, 0)
-       >>> html5_parse_legacy_color('Window')
+       >>> html5_parse_legacy_color(u'Window')
        (0, 13, 0)
 
    :param input: The color to parse.

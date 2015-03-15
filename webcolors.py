@@ -38,10 +38,10 @@ def _reversedict(d):
 
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
-SUPPORTED_SPECIFICATIONS = ('html4', 'css2', 'css21', 'css3')
+SUPPORTED_SPECIFICATIONS = (u'html4', u'css2', u'css21', u'css3')
 
-SPECIFICATION_ERROR_TEMPLATE = "'%%s' is not a supported specification for color name lookups; \
-supported specifications are: %s." % (', '.join(SUPPORTED_SPECIFICATIONS))
+SPECIFICATION_ERROR_TEMPLATE = u"'%%s' is not a supported specification for color name lookups; \
+supported specifications are: %s." % (u', '.join(SUPPORTED_SPECIFICATIONS))
 
 
 # Mappings of color names to normalized hexadecimal color values.
@@ -80,7 +80,7 @@ HTML4_NAMES_TO_HEX = {
 CSS2_NAMES_TO_HEX = HTML4_NAMES_TO_HEX
 
 # CSS 2.1 added orange.
-CSS21_NAMES_TO_HEX = dict(HTML4_NAMES_TO_HEX, orange='#ffa500')
+CSS21_NAMES_TO_HEX = dict(HTML4_NAMES_TO_HEX, orange=u'#ffa500')
 
 # The CSS 3/SVG named colors.
 #
@@ -294,12 +294,12 @@ def normalize_hex(hex_value):
     match = HEX_COLOR_RE.match(hex_value)
     if match is None:
         raise ValueError(
-            "'%s' is not a valid hexadecimal color value." % hex_value
+            u"'%s' is not a valid hexadecimal color value." % hex_value
         )
     hex_digits = match.group(1)
     if len(hex_digits) == 3:
-        hex_digits = ''.join(2 * s for s in hex_digits)
-    return '#%s' % hex_digits.lower()
+        hex_digits = u''.join(2 * s for s in hex_digits)
+    return u'#%s' % hex_digits.lower()
 
 
 def _normalize_integer_rgb(value):
@@ -328,12 +328,12 @@ def _normalize_percent_rgb(value):
     the permitted range (0%-100%, inclusive).
 
     """
-    percent = value.split('%')[0]
-    percent = float(percent) if '.' in percent else int(percent)
+    percent = value.split(u'%')[0]
+    percent = float(percent) if u'.' in percent else int(percent)
 
-    return '0%' if percent < 0 \
-        else '100%' if percent > 100 \
-        else '%s%%' % percent
+    return u'0%' if percent < 0 \
+        else u'100%' if percent > 100 \
+        else u'%s%%' % percent
 
 
 def normalize_percent_triplet(rgb_triplet):
@@ -348,7 +348,7 @@ def normalize_percent_triplet(rgb_triplet):
 # Conversions from color names to various formats.
 #################################################################
 
-def name_to_hex(name, spec='css3'):
+def name_to_hex(name, spec=u'css3'):
     """
     Convert a color name to a normalized hexadecimal color value.
 
@@ -364,18 +364,18 @@ def name_to_hex(name, spec='css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
     normalized = name.lower()
-    hex_value = {'css2': CSS2_NAMES_TO_HEX,
-                 'css21': CSS21_NAMES_TO_HEX,
-                 'css3': CSS3_NAMES_TO_HEX,
-                 'html4': HTML4_NAMES_TO_HEX}[spec].get(normalized)
+    hex_value = {u'css2': CSS2_NAMES_TO_HEX,
+                 u'css21': CSS21_NAMES_TO_HEX,
+                 u'css3': CSS3_NAMES_TO_HEX,
+                 u'html4': HTML4_NAMES_TO_HEX}[spec].get(normalized)
     if hex_value is None:
         raise ValueError(
-            "'%s' is not defined as a named color in %s." % (name, spec)
+            u"'%s' is not defined as a named color in %s." % (name, spec)
         )
     return hex_value
 
 
-def name_to_rgb(name, spec='css3'):
+def name_to_rgb(name, spec=u'css3'):
     """
     Convert a color name to a 3-tuple of integers suitable for use in
     an ``rgb()`` triplet specifying that color.
@@ -384,7 +384,7 @@ def name_to_rgb(name, spec='css3'):
     return hex_to_rgb(name_to_hex(name, spec=spec))
 
 
-def name_to_rgb_percent(name, spec='css3'):
+def name_to_rgb_percent(name, spec=u'css3'):
     """
     Convert a color name to a 3-tuple of percentages suitable for use
     in an ``rgb()`` triplet specifying that color.
@@ -396,7 +396,7 @@ def name_to_rgb_percent(name, spec='css3'):
 # Conversions from hexadecimal color values to various formats.
 #################################################################
 
-def hex_to_name(hex_value, spec='css3'):
+def hex_to_name(hex_value, spec=u'css3'):
     """
     Convert a hexadecimal color value to its corresponding normalized
     color name, if any such name exists.
@@ -413,13 +413,13 @@ def hex_to_name(hex_value, spec='css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
     normalized = normalize_hex(hex_value)
-    name = {'css2': CSS2_HEX_TO_NAMES,
-            'css21': CSS21_HEX_TO_NAMES,
-            'css3': CSS3_HEX_TO_NAMES,
-            'html4': HTML4_HEX_TO_NAMES}[spec].get(normalized)
+    name = {u'css2': CSS2_HEX_TO_NAMES,
+            u'css21': CSS21_HEX_TO_NAMES,
+            u'css3': CSS3_HEX_TO_NAMES,
+            u'html4': HTML4_HEX_TO_NAMES}[spec].get(normalized)
     if name is None:
         raise ValueError(
-            "'%s' has no defined color name in %s." % (hex_value, spec)
+            u"'%s' has no defined color name in %s." % (hex_value, spec)
         )
     return name
 
@@ -449,7 +449,7 @@ def hex_to_rgb_percent(hex_value):
 # Conversions from  integer rgb() triplets to various formats.
 #################################################################
 
-def rgb_to_name(rgb_triplet, spec='css3'):
+def rgb_to_name(rgb_triplet, spec=u'css3'):
     """
     Convert a 3-tuple of integers, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
@@ -475,7 +475,7 @@ def rgb_to_hex(rgb_triplet):
     color triplet, to a normalized hexadecimal value for that color.
 
     """
-    return '#%02x%02x%02x' % normalize_integer_triplet(rgb_triplet)
+    return u'#%02x%02x%02x' % normalize_integer_triplet(rgb_triplet)
 
 
 def rgb_to_rgb_percent(rgb_triplet):
@@ -495,16 +495,16 @@ def rgb_to_rgb_percent(rgb_triplet):
     """
     # In order to maintain precision for common values,
     # special-case them.
-    specials = {255: '100%', 128: '50%', 64: '25%',
-                32: '12.5%', 16: '6.25%', 0: '0%'}
-    return tuple(specials.get(d, '%.02f%%' % (d / 255.0 * 100))
+    specials = {255: u'100%', 128: u'50%', 64: u'25%',
+                32: u'12.5%', 16: u'6.25%', 0: u'0%'}
+    return tuple(specials.get(d, u'%.02f%%' % (d / 255.0 * 100))
                  for d in normalize_integer_triplet(rgb_triplet))
 
 
 # Conversions from percentage rgb() triplets to various formats.
 #################################################################
 
-def rgb_percent_to_name(rgb_percent_triplet, spec='css3'):
+def rgb_percent_to_name(rgb_percent_triplet, spec=u'css3'):
     """
     Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
@@ -543,7 +543,7 @@ def _percent_to_integer(percent):
     between 0 and 255 inclusive.
 
     """
-    num = float(percent.split('%')[0]) / 100 * 255
+    num = float(percent.split(u'%')[0]) / 100 * 255
     e = num - math.floor(num)
     return e < 0.5 and int(math.floor(num)) or int(math.ceil(num))
 
@@ -587,22 +587,23 @@ def html5_parse_simple_color(input):
     #    error.
     if not isinstance(input, unicode) or len(input) != 7:
         raise ValueError(
-            "An HTML5 simple color must be a Unicode string "
-            "exactly seven characters long."
+            u"An HTML5 simple color must be a Unicode string "
+            u"exactly seven characters long."
         )
 
     # 3. If the first character in input is not a U+0023 NUMBER SIGN
     #    character (#), then return an error.
     if not input.startswith('#'):
         raise ValueError(
-            "An HTML5 simple color must begin with the character '#' (U+0023)."
+            u"An HTML5 simple color must begin with the "
+            u"character '#' (U+0023)."
         )
 
     # 4. If the last six characters of input are not all ASCII hex
     #    digits, then return an error.
     if not all(c in string.hexdigits for c in input[1:]):
         raise ValueError(
-            "An HTML5 simple color must contain exactly six ASCII hex digits."
+            u"An HTML5 simple color must contain exactly six ASCII hex digits."
         )
 
     # 5. Let result be a simple color.
@@ -639,9 +640,9 @@ def html5_serialize_simple_color(simple_color):
     #    two-digit hexadecimal numbers using lowercase ASCII hex
     #    digits, zero-padding if necessary, and append these numbers
     #    to result, in the order red, green, blue.
-    result += ("%02x" % red).lower()
-    result += ("%02x" % green).lower()
-    result += ("%02x" % blue).lower()
+    result += (u"%02x" % red).lower()
+    result += (u"%02x" % green).lower()
+    result += (u"%02x" % blue).lower()
 
     # 3. Return result, which will be a valid lowercase simple color.
     return result
@@ -656,13 +657,13 @@ def html5_parse_legacy_color(input):
     # 1. Let input be the string being parsed.
     if not isinstance(input, unicode):
         raise ValueError(
-            "HTML5 legacy color parsing requires a Unicode string as input."
+            u"HTML5 legacy color parsing requires a Unicode string as input."
         )
 
     # 2. If input is the empty string, then return an error.
     if input == "":
         raise ValueError(
-            "HTML5 legacy color parsing forbids empty string as a value."
+            u"HTML5 legacy color parsing forbids empty string as a value."
         )
 
     # 3. Strip leading and trailing whitespace from input.
@@ -670,9 +671,9 @@ def html5_parse_legacy_color(input):
 
     # 4. If input is an ASCII case-insensitive match for the string
     #    "transparent", then return an error.
-    if input.lower() == "transparent":
+    if input.lower() == u"transparent":
         raise ValueError(
-            'HTML5 legacy color parsing forbids "transparent" as a value.'
+            u'HTML5 legacy color parsing forbids "transparent" as a value.'
         )
 
     # 5. If input is an ASCII case-insensitive match for one of the
@@ -688,7 +689,7 @@ def html5_parse_legacy_color(input):
     #    characters of input are all ASCII hex digits, then run these
     #    substeps:
     if len(input) == 4 and \
-       input.startswith('#') and \
+       input.startswith(u'#') and \
        all(c in string.hexdigits for c in input[1:]):
         # 1. Let result be a simple color.
         #
@@ -746,7 +747,7 @@ def html5_parse_legacy_color(input):
     # input the generated format string will be '<LLLLLL'.
     format_string = '<' + ('L' * (int(len(encoded_input) / 4)))
     codepoints = struct.unpack(format_string, encoded_input)
-    input = ''.join('00' if c > 0xffff
+    input = ''.join(u'00' if c > 0xffff
                     else unichr(c)
                     for c in codepoints)
 
@@ -757,18 +758,18 @@ def html5_parse_legacy_color(input):
 
     # 9. If the first character in input is a "#" (U+0023) character,
     #    remove it.
-    if input.startswith('#'):
+    if input.startswith(u'#'):
         input = input[1:]
 
     # 10. Replace any character in input that is not an ASCII hex
     #     digit with the character "0" (U+0030).
     if any(c for c in input if c not in string.hexdigits):
-        input = ''.join(c if c in string.hexdigits else '0' for c in input)
+        input = ''.join(c if c in string.hexdigits else u'0' for c in input)
 
     # 11. While input's length is zero or not a multiple of three,
     #     append a "0" (U+0030) character to input.
     while (len(input) == 0) or (len(input) % 3 != 0):
-        input += '0'
+        input += u'0'
 
     # 12. Split input into three strings of equal length, to obtain
     #     three components. Let length be the length of those
@@ -789,9 +790,9 @@ def html5_parse_legacy_color(input):
     # 14. While length is greater than two and the first character in
     #     each component is a "0" (U+0030) character, remove that
     #     character and reduce length by one.
-    while (length > 2) and (red[0] == '0' and
-                            green[0] == '0' and
-                            blue[0] == '0'):
+    while (length > 2) and (red[0] == u'0' and
+                            green[0] == u'0' and
+                            blue[0] == u'0'):
         red, green, blue = (red[1:],
                             green[1:],
                             blue[1:])
