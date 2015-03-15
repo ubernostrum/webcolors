@@ -29,7 +29,7 @@ Documentation contents
 .. seealso::
 
   * `The sRGB color space <http://www.w3.org/Graphics/Color/sRGB>`_
-  * `HTML 4 color specification <http://www.w3.org/TR/html401/types.html#h-6.5>`_
+  * `HTML 4: Colors <http://www.w3.org/TR/html401/types.html#h-6.5>`_
   * `CSS 1: Color units <http://www.w3.org/TR/CSS1/#color-units>`_
   * `CSS 2: Colors <http://www.w3.org/TR/CSS2/syndata.html#color-units>`_
   * `CSS 3 color module <http://www.w3.org/TR/css3-color/>`_

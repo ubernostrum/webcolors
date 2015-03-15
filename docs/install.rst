@@ -23,7 +23,7 @@ Normal installation
 The preferred method of installing ``webcolors`` is via ``pip``, the
 standard Python package-installation tool. If you don't have ``pip``,
 instructions are available for `how to obtain and install it
-<http://www.pip-installer.org/en/latest/installing.html>`_.
+<https://pip.pypa.io/en/latest/installing.html>`_.
 
 Once you have ``pip``, simply type::
 
@@ -61,4 +61,4 @@ repository by typing::
     git clone https://github.com/ubernostrum/webcolors.git
 
 From there, you can use normal git commands to check out the specific
-revision you want, and install it.
+revision you want, and install it using ``python setup.py install``.
