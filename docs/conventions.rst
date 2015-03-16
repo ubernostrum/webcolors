@@ -11,63 +11,62 @@ applies a set of conventions for representing color names and values,
 and for normalizing them.
 
 
+.. _string-types:
+
 Python string types
 -------------------
 
 The ``webcolors`` module is written to be compatible with both Python
 2 and Python 3, which have different approaches to strings:
 
-* On Python 2, the ``str`` type is a sequence of bytes in a particular
-  encoding, and Unicode strings are represented by the type
-  ``unicode``. Promiscuous mixing of ``str`` and ``unicode`` is
-  possible in Python 2, but not recommended as it is a frequent source
-  of bugs.
+* On Python 2, a sequence of bytes in a particular encoding (a "byte
+  string") is represented by the type ``str`` , and Unicode strings
+  are represented by the type ``unicode``. Promiscuous mixing of
+  ``str`` and ``unicode`` is possible in Python 2, but not recommended
+  as it is a frequent source of bugs.
 
-* On Python 3, the ``str`` type is a Unicode string, and sequences of
-  bytes in any particular encoding are represented by the type
-  ``bytes``. Promiscuous mixing of ``str`` and ``bytes`` is not
-  permitted in Python 3, and will often simply raise exceptions.
+* On Python 3, a sequence of bytes in a particular encoding is
+  represented by the type ``bytes``, and Unicode strings are
+  represented by the type ``str``. Promiscuous mixing of ``str`` and
+  ``bytes`` is not permitted in Python 3, and will usually raise
+  exceptions.
 
 The approach to string types in ``webcolors`` is as follows:
+
+* On Python 3, use of Unicode strings -- ``str`` -- is mandatory for
+  all string arguments to functions in ``webcolors``. Use of ``bytes``
+  values is forbidden.
 
 * All mappings from color names to hexadecimal values (and vice versa)
   are dictionaries whose keys and values are Unicode strings (``str``
   on Python 3 and ``unicode`` on Python 2). This permits promiscuous
-  use of byte strings on Python 2, but will yield results as Unicode
-  strings.
+  use of byte strings on Python 2, but ensures that results will be
+  Unicode strings.
 
-* All functions which return a string value or a tuple of string
-  values will return a Unicode string (``str`` on Python 3 and
-  ``unicode`` on Python 2).
+* All functions whose return values include strings will use Unicode
+  strings (``unicode`` on Python 2 and ``str`` on Python 3).
 
-* All functions which accept a string value or tuple of string values
-  as an argument, *except* for the HTML5 color algorithms (see below),
-  will accept a sequence of bytes (``str``) on Python 2, but will
-  convert to Unicode strings (``unicode``) for output.
+* All functions whose arguments include string values, *except* for
+  the HTML5 color algorithms (see below), will accept a sequence of
+  bytes (``str``) on Python 2, but will convert to Unicode strings
+  (``unicode``) for output.
 
 Because the HTML5 Recommendation specifies its color algorithms in
 terms of Unicode strings only (and in some cases, requires exact
 identification of Unicode code points to determine behavior), the
-following constraints apply to these functions:
+following constraint applies to the functions implementing these
+algorithms:
 
-* Inputs which are specified by HTML5 to be strings must be of type
-  ``str`` (not ``bytes``) on Python 3, and of type ``unicode`` (not
-  ``str``) on Python 2. A ``ValueError`` will be raised if a
-  bytestring (``bytes`` on Python 3 or ``str`` on Python 2) is
-  provided as an argument.
+* Any string arguments *must* be Unicode strings (``unicode`` on
+  Python 2 or ``str`` on Python 3). Use of ``str`` on Python 2 or
+  ``bytes`` on Python 3 will raise a ``ValueError``.
 
-* Outputs which are specified by HTML5 to be strings will be of type
-  ``str`` (never ``bytes``) on Python 3, and of type ``unicode``
-  (never ``str``) on Python 2.
-
-Because Unicode strings are everywhere preferred (and in some cases
-mandatory) as input, and consistently produced as output, all
-documentation of functions in ``webcolors`` which involves string
-input or output uses the ``u`` prefix as a reminder. Use of that
-prefix is required in Python 2 to mark Unicode strings; in Python 3.3
-and later, use is permitted on strings, but has no effect as ``str``
-is a Unicode type in Python 3. Internally, ``webcolors`` uses the
-``u`` prefix on all strings it produces for output.
+Use of Unicode strings whenever possible is strongly preferred. To
+encourage this, all documentation for ``webcolors`` uses the ``u``
+prefix for string literals. Use of the ``u`` prefix is required on
+Python 2 to mark a string literal as Unicode; on Pyhon 3.3 and later,
+use is permitted but not necessary (as all un-prefixed string literals
+on Python 3 are Unicode strings).
 
 
 Hexadecimal color values
@@ -102,9 +101,10 @@ Integer and percentage ``rgb()`` triplets
 
 Functions which work with integer ``rgb()`` triplets accept and return
 them as a 3-tuple of Python ``int``. Functions which work with
-percentage ``rgb()`` triplets accept and return them as a 3-tuple of
-Python Unicode strings (``unicode`` or ``str`` depending on Python
-version).
+percentage ``rgb()`` triplets accept them as 3-tuple of Python strings
+(either ``str`` or ``unicode`` is permitted on Python 2; only ``str``
+is permitted on Python 3) and return them as a 3-tuple of Python
+Unicode strings (``unicode`` or ``str`` depending on Python version).
 
 Internally, Python ``float`` is used in some conversions to and from
 the triplet representations; for each function which may have the
@@ -132,10 +132,10 @@ Color names
 -----------
 
 For colors specified via predefined names, ``webcolors`` will accept
-strings containing names so long as they contain no spaces or
-non-alphabetic characters, and regardless of case. Thus, for example,
-``AliceBlue`` and ``aliceblue`` are both accepted, and both will refer
-to the same color (namely, ``rgb(240, 248, 255)``).
+strings containing names case-insensitively, so long as they contain
+no spaces or non-alphabetic characters. Thus, for example,
+``u'AliceBlue'`` and ``u'aliceblue'`` are both accepted, and both will
+refer to the same color (namely, ``rgb(240, 248, 255)``).
 
 For output which consists of a color name, and for functions which
 perform intermediate conversion to a predefined name before returning

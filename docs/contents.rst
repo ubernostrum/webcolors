@@ -32,6 +32,11 @@ hexadecimal color values, or with a request to name a color which has
 no name in the requested specification, or with an invalid
 specification identifier, will raise ``ValueError``.
 
+In the documentation below, "Unicode string" means the Unicode string
+type of the Python version being used; on Python 3 this is ``str`` and
+on Python 2 it is ``unicode``. See :ref:`the documentation on use of
+Python string types <string-types>` for details.
+
 
 Constants
 ---------
@@ -136,8 +141,8 @@ Normalization functions
        ValueError: '0099cc' is not a valid hexadecimal color value.
 
    :param hex_value: The hexadecimal color value to normalize.
-   :type hex_value: str
-   :rtype: str
+   :type hex_value: ``str``
+   :rtype: Unicode string
 
 .. function:: normalize_integer_triplet(rgb_triplet)
 
@@ -175,7 +180,7 @@ Normalization functions
     
     :param rgb_triplet: The percentage ``rgb()`` triplet to normalize.
     :type rgb_triplet: 3-tuple of ``str``
-    :rtype: 3-tuple of ``str``
+    :rtype: 3-tuple of Unicode string
 
 
 Conversions from color names to other formats
@@ -207,7 +212,7 @@ Conversions from color names to other formats
       names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
       ``'css3'``. Default is ``'css3'``.
    :type spec: ``str``
-   :rtype: ``str``
+   :rtype: Unicode string
 
 .. function:: name_to_rgb(name, spec=u'css3')
 
@@ -257,7 +262,7 @@ Conversions from color names to other formats
       names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
       ``'css3'``. Default is ``'css3'``.
    :type spec: ``str``
-   :rtype: 3-tuple of ``str``
+   :rtype: 3-tuple of Unicode string
 
 
 Conversion from hexadecimal color values to other formats
@@ -291,7 +296,7 @@ Conversion from hexadecimal color values to other formats
       names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
       ``'css3'``. Default is ``'css3'``.
    :type spec: ``str``
-   :rtype: ``str``
+   :rtype: Unicode string
 
 .. function:: hex_to_rgb(hex_value)
 
@@ -327,7 +332,7 @@ Conversion from hexadecimal color values to other formats
 
    :param hex_value: The hexadecimal color value to convert.
    :type hex_value: ``str``
-   :rtype: 3-tuple of ``str``
+   :rtype: 3-tuple of Unicode string
 
 
 Conversions from integer ``rgb()`` triplets to other formats
@@ -355,7 +360,7 @@ Conversions from integer ``rgb()`` triplets to other formats
       names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
       ``'css3'``. Default is ``'css3'``.
    :type spec: ``str``
-   :rtype: ``str``
+   :rtype: Unicode string
 
 .. function:: rgb_to_hex(rgb_triplet)
 
@@ -371,7 +376,7 @@ Conversions from integer ``rgb()`` triplets to other formats
 
    :param rgb_triplet: The ``rgb()`` triplet.
    :type rgb_triplet: 3-tuple of ``int``
-   :rtype: ``str``
+   :rtype: Unicode string
 
 .. function:: rgb_to_rgb_percent(rgb_triplet)
 
@@ -398,7 +403,7 @@ Conversions from integer ``rgb()`` triplets to other formats
 
    :param rgb_triplet: The ``rgb()`` triplet.
    :type rgb_triplet: 3-tuple of ``int``
-   :rtype: 3-tuple of ``str``
+   :rtype: 3-tuple of Unicode string
 
 
 Conversions from percentage ``rgb()`` triplets to other formats
@@ -428,7 +433,7 @@ Conversions from percentage ``rgb()`` triplets to other formats
        names; valid values are ``'html4'``, ``'css2'``, ``'css21'``
        and ``'css3'``. Default is ``'css3'``.
    :type spec: ``str``
-   :rtype: ``str``
+   :rtype: Unicode string
 
 .. function:: rgb_percent_to_hex(rgb_percent_triplet)
 
@@ -519,10 +524,9 @@ HTML5 color algorithms
 
    :param simple_color: The color to serialize.
    :type simple_color: 3-tuple of ``int``, each in the range 0..255
-   :rtype: A valid lowercase simple color, which is a ``str`` on
-      Python 3, ``unicode`` on Python 2, exactly seven characters
-      long, beginning with ``#`` and followed by six lowercase
-      hexadecimal digits.
+   :rtype: A valid lowercase simple color, which is a Unicode string
+      exactly seven characters long, beginning with ``#`` and followed
+      by six lowercase hexadecimal digits.
 
 .. function:: html5_parse_legacy_color(input)
 
