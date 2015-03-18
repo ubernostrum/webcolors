@@ -27,7 +27,7 @@ For example::
 
 Implementations are also provided for the HTML5 color parsing and
 serialization algorithms. For example, parsing the infamous
-"chucknorris" into an rgb() triplet::
+"chucknorris" string into an rgb() triplet::
 
     >>> import webcolors
     >>> webcolors.html5_parse_legacy_color(u'chucknorris')
