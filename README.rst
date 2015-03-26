@@ -1,5 +1,8 @@
 .. -*-restructuredtext-*-
 
+.. image:: https://travis-ci.org/ubernostrum/webcolors.svg?branch=master
+    :target: https://travis-ci.org/ubernostrum/webcolors
+
 ``webcolors`` is a simple Python module for working with HTML/CSS
 color definitions.
 
