@@ -4,4 +4,8 @@ python:
   - "3.3"
   - "2.7"
   - "2.6"
-script: nosetests
+install:
+  pip install coverage
+script: 
+  - nosetests --with-coverage
+
