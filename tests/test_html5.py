@@ -24,7 +24,7 @@ class HTML5Tests(unittest.TestCase):
         Test error conditions of the HTML5 simple color parsing
         algorithm.
         """
-        test_values = (u'0099cc',
+        test_values = (u'0099ccc',
                        u'#09c',
                        u'#0000',
                        u'#0000000',
@@ -59,7 +59,8 @@ class HTML5Tests(unittest.TestCase):
         test_pairs = ((u'chucknorris', (192, 0, 0)),
                       (u'Window', (0, 13, 0)),
                       (u'RE|SXLuAse', (224, 0, 224)),
-                      (u'+=@FnnWL!Yb}5Dk', (0, 0, 176)))
+                      (u'+=@FnnWL!Yb}5Dk', (0, 0, 176)),
+                      (u'A' * 129, (170, 170, 170)))
         for pair in test_pairs:
             self.assertEqual(pair[1],
                              webcolors.html5_parse_legacy_color(pair[0]))
