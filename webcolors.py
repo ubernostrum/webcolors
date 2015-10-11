@@ -15,16 +15,16 @@ import struct
 
 
 # Python 2's unichr() is Python 3's chr().
-try:              # pragma: no cover
-    unichr        # pragma: no cover
-except NameError: # pragma: no cover
-    unichr = chr  # pragma: no cover
+try:               # pragma: no cover
+    unichr         # pragma: no cover
+except NameError:  # pragma: no cover
+    unichr = chr   # pragma: no cover
 
 # Python 2's unicode is Python 3's str.
-try:              # pragma: no cover
-    unicode       # pragma: no cover
-except NameError: # pragma: no cover
-    unicode = str # pragma: no cover
+try:               # pragma: no cover
+    unicode        # pragma: no cover
+except NameError:  # pragma: no cover
+    unicode = str  # pragma: no cover
 
 
 def _reversedict(d):
