@@ -465,8 +465,12 @@ def rgb_to_name(rgb_triplet, spec=u'css3'):
     """
     return hex_to_name(
         rgb_to_hex(
-            normalize_integer_triplet(rgb_triplet)),
-        spec=spec)
+            normalize_integer_triplet(
+                rgb_triplet
+            )
+        ),
+        spec=spec
+    )
 
 
 def rgb_to_hex(rgb_triplet):
@@ -521,8 +525,11 @@ def rgb_percent_to_name(rgb_percent_triplet, spec=u'css3'):
     return rgb_to_name(
         rgb_percent_to_rgb(
             normalize_percent_triplet(
-                rgb_percent_triplet)),
-        spec=spec)
+                rgb_percent_triplet
+            )
+        ),
+        spec=spec
+    )
 
 
 def rgb_percent_to_hex(rgb_percent_triplet):
@@ -534,7 +541,11 @@ def rgb_percent_to_hex(rgb_percent_triplet):
     """
     return rgb_to_hex(
         rgb_percent_to_rgb(
-            normalize_percent_triplet(rgb_percent_triplet)))
+            normalize_percent_triplet(
+                rgb_percent_triplet
+            )
+        )
+    )
 
 
 def _percent_to_integer(percent):
@@ -558,8 +569,14 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
     regarding precision for ``rgb_to_rgb_percent()`` for details.
 
     """
-    return tuple(map(_percent_to_integer,
-                     normalize_percent_triplet(rgb_percent_triplet)))
+    return tuple(
+        map(
+            _percent_to_integer,
+            normalize_percent_triplet(
+                rgb_percent_triplet
+            )
+        )
+    )
 
 
 # HTML5 color algorithms.
