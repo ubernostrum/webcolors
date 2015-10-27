@@ -65,8 +65,11 @@ Use of Unicode strings whenever possible is strongly preferred. To
 encourage this, all documentation for ``webcolors`` uses the ``u``
 prefix for string literals. Use of the ``u`` prefix is required on
 Python 2 to mark a string literal as Unicode; on Python 3.3 and later,
-use is permitted but not necessary (as all un-prefixed string literals
-on Python 3 are Unicode strings).
+use of this prefix is permitted but not necessary (as all un-prefixed
+string literals on Python 3 are Unicode strings).
+
+Due to use of the ``u`` prefix, using ``webcolors`` on Python 3 will
+require at least Python 3.3.
 
 
 Hexadecimal color values
