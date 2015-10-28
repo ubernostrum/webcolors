@@ -8,7 +8,6 @@ details of the supported formats and conversions.
 
 """
 
-import math
 import re
 import string
 import struct
@@ -554,9 +553,9 @@ def _percent_to_integer(percent):
     between 0 and 255 inclusive.
 
     """
-    num = float(percent.split(u'%')[0]) / 100 * 255
-    e = num - math.floor(num)
-    return e < 0.5 and int(math.floor(num)) or int(math.ceil(num))
+    return round(
+        float(percent.split(u'%')[0]) / 100 * 255
+    )
 
 
 def rgb_percent_to_rgb(rgb_percent_triplet):
