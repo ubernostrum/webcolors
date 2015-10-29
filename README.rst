@@ -3,8 +3,8 @@
 .. image:: https://travis-ci.org/ubernostrum/webcolors.svg?branch=master
     :target: https://travis-ci.org/ubernostrum/webcolors
 
-``webcolors`` is a simple Python module for working with HTML/CSS
-color definitions.
+``webcolors`` is a simple Python (2.6, 2.7, 3.3+) module for working
+with HTML/CSS color definitions.
 
 Support is included for normalizing and converting between the
 following formats (RGB colorspace only; conversion to/from HSL can be
