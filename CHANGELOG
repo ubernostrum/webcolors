@@ -1,0 +1,53 @@
+Version 1.5, 2015-03-17
+-----------------------
+
+* Official Python 3 support, requires Python 3.3 or later.
+
+* Added HTML5 color algorithm support.
+
+* Expanded documentation.
+
+
+Version 1.4, 2012-02-10
+-----------------------
+
+* Prep work for Python 3 support.
+
+* Packaging fixes.
+
+* 100% test coverage.
+
+* Bugfix: added normalization of integer and percentage rgb()
+  triplets, per CSS clipping rules.
+
+
+Version 1.3.1, 2009-10-24
+-------------------------
+
+* Continued documentation expansion.
+
+* Documentation now maintained using Sphinx.
+
+
+Version 1.3, 2009-05-08
+-----------------------
+
+* Major expansion of documentation.
+
+
+Version 1.2, 2009-03-01
+-----------------------
+
+* Corrected a packaging error.
+
+
+Version 1.1, 2008-12-19
+-----------------------
+
+* Minor documentation update.
+
+
+Version 1.0, 2008-10-28
+-----------------------
+
+* Initial stable release.
