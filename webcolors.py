@@ -4,7 +4,7 @@ formats defined by the HTML and CSS specifications for use in
 documents on the Web.
 
 See documentation (in docs/ directory of source distribution) for
-details of the supported formats and conversions.
+details of the supported formats, conventions and conversions.
 
 """
 
