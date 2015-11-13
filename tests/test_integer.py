@@ -16,9 +16,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
                       ((0, 0, 128), u'navy'),
                       ((218, 165, 32), u'goldenrod'))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.rgb_to_name(pair[0]))
+        for triplet, name in test_pairs:
+            self.assertEqual(name,
+                             webcolors.rgb_to_name(triplet))
 
     def test_rgb_to_name_unnamed(self):
         """
@@ -59,9 +59,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
                       ((0, 0, 128), u'#000080'),
                       ((218, 165, 32), u'#daa520'))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.rgb_to_hex(pair[0]))
+        for triplet, hex_value in test_pairs:
+            self.assertEqual(hex_value,
+                             webcolors.rgb_to_hex(triplet))
 
     def test_rgb_to_rgb_percent(self):
         """
@@ -72,6 +72,6 @@ class IntegerRGBConversionTests(unittest.TestCase):
                       ((0, 0, 128), (u'0%', u'0%', u'50%')),
                       ((218, 165, 32), (u'85.49%', u'64.71%', u'12.5%')))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.rgb_to_rgb_percent(pair[0]))
+        for triplet, percent_triplet in test_pairs:
+            self.assertEqual(percent_triplet,
+                             webcolors.rgb_to_rgb_percent(triplet))

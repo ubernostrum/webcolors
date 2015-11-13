@@ -15,9 +15,9 @@ class NameConversionTests(unittest.TestCase):
                       (u'navy', u'#000080'),
                       (u'goldenrod', u'#daa520'))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.name_to_hex(pair[0]))
+        for name, hex_value in test_pairs:
+            self.assertEqual(hex_value,
+                             webcolors.name_to_hex(name))
 
     def test_name_to_hex_bad_name(self):
         """
@@ -25,14 +25,21 @@ class NameConversionTests(unittest.TestCase):
         correspond to a color in the given specification, raises
         ValueError.
         """
-        test_values = ((u'goldenrod', u'html4'),
-                       (u'glue', u'css21'),
-                       (u'breen', u'css3'))
+        test_values = (
+            {u'name': u'goldenrod',
+             u'spec': u'html4'},
+            {u'name': u'glue',
+             u'spec': u'css21'},
+            {u'name': u'breen',
+             u'spec': u'css3'},
+        )
 
-        for value in test_values:
-            self.assertRaises(ValueError,
-                              webcolors.name_to_hex,
-                              *value)
+        for kwarg_dict in test_values:
+            self.assertRaises(
+                ValueError,
+                webcolors.name_to_hex,
+                **kwarg_dict
+            )
 
     def test_name_to_hex_specs(self):
         """
@@ -57,9 +64,9 @@ class NameConversionTests(unittest.TestCase):
                       (u'navy', (0, 0, 128)),
                       (u'goldenrod', (218, 165, 32)))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.name_to_rgb(pair[0]))
+        for name, triplet in test_pairs:
+            self.assertEqual(triplet,
+                             webcolors.name_to_rgb(name))
 
     def test_name_to_rgb_percent(self):
         """
@@ -69,6 +76,6 @@ class NameConversionTests(unittest.TestCase):
                       (u'navy', (u'0%', u'0%', u'50%')),
                       (u'goldenrod', (u'85.49%', u'64.71%', u'12.5%')))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.name_to_rgb_percent(pair[0]))
+        for name, triplet in test_pairs:
+            self.assertEqual(triplet,
+                             webcolors.name_to_rgb_percent(name))

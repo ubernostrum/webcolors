@@ -17,9 +17,9 @@ class HexConversionTests(unittest.TestCase):
                       (u'#000080', u'navy'),
                       (u'#daa520', u'goldenrod'))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.hex_to_name(pair[0]))
+        for hex_value, name in test_pairs:
+            self.assertEqual(name,
+                             webcolors.hex_to_name(hex_value))
 
     def test_hex_to_name_unnamed(self):
         """
@@ -60,9 +60,9 @@ class HexConversionTests(unittest.TestCase):
                       (u'#ffffff', (255, 255, 255)),
                       (u'#000080', (0, 0, 128)))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.hex_to_rgb(pair[0]))
+        for hex_value, triplet in test_pairs:
+            self.assertEqual(triplet,
+                             webcolors.hex_to_rgb(hex_value))
 
     def test_hex_to_rgb_percent(self):
         """
@@ -72,6 +72,6 @@ class HexConversionTests(unittest.TestCase):
                       (u'#ffffff', (u'100%', u'100%', u'100%')),
                       (u'#000080', (u'0%', u'0%', u'50%')))
 
-        for pair in test_pairs:
-            self.assertEqual(pair[1],
-                             webcolors.hex_to_rgb_percent(pair[0]))
+        for hex_value, triplet in test_pairs:
+            self.assertEqual(triplet,
+                             webcolors.hex_to_rgb_percent(hex_value))
