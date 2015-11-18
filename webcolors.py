@@ -553,8 +553,10 @@ def _percent_to_integer(percent):
     between 0 and 255 inclusive.
 
     """
-    return round(
-        float(percent.split(u'%')[0]) / 100 * 255
+    return int(
+        round(
+            float(percent.split(u'%')[0]) / 100 * 255
+        )
     )
 
 
