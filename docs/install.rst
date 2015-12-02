@@ -8,13 +8,13 @@ The ``webcolors`` module has no external dependencies other than
 Python itself. It's officially tested and supported on the following
 versions of Python:
 
-* Python 2.6
-
 * Python 2.7
 
 * Python 3.3
 
 * Python 3.4
+
+* Python 3.5
 
 
 Normal installation

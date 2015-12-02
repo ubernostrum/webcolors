@@ -10,18 +10,25 @@ when using ``webcolors``.
 What versions of Python are supported?
 --------------------------------------
 
-On Python 2, ``webcolors`` supports and is tested on Python 2.6 and
-2.7. Although ``webcolors`` may work on Python 2.5 or older versions,
-this is unintentional and unsupported.
+On Python 2, ``webcolors`` supports and is tested on Python 2.7. On
+Python 3, ``webcolors`` supports and is tested on Python 3.3, 3.4 and
+3.5.
 
+These Python version requirements are due to a combination of factors:
 
-On Python 3, ``webcolors`` supports and is tested on Python 3.3, 3.4
-and 3.5. Python 3.0, 3.1 and 3.2 are explicitly unsupported, and the
-``webcolors`` test suite will not execute on those versions. The
-minimum-3.3 version requirement is because Python 3.3 was both the
-first generally-adopted Python 3 release, and because Python 3.3
-greatly simplified the process of consistently handling both Python 2
-and Python 3 strings in the same codebase.
+* On Python 2, only 2.7 still receives official security support from
+  Python's development team. Although some third parties continue to
+  provide unofficial security support for earlier Python 2 versions,
+  the fact remains that Python 2.6 and earlier have reached their
+  official end-of-life and their use should not be encouraged. On
+  Python 3, 3.0 and 3.1 have similarly reached end-of-life and no
+  longer receive security support. Python 3.2 is nearing end-of-life
+  (scheduled for February 2016).
+
+* On Python 3, 3.3 was the first widely-adopted release, and also
+  introduced features (not present in earlier Python 3 releases) which
+  greatly simplify the process of consistently handling strings in
+  both Python 2 and Python 3 within the same codebase.
 
 
 How closely does this module follow the standards?
