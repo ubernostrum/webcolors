@@ -5,7 +5,7 @@ import webcolors
 
 class HTML5Tests(unittest.TestCase):
     """
-    Test functions which implement the HTML5 color algorithms.
+    Test the functions which implement the HTML5 color algorithms.
     """
     def test_parse_simple_color(self):
         """
