@@ -6,6 +6,7 @@ import webcolors
 class HTML5Tests(unittest.TestCase):
     """
     Test the functions which implement the HTML5 color algorithms.
+
     """
     def test_parse_simple_color(self):
         """
@@ -23,6 +24,7 @@ class HTML5Tests(unittest.TestCase):
         """
         Test error conditions of the HTML5 simple color parsing
         algorithm.
+
         """
         test_values = (u'0099ccc',
                        u'#09c',
@@ -39,6 +41,7 @@ class HTML5Tests(unittest.TestCase):
         """
         Test implementation of the HTML5 simple color serialization
         algorithm.
+
         """
         test_pairs = (((0, 0, 0), u'#000000'),
                       ((0, 0, 128), u'#000080'),
@@ -51,6 +54,7 @@ class HTML5Tests(unittest.TestCase):
         """
         Test implementation of the HTML5 legacy color parsing
         algorithm.
+
         """
         # One of these is the famous "chucknorris" value. Another is a
         # CSS 2 system color. The final two are randomly-generated but
@@ -68,6 +72,7 @@ class HTML5Tests(unittest.TestCase):
     def test_parse_legacy_color_names(self):
         """
         Test the HTML5 legacy color parsing of SVG/CSS3 color names.
+
         """
         for name in webcolors.CSS3_NAMES_TO_HEX.keys():
             self.assertEqual(webcolors.name_to_rgb(name),
@@ -77,6 +82,7 @@ class HTML5Tests(unittest.TestCase):
         """
         Test the HTML5 legacy color parsing of three- and six-digit
         hexadecimal color values.
+
         """
         test_values = (u'#000',
                        u'#000000',
@@ -90,6 +96,7 @@ class HTML5Tests(unittest.TestCase):
     def test_parse_legacy_color_error(self):
         """
         Test error conditions of the HTML5 legacy color parsing algorithm.
+
         """
         test_values = (u'#000000'.encode('ascii'),
                        u"transparent",
