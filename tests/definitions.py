@@ -1,6 +1,7 @@
 """
 Test accuracy of the mappings of color names and values, by extracting
 the definitions of the colors from the relevant standards documents.
+
 """
 
 import re
@@ -21,6 +22,7 @@ class HTML4DefinitionTests(unittest.TestCase):
     Extract the names and values of the 16 defined HTML 4 colors from
     the online version of the standard, and check them against this
     module's definitions of them.
+
     """
     def setUp(self):
         self.html4_colors = {}
@@ -46,6 +48,7 @@ class CSS21DefinitionTests(unittest.TestCase):
     Extract the names and values of the 17 defined CSS 2.1 colors from
     the online version of the standard, and check them against this
     module's definitions of them.
+
     """
     def setUp(self):
         self.color_matching_re = re.compile(r'^([a-z]+)(#[a-fA-F0-9]{6})$')
@@ -73,6 +76,7 @@ class CSS3DefinitionTests(unittest.TestCase):
     Extract the names and values of the 147 defined CSS 3 colors from
     the online version of the standard, and check them against this
     module's definitions of them.
+
     """
     def setUp(self):
         self.css3_colors = {}

@@ -5,8 +5,9 @@ import webcolors
 
 class HexConversionTests(unittest.TestCase):
     """
-    Test functions which convert from hex color codes to other
+    Test the functions which convert from hex color codes to other
     formats.
+
     """
     def test_hex_to_name(self):
         """
@@ -26,6 +27,7 @@ class HexConversionTests(unittest.TestCase):
         A hex code which does not correspond to a named color, or does
         not correspond to a named color in the given specification,
         raises ValueError.
+
         """
         # No name in any spec.
         self.assertRaises(ValueError,
@@ -41,6 +43,7 @@ class HexConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; using an
         unsupported specification raises ValueError.
+
         """
         for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
             self.assertEqual(u'white',
@@ -55,6 +58,7 @@ class HexConversionTests(unittest.TestCase):
     def test_hex_to_rgb(self):
         """
         Test conversion from hex to integer RGB triplet.
+
         """
         test_pairs = ((u'#fff', (255, 255, 255)),
                       (u'#ffffff', (255, 255, 255)),
@@ -67,6 +71,7 @@ class HexConversionTests(unittest.TestCase):
     def test_hex_to_rgb_percent(self):
         """
         Test conversion from hex to percent RGB triplet.
+
         """
         test_pairs = ((u'#fff', (u'100%', u'100%', u'100%')),
                       (u'#ffffff', (u'100%', u'100%', u'100%')),

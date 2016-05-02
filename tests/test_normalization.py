@@ -7,11 +7,13 @@ class NormalizationTests(unittest.TestCase):
     """
     Test both the publicly-exposed and internal normalization
     functions.
+
     """
     def test_normalize_hex(self):
         """
         Hexadecimal normalization normalizes valid hex color codes to
         6 digits, lowercase.
+
         """
         test_pairs = ((u'#0099cc', u'#0099cc'),
                       (u'#0099CC', u'#0099cc'),
@@ -25,6 +27,7 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_hex_format(self):
         """
         Hex normalization raises ValueError on invalid hex color code.
+
         """
         test_values = (u'0099cc',
                        '#0000gg',
@@ -38,6 +41,7 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_integer_rgb(self):
         """
         Integer normalization clips to 0-255.
+
         """
         test_pairs = ((255, 255),
                       (0, 0),
@@ -53,6 +57,7 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_integer_triplet(self):
         """
         Integer triplet normalization clips all values to 0-255.
+
         """
         test_pairs = (((128, 128, 128), (128, 128, 128)),
                       ((0, 0, 0), (0, 0, 0)),
@@ -67,6 +72,7 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_percent_rgb(self):
         """
         Percent normalization clips to 0%-100%.
+
         """
         test_pairs = ((u'0%', u'0%'),
                       (u'100%', u'100%'),
@@ -83,6 +89,7 @@ class NormalizationTests(unittest.TestCase):
     def test_normalize_percent_triplet(self):
         """
         Percent triplet normalization clips all values to 0%-100%.
+
         """
         test_pairs = (((u'50%', u'50%', u'50%'), (u'50%', u'50%', u'50%')),
                       ((u'0%', u'100%', u'0%'), (u'0%', u'100%', u'0%')),

@@ -5,8 +5,9 @@ import webcolors
 
 class PercentRGBConversionTests(unittest.TestCase):
     """
-    Test functions which convert from percent RGB triplets to other
-    formats.
+    Test the functions which convert from percent RGB triplets to
+    other formats.
+
     """
     def test_rgb_percent_to_name(self):
         """
@@ -25,6 +26,7 @@ class PercentRGBConversionTests(unittest.TestCase):
         A percent RGB triplet which does not correspond to a named
         color, or does not correspond to a named color in the given
         specification, raises ValueError.
+
         """
         # No name in any spec.
         self.assertRaises(ValueError,
@@ -40,6 +42,7 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         Using one of the supported specifications succeeds; an
         unsupported specification raises ValueError.
+
         """
         for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
             self.assertEqual(u'white',
@@ -56,6 +59,7 @@ class PercentRGBConversionTests(unittest.TestCase):
     def test_rgb_percent_to_hex(self):
         """
         Test conversion from percent RGB triplet to hex.
+
         """
         test_pairs = (((u'100%', u'100%', u'0%'), u'#ffff00'),
                       ((u'0%', u'0%', u'50%'), u'#000080'),
@@ -69,6 +73,7 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         Test conversion from percent RGB triplet to integer RGB
         triplet.
+
         """
         test_pairs = (((u'100%', u'100%', u'0%'), (255, 255, 0)),
                       ((u'0%', u'0%', u'50%'), (0, 0, 128)),
