@@ -478,7 +478,11 @@ def rgb_to_hex(rgb_triplet):
     color triplet, to a normalized hexadecimal value for that color.
 
     """
-    return u'#%02x%02x%02x' % normalize_integer_triplet(rgb_triplet)
+    return u'#{:02x}{:02x}{:02x}'.format(
+        *normalize_integer_triplet(
+            rgb_triplet
+        )
+    )
 
 
 def rgb_to_rgb_percent(rgb_triplet):
