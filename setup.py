@@ -3,7 +3,7 @@ import os
 from distutils.core import setup
 
 setup(name='webcolors',
-      version='1.6',
+      version='1.7',
       description='A library for working with color names and color value formats defined by the HTML and CSS specifications for use in documents on the Web.',
       long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
       author='James Bennett',

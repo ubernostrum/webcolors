@@ -6,7 +6,7 @@
 Module contents
 ===============
 
-The contents of the ``webcolors`` module fall into four categories:
+The contents of the webcolors module fall into four categories:
 
 1. Constants which provide mappings between color names and values.
 
@@ -20,7 +20,7 @@ The contents of the ``webcolors`` module fall into four categories:
 
 See :ref:`the documentation regarding conventions <conventions>` for
 information regarding the types and representation of various color
-formats in ``webcolors``.
+formats in webcolors.
 
 All conversion functions which involve color names take an optional
 argument to determine which specification to draw color names
@@ -103,7 +103,7 @@ Mappings from hexadecimal values to names
 
 The canonical names of these constants are as listed above, entirely
 in uppercase. For backwards compatibility with older versions of
-``webcolors``, aliases are provided whose names are entirely lowercase
+webcolors, aliases are provided whose names are entirely lowercase
 (for example, ``html4_names_to_hex``).
 
 

@@ -4,7 +4,7 @@
 Conformance and testing
 =======================
 
-Much of the behavior of ``webcolors`` is dictated by the relevant Web
+Much of the behavior of webcolors is dictated by the relevant Web
 standards, which define the acceptable color formats, how to determine
 valid values for each format and the values corresponding to defined
 color names. Maintaining correct conversions and conformance to those
@@ -14,7 +14,7 @@ standards is crucial.
 The normal test suite
 ---------------------
 
-The normal test suite for ``webcolors`` -- that is, the set of unit
+The normal test suite for webcolors -- that is, the set of unit
 tests which will execute using standard Python test runners -- aims
 for 100% code coverage, but does *not* aim for 100% coverage of
 possible color value inputs and outputs. Instead, it uses a small
@@ -49,7 +49,7 @@ provides good basic confidence in the correctness of the tested
 functions.
 
 However, the normal test suite cannot guarantee that the color
-definitions included in ``webcolors`` correspond to those in the
+definitions included in webcolors correspond to those in the
 relevant standards, and cannot provide guarantees of correct
 conversions for all possible values. For that, additional tests are
 required.
@@ -63,9 +63,9 @@ Verifying color definitions
 ---------------------------
 
 The ``definitions`` test file verifies that the color definitions in
-``webcolors`` are correct. It does this by retrieving the relevant
+webcolors are correct. It does this by retrieving the relevant
 standards documents as HTML, parsing out the color definitions in
-them, and comparing them to the definitions in ``webcolors``. That
+them, and comparing them to the definitions in webcolors. That
 consists of:
 
 * Parsing out the names and hexadecimal values of the 16 named colors
@@ -102,7 +102,7 @@ For conversions between hexadecimal and integer ``rgb()``, that file
 generates all 16,777,216 possible color values for each format in
 order (starting at ``#000000`` and ``(0, 0, 0)`` and incrementing),
 and verifies that each one converts to the corresponding value in the
-other format. Thus, it is possible to be confident that ``webcolors``
+other format. Thus, it is possible to be confident that webcolors
 provides correct conversions between all possible color values in
 those formats.
 
@@ -128,7 +128,7 @@ provided, for two reasons:
    amount of time.
 
 Since precise correctness and completeness are not achievable,
-``webcolors`` instead aims to achieve *consistency* in
+webcolors instead aims to achieve *consistency* in
 conversions. Specifically, the ``full_colors`` test generates all
 16,777,216 integer ``rgb()`` triplets, and for each such triplet ``t``
 verifies that the following assertion holds::

@@ -34,4 +34,4 @@ serialization algorithms. For example, parsing the infamous
     >>> webcolors.html5_parse_legacy_color(u'chucknorris')
     (192, 0, 0)
 
-Full documentation is `available online <http://webcolors.readthedocs.org/>`_.
+Full documentation is `available online <http://webcolors.readthedocs.io/>`_.

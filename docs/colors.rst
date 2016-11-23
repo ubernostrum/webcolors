@@ -162,7 +162,7 @@ algorithms of `the W3C HTML5 Recommendation's section on colors`_.
 What this module supports
 -------------------------
 
-The ``webcolors`` module supports the following methods of specifying
+The webcolors module supports the following methods of specifying
 sRGB colors, and conversions between them:
 
 * Six-digit hexadecimal.
@@ -175,7 +175,7 @@ sRGB colors, and conversions between them:
 
 * Varying selections of predefined color names.
 
-The ``webcolors`` module **does not support**:
+The webcolors module **does not support**:
 
 * The CSS 1 named colors, which did not have defined values.
 

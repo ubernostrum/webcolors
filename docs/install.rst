@@ -4,7 +4,7 @@
 Installation guide
 ==================
 
-The ``webcolors`` module has no external dependencies other than
+The webcolors module has no external dependencies other than
 Python itself. It's officially tested and supported on the following
 versions of Python:
 
@@ -16,14 +16,27 @@ versions of Python:
 
 * Python 3.5
 
+It is expected that webcolors |version| will work without modification
+on Python 3.6 once it is released.
+
+.. important:: **Python 3**
+
+   Although webcolors is supported on Python 3.3 and later, it is not
+   and will not be supported on earlier Python 3.x releases. Python
+   3.3 was the first 3.x release to include several important Python
+   2/3 compatibility features, which allow webcolors to support Python
+   2 and 3 in the same codebase.
+
 
 Normal installation
 -------------------
 
-The preferred method of installing ``webcolors`` is via ``pip``, the
+The preferred method of installing webcolors is via ``pip``, the
 standard Python package-installation tool. If you don't have ``pip``,
 instructions are available for `how to obtain and install it
-<https://pip.pypa.io/en/latest/installing.html>`_.
+<https://pip.pypa.io/en/latest/installing.html>`_. If you're using
+Python 2.7.9 or later (for Python 2) or Python 3.4 or later (for
+Python 3), ``pip`` came bundled with your installation of Python.
 
 Once you have ``pip``, simply type::
 
@@ -33,27 +46,27 @@ Once you have ``pip``, simply type::
 Manual installation
 -------------------
 
-It's also possible to install ``webcolors`` manually. To do so, obtain
+It's also possible to install webcolors manually. To do so, obtain
 the latest packaged version from `the listing on the Python Package
 Index <https://pypi.python.org/pypi/webcolors/>`_. Unpack the
 ``.tar.gz`` file, and run::
 
     python setup.py install
 
-Once you've installed ``webcolors``, you can verify successful
+Once you've installed webcolors, you can verify successful
 installation by opening a Python interpreter and typing ``import
 webcolors``.
 
 If the installation was successful, you'll simply get a fresh Python
 prompt. If you instead see an ``ImportError``, check the configuration
 of your install tools and your Python import path to ensure
-``webcolors`` installed into a location Python can import from.
+webcolors installed into a location Python can import from.
 
 
 Installing from a source checkout
 ---------------------------------
 
-The development repository for ``webcolors`` is at
+The development repository for webcolors is at
 <https://github.com/ubernostrum/webcolors>. Presuming you have `git
 <http://git-scm.com/>`_ installed, you can obtain a copy of the
 repository by typing::

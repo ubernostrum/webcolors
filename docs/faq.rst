@@ -4,15 +4,16 @@ Frequently asked questions
 ==========================
 
 The following notes answer common questions, and may be useful to you
-when using ``webcolors``.
+when using webcolors.
 
 
 What versions of Python are supported?
 --------------------------------------
 
-On Python 2, ``webcolors`` supports and is tested on Python 2.7. On
-Python 3, ``webcolors`` supports and is tested on Python 3.3, 3.4 and
-3.5.
+On Python 2, webcolors supports and is tested on Python 2.7. On
+Python 3, webcolors supports and is tested on Python 3.3, 3.4 and
+3.5. It is expected that webcolors |version| will also work without
+modification on Python 3.6 once it is released.
 
 These Python version requirements are due to a combination of factors:
 
@@ -21,9 +22,8 @@ These Python version requirements are due to a combination of factors:
   provide unofficial security support for earlier Python 2 versions,
   the fact remains that Python 2.6 and earlier have reached their
   official end-of-life and their use should not be encouraged. On
-  Python 3, 3.0 and 3.1 have similarly reached end-of-life and no
-  longer receive security support. Python 3.2 is nearing end-of-life
-  (scheduled for February 2016).
+  Python 3, 3.0, 3.1 and 3.2 have similarly reached end-of-life and no
+  longer receive security support.
 
 * On Python 3, 3.3 was the first widely-adopted release, and also
   introduced features (not present in earlier Python 3 releases) which
@@ -36,7 +36,7 @@ How closely does this module follow the standards?
 
 As closely as is practical (see below regarding floating-point
 values), within :ref:`the supported formats <support>`; the
-``webcolors`` module was written with the relevant standards documents
+webcolors module was written with the relevant standards documents
 close at hand. See :ref:`the conformance documentation <conformance>`
 for details.
 
@@ -98,18 +98,18 @@ style of interface for converting amongst color spaces.
 Note that if an object-oriented interface is desired, `the third-party
 colormath module <https://pypi.python.org/pypi/colormath/>`_ does have
 a class-based interface (and rightly so, as it offers a wider range of
-color representation and manipulation options than ``webcolors``).
+color representation and manipulation options than webcolors).
 
 
 How am I allowed to use this module?
 ------------------------------------
 
-The ``webcolors`` module is distributed under a `three-clause BSD
+The webcolors module is distributed under a `three-clause BSD
 license <http://opensource.org/licenses/BSD-3-Clause>`_. This is an
 open-source license which grants you broad freedom to use,
 redistribute, modify and distribute modified versions of
-``webcolors``. For details, see the file ``LICENSE`` in the source
-distribution of ``webcolors``.
+webcolors. For details, see the file ``LICENSE`` in the source
+distribution of webcolors.
 
 .. _three-clause BSD license: http://opensource.org/licenses/BSD-3-Clause
 
@@ -117,7 +117,7 @@ distribution of ``webcolors``.
 I found a bug or want to make an improvement!
 ---------------------------------------------
 
-The canonical development repository for ``webcolors`` is online at
+The canonical development repository for webcolors is online at
 <https://github.com/ubernostrum/webcolors>. Issues and pull requests
 can both be filed there.
 
