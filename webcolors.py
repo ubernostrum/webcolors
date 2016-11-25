@@ -65,9 +65,9 @@ HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
 SUPPORTED_SPECIFICATIONS = (u'html4', u'css2', u'css21', u'css3')
 
-SPECIFICATION_ERROR_TEMPLATE = u'{spec} is not a supported specification for color name lookups; \
+SPECIFICATION_ERROR_TEMPLATE = u'{{spec}} is not a supported specification for color name lookups; \
 supported specifications are: {supported}.'.format(
-    spec='{spec}', supported=','.join(SUPPORTED_SPECIFICATIONS)
+    supported=','.join(SUPPORTED_SPECIFICATIONS)
 )
 
 
