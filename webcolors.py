@@ -8,6 +8,32 @@ details of the supported formats, conventions and conversions.
 
 """
 
+# Stylistic notes:
+#
+# The HTML5 algorithms are implemented as direct translations into
+# Python of the descriptions in the spec. This produces somewhat
+# un-Pythonic code, but correctness of the implementations is more
+# important.
+#
+# Several other style choices in this module enforce usage or Python
+# version support (see documentation in docs/ directory for rationale
+# behind Python version support and usage requirements):
+#
+# * The only Python 2.x version supported is 2.7. Use of a dict
+#   comprehension in the _reversedict() helper function enforces this
+#   by causing an import-time syntax error on Python 2.6 and earlier.
+#
+# * The oldest Python 3.x version supported is 3.3. Use of u-prefixed
+#   string literals enforces this by causing an import-time syntax
+#   error on Python 3.0, 3.1 and 3.2.
+#
+# * Use of this module on Python 3 requires str rather than bytes for
+#   all string arguments to functions. Use of the format() method for
+#   string formatting enforces this; as of Python 3.5, formatting with
+#   % is implemented on bytes objects, but the format() method will
+#   never be implemented on bytes.
+
+
 import re
 import string
 import struct
@@ -39,8 +65,8 @@ HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
 SUPPORTED_SPECIFICATIONS = (u'html4', u'css2', u'css21', u'css3')
 
-SPECIFICATION_ERROR_TEMPLATE = u"'%%s' is not a supported specification for color name lookups; \
-supported specifications are: %s." % (u', '.join(SUPPORTED_SPECIFICATIONS))
+SPECIFICATION_ERROR_TEMPLATE = u'{spec} is not a supported specification for color name lookups; \
+supported specifications are: {supported}.'.format(spec='{spec}', supported=','.join(SUPPORTED_SPECIFICATIONS))
 
 
 # Mappings of color names to normalized hexadecimal color values.
@@ -293,12 +319,12 @@ def normalize_hex(hex_value):
     match = HEX_COLOR_RE.match(hex_value)
     if match is None:
         raise ValueError(
-            u"'%s' is not a valid hexadecimal color value." % hex_value
+            u"'{}' is not a valid hexadecimal color value.".format(hex_value)
         )
     hex_digits = match.group(1)
     if len(hex_digits) == 3:
         hex_digits = u''.join(2 * s for s in hex_digits)
-    return u'#%s' % hex_digits.lower()
+    return u'#{}'.format(hex_digits.lower())
 
 
 def _normalize_integer_rgb(value):
@@ -332,7 +358,7 @@ def _normalize_percent_rgb(value):
 
     return u'0%' if percent < 0 \
         else u'100%' if percent > 100 \
-        else u'%s%%' % percent
+        else u'{}%'.format(percent)
 
 
 def normalize_percent_triplet(rgb_triplet):
@@ -361,7 +387,7 @@ def name_to_hex(name, spec=u'css3'):
 
     """
     if spec not in SUPPORTED_SPECIFICATIONS:
-        raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
+        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     normalized = name.lower()
     hex_value = {u'css2': CSS2_NAMES_TO_HEX,
                  u'css21': CSS21_NAMES_TO_HEX,
@@ -369,7 +395,9 @@ def name_to_hex(name, spec=u'css3'):
                  u'html4': HTML4_NAMES_TO_HEX}[spec].get(normalized)
     if hex_value is None:
         raise ValueError(
-            u"'%s' is not defined as a named color in %s." % (name, spec)
+            u"'{name}' is not defined as a named color in {spec}".format(
+                name=name, spec=spec
+            )
         )
     return hex_value
 
@@ -410,7 +438,7 @@ def hex_to_name(hex_value, spec=u'css3'):
 
     """
     if spec not in SUPPORTED_SPECIFICATIONS:
-        raise ValueError(SPECIFICATION_ERROR_TEMPLATE % spec)
+        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     normalized = normalize_hex(hex_value)
     name = {u'css2': CSS2_HEX_TO_NAMES,
             u'css21': CSS21_HEX_TO_NAMES,
@@ -418,7 +446,7 @@ def hex_to_name(hex_value, spec=u'css3'):
             u'html4': HTML4_HEX_TO_NAMES}[spec].get(normalized)
     if name is None:
         raise ValueError(
-            u"'%s' has no defined color name in %s." % (hex_value, spec)
+            u"'{}' has no defined color name in {}".format(hex_value, spec)
         )
     return name
 
@@ -504,7 +532,7 @@ def rgb_to_rgb_percent(rgb_triplet):
     # special-case them.
     specials = {255: u'100%', 128: u'50%', 64: u'25%',
                 32: u'12.5%', 16: u'6.25%', 0: u'0%'}
-    return tuple(specials.get(d, u'%.02f%%' % (d / 255.0 * 100))
+    return tuple(specials.get(d, u'{:.02f}%'.format(d / 255.0 * 100))
                  for d in normalize_integer_triplet(rgb_triplet))
 
 
@@ -662,9 +690,10 @@ def html5_serialize_simple_color(simple_color):
     #    two-digit hexadecimal numbers using lowercase ASCII hex
     #    digits, zero-padding if necessary, and append these numbers
     #    to result, in the order red, green, blue.
-    result += (u"%02x" % red).lower()
-    result += (u"%02x" % green).lower()
-    result += (u"%02x" % blue).lower()
+    format_string = '{:02x}'
+    result += format_string.format(red)
+    result += format_string.format(green)
+    result += format_string.format(blue)
 
     # 3. Return result, which will be a valid lowercase simple color.
     return result
