@@ -1,5 +1,6 @@
 include LICENSE
 include MANIFEST.in
 include README.rst
+include Makefile
 recursive-include docs *
 recursive-include tests *
