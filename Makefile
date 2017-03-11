@@ -11,7 +11,7 @@ clean:
 	rm -rf build/
 	rm -rf dist/
 	rm -rf *.egg*/
-	rm -rf ${PACKAGE_NAME}/__pycache__/
+	rm -rf ./__pycache__/
 	rm -rf ${PACKAGE_NAME}/tests/__pycache__/
 	find . -type f -name '*.pyc' -delete
 	find ./tests -type f -name '*.pyc' -delete
@@ -40,7 +40,7 @@ test_dependencies:
 
 .PHONY: lint
 lint: test_dependencies
-	flake8 ${PACKAGE_NAME}.py
+	flake8 .
 
 .PHONY: test
 test: lint

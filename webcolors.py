@@ -39,6 +39,9 @@ import string
 import struct
 
 
+__version__ = '1.7'
+
+
 # Python 2's unichr() is Python 3's chr().
 try:               # pragma: no cover
     unichr         # pragma: no cover

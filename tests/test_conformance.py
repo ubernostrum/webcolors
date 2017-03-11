@@ -27,7 +27,8 @@ import webcolors
 #
 # HTML 4 colors: http://www.w3.org/TR/html401/types.html#h-6.5
 #
-# SVG colors (which CSS 3 adopted): http://www.w3.org/TR/SVG/types.html#ColorKeywords
+# SVG colors (which CSS 3 adopted):
+# http://www.w3.org/TR/SVG/types.html#ColorKeywords
 #
 # Conformance of this module with the relevant standards is proven by
 # comparing its output to these mappings.
@@ -205,23 +206,23 @@ class ConformanceTests(unittest.TestCase):
     """
     Demonstrate that this module conforms to the relevant standards
     documents governing colors on the Web.
-    
+
     """
     def test_html_definition_conformance(self):
         """
         Compare the results of name-to-hex conversion to the canonical
         hex values provided in the HTML 4 specification.
-        
+
         """
         for color, hex_value in HTML4_COLOR_DEFINITIONS.items():
             self.assertEqual(webcolors.normalize_hex(hex_value),
                              webcolors.name_to_hex(color))
-    
+
     def test_svg_definition_conformance(self):
         """
         Compare the results of name-to-rgb-triplet conversion to the
         canonical triplet values provided in the SVG specification.
-        
+
         """
         for color, triplet in SVG_COLOR_DEFINITIONS.items():
             self.assertEqual(triplet,
