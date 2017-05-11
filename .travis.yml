@@ -6,5 +6,5 @@ python:
   - "3.4"
   - "3.3"
   - "2.7"
-script: 
-  - make test
+install: pip install tox-travis
+script: tox
