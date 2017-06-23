@@ -31,7 +31,7 @@ serialization algorithms. For example, parsing the infamous
 
     >>> import webcolors
     >>> webcolors.html5_parse_legacy_color(u'chucknorris')
-    (192, 0, 0)
+    HTML5SimpleColor(red-192, blue=0, green=0)
 
 
 Documentation contents

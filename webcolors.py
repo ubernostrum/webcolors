@@ -34,6 +34,7 @@ details of the supported formats, conventions and conversions.
 #   never be implemented on bytes.
 
 
+import collections
 import re
 import string
 import struct
@@ -71,6 +72,15 @@ SUPPORTED_SPECIFICATIONS = (u'html4', u'css2', u'css21', u'css3')
 SPECIFICATION_ERROR_TEMPLATE = u'{{spec}} is not a supported specification for color name lookups; \
 supported specifications are: {supported}.'.format(
     supported=','.join(SUPPORTED_SPECIFICATIONS)
+)
+
+
+IntegerRGB = collections.namedtuple('IntegerRGB', ['red', 'green', 'blue'])
+
+PercentRGB = collections.namedtuple('PercentRGB', ['red', 'green', 'blue'])
+
+HTML5SimpleColor = collections.namedtuple(
+    'HTML5SimpleColor', ['red', 'green', 'blue']
 )
 
 
@@ -349,7 +359,9 @@ def normalize_integer_triplet(rgb_triplet):
     within the range 0-255 inclusive.
 
     """
-    return tuple(_normalize_integer_rgb(value) for value in rgb_triplet)
+    return IntegerRGB._make(
+        _normalize_integer_rgb(value) for value in rgb_triplet
+    )
 
 
 def _normalize_percent_rgb(value):
@@ -372,7 +384,9 @@ def normalize_percent_triplet(rgb_triplet):
     within the range 0%-100% inclusive.
 
     """
-    return tuple(_normalize_percent_rgb(value) for value in rgb_triplet)
+    return PercentRGB._make(
+        _normalize_percent_rgb(value) for value in rgb_triplet
+    )
 
 
 # Conversions from color names to various formats.
@@ -464,9 +478,11 @@ def hex_to_rgb(hex_value):
     """
     hex_value = normalize_hex(hex_value)
     hex_value = int(hex_value[1:], 16)
-    return (hex_value >> 16,
-            hex_value >> 8 & 0xff,
-            hex_value & 0xff)
+    return IntegerRGB(
+        hex_value >> 16,
+        hex_value >> 8 & 0xff,
+        hex_value & 0xff
+    )
 
 
 def hex_to_rgb_percent(hex_value):
@@ -537,8 +553,10 @@ def rgb_to_rgb_percent(rgb_triplet):
     # special-case them.
     specials = {255: u'100%', 128: u'50%', 64: u'25%',
                 32: u'12.5%', 16: u'6.25%', 0: u'0%'}
-    return tuple(specials.get(d, u'{:.02f}%'.format(d / 255.0 * 100))
-                 for d in normalize_integer_triplet(rgb_triplet))
+    return PercentRGB._make(
+        specials.get(d, u'{:.02f}%'.format(d / 255.0 * 100))
+        for d in normalize_integer_triplet(rgb_triplet)
+    )
 
 
 # Conversions from percentage rgb() triplets to various formats.
@@ -607,7 +625,7 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
     regarding precision for ``rgb_to_rgb_percent()`` for details.
 
     """
-    return tuple(
+    return IntegerRGB._make(
         map(
             _percent_to_integer,
             normalize_percent_triplet(
@@ -673,10 +691,11 @@ def html5_parse_simple_color(input):
     #    number and let the result be the blue component of result.
     #
     # 9. Return result.
-    result = (int(input[1:3], 16),
-              int(input[3:5], 16),
-              int(input[5:7], 16))
-    return result
+    return HTML5SimpleColor(
+        int(input[1:3], 16),
+        int(input[3:5], 16),
+        int(input[5:7], 16)
+    )
 
 
 def html5_serialize_simple_color(simple_color):
@@ -871,9 +890,10 @@ def html5_parse_legacy_color(input):
     #
     # 19. Interpret the third component as a hexadecimal number; let
     #     the blue component of result be the resulting number.
-    result = (int(red, 16),
-              int(green, 16),
-              int(blue, 16))
-
+    #
     # 20. Return result.
-    return result
+    return HTML5SimpleColor(
+        int(red, 16),
+        int(green, 16),
+        int(blue, 16)
+    )

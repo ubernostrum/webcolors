@@ -109,6 +109,15 @@ percentage ``rgb()`` triplets accept them as 3-tuple of Python strings
 is permitted on Python 3) and return them as a 3-tuple of Python
 Unicode strings (``unicode`` or ``str`` depending on Python version).
 
+Plain tuples are accepted by all functions which deal with integer or
+percentage ``rgb()`` triplets, but three types of ``namedtuple`` are
+also provided to represent these values:
+:class:`~webcolors.IntegerRGB` for integer triplets,
+:class:`~webcolors.PercentRGB` for percentage triplets, and
+:class:`~webcolors.HTML5SimpleColor` for an HTML5 simple
+color. Functions which return an integer or percentage ``rgb()``
+triplet, or an HTML5 simple color, will return values of these types.
+
 Internally, Python ``float`` is used in some conversions to and from
 the triplet representations; for each function which may have the
 precision of its results affected by this, a note is provided in the
