@@ -779,9 +779,11 @@ def html5_parse_legacy_color(input):
         # 4. Interpret the fourth character of input as a hexadecimal
         #    digit; let the blue component of result be the resulting
         #    number multiplied by 17.
-        result = (int(input[1], 16) * 17,
-                  int(input[2], 16) * 17,
-                  int(input[3], 16) * 17)
+        result = HTML5SimpleColor(
+            int(input[1], 16) * 17,
+            int(input[2], 16) * 17,
+            int(input[3], 16) * 17
+        )
 
         # 5. Return result.
         return result
