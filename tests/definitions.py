@@ -7,12 +7,9 @@ the definitions of the colors from the relevant standards documents.
 import re
 import unittest
 
-try:
-    import urllib2
-except ImportError:
-    import urllib.request as urllib2
-
-from BeautifulSoup import BeautifulSoup
+from bs4 import BeautifulSoup
+import html5lib
+import requests
 
 import webcolors
 
@@ -27,15 +24,17 @@ class HTML4DefinitionTests(unittest.TestCase):
     def setUp(self):
         self.html4_colors = {}
         soup = BeautifulSoup(
-            urllib2.urlopen('http://www.w3.org/TR/html401/types.html'))
+            requests.get('http://www.w3.org/TR/html401/types.html').content,
+            "html.parser"
+        )
         color_table = soup.find(
             'table',
             attrs={
                 'summary': 'Table of color names and their sRGB values'})
         for td in color_table.findAll('td'):
-            if (u'width', u'16') not in td.attrs:
+            if u'width' not in td.attrs:
                 color_name, color_value = td.text.split(' = ')
-                self.html4_colors[color_name] = color_value.replace('"', '')
+                self.html4_colors[color_name] = color_value.replace('"', '').strip()
 
     def test_color_definitions(self):
         for color_name, color_value in self.html4_colors.items():
@@ -51,16 +50,18 @@ class CSS21DefinitionTests(unittest.TestCase):
 
     """
     def setUp(self):
-        self.color_matching_re = re.compile(r'^([a-z]+)(#[a-fA-F0-9]{6})$')
+        self.color_matching_re = re.compile(r'^([a-z]+) (#[a-fA-F0-9]{6})$')
         self.css21_colors = {}
         soup = BeautifulSoup(
-            urllib2.urlopen('http://www.w3.org/TR/CSS2/syndata.html'))
+            requests.get('http://www.w3.org/TR/CSS2/syndata.html').content,
+            "html.parser"
+        )
         color_table = soup.find('div',
                                 attrs={'id': 'TanteksColorDiagram20020613'})
         for color_square in color_table.findAll('span',
                                                 attrs={
                                                     'class': 'colorsquare'}):
-            color_name, color_value = self.color_matching_re.match(
+            color_name, color_value = self.color_matching_re.search(
                 color_square.text
                 ).groups()
             self.css21_colors[color_name] = color_value
@@ -80,24 +81,27 @@ class CSS3DefinitionTests(unittest.TestCase):
     """
     def setUp(self):
         self.css3_colors = {}
-        soup = BeautifulSoup(urllib2.urlopen(
-            'http://www.w3.org/TR/css3-color/'))
+        soup = BeautifulSoup(
+            requests.get('http://www.w3.org/TR/css3-color/').content,
+            "html5lib"
+        )
         color_table = soup.findAll('table',
                                    attrs={'class': 'colortable'})[1]
         color_names = [dfn.text for dfn in color_table.findAll('dfn')]
-        hex_values = [td.text for
+        hex_values = [td.text.strip() for
                       td in
                       color_table.findAll('td',
                                           attrs={'class': 'c',
                                                  'style': 'background:silver'})
                       if td.text.startswith('#')]
-        rgb_values = [td.text for
+        rgb_values = [td.text.strip() for
                       td in
                       color_table.findAll('td',
                                           attrs={'class': 'c',
                                                  'style': 'background:silver'})
                       if not td.text.startswith('#') and
-                      not td.text.startswith('&')]
+                      not td.text.startswith('&') and
+                      td.text.strip()]
         for i, color_name in enumerate(color_names):
             self.css3_colors[color_name] = {
                 'hex': hex_values[i],
