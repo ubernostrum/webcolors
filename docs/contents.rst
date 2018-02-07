@@ -6,16 +6,18 @@
 Module contents
 ===============
 
-The contents of the webcolors module fall into four categories:
+The contents of the webcolors module fall into five categories:
 
-1. Constants which provide mappings between color names and values.
+1. A set of (optional) data types for representing color values.
 
-2. Normalization functions which sanitize input in various formats
+2. Constants which provide mappings between color names and values.
+
+3. Normalization functions which sanitize input in various formats
    prior to conversion or output.
 
-3. Conversion functions between each method of specifying colors.
+4. Conversion functions between each method of specifying colors.
 
-4. Implementations of the color parsing and serialization algorithms
+5. Implementations of the color parsing and serialization algorithms
    in HTML5.
 
 See :ref:`the documentation regarding conventions <conventions>` for

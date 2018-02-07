@@ -16,8 +16,7 @@ versions of Python:
 
 * Python 3.5
 
-It is expected that webcolors |version| will work without modification
-on Python 3.6 once it is released.
+* Python 3.6
 
 .. important:: **Python 3**
 
@@ -43,35 +42,20 @@ Once you have ``pip``, simply type::
     pip install webcolors
 
 
-Manual installation
--------------------
-
-It's also possible to install webcolors manually. To do so, obtain
-the latest packaged version from `the listing on the Python Package
-Index <https://pypi.python.org/pypi/webcolors/>`_. Unpack the
-``.tar.gz`` file, and run::
-
-    python setup.py install
-
-Once you've installed webcolors, you can verify successful
-installation by opening a Python interpreter and typing ``import
-webcolors``.
-
-If the installation was successful, you'll simply get a fresh Python
-prompt. If you instead see an ``ImportError``, check the configuration
-of your install tools and your Python import path to ensure
-webcolors installed into a location Python can import from.
-
-
 Installing from a source checkout
 ---------------------------------
 
+If you want to work on webcolors, you can obtain a source checkout.
+
 The development repository for webcolors is at
-<https://github.com/ubernostrum/webcolors>. Presuming you have `git
+<https://github.com/ubernostrum/webcolors>. If you have `git
 <http://git-scm.com/>`_ installed, you can obtain a copy of the
 repository by typing::
 
     git clone https://github.com/ubernostrum/webcolors.git
 
 From there, you can use normal git commands to check out the specific
-revision you want, and install it using ``python setup.py install``.
+revision you want, and install it using ``pip install -e .`` (the
+``-e`` flag specifies an "editable" install, allowing you to change
+code as you work on webcolors, and have your changes picked up
+automatically).
