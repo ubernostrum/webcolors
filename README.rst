@@ -20,7 +20,9 @@ handled by the ``colorsys`` module in the Python standard library):
 
 * Percentage ``rgb()`` triplet
 
-For example::
+For example:
+
+.. code-block:: python
 
     >>> import webcolors
     >>> webcolors.hex_to_name(u'#daa520')
@@ -28,10 +30,12 @@ For example::
 
 Implementations are also provided for the HTML5 color parsing and
 serialization algorithms. For example, parsing the infamous
-"chucknorris" string into an rgb() triplet::
+"chucknorris" string into an rgb() triplet:
+
+.. code-block:: python
 
     >>> import webcolors
     >>> webcolors.html5_parse_legacy_color(u'chucknorris')
     HTML5SimpleColor(192, 0, 0)
 
-Full documentation is `available online <http://webcolors.readthedocs.io/>`_.
+Full documentation is `available online <https://webcolors.readthedocs.io/>`_.
