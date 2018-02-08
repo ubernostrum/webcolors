@@ -10,10 +10,8 @@ when using webcolors.
 What versions of Python are supported?
 --------------------------------------
 
-On Python 2, webcolors supports and is tested on Python 2.7. On
-Python 3, webcolors supports and is tested on Python 3.3, 3.4 and
-3.5. It is expected that webcolors |version| will also work without
-modification on Python 3.6 once it is released.
+On Python 2, webcolors supports and is tested on Python 2.7. On Python
+3, webcolors supports and is tested on Python 3.4, 3.5, and 3.6.
 
 These Python version requirements are due to a combination of factors:
 
@@ -21,14 +19,10 @@ These Python version requirements are due to a combination of factors:
   Python's development team. Although some third parties continue to
   provide unofficial security support for earlier Python 2 versions,
   the fact remains that Python 2.6 and earlier have reached their
-  official end-of-life and their use should not be encouraged. On
-  Python 3, 3.0, 3.1 and 3.2 have similarly reached end-of-life and no
-  longer receive security support.
+  official end-of-life and their use should not be encouraged.
 
-* On Python 3, 3.3 was the first widely-adopted release, and also
-  introduced features (not present in earlier Python 3 releases) which
-  greatly simplify the process of consistently handling strings in
-  both Python 2 and Python 3 within the same codebase.
+* Python 3.4 is the oldest Python 3.x release still receiving upstream
+  security support.
 
 
 How closely does this module follow the standards?
@@ -48,10 +42,8 @@ This is due to limitations in the representation of floating-point
 numbers in programming languages. Python, like many programming
 languages, uses `IEEE floating-point
 <http://en.wikipedia.org/wiki/IEEE_floating_point>`_, which is
-inherently imprecise for some values.
-
-This imprecision only appears when converting between integer and
-percentage ``rgb()`` triplets.
+inherently imprecise for some values. This imprecision only appears
+when converting between integer and percentage ``rgb()`` triplets.
 
 To work around this, some common values (255, 128, 64, 32, 16 and 0)
 are handled as special cases, with hard-coded precise results. For all
@@ -83,15 +75,15 @@ Why not use a more object-oriented design with classes for the colors?
 ----------------------------------------------------------------------
 
 Representing color values with Python classes would introduce overhead
-for no real gain. Real-world use cases tend to simply involve working
-with the actual values, so settling on conventions for how to
+for no real gain. Real-world use cases tend to involve working
+directly with the actual values, so settling on conventions for how to
 represent them as Python types, and then offering a function-based
 interface, accomplishes everything needed without the addtional
 indirection layer of having to instantiate and serialize a
 color-wrapping object.
 
-Keeping a simple function-based interface also maintains consistency
-with `Python's built-in colorsys module
+Keeping a function-based interface also maintains consistency with
+`Python's built-in colorsys module
 <https://docs.python.org/library/colorsys.html>`_, which has the same
 style of interface for converting amongst color spaces.
 

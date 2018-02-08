@@ -87,8 +87,10 @@ consists of:
 The ``definitions`` file can be run standalone (i.e., ``python
 tests/definitions.py``) to execute these tests, but it does require an
 internet connection (to retrieve the standards documents) and requires
-`the BeautifulSoup library
-<http://www.crummy.com/software/BeautifulSoup/>`_ for HTML parsing.
+a few libraries for retrieving and parsing the standards
+documents. The file ``test_requirements.txt`` in `the webcolors source
+repository <https://github.com/ubernostrum/webcolors/>`_ will install
+all libraries necessary for executing this test file.
 
 
 Fully verifying correctness of conversions

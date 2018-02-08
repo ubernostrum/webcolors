@@ -10,21 +10,16 @@ versions of Python:
 
 * Python 2.7
 
-* Python 3.3
-
 * Python 3.4
 
 * Python 3.5
 
 * Python 3.6
 
-.. important:: **Python 3**
-
-   Although webcolors is supported on Python 3.3 and later, it is not
-   and will not be supported on earlier Python 3.x releases. Python
-   3.3 was the first 3.x release to include several important Python
-   2/3 compatibility features, which allow webcolors to support Python
-   2 and 3 in the same codebase.
+These are the versions of Python receiving upstream bugfix or security
+support as of the release of webcolors |version|. Use of older
+versions of Python is not recommended, and typically will result in
+errors.
 
 
 Normal installation
@@ -37,7 +32,7 @@ instructions are available for `how to obtain and install it
 Python 2.7.9 or later (for Python 2) or Python 3.4 or later (for
 Python 3), ``pip`` came bundled with your installation of Python.
 
-Once you have ``pip``, simply type::
+Once you have ``pip``, type::
 
     pip install webcolors
 

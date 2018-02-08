@@ -21,27 +21,26 @@ The webcolors module is written to be compatible with both Python
 
 * On Python 2, a sequence of bytes in a particular encoding (a "byte
   string") is represented by the type ``str`` , and Unicode strings
-  are represented by the type ``unicode``. Promiscuous mixing of
-  ``str`` and ``unicode`` is possible in Python 2, but not recommended
-  as it is a frequent source of bugs.
+  are represented by the type ``unicode``. Mixing of ``str`` and
+  ``unicode`` is possible in Python 2, but not recommended as it is a
+  frequent source of bugs.
 
 * On Python 3, a sequence of bytes in a particular encoding is
   represented by the type ``bytes``, and Unicode strings are
-  represented by the type ``str``. Promiscuous mixing of ``str`` and
-  ``bytes`` is not permitted in Python 3, and will usually raise
-  exceptions.
+  represented by the type ``str``. Mixing of ``str`` and ``bytes`` is
+  not permitted in Python 3, and will usually raise exceptions.
 
 The approach to string types in webcolors is as follows:
 
 * On Python 3, use of Unicode strings -- ``str`` -- is mandatory for
   all string arguments to functions in webcolors. Use of ``bytes``
-  values is forbidden.
+  values is forbidden and will result in errors.
 
 * All mappings from color names to hexadecimal values (and vice versa)
   are dictionaries whose keys and values are Unicode strings (``str``
-  on Python 3 and ``unicode`` on Python 2). This permits promiscuous
-  use of byte strings on Python 2, but ensures that results will be
-  Unicode strings.
+  on Python 3 and ``unicode`` on Python 2). This permits use of byte
+  strings on Python 2, but ensures that results will be Unicode
+  strings.
 
 * All functions whose return values include strings will use Unicode
   strings (``unicode`` on Python 2 and ``str`` on Python 3).
@@ -124,7 +123,7 @@ precision of its results affected by this, a note is provided in the
 documentation.
 
 For colors specified via ``rgb()`` triplets, values contained in the
-triplets will be normalized via clipping in accordance with CSS:
+triplets will be normalized in accordance with CSS clipping rules:
 
 * Integer values less than 0 will be normalized to 0, and percentage
   values less than 0% will be normalized to 0%.
@@ -147,7 +146,7 @@ For colors specified via predefined names, webcolors will accept
 strings containing names case-insensitively, so long as they contain
 no spaces or non-alphabetic characters. Thus, for example,
 ``u'AliceBlue'`` and ``u'aliceblue'`` are both accepted, and both will
-refer to the same color (namely, ``rgb(240, 248, 255)``).
+refer to the same color: ``rgb(240, 248, 255)``.
 
 For output which consists of a color name, and for functions which
 perform intermediate conversion to a predefined name before returning
@@ -164,16 +163,16 @@ For purposes of identifying the specification from which to draw the
 selection of defined color names, webcolors recognizes the
 following strings as identifiers:
 
-``'html4'``
+``u'html4'``
     The HTML 4 named colors.
 
-``'css2'``
+``u'css2'``
     The CSS 2 named colors.
 
-``'css21'``
+``u'css21'``
     The CSS 2.1 named colors.
 
-``'css3'``
+``u'css3'``
     The CSS 3/SVG named colors. For all functions for which the set of
     color names is relevant, this is the default set used.
 
