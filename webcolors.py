@@ -40,7 +40,7 @@ import string
 import struct
 
 
-__version__ = '1.7'
+__version__ = '1.8'
 
 
 # Python 2's unichr() is Python 3's chr().
