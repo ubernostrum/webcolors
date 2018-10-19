@@ -32,12 +32,13 @@ from. See :ref:`the list of specification identifiers
 All conversion functions, when faced with identifiably invalid
 hexadecimal color values, or with a request to name a color which has
 no name in the requested specification, or with an invalid
-specification identifier, will raise ``ValueError``.
+specification identifier, will raise :exc:`ValueError`.
 
 In the documentation below, "Unicode string" means the Unicode string
-type of the Python version being used; on Python 3 this is ``str`` and
-on Python 2 it is ``unicode``. See :ref:`the documentation on use of
-Python string types <string-types>` for details.
+type of the Python version being used; on Python 3 this is
+:class:`str` and on Python 2 it is :class:`unicode`. See :ref:`the
+documentation on use of Python string types <string-types>` for
+details.
 
 
 Data types
@@ -45,8 +46,9 @@ Data types
 
 .. class:: IntegerRGB
 
-   A ``namedtuple`` representing an integer RGB triplet. Has three
-   fields, each of type ``int`` and in the range 0-255 inclusive:
+   A :func:`~collections.namedtuple` representing an integer RGB
+   triplet. Has three fields, each of type :class:`int` and in the
+   range 0-255 inclusive:
 
    .. attribute:: red
 
@@ -62,9 +64,9 @@ Data types
 
 .. class:: PercentRGB
 
-   A ``namedtuple`` representing a percentage RGB triplet. Has three
-   fields, each of type ``str`` and representing a percentage value in
-   the range 0%-100% inclusive:
+   A :func:`~collections.namedtuple` representing a percentage RGB
+   triplet. Has three fields, each of type :class:`str` and
+   representing a percentage value in the range 0%-100% inclusive:
 
    .. attribute:: red
 
@@ -80,8 +82,9 @@ Data types
 
 .. class:: HTML5SimpleColor
 
-   A ``namedtuple`` representing an HTML5 simple color. Has three
-   fields, each of type ``int`` and in the range 0-255 inclusive:
+   A :func:`~collections.namedtuple` representing an HTML5 simple
+   color. Has three fields, each of type :class:`int` and in the range
+   0-255 inclusive:
 
    .. attribute:: red
 
@@ -109,7 +112,7 @@ Mappings from names to hexadecimal values
 
 .. data:: HTML4_NAMES_TO_HEX
 
-   A dictionary whose keys are the normalized names of the sixteen
+   A :class:`dict` whose keys are the normalized names of the sixteen
    named HTML 4 colors, and whose values are the normalized
    hexadecimal values of those colors.
 
@@ -120,16 +123,16 @@ Mappings from names to hexadecimal values
 
 .. data:: CSS21_NAMES_TO_HEX
 
-   A dictionary whose keys are the normalized names of the seventeen
-   named CSS 2.1 colors, and whose values are the normalized
+   A :class:`dict` whose keys are the normalized names of the
+   seventeen named CSS 2.1 colors, and whose values are the normalized
    hexadecimal values of those colors (sixteen of these are identical
-   to HTML 4 and CSS 2; the seventeenth color is ``orange``, added in
+   to HTML 4 and CSS 2; the seventeenth color is `orange`, added in
    CSS 2.1).
 
 .. data:: CSS3_NAMES_TO_HEX
 
-   A dictionary whose keys are the normalized names of the 147 named
-   CSS 3 colors, and whose values are the normalized hexadecimal
+   A :class:`dict` whose keys are the normalized names of the 147
+   named CSS 3 colors, and whose values are the normalized hexadecimal
    values of those colors. These colors are also identical to the 147
    named colors of SVG.
 
@@ -139,7 +142,7 @@ Mappings from hexadecimal values to names
 
 .. data:: HTML4_HEX_TO_NAMES
 
-   A dictionary whose keys are the normalized hexadecimal values of
+   A :class:`dict` whose keys are the normalized hexadecimal values of
    the sixteen named HTML 4 colors, and whose values are the
    corresponding normalized names.
 
@@ -149,20 +152,20 @@ Mappings from hexadecimal values to names
 
 .. data:: CSS21_HEX_TO_NAMES
 
-   A dictionary whose keys are the normalized hexadecimal values of
+   A :class:`dict` whose keys are the normalized hexadecimal values of
    the seventeen named CSS 2.1 colors, and whose values are the
    corresponding normalized names.
 
 .. data:: CSS3_HEX_TO_NAMES
 
-   A dictionary whose keys are the normalized hexadecimal values of
+   A :class:`dict` whose keys are the normalized hexadecimal values of
    the 147 names CSS 3 colors, and whose values are the corresponding
    normalized names.
 
 The canonical names of these constants are as listed above, entirely
 in uppercase. For backwards compatibility with older versions of
 webcolors, aliases are provided whose names are entirely lowercase
-(for example, ``html4_names_to_hex``).
+(for example, `html4_names_to_hex`).
 
 
 Normalization functions
@@ -171,11 +174,11 @@ Normalization functions
 .. function:: normalize_hex(hex_value)
 
    Normalize a hexadecimal color value to a string consisting of the
-   character ``#`` followed by six lowercase hexadecimal digits (what
+   character `#` followed by six lowercase hexadecimal digits (what
    HTML5 terms a "valid lowercase simple color").
 
    If the supplied value cannot be interpreted as a hexadecimal color
-   value, ``ValueError`` is raised. See :ref:`the conventions used by
+   value, `ValueError` is raised. See :ref:`the conventions used by
    this module <conventions>` for information on acceptable formats
    for hexadecimal values.
 
@@ -198,13 +201,13 @@ Normalization functions
            ...
        ValueError: '0099cc' is not a valid hexadecimal color value.
 
-   :param hex_value: The hexadecimal color value to normalize.
-   :type hex_value: ``str``
-   :rtype: Unicode string
+   :param str hex_value: The hexadecimal color value to normalize.
+   :rtype: str
+   :raises ValueError: when the input is not a valid hexadecimal color value.
 
 .. function:: normalize_integer_triplet(rgb_triplet)
 
-    Normalize an integer ``rgb()`` triplet so that all values are
+    Normalize an integer `rgb()` triplet so that all values are
     within the range 0..255.
 
     Examples::
@@ -218,13 +221,12 @@ Normalization functions
         >>> normalize_integer_triplet((270, -20, -0))
         IntegerRGB(red=255, green=0, blue=0)
     
-    :param rgb_triplet: The integer ``rgb()`` triplet to normalize.
-    :type rgb_triplet: 3-tuple of ``int``
+    :param tuple rgb_triplet: The integer `rgb()` triplet to normalize.
     :rtype: IntegerRGB
 
 .. function:: normalize_percent_triplet(rgb_triplet)
 
-    Normalize a percentage ``rgb()`` triplet to that all values are
+    Normalize a percentage `rgb()` triplet to that all values are
     within the range 0%..100%.
 
     Examples::
@@ -236,8 +238,7 @@ Normalization functions
         >>> normalize_percent_triplet((u'-10%', u'-0%', u'500%'))
         PercentRGB(red=u'0%', green=u'0%', blue=u'100%')
     
-    :param rgb_triplet: The percentage ``rgb()`` triplet to normalize.
-    :type rgb_triplet: 3-tuple of ``str``
+    :param tuple rgb_triplet: The percentage `rgb()` triplet to normalize.
     :rtype: PercentRGB
 
 
@@ -264,18 +265,18 @@ Conversions from color names to other formats
            ...
        ValueError: 'goldenrod' is not defined as a named color in html4.
 
-   :param name: The color name to convert.
-   :type name: ``str``
-   :param spec: The specification from which to draw the list of color
-      names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
-      ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
-   :rtype: Unicode string
+   :param str name: The color name to convert.
+   :param str spec: The specification from which to draw the list of color
+      names; valid values are `'html4'`, `'css2'`, `'css21'` and
+      `'css3'`. Default is `'css3'`.
+   :rtype: str
+   :raises ValueError: when the given name has no definition in the given spec.
+
 
 .. function:: name_to_rgb(name, spec=u'css3')
 
-   Convert a color name to a 3-tuple of integers suitable for use in
-   an ``rgb()`` triplet specifying that color.
+   Convert a color name to a 3-:class:`tuple` of :class:`int` suitable for use in
+   an `rgb()` triplet specifying that color.
 
    The color name will be normalized to lower-case before being looked
    up.
@@ -289,18 +290,18 @@ Conversions from color names to other formats
        >>> name_to_rgb(u'goldenrod')
        IntegerRGB(red=218, green=165, blue=32)
 
-   :param name: The color name to convert.
-   :type name: ``str``
-   :param spec: The specification from which to draw the list of color
-      names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
-      ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
+   :param str name: The color name to convert.
+   :param str spec: The specification from which to draw the list of color
+      names; valid values are `'html4'`, `'css2'`, `'css21'` and
+      `'css3'`. Default is `'css3'`.
    :rtype: IntegerRGB
+   :raises ValueError: when the given name has no definition in the given spec.
+
 
 .. function:: name_to_rgb_percent(name, spec=u'css3')
 
-   Convert a color name to a 3-tuple of percentages suitable for use
-   in an ``rgb()`` triplet specifying that color.
+   Convert a color name to a 3-:class:`tuple` of percentages suitable for use
+   in an `rgb()` triplet specifying that color.
 
    The color name will be normalized to lower-case before being looked
    up.
@@ -314,13 +315,12 @@ Conversions from color names to other formats
        >>> name_to_rgb_percent(u'goldenrod')
        PercentRGB(red=u'85.49%', green=u'64.71%', blue=u'12.5%')
 
-   :param name: The color name to convert.
-   :type name: ``str``
-   :param spec: The specification from which to draw the list of color
-      names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
-      ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
+   :param str name: The color name to convert.
+   :param str spec: The specification from which to draw the list of color
+      names; valid values are `'html4'`, `'css2'`, `'css21'` and
+      `'css3'`. Default is `'css3'`.
    :rtype: PercentRGB
+   :raises ValueError: when the given name has no definition in the given spec.
 
 
 Conversion from hexadecimal color values to other formats
@@ -348,18 +348,17 @@ Conversion from hexadecimal color values to other formats
            ...
        ValueError: '#daa520' has no defined color name in html4.
 
-   :param hex_value: The hexadecimal color value to convert.
-   :type hex_value: str
-   :param spec: The specification from which to draw the list of color
-      names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
-      ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
-   :rtype: Unicode string
+   :param str hex_value: The hexadecimal color value to convert.
+   :param str spec: The specification from which to draw the list of color
+      names; valid values are `'html4'`, `'css2'`, `'css21'` and
+      `'css3'`. Default is `'css3'`.
+   :rtype: str
+   :raises ValueError: when the given color has no name in the given spec.
 
 .. function:: hex_to_rgb(hex_value)
 
-   Convert a hexadecimal color value to a 3-tuple of integers suitable
-   for use in an ``rgb()`` triplet specifying that color.
+   Convert a hexadecimal color value to a 3-:class:`tuple` of :class:`int` suitable
+   for use in an `rgb()` triplet specifying that color.
 
    The hexadecimal value will be normalized before being converted.
 
@@ -370,14 +369,14 @@ Conversion from hexadecimal color values to other formats
        >>> hex_to_rgb(u'#000080')
        IntegerRGB(red=0, green=0, blue=128)
 
-   :param hex_value: The hexadecimal color value to convert.
-   :type hex_value: ``str``
+   :param str hex_value: The hexadecimal color value to convert.
    :rtype: IntegerRGB
+
 
 .. function:: hex_to_rgb_percent(hex_value)
 
-   Convert a hexadecimal color value to a 3-tuple of percentages
-   suitable for use in an ``rgb()`` triplet representing that color.
+   Convert a hexadecimal color value to a 3-:class:`tuple` of percentages
+   suitable for use in an `rgb()` triplet representing that color.
 
    The hexadecimal value will be normalized before being converted.
 
@@ -388,17 +387,16 @@ Conversion from hexadecimal color values to other formats
        >>> hex_to_rgb_percent(u'#000080')
        PercentRGB(red=u'0%', green=u'0%', blue=u'50%')
 
-   :param hex_value: The hexadecimal color value to convert.
-   :type hex_value: ``str``
+   :param str hex_value: The hexadecimal color value to convert.
    :rtype: PercentRGB
 
 
-Conversions from integer ``rgb()`` triplets to other formats
+Conversions from integer `rgb()` triplets to other formats
 ------------------------------------------------------------
 
 .. function:: rgb_to_name(rgb_triplet, spec=u'css3')
 
-   Convert a 3-tuple of integers, suitable for use in an ``rgb()``
+   Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
    color triplet, to its corresponding normalized color name, if any
    such name exists.
 
@@ -412,17 +410,18 @@ Conversions from integer ``rgb()`` triplets to other formats
        >>> rgb_to_name((0, 0, 128))
        u'navy'
 
-   :param rgb_triplet: The ``rgb()`` triplet
-   :type rgb_triplet: 3-tuple of ``int``, or :class:`IntegerRGB`
-   :param spec: The specification from which to draw the list of color
-      names; valid values are ``'html4'``, ``'css2'``, ``'css21'`` and
-      ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
-   :rtype: Unicode string
+   :param rgb_triplet: The `rgb()` triplet
+   :type rgb_triplet: 3-:class:`tuple` of :class:`int`, or :class:`IntegerRGB`
+   :param str spec: The specification from which to draw the list of color
+      names; valid values are `'html4'`, `'css2'`, `'css21'` and
+      `'css3'`. Default is `'css3'`.
+   :rtype: str
+   :raises ValueError: when the given color has no name in the given spec.
+
 
 .. function:: rgb_to_hex(rgb_triplet)
 
-   Convert a 3-tuple of integers, suitable for use in an ``rgb()``
+   Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
    color triplet, to a normalized hexadecimal value for that color.
 
    Examples::
@@ -432,21 +431,22 @@ Conversions from integer ``rgb()`` triplets to other formats
        >>> rgb_to_hex((0, 0, 128))
        u'#000080'
 
-   :param rgb_triplet: The ``rgb()`` triplet.
-   :type rgb_triplet: 3-tuple of ``int``, or :class:`IntegerRGB`
-   :rtype: Unicode string
+   :param rgb_triplet: The `rgb()` triplet.
+   :type rgb_triplet: 3-:class:`tuple` of :class:`int`, or :class:`IntegerRGB`
+   :rtype: str
+
 
 .. function:: rgb_to_rgb_percent(rgb_triplet)
 
-   Convert a 3-tuple of integers, suitable for use in an ``rgb()``
-   color triplet, to a 3-tuple of percentages suitable for use in
+   Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
+   color triplet, to a 3-:class:`tuple` of percentages suitable for use in
    representing that color.
 
    This function makes some trade-offs in terms of the accuracy of the
    final representation; for some common integer values, special-case
    logic is used to ensure a precise result (e.g., integer 128 will
    always convert to '50%', integer 32 will always convert to
-   '12.5%'), but for all other values a standard Python ``float`` is
+   '12.5%'), but for all other values a standard Python `float` is
    used and rounded to two decimal places, which may result in a loss
    of precision for some values.
 
@@ -459,17 +459,17 @@ Conversions from integer ``rgb()`` triplets to other formats
        >>> rgb_to_rgb_percent((218, 165, 32))
        PercentRGB(red=u'85.49%', green=u'64.71%', blue=u'12.5%')
 
-   :param rgb_triplet: The ``rgb()`` triplet.
-   :type rgb_triplet: 3-tuple of ``int``, or :class:`IntegerRGB`
+   :param rgb_triplet: The `rgb()` triplet.
+   :type rgb_triplet: 3-:class:`tuple` of :class:`int`, or :class:`IntegerRGB`
    :rtype: PercentRGB
 
 
-Conversions from percentage ``rgb()`` triplets to other formats
+Conversions from percentage `rgb()` triplets to other formats
 ---------------------------------------------------------------
 
 .. function:: rgb_percent_to_name(rgb_percent_triplet, spec=u'css3')
 
-   Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
+   Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
    color triplet, to its corresponding normalized color name, if any
    such name exists.
 
@@ -485,17 +485,18 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> rgb_percent_to_name((u'85.49%', u'64.71%', u'12.5%'))
        u'goldenrod'
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet. 
-   :type rgb_percent_triplet: 3-tuple of ``str``, or :class:`PercentRGB`
-   :param spec: The specification from which to draw the list of color
-       names; valid values are ``'html4'``, ``'css2'``, ``'css21'``
-       and ``'css3'``. Default is ``'css3'``.
-   :type spec: ``str``
-   :rtype: Unicode string
+   :param rgb_percent_triplet: The `rgb()` triplet. 
+   :type rgb_percent_triplet: 3-:class:`tuple` of :class:`str`, or :class:`PercentRGB`
+   :param str spec: The specification from which to draw the list of color
+       names; valid values are `'html4'`, `'css2'`, `'css21'`
+       and `'css3'`. Default is `'css3'`.
+   :rtype: str
+   :raises ValueError: when the given color has no name in the given spec.
+
 
 .. function:: rgb_percent_to_hex(rgb_percent_triplet)
 
-   Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
+   Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
    color triplet, to a normalized hexadecimal color value for that
    color.
 
@@ -508,14 +509,14 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> rgb_percent_to_hex((u'85.49%', u'64.71%', u'12.5%'))
        u'#daa520'
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet.
-   :type rgb_percent_triplet: 3-tuple of ``str``, or :class:`PercentRGB`
-   :rtype: ``str``
+   :param rgb_percent_triplet: The `rgb()` triplet.
+   :type rgb_percent_triplet: 3-:class:`tuple` of :class:`str`, or :class:`PercentRGB`
+   :rtype: `str`
 
 .. function:: rgb_percent_to_rgb(rgb_percent_triplet)
 
-   Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
-   color triplet, to a 3-tuple of integers suitable for use in
+   Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
+   color triplet, to a 3-:class:`tuple` of :class:`int` suitable for use in
    representing that color.
 
    Some precision may be lost in this conversion. See the note
@@ -531,8 +532,8 @@ Conversions from percentage ``rgb()`` triplets to other formats
        >>> rgb_percent_to_rgb((u'85.49%', u'64.71%', u'12.5%'))
        IntegerRGB(red=218, green=165, blue=32)
 
-   :param rgb_percent_triplet: The ``rgb()`` triplet.
-   :type rgb_percent_triplet: 3-tuple of ``str``, or :class:`PercentRGB`
+   :param rgb_percent_triplet: The `rgb()` triplet.
+   :type rgb_percent_triplet: 3-:class:`tuple` of :class:`str`, or :class:`PercentRGB`
    :rtype: IntegerRGB
 
 
@@ -551,7 +552,7 @@ HTML5 color algorithms
 
    Apply the HTML5 simple color parsing algorithm.
 
-   Note that ``input`` *must* be a Unicode string -- on Python 2,
+   Note that `input` *must* be a Unicode string -- on Python 2,
    bytestrings will not be accepted.
 
    Examples::
@@ -564,10 +565,12 @@ HTML5 color algorithms
        ValueError: An HTML5 simple color must be a string exactly seven characters long.
 
    :param input: The color to parse.
-   :type input: seven-character ``str`` on Python 3, ``unicode`` on
-       Python 2, which must consist of exactly the character ``#``
+   :type input: seven-character `str` on Python 3, `unicode` on
+       Python 2, which must consist of exactly the character `#`
        followed by six hexadecimal digits
    :rtype: HTML5SimpleColor
+   :raises ValueError: when the given input is not a hexadecimal Unicode string of length 7
+
 
 .. function:: html5_serialize_simple_color(simple_color)
 
@@ -581,11 +584,12 @@ HTML5 color algorithms
        u'#ffffff'
 
    :param simple_color: The color to serialize.
-   :type simple_color: 3-tuple of ``int``, each in the range 0..255,
+   :type simple_color: 3-:class:`tuple` of :class:`int`, each in the range 0..255,
       or :class:`IntegerRGB`
    :rtype: A valid lowercase simple color, which is a Unicode string
-      exactly seven characters long, beginning with ``#`` and followed
+      exactly seven characters long, beginning with `#` and followed
       by six lowercase hexadecimal digits.
+
 
 .. function:: html5_parse_legacy_color(input)
 
@@ -597,7 +601,7 @@ HTML5 color algorithms
    with high levels of "junk" (i.e., text other than a color value)
    may be surprising.
 
-   Note also that ``input`` *must* be a Unicode string -- on Python 2,
+   Note also that `input` *must* be a Unicode string -- on Python 2,
    bytestrings will not be accepted.
 
    Examples::
@@ -610,5 +614,5 @@ HTML5 color algorithms
        HTML5SimpleColor(red=0, green=13, blue=0)
 
    :param input: The color to parse.
-   :type input: ``str`` on Python 3, ``unicode`` on Python 2
+   :type input: `str` on Python 3, `unicode` on Python 2
    :rtype: HTML5SimpleColor

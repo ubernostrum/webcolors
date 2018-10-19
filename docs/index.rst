@@ -7,7 +7,8 @@ specifications for use in documents on the Web.
 
 Support is included for normalizing and converting between the
 following formats (RGB colorspace only; conversion to/from HSL can be
-handled by the ``colorsys`` module in the Python standard library):
+handled by the :mod:`colorsys` module in the Python standard
+library):
 
 * Specification-defined color names
 
@@ -15,9 +16,9 @@ handled by the ``colorsys`` module in the Python standard library):
 
 * Three-digit hexadecimal
 
-* Integer ``rgb()`` triplet
+* Integer `rgb()` triplet
 
-* Percentage ``rgb()`` triplet
+* Percentage `rgb()` triplet
 
 For example::
 

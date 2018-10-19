@@ -25,12 +25,12 @@ HTML 4
 
 HTML 4 defined `two ways to specify sRGB colors`_:
 
-* The character ``#`` followed by three pairs of hexdecimal digits,
+* The character `#` followed by three pairs of hexdecimal digits,
   specifying values for red, green and blue components in that order;
-  for example, ``#0099cc``.
+  for example, `#0099cc`.
 
 * A set of predefined color names which correspond to specific
-  hexadecimal values; for example, ``blue``. HTML 4 defines sixteen
+  hexadecimal values; for example, `blue`. HTML 4 defines sixteen
   such colors.
 
 
@@ -40,17 +40,17 @@ CSS 1
 In `its description of color units`_, CSS 1 added
 three new ways to specify sRGB colors:
 
-* The character ``#`` followed by three hexadecimal digits, which is
+* The character `#` followed by three hexadecimal digits, which is
   expanded into three hexadecimal pairs by repeating each digit; thus
-  ``#09c`` is equivalent to ``#0099cc``.
+  `#09c` is equivalent to `#0099cc`.
 
-* The string ``rgb``, followed by parentheses, between which are three
+* The string `rgb`, followed by parentheses, between which are three
   base-10 integers in the range 0..255, which are taken
   to be the values of the red, green and blue components in that
-  order; for example, ``rgb(0, 153, 204)``.
+  order; for example, `rgb(0, 153, 204)`.
 
 * The same as above, except using percentages instead of numeric
-  values; for example, ``rgb(0%, 60%, 80%)``.
+  values; for example, `rgb(0%, 60%, 80%)`.
 
 CSS 1 also suggested a set of sixteen color names. These names were
 identical to the set defined in HTML 4, but CSS 1 did not provide
@@ -72,7 +72,7 @@ same colors as the surrounding user interface. These names are
 deprecated as of CSS 3.
 
 The CSS 2.1 revision did not add any new methods of specifying sRGB
-colors, but did define `one additional named color`_: ``orange``.
+colors, but did define `one additional named color`_: `orange`.
 
 
 CSS 3
@@ -81,16 +81,16 @@ CSS 3
 `The CSS 3 color module`_ adds one new way to specify colors:
 
 * A hue-saturation-lightness triplet (HSL), using the construct
-  ``hsl()``.
+  `hsl()`.
 
 CSS 3 also adds support for variable opacity of colors, by allowing
-the specification of alpha-channel information through the ``rgba()``
-and ``hsla()`` constructs. These are used similarly to the ``rgb()``
-and ``hsl()`` constructs, except a fourth value is supplied indicating
-the level of opacity from ``0.0`` (completely transparent) to ``1.0``
+the specification of alpha-channel information through the `rgba()`
+and `hsla()` constructs. These are used similarly to the `rgb()`
+and `hsl()` constructs, except a fourth value is supplied indicating
+the level of opacity from `0.0` (completely transparent) to `1.0`
 (completely opaque). Though not technically a color, the keyword
-``transparent`` is also made available in lieu of a color value, and
-corresponds to ``rgba(0,0,0,0)``.
+`transparent` is also made available in lieu of a color value, and
+corresponds to `rgba(0,0,0,0)`.
 
 CSS 3 also defines a new set of 147 color names. This set is taken
 directly from `the named colors defined for SVG (Scalable Vector
@@ -114,13 +114,13 @@ terminology.
 * A set of three 8-bit numbers representing the red, blue and green
   components of an sRGB color is termed a "simple color".
 
-* A seven-character string which begins with the character ``#``,
-  followed by six ASCII hex digits (i.e., ``A-Fa-f0-9``), representing
+* A seven-character string which begins with the character `#`,
+  followed by six ASCII hex digits (i.e., `A-Fa-f0-9`), representing
   the red, green and blue components of an sRGB color, is a "valid
   simple color".
 
 * A valid simple color expressed with only lowercase ASCII hex digits
-  (i.e., ``a-f0-9``) is a "valid lowercase simple color".
+  (i.e., `a-f0-9`) is a "valid lowercase simple color".
 
 HTML5 provides three algorithms related to colors:
 
@@ -137,7 +137,7 @@ HTML5 provides three algorithms related to colors:
    real-world documents.
 
 The HTML5 legacy parsing algorithm does not support the non-color
-keyword ``transparent`` from CSS 3 and will produce an error for that
+keyword `transparent` from CSS 3 and will produce an error for that
 input. It also does not recognize the CSS 2 "system color" keywords;
 it will convert each such keyword to simple color, consistently, but
 in a way which does not follow CSS 2's definitions of these keywords
@@ -169,9 +169,9 @@ sRGB colors, and conversions between them:
 
 * Three-digit hexadecimal.
 
-* Integer ``rgb()`` triplet.
+* Integer `rgb()` triplet.
 
-* Percentage ``rgb()`` triplet.
+* Percentage `rgb()` triplet.
 
 * Varying selections of predefined color names.
 
@@ -181,12 +181,12 @@ The webcolors module **does not support**:
 
 * The CSS 2 system colors, which did not have fixed values.
 
-* The ``transparent`` keyword, which denotes an effective lack of
+* The `transparent` keyword, which denotes an effective lack of
   color.
 
-* Opacity/alpha-channel information specified via ``rgba()`` triplets.
+* Opacity/alpha-channel information specified via `rgba()` triplets.
 
-* Colors specified in the HSL color space, via ``hsl()`` or ``hsla()``
+* Colors specified in the HSL color space, via `hsl()` or `hsla()`
   triplets.
 
 If you need to convert between sRGB-specified colors and HSL-specified
