@@ -25,7 +25,7 @@ HTML 4
 
 HTML 4 defined `two ways to specify sRGB colors`_:
 
-* The character `#` followed by three pairs of hexdecimal digits,
+* The character `#` followed by three pairs of hexadecimal digits,
   specifying values for red, green and blue components in that order;
   for example, `#0099cc`.
 

@@ -1,7 +1,6 @@
 include LICENSE
 include MANIFEST.in
-include README.rst
-include Makefile
-include webcolors.pyi
 recursive-include docs *
-recursive-include tests *
+include tox.ini
+graft src
+graft tests

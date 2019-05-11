@@ -80,7 +80,7 @@ Representing color values with Python classes would introduce overhead
 for no real gain. Real-world use cases tend to involve working
 directly with the actual values, so settling on conventions for how to
 represent them as Python types, and then offering a function-based
-interface, accomplishes everything needed without the addtional
+interface, accomplishes everything needed without the additional
 indirection layer of having to instantiate and serialize a
 color-wrapping object.
 

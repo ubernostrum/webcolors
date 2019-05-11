@@ -1,6 +1,0 @@
-flake8
-pytest
-pytest-cov
-bs4
-requests
-html5lib

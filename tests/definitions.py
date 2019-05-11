@@ -7,9 +7,9 @@ the definitions of the colors from the relevant standards documents.
 import re
 import unittest
 
-from bs4 import BeautifulSoup
-import html5lib
+import html5lib  # noqa: F401
 import requests
+from bs4 import BeautifulSoup
 
 import webcolors
 
@@ -34,7 +34,9 @@ class HTML4DefinitionTests(unittest.TestCase):
         for td in color_table.findAll('td'):
             if u'width' not in td.attrs:
                 color_name, color_value = td.text.split(' = ')
-                self.html4_colors[color_name] = color_value.replace('"', '').strip()
+                self.html4_colors[color_name] = (
+                    color_value.replace('"', '').strip()
+                )
 
     def test_color_definitions(self):
         for color_name, color_value in self.html4_colors.items():

@@ -29,6 +29,7 @@ import unittest
 
 import webcolors
 
+
 try:
     # On Python 3, the built-in zip() is identical to the Python 2
     # itertools.izip(), and Python 3's itertools does not define an

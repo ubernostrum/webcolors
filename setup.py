@@ -1,8 +1,12 @@
-from setuptools import setup
+from glob import glob
+from os.path import basename, splitext
+
+from setuptools import find_packages, setup
 
 
-# setuptools is built on the assumption that everything is a package
-# in a directory, not a single file, so we have to pass py_modules
-# here to get distutils behavior, and can't set this option in
-# setup.cfg.
-setup(py_modules=['webcolors'])
+setup(
+    packages=find_packages('src'),
+    package_dir={'': 'src'},
+    py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
+    python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
+)
