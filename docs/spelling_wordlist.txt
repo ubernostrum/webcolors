@@ -1,9 +1,17 @@
+amongst
 bytestrings
 chucknorris
 colorspace
 HSL
+identifiably
+incrementing
 internet
 online
 sRGB
 rgb
+superset
+tuple
+tuples
+uncountably
 unprefixed
+versa
