@@ -23,10 +23,7 @@ class NormalizationTests(unittest.TestCase):
         )
 
         for raw, normalized in test_pairs:
-            self.assertEqual(
-                normalized,
-                webcolors.normalize_hex(raw)
-            )
+            assert normalized == webcolors.normalize_hex(raw)
 
     def test_normalize_hex_format(self):
         """
@@ -61,10 +58,7 @@ class NormalizationTests(unittest.TestCase):
         )
 
         for raw, normalized in test_pairs:
-            self.assertEqual(
-                normalized,
-                webcolors._normalize_integer_rgb(raw)
-            )
+            assert normalized == webcolors._normalize_integer_rgb(raw)
 
     def test_normalize_integer_triplet(self):
         """
@@ -81,10 +75,8 @@ class NormalizationTests(unittest.TestCase):
 
         for triplet, normalized in test_pairs:
             result = webcolors.normalize_integer_triplet(triplet)
-            self.assertTrue(
-                isinstance(result, webcolors.IntegerRGB)
-            )
-            self.assertEqual(normalized, result)
+            assert isinstance(result, webcolors.IntegerRGB)
+            assert normalized == result
 
     def test_normalize_percent_rgb(self):
         """
@@ -102,10 +94,7 @@ class NormalizationTests(unittest.TestCase):
         )
 
         for raw, normalized in test_pairs:
-            self.assertEqual(
-                normalized,
-                webcolors._normalize_percent_rgb(raw)
-            )
+            assert normalized == webcolors._normalize_percent_rgb(raw)
 
     def test_normalize_percent_triplet(self):
         """
@@ -121,7 +110,5 @@ class NormalizationTests(unittest.TestCase):
 
         for triplet, normalized in test_pairs:
             result = webcolors.normalize_percent_triplet(triplet)
-            self.assertTrue(
-                isinstance(result, webcolors.PercentRGB)
-            )
-            self.assertEqual(normalized, result)
+            assert isinstance(result, webcolors.PercentRGB)
+            assert normalized == result
