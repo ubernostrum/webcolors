@@ -52,16 +52,15 @@ class FullColorTest(unittest.TestCase):
     def test_full_colors(self):
         for hex_color, int_triplet in six.moves.zip(
                 hex_colors(), int_colors()):
-            self.assertEqual(int_triplet,
-                             webcolors.hex_to_rgb(hex_color))
-            self.assertEqual(hex_color,
-                             webcolors.rgb_to_hex(int_triplet))
+            assert int_triplet == webcolors.hex_to_rgb(hex_color)
+            assert hex_color == webcolors.rgb_to_hex(int_triplet)
 
     def test_triplet_conversion(self):
         for int_triplet in int_colors():
-            self.assertEqual(int_triplet,
-                             webcolors.rgb_percent_to_rgb(
-                                 webcolors.rgb_to_rgb_percent(int_triplet)))
+            conversion = webcolors.rgb_percent_to_rgb(
+                webcolors.rgb_to_rgb_percent(int_triplet)
+            )
+            assert int_triplet == conversion
 
 
 if __name__ == '__main__':

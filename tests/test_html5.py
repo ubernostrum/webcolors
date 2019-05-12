@@ -20,10 +20,8 @@ class HTML5Tests(unittest.TestCase):
         )
         for raw, parsed in test_pairs:
             result = webcolors.html5_parse_simple_color(raw)
-            self.assertTrue(
-                isinstance(result, webcolors.HTML5SimpleColor)
-            )
-            self.assertEqual(parsed, result)
+            assert isinstance(result, webcolors.HTML5SimpleColor)
+            assert parsed == result
 
     def test_parse_simple_color_error(self):
         """
@@ -60,10 +58,8 @@ class HTML5Tests(unittest.TestCase):
             (webcolors.HTML5SimpleColor(218, 165, 32), u'#daa520'),
         )
         for raw, serialized in test_pairs:
-            self.assertEqual(
-                serialized,
-                webcolors.html5_serialize_simple_color(raw)
-            )
+            result = webcolors.html5_serialize_simple_color(raw)
+            assert serialized == result
 
     def test_parse_legacy_color(self):
         """
@@ -84,10 +80,8 @@ class HTML5Tests(unittest.TestCase):
         )
         for raw, parsed in test_pairs:
             result = webcolors.html5_parse_legacy_color(raw)
-            self.assertTrue(
-                isinstance(result, webcolors.HTML5SimpleColor)
-            )
-            self.assertEqual(parsed, result)
+            assert isinstance(result, webcolors.HTML5SimpleColor)
+            assert parsed == result
 
     def test_parse_legacy_color_names(self):
         """
@@ -95,10 +89,8 @@ class HTML5Tests(unittest.TestCase):
 
         """
         for name in webcolors.CSS3_NAMES_TO_HEX.keys():
-            self.assertEqual(
-                webcolors.name_to_rgb(name),
-                webcolors.html5_parse_legacy_color(name)
-            )
+            parsed = webcolors.html5_parse_legacy_color(name)
+            assert parsed == webcolors.name_to_rgb(name)
 
     def test_parse_legacy_color_hex(self):
         """
@@ -114,10 +106,8 @@ class HTML5Tests(unittest.TestCase):
             u'#000080'
         )
         for value in test_values:
-            self.assertEqual(
-                webcolors.hex_to_rgb(value),
-                webcolors.html5_parse_legacy_color(value)
-            )
+            parsed = webcolors.html5_parse_legacy_color(value)
+            assert parsed == webcolors.hex_to_rgb(value)
 
     def test_parse_legacy_color_error(self):
         """

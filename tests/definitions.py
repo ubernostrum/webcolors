@@ -40,8 +40,8 @@ class HTML4DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         for color_name, color_value in self.html4_colors.items():
-            self.assertEqual(color_value.lower(),
-                             webcolors.HTML4_NAMES_TO_HEX[color_name.lower()])
+            extracted = webcolors.HTML4_NAMES_TO_HEX[color_name.lower()]
+            assert color_value.lower() == extracted
 
 
 class CSS21DefinitionTests(unittest.TestCase):
@@ -70,8 +70,8 @@ class CSS21DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         for color_name, color_value in self.css21_colors.items():
-            self.assertEqual(color_value.lower(),
-                             webcolors.CSS21_NAMES_TO_HEX[color_name.lower()])
+            extracted = webcolors.CSS21_NAMES_TO_HEX[color_name.lower()]
+            assert color_value.lower() == extracted
 
 
 class CSS3DefinitionTests(unittest.TestCase):
@@ -111,10 +111,10 @@ class CSS3DefinitionTests(unittest.TestCase):
 
     def test_color_definitions(self):
         for color_name, color_values in self.css3_colors.items():
-            self.assertEqual(color_values['hex'].lower(),
-                             webcolors.CSS3_NAMES_TO_HEX[color_name.lower()])
-            self.assertEqual(color_values['rgb'],
-                             webcolors.name_to_rgb(color_name))
+            extracted_hex = webcolors.CSS3_NAMES_TO_HEX[color_name.lower()]
+            extracted_rgb = webcolors.name_to_rgb(color_name)
+            assert color_values['hex'].lower() == extracted_hex
+            assert color_values['rgb'] == extracted_rgb
 
 
 if __name__ == '__main__':

@@ -25,10 +25,7 @@ class HexConversionTests(unittest.TestCase):
         )
 
         for hex_value, name in test_pairs:
-            self.assertEqual(
-                name,
-                webcolors.hex_to_name(hex_value)
-            )
+            assert name == webcolors.hex_to_name(hex_value)
 
     def test_hex_to_name_unnamed(self):
         """
@@ -58,14 +55,9 @@ class HexConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
-            self.assertEqual(
-                u'white',
-                webcolors.hex_to_name(
-                    u'#ffffff',
-                    spec=supported_spec
-                )
-            )
+        for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
+            result = webcolors.hex_to_name(u'#ffffff', spec=supported_spec)
+            assert u'white' == result
 
         for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(
@@ -88,10 +80,8 @@ class HexConversionTests(unittest.TestCase):
 
         for hex_value, triplet in test_pairs:
             result = webcolors.hex_to_rgb(hex_value)
-            self.assertTrue(
-                isinstance(result, webcolors.IntegerRGB)
-            )
-            self.assertEqual(result, triplet)
+            assert isinstance(result, webcolors.IntegerRGB)
+            assert triplet == result
 
     def test_hex_to_rgb_percent(self):
         """
@@ -106,10 +96,8 @@ class HexConversionTests(unittest.TestCase):
 
         for hex_value, triplet in test_pairs:
             result = webcolors.hex_to_rgb_percent(hex_value)
-            self.assertTrue(
-                isinstance(result, webcolors.PercentRGB)
-            )
-            self.assertEqual(result, triplet)
+            assert isinstance(result, webcolors.PercentRGB)
+            assert triplet == result
 
 
 class IntegerRGBConversionTests(unittest.TestCase):
@@ -131,8 +119,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
         )
 
         for triplet, name in test_pairs:
-            self.assertEqual(name,
-                             webcolors.rgb_to_name(triplet))
+            assert name == webcolors.rgb_to_name(triplet)
 
     def test_rgb_to_name_unnamed(self):
         """
@@ -162,14 +149,11 @@ class IntegerRGBConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
-            self.assertEqual(
-                u'white',
-                webcolors.rgb_to_name(
-                    (255, 255, 255),
-                    spec=supported_spec
-                )
+        for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
+            result = webcolors.rgb_to_name(
+                (255, 255, 255), spec=supported_spec
             )
+            assert u'white' == result
 
         for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(
@@ -191,10 +175,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
         )
 
         for triplet, hex_value in test_pairs:
-            self.assertEqual(
-                hex_value,
-                webcolors.rgb_to_hex(triplet)
-            )
+            assert hex_value == webcolors.rgb_to_hex(triplet)
 
     def test_rgb_to_rgb_percent(self):
         """
@@ -210,10 +191,8 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         for triplet, percent_triplet in test_pairs:
             result = webcolors.rgb_to_rgb_percent(triplet)
-            self.assertTrue(
-                isinstance(result, webcolors.PercentRGB)
-            )
-            self.assertEqual(percent_triplet, result)
+            assert isinstance(result, webcolors.PercentRGB)
+            assert percent_triplet == result
 
 
 class NameConversionTests(unittest.TestCase):
@@ -233,10 +212,7 @@ class NameConversionTests(unittest.TestCase):
         )
 
         for name, hex_value in test_pairs:
-            self.assertEqual(
-                hex_value,
-                webcolors.name_to_hex(name)
-            )
+            assert hex_value == webcolors.name_to_hex(name)
 
     def test_name_to_hex_bad_name(self):
         """
@@ -267,14 +243,9 @@ class NameConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
-            self.assertEqual(
-                u'#ffffff',
-                webcolors.name_to_hex(
-                    u'white',
-                    spec=supported_spec
-                )
-            )
+        for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
+            result = webcolors.name_to_hex(u'white', spec=supported_spec)
+            assert u'#ffffff' == result
 
         for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(
@@ -296,13 +267,8 @@ class NameConversionTests(unittest.TestCase):
 
         for name, triplet in test_pairs:
             result = webcolors.name_to_rgb(name)
-            self.assertTrue(
-                isinstance(
-                    result,
-                    webcolors.IntegerRGB
-                )
-            )
-            self.assertEqual(triplet, result)
+            assert isinstance(result, webcolors.IntegerRGB)
+            assert triplet == result
 
     def test_name_to_rgb_percent(self):
         """
@@ -317,10 +283,8 @@ class NameConversionTests(unittest.TestCase):
 
         for name, triplet in test_pairs:
             result = webcolors.name_to_rgb_percent(name)
-            self.assertTrue(
-                isinstance(result, webcolors.PercentRGB)
-            )
-            self.assertEqual(triplet, result)
+            assert isinstance(result, webcolors.PercentRGB)
+            assert triplet == result
 
 
 class PercentRGBConversionTests(unittest.TestCase):
@@ -342,10 +306,7 @@ class PercentRGBConversionTests(unittest.TestCase):
         )
 
         for triplet, name in test_pairs:
-            self.assertEqual(
-                name,
-                webcolors.rgb_percent_to_name(triplet)
-            )
+            assert name == webcolors.rgb_percent_to_name(triplet)
 
     def test_rgb_percent_to_name_unnamed(self):
         """
@@ -376,13 +337,10 @@ class PercentRGBConversionTests(unittest.TestCase):
 
         """
         for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
-            self.assertEqual(
-                u'white',
-                webcolors.rgb_percent_to_name(
-                    (u'100%', u'100%', u'100%'),
-                    spec=supported_spec
-                )
+            result = webcolors.rgb_percent_to_name(
+                (u'100%', u'100%', u'100%'), spec=supported_spec
             )
+            assert u'white' == result
 
         for unsupported_spec in (u'css1', u'css4', u'html5'):
             self.assertRaises(
@@ -404,10 +362,7 @@ class PercentRGBConversionTests(unittest.TestCase):
         )
 
         for triplet, hex_value in test_pairs:
-            self.assertEqual(
-                hex_value,
-                webcolors.rgb_percent_to_hex(triplet)
-            )
+            assert hex_value == webcolors.rgb_percent_to_hex(triplet)
 
     def test_rgb_percent_to_rgb(self):
         """
@@ -423,7 +378,5 @@ class PercentRGBConversionTests(unittest.TestCase):
 
         for triplet, int_triplet in test_pairs:
             result = webcolors.rgb_percent_to_rgb(triplet)
-            self.assertTrue(
-                isinstance(result, webcolors.IntegerRGB)
-            )
-            self.assertEqual(int_triplet, result)
+            assert isinstance(result, webcolors.IntegerRGB)
+            assert int_triplet == result

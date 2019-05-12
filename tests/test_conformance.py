@@ -215,8 +215,8 @@ class ConformanceTests(unittest.TestCase):
 
         """
         for color, hex_value in HTML4_COLOR_DEFINITIONS.items():
-            self.assertEqual(webcolors.normalize_hex(hex_value),
-                             webcolors.name_to_hex(color))
+            normalized = webcolors.normalize_hex(hex_value)
+            assert normalized == webcolors.name_to_hex(color)
 
     def test_svg_definition_conformance(self):
         """
@@ -225,5 +225,4 @@ class ConformanceTests(unittest.TestCase):
 
         """
         for color, triplet in SVG_COLOR_DEFINITIONS.items():
-            self.assertEqual(triplet,
-                             webcolors.name_to_rgb(color))
+            assert triplet == webcolors.name_to_rgb(color)
