@@ -39,21 +39,10 @@ import re
 import string
 import struct
 
+import six
+
 
 __version__ = '1.8.1'
-
-
-# Python 2's unichr() is Python 3's chr().
-try:               # pragma: no cover
-    unichr         # pragma: no cover
-except NameError:  # pragma: no cover
-    unichr = chr   # pragma: no cover
-
-# Python 2's unicode is Python 3's str.
-try:               # pragma: no cover
-    unicode        # pragma: no cover
-except NameError:  # pragma: no cover
-    unicode = str  # pragma: no cover
 
 
 def _reversedict(d):
@@ -663,7 +652,7 @@ def html5_parse_simple_color(input):
     #
     # 2. If input is not exactly seven characters long, then return an
     #    error.
-    if not isinstance(input, unicode) or len(input) != 7:
+    if not isinstance(input, six.text_type) or len(input) != 7:
         raise ValueError(
             u"An HTML5 simple color must be a Unicode string "
             u"exactly seven characters long."
@@ -735,7 +724,7 @@ def html5_parse_legacy_color(input):
 
     """
     # 1. Let input be the string being parsed.
-    if not isinstance(input, unicode):
+    if not isinstance(input, six.text_type):
         raise ValueError(
             u"HTML5 legacy color parsing requires a Unicode string as input."
         )
@@ -830,7 +819,7 @@ def html5_parse_legacy_color(input):
     format_string = '<' + ('L' * (int(len(encoded_input) / 4)))
     codepoints = struct.unpack(format_string, encoded_input)
     input = ''.join(u'00' if c > 0xffff
-                    else unichr(c)
+                    else six.unichr(c)
                     for c in codepoints)
 
     # 8. If input is longer than 128 characters, truncate input,
