@@ -27,28 +27,14 @@ returns the original integer values, for consistency.
 
 import unittest
 
+import six
+
 import webcolors
-
-
-try:
-    # On Python 3, the built-in zip() is identical to the Python 2
-    # itertools.izip(), and Python 3's itertools does not define an
-    # izip() as a result.
-    from itertools import izip as zip
-except ImportError:
-    pass
-
-try:
-    # Similarly, Python 3's range() does what Python 2's xrange() did,
-    # and so Python 3 does not have xrange()
-    xrange(1)
-except NameError:
-    xrange = range
 
 
 def hex_colors():
     HEX_TEMPLATE = u"#%06x"
-    for i in xrange(16777217):
+    for i in six.moves.xrange(16777217):
         yield HEX_TEMPLATE % i
 
 
@@ -64,7 +50,8 @@ def int_colors():
 
 class FullColorTest(unittest.TestCase):
     def test_full_colors(self):
-        for hex_color, int_triplet in zip(hex_colors(), int_colors()):
+        for hex_color, int_triplet in six.moves.zip(
+                hex_colors(), int_colors()):
             self.assertEqual(int_triplet,
                              webcolors.hex_to_rgb(hex_color))
             self.assertEqual(hex_color,
