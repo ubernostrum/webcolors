@@ -67,7 +67,12 @@ def _reversedict(d):
 
 HEX_COLOR_RE = re.compile(r'^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$')
 
-SUPPORTED_SPECIFICATIONS = (u'html4', u'css2', u'css21', u'css3')
+HTML4 = u'html4'
+CSS2 = u'css2'
+CSS21 = u'css21'
+CSS3 = u'css3'
+
+SUPPORTED_SPECIFICATIONS = (HTML4, CSS2, CSS21, CSS3)
 
 SPECIFICATION_ERROR_TEMPLATE = u'{{spec}} is not a supported specification for color name lookups; \
 supported specifications are: {supported}.'.format(
@@ -392,14 +397,13 @@ def normalize_percent_triplet(rgb_triplet):
 # Conversions from color names to various formats.
 #################################################################
 
-def name_to_hex(name, spec=u'css3'):
+def name_to_hex(name, spec=CSS3):
     """
     Convert a color name to a normalized hexadecimal color value.
 
     The optional keyword argument ``spec`` determines which
-    specification's list of color names will be used; valid values are
-    ``html4``, ``css2``, ``css21`` and ``css3``, and the default is
-    ``css3``.
+    specification's list of color names will be used. The default is
+    CSS3.
 
     When no color of that name exists in the given specification,
     ``ValueError`` is raised.
@@ -408,10 +412,12 @@ def name_to_hex(name, spec=u'css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     normalized = name.lower()
-    hex_value = {u'css2': CSS2_NAMES_TO_HEX,
-                 u'css21': CSS21_NAMES_TO_HEX,
-                 u'css3': CSS3_NAMES_TO_HEX,
-                 u'html4': HTML4_NAMES_TO_HEX}[spec].get(normalized)
+    hex_value = {
+        CSS2: CSS2_NAMES_TO_HEX,
+        CSS21: CSS21_NAMES_TO_HEX,
+        CSS3: CSS3_NAMES_TO_HEX,
+        HTML4: HTML4_NAMES_TO_HEX
+    }[spec].get(normalized)
     if hex_value is None:
         raise ValueError(
             u"'{name}' is not defined as a named color in {spec}".format(
@@ -421,7 +427,7 @@ def name_to_hex(name, spec=u'css3'):
     return hex_value
 
 
-def name_to_rgb(name, spec=u'css3'):
+def name_to_rgb(name, spec=CSS3):
     """
     Convert a color name to a 3-tuple of integers suitable for use in
     an ``rgb()`` triplet specifying that color.
@@ -430,7 +436,7 @@ def name_to_rgb(name, spec=u'css3'):
     return hex_to_rgb(name_to_hex(name, spec=spec))
 
 
-def name_to_rgb_percent(name, spec=u'css3'):
+def name_to_rgb_percent(name, spec=CSS3):
     """
     Convert a color name to a 3-tuple of percentages suitable for use
     in an ``rgb()`` triplet specifying that color.
@@ -442,15 +448,14 @@ def name_to_rgb_percent(name, spec=u'css3'):
 # Conversions from hexadecimal color values to various formats.
 #################################################################
 
-def hex_to_name(hex_value, spec=u'css3'):
+def hex_to_name(hex_value, spec=CSS3):
     """
     Convert a hexadecimal color value to its corresponding normalized
     color name, if any such name exists.
 
     The optional keyword argument ``spec`` determines which
-    specification's list of color names will be used; valid values are
-    ``html4``, ``css2``, ``css21`` and ``css3``, and the default is
-    ``css3``.
+    specification's list of color names will be used. The default is
+    CSS3.
 
     When no color name for the value is found in the given
     specification, ``ValueError`` is raised.
@@ -459,10 +464,12 @@ def hex_to_name(hex_value, spec=u'css3'):
     if spec not in SUPPORTED_SPECIFICATIONS:
         raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
     normalized = normalize_hex(hex_value)
-    name = {u'css2': CSS2_HEX_TO_NAMES,
-            u'css21': CSS21_HEX_TO_NAMES,
-            u'css3': CSS3_HEX_TO_NAMES,
-            u'html4': HTML4_HEX_TO_NAMES}[spec].get(normalized)
+    name = {
+        CSS2: CSS2_HEX_TO_NAMES,
+        CSS21: CSS21_HEX_TO_NAMES,
+        CSS3: CSS3_HEX_TO_NAMES,
+        HTML4: HTML4_HEX_TO_NAMES
+    }[spec].get(normalized)
     if name is None:
         raise ValueError(
             u"'{}' has no defined color name in {}".format(hex_value, spec)
@@ -497,16 +504,15 @@ def hex_to_rgb_percent(hex_value):
 # Conversions from  integer rgb() triplets to various formats.
 #################################################################
 
-def rgb_to_name(rgb_triplet, spec=u'css3'):
+def rgb_to_name(rgb_triplet, spec=CSS3):
     """
     Convert a 3-tuple of integers, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
     such name exists.
 
     The optional keyword argument ``spec`` determines which
-    specification's list of color names will be used; valid values are
-    ``html4``, ``css2``, ``css21`` and ``css3``, and the default is
-    ``css3``.
+    specification's list of color names will be used. The default is
+    CSS3.
 
     If there is no matching name, ``ValueError`` is raised.
 
@@ -562,16 +568,15 @@ def rgb_to_rgb_percent(rgb_triplet):
 # Conversions from percentage rgb() triplets to various formats.
 #################################################################
 
-def rgb_percent_to_name(rgb_percent_triplet, spec=u'css3'):
+def rgb_percent_to_name(rgb_percent_triplet, spec=CSS3):
     """
     Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
     such name exists.
 
     The optional keyword argument ``spec`` determines which
-    specification's list of color names will be used; valid values are
-    ``html4``, ``css2``, ``css21`` and ``css3``, and the default is
-    ``css3``.
+    specification's list of color names will be used. The default is
+    CSS3.
 
     If there is no matching name, ``ValueError`` is raised.
 
