@@ -297,6 +297,18 @@ CSS21_HEX_TO_NAMES = _reversedict(CSS21_NAMES_TO_HEX)
 
 CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 
+# Both 'gray' and 'grey' are accepted in CSS3, and both map to the
+# same 24-bit value (#808080). Reversing this requires picking one
+# spelling to be the "winner".
+#
+# The way in which _reversedict generates these mappings will pick a
+# "winner" based on the ordering of dictionary keys, which varies
+# according to the Python version in use, and on some Python versions
+# is deliberately not to be relied on for consistency. So we manually
+# pick one. Since it was the only spelling supported by HTML 4 and
+# CSS1, 'gray' is the winner.
+CSS3_HEX_TO_NAMES[u'#808080'] = 'gray'
+
 
 # Aliases of the above mappings, for backwards compatibility.
 #################################################################
