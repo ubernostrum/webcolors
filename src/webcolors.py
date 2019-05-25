@@ -305,8 +305,8 @@ CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 # "winner" based on the ordering of dictionary keys, which varies
 # according to the Python version in use, and on some Python versions
 # is deliberately not to be relied on for consistency. So we manually
-# pick one. Since it was the only spelling supported by HTML 4 and
-# CSS1, 'gray' is the winner.
+# pick one. Since it was the only spelling supported by HTML 4, CSS1,
+# and CSS2, 'gray' is the winner.
 CSS3_HEX_TO_NAMES[u'#808080'] = 'gray'
 
 

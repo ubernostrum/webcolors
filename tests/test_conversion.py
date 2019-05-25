@@ -380,3 +380,23 @@ class PercentRGBConversionTests(unittest.TestCase):
             result = webcolors.rgb_percent_to_rgb(triplet)
             assert isinstance(result, webcolors.IntegerRGB)
             assert int_triplet == result
+
+
+class ConversionTests(unittest.TestCase):
+    """
+    Test other aspects of convevrsion not covered by format-specific
+    test cases.
+
+    """
+    def test_spelling_variant(self):
+        """
+        When asked to name a color value that maps to either of 'gray' or
+        'grey' in CSS3, webcolors always picks 'gray' as the spelling.
+
+        """
+        for converter, value in (
+                (webcolors.hex_to_name, u'#808080'),
+                (webcolors.rgb_to_name, (128, 128, 128)),
+                (webcolors.rgb_percent_to_name, (u'50%', u'50%', u'50%'))
+        ):
+            assert u"gray" == converter(value)
