@@ -46,7 +46,7 @@ class HexConversionTests(unittest.TestCase):
             ValueError,
             webcolors.hex_to_name,
             '#daa520',
-            spec=u'html4'
+            spec=webcolors.HTML4
         )
 
     def test_hex_to_name_specs(self):
@@ -140,7 +140,7 @@ class IntegerRGBConversionTests(unittest.TestCase):
             ValueError,
             webcolors.rgb_to_name,
             (218, 165, 32),
-            spec=u'html4'
+            spec=webcolors.HTML4
         )
 
     def test_rgb_to_name_specs(self):
@@ -327,7 +327,7 @@ class PercentRGBConversionTests(unittest.TestCase):
             ValueError,
             webcolors.rgb_percent_to_name,
             (u'85.49%', u'64.71%', u'12.5%'),
-            spec=u'html4'
+            spec=webcolors.HTML4
         )
 
     def test_rgb_percent_to_name_specs(self):
