@@ -8,32 +8,6 @@ details of the supported formats, conventions and conversions.
 
 """
 
-# Stylistic notes:
-#
-# The HTML5 algorithms are implemented as direct translations into
-# Python of the descriptions in the spec. This produces somewhat
-# un-Pythonic code, but correctness of the implementations is more
-# important.
-#
-# Several other style choices in this module enforce usage or Python
-# version support (see documentation in docs/ directory for rationale
-# behind Python version support and usage requirements):
-#
-# * The only Python 2.x version supported is 2.7. Use of a dict
-#   comprehension in the _reversedict() helper function enforces this
-#   by causing an import-time syntax error on Python 2.6 and earlier.
-#
-# * The oldest Python 3.x version supported is 3.3. Use of u-prefixed
-#   string literals enforces this by causing an import-time syntax
-#   error on Python 3.0, 3.1 and 3.2.
-#
-# * Use of this module on Python 3 requires str rather than bytes for
-#   all string arguments to functions. Use of the format() method for
-#   string formatting enforces this; as of Python 3.5, formatting with
-#   % is implemented on bytes objects, but the format() method will
-#   never be implemented on bytes.
-
-
 import collections
 import re
 import string
