@@ -10,8 +10,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 project = u'webcolors'
 copyright = u'2008-2018, James Bennett'
-version = '1.8'
-release = '1.8.1'
+version = '1.9'
+release = '1.9'
 exclude_trees = ['_build']
 pygments_style = 'sphinx'
 html_static_path = ['_static']
@@ -27,6 +27,7 @@ if not on_rtd:
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
+    'six': ('https://six.readthedocs.io/', None),
 }
 
 if not on_rtd:

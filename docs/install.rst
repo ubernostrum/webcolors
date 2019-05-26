@@ -4,12 +4,10 @@
 Installation guide
 ==================
 
-The |release| version of `webcolors` is officially tested and supported
+The |release| version of webcolors is officially tested and supported
 on the following versions of Python:
 
 * Python 2.7
-
-* Python 3.4
 
 * Python 3.5
 
@@ -21,14 +19,14 @@ on the following versions of Python:
 Normal installation
 -------------------
 
-The preferred method of installing `webcolors` is via `pip`, the
+The preferred method of installing webcolors is via `pip`, the
 standard Python package-installation tool. If you don't have `pip`,
 instructions are available for `how to obtain and install it
 <https://pip.pypa.io/en/latest/installing.html>`_. If you're using a
 supported version of Python, `pip` came bundled with your installation
 of Python.
 
-Once you have `pip`, simply type::
+Once you have `pip`, type::
 
     pip install webcolors
 
@@ -36,10 +34,9 @@ Once you have `pip`, simply type::
 Installing from a source checkout
 ---------------------------------
 
-If you want to work on `webcolors`, you can obtain a source
-checkout.
+If you want to work on webcolors, you can obtain a source checkout.
 
-The development repository for `webcolors` is at
+The development repository for webcolors is at
 <https://github.com/ubernostrum/webcolors>. If you have `git
 <http://git-scm.com/>`_ installed, you can obtain a copy of the
 repository by typing::

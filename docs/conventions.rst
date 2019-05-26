@@ -4,9 +4,9 @@
 Normalization and conventions
 =============================
 
-Since the various formats used to specify colors in Web documents do
+Since the various formats used to specify colors in web documents do
 not always map cleanly to Python data types, and some variation is
-permitted in how to use each format in a Web document, webcolors
+permitted in how to use each format in a web document, webcolors
 applies a set of conventions for representing color names and values,
 and for normalizing them.
 
@@ -51,8 +51,8 @@ The approach to string types in webcolors is as follows:
   bytes (:class:`str`) on Python 2, but will convert to Unicode
   strings (:class:`unicode`) for output.
 
-Because the HTML5 Recommendation specifies its color algorithms in
-terms of Unicode strings only (and in some cases, requires exact
+Because the HTML5 Recommendation specifies its color algorithms only
+in terms of Unicode strings (and in some cases, requires exact
 identification of Unicode code points to determine behavior), the
 following constraint applies to the functions implementing these
 algorithms:
@@ -61,15 +61,18 @@ algorithms:
   Python 2 or :class:`str` on Python 3). Use of :class:`str` on Python
   2 or :class:`bytes` on Python 3 will raise a :exc:`ValueError`.
 
-Use of Unicode strings whenever possible is strongly preferred. To
+Use of Unicode strings whenever is strongly preferred on Python 2. To
 encourage this, all documentation for webcolors uses the `u` prefix
 for string literals. Use of the `u` prefix is required on Python 2 to
 mark a string literal as Unicode; on Python 3.3 and later, use of this
 prefix is permitted but not necessary (as all unprefixed string
 literals on Python 3 are Unicode strings).
 
-Due to use of the `u` prefix, using webcolors on Python 3 will require
-at least Python 3.3.
+When relevant, this documentation will refer to the Unicode string
+type as :data:`six.text_type`; the :mod:`six` library provides helpers
+for writing code compatible with both Python 2 and 3, and
+:data:`six.text_type` always resolves to the Unicode string type of
+the Python version in use.
 
 
 Hexadecimal color values
@@ -102,13 +105,11 @@ this normalization manually if desired.
 Integer and percentage `rgb()` triplets
 -----------------------------------------
 
-Functions which work with integer `rgb()` triplets accept and return
-them as a 3-tuple of Python :class:`int`. Functions which work with
-percentage `rgb()` triplets accept them as 3-tuple of Python strings
-(either :class:`str` or :class:`unicode` is permitted on Python 2;
-only :class:`str` is permitted on Python 3) and return them as a
-3-tuple of Python Unicode strings (:class:`unicode` or :class:`str`
-depending on Python version).
+Functions which work with integer `rgb()` triplets accept them as a
+3-:class:`tuple` of Python :class:`int`. Functions which work with
+percentage `rgb()` triplets accept them as 3-:class:`tuple` of Python
+strings (see :ref:`above regarding Python string types
+<string-types>`).
 
 Plain tuples are accepted by all functions which deal with integer or
 percentage `rgb()` triplets, but three types of
@@ -156,29 +157,15 @@ a result in another format, webcolors always normalizes such values to
 be entirely lowercase.
 
 
-.. _spec-identifiers:
-
 Identifying sets of named colors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For purposes of identifying the specification from which to draw the
-selection of defined color names, webcolors recognizes the following
-strings as identifiers:
+selection of defined color names, webcolors uses strings naming the
+specifications, and provides :ref:`a set of constants containing the
+correct values <spec-constants>`.
 
-`u'html4'`
-    The HTML 4 named colors.
-
-`u'css2'`
-    The CSS 2 named colors.
-
-`u'css21'`
-    The CSS 2.1 named colors.
-
-`u'css3'`
-    The CSS 3/SVG named colors. For all functions for which the set of
-    color names is relevant, this is the default set used.
-
-The CSS 1 named colors are not represented here, as CSS 1 merely
+Note that the CSS1 named colors are not supported here, as CSS1 merely
 "suggested" a set of color names, and declined to provide values for
-them. The CSS 2 "system colors" are also not represented here, as they
+them. The CSS2 "system colors" are also not represented here, as they
 had no fixed defined values and are now deprecated.

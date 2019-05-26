@@ -11,18 +11,9 @@ What versions of Python are supported?
 --------------------------------------
 
 On Python 2, webcolors supports and is tested on Python 2.7. On Python
-3, webcolors supports and is tested on Python 3.4, 3.5, and 3.6.
-
-These Python version requirements are due to a combination of factors:
-
-* On Python 2, only 2.7 still receives official security support from
-  Python's development team. Although some third parties continue to
-  provide unofficial security support for earlier Python 2 versions,
-  the fact remains that Python 2.6 and earlier have reached their
-  official end-of-life and their use should not be encouraged.
-
-* Python 3.4 is the oldest Python 3.x release still receiving upstream
-  security support.
+3, webcolors supports and is tested on Python 3.5, 3.6, and 3.7. These
+are the only versions of Python currently receiving upstream security
+support from the Python core team.
 
 
 How closely does this module follow the standards?
@@ -56,6 +47,40 @@ See :ref:`the conformance documentation <conformance>` for details on
 how this affects testing.
 
 
+Why does webcolors prefer American spellings?
+---------------------------------------------
+
+In CSS3, two names -- `gray` and `grey` -- each map to the same color:
+`rgb(128, 128, 128)`. Using any of the conversions from names to other
+formats (:func:`~webcolors.name_to_hex`,
+:func:`~webcolors.name_to_rgb`, or
+:func:`~webcolors.name_to_rgb_percent`) will accept either name
+provided the `spec` argument is :data:`~webcolors.CSS3`.
+
+However, converting from other formats to a name requires picking one
+of these spellings. Since webcolors uses a Python :class:`dict` to
+store its :ref:`name-to-value mappings <mapping-constants>`, simply
+reversing those mappings risks inconsistency: swapping the keys and
+values of a :class:`dict` in Python depends on the key order, which
+varies from one version of Python to another and in several supported
+Python versions is not guaranteed to be consistent and/or is
+documented as an implementation detail not to be relied on. So
+webcolors must manually pick a spelling to normalize to, and chooses
+`gray`. This choice was made for consistency with HTML 4, CSS1, and
+CSS2, each of which only allowed `gray`.
+
+As a result, the following functions each return `u'gray'` for the
+following inputs, and never `u'grey'`, even when the `spec` argument
+is :data:`~webcolors.CSS3`:
+
+* :func:`~webcolors.hex_to_name` for input `u'#808080'`
+
+* :func:`~webcolors.rgb_to_name` for input `(128, 128, 128)`
+
+* :func:`~webcolors.rgb_percent_to_name` for input `(u'50%', u'50%',
+  u'50%')`
+
+
 Why aren't HSL values supported?
 --------------------------------
 
@@ -65,12 +90,10 @@ Web are specified using sRGB, through hexadecimal color values or
 through integer or percentage `rgb()` triplets. This decreases the
 importance of supporting the `hsl()` construct.
 
-Additionally, Python already has `the colorsys module`_ in the
+Additionally, Python already has the :mod:`colorsys` module in the
 standard library, which offers functions for converting between RGB,
 HSL, HSV and YIQ color systems. If you need conversion to/from HSL or
 another color system, use :mod:`colorsys`.
-
-.. _the colorsys module: http://docs.python.org/library/colorsys.html
 
 
 Why not use a more object-oriented design with classes for the colors?
@@ -85,9 +108,8 @@ indirection layer of having to instantiate and serialize a
 color-wrapping object.
 
 Keeping a function-based interface also maintains consistency with
-`Python's built-in colorsys module
-<https://docs.python.org/library/colorsys.html>`_, which has the same
-style of interface for converting amongst color spaces.
+Python's built-in :mod:`colorsys` module which has the same style of
+interface for converting amongst color spaces.
 
 Note that if an object-oriented interface is desired, `the third-party
 colormath module <https://pypi.python.org/pypi/colormath/>`_ does have

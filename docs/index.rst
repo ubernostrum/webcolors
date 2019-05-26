@@ -1,9 +1,9 @@
-webcolors
-=========
+webcolors |release|
+===================
 
 This module provides utility functions for working with the color
 names and color value formats defined by the HTML and CSS
-specifications for use in documents on the Web.
+specifications for use in documents on the web.
 
 Support is included for normalizing and converting between the
 following formats (RGB colorspace only; conversion to/from HSL can be
@@ -46,6 +46,7 @@ Documentation contents
    conventions
    contents
    conformance
+   changelog
    faq
 
 .. seealso::

@@ -1,7 +1,9 @@
 amongst
+bugfixes
 bytestrings
 chucknorris
 colorspace
+gz
 HSL
 identifiably
 incrementing
@@ -10,8 +12,10 @@ online
 sRGB
 rgb
 superset
+tox
 tuple
 tuples
 uncountably
 unprefixed
 versa
+whl
