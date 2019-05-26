@@ -399,4 +399,4 @@ class ConversionTests(unittest.TestCase):
                 (webcolors.rgb_to_name, (128, 128, 128)),
                 (webcolors.rgb_percent_to_name, (u'50%', u'50%', u'50%'))
         ):
-            assert u"gray" == converter(value)
+            assert u"gray" == converter(value, spec=webcolors.CSS3)
