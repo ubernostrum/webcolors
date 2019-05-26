@@ -281,7 +281,7 @@ CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 # is deliberately not to be relied on for consistency. So we manually
 # pick one. Since it was the only spelling supported by HTML 4, CSS1,
 # and CSS2, 'gray' is the winner.
-CSS3_HEX_TO_NAMES[u'#808080'] = 'gray'
+CSS3_HEX_TO_NAMES[u'#808080'] = u'gray'
 
 
 # Aliases of the above mappings, for backwards compatibility.
