@@ -6,7 +6,7 @@ Change log
 
 This document lists the changes between each release of webcolors.
 
-Version 1.9, released 2019-06-??
+Version 1.9, released 2019-06-01
 --------------------------------
 
 No bug fixes.
