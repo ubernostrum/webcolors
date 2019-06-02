@@ -61,12 +61,12 @@ algorithms:
   Python 2 or :class:`str` on Python 3). Use of :class:`str` on Python
   2 or :class:`bytes` on Python 3 will raise a :exc:`ValueError`.
 
-Use of Unicode strings whenever is strongly preferred on Python 2. To
-encourage this, all documentation for webcolors uses the `u` prefix
-for string literals. Use of the `u` prefix is required on Python 2 to
-mark a string literal as Unicode; on Python 3.3 and later, use of this
-prefix is permitted but not necessary (as all unprefixed string
-literals on Python 3 are Unicode strings).
+Use of Unicode strings is strongly preferred on Python 2. To encourage
+this, all documentation for webcolors uses the `u` prefix for string
+literals. Use of the `u` prefix is required on Python 2 to mark a
+string literal as Unicode; on Python 3.3 and later, use of this prefix
+is permitted but not necessary (as all unprefixed string literals on
+Python 3 are Unicode strings).
 
 When relevant, this documentation will refer to the Unicode string
 type as :data:`six.text_type`; the :mod:`six` library provides helpers

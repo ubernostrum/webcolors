@@ -188,19 +188,23 @@ Mappings from hexadecimal values to names
 
 .. data:: CSS2_HEX_TO_NAMES
 
-   An alias for :data:`~webcolors.HTML4_HEX_TO_NAMES`.
+   An alias for :data:`~webcolors.HTML4_HEX_TO_NAMES`, as CSS2 defined
+   the same set of colors.
 
 .. data:: CSS21_HEX_TO_NAMES
 
    A :class:`dict` whose keys are the normalized hexadecimal values of
    the seventeen named CSS2.1 colors, and whose values are the
-   corresponding normalized names.
+   corresponding normalized names (sixteen of these are identical to
+   HTML 4 and CSS2; the seventeenth color is `orange`, added in
+   CSS2.1).
 
 .. data:: CSS3_HEX_TO_NAMES
 
    A :class:`dict` whose keys are the normalized hexadecimal values of
    the 147 names CSS3 colors, and whose values are the corresponding
-   normalized names.
+   normalized names. These colors are also identical to the 147 named
+   colors of SVG.
 
    .. note:: **Spelling variants**
 
@@ -209,11 +213,6 @@ Mappings from hexadecimal values to names
       hexadecimal value to a name requires picking one and only one of
       these, and webcolors chooses `gray` as it was the spelling used
       by HTML 4, CSS1, and CSS2.
-
-The canonical names of these constants are as listed above, entirely
-in uppercase. For backwards compatibility with older versions of
-webcolors, aliases are provided whose names are entirely lowercase
-(for example, `html4_names_to_hex`).
 
 
 Normalization functions
@@ -226,8 +225,8 @@ Normalization functions
    HTML5 terms a "valid lowercase simple color").
 
    If the supplied value cannot be interpreted as a hexadecimal color
-   value, `ValueError` is raised. See :ref:`the conventions used by
-   this module <conventions>` for information on acceptable formats
+   value, :exc:`ValueError` is raised. See :ref:`the conventions used
+   by this module <conventions>` for information on acceptable formats
    for hexadecimal values.
 
    Examples:
@@ -278,7 +277,7 @@ Normalization functions
 
 .. function:: normalize_percent_triplet(rgb_triplet)
 
-    Normalize a percentage `rgb()` triplet to that all values are
+    Normalize a percentage `rgb()` triplet so that all values are
     within the range 0%..100%.
 
     Examples:
@@ -418,7 +417,8 @@ Conversion from hexadecimal color values to other formats
    :param str spec: The specification from which to draw the list of color
       names. Default is :data:`CSS3`.
    :rtype: :data:`six.text_type`
-   :raises ValueError: when the given color has no name in the given spec.
+   :raises ValueError: when the given color has no name in the given
+      spec, or when the supplied hex value is invalid.
 
 .. function:: hex_to_rgb(hex_value)
 
@@ -438,6 +438,7 @@ Conversion from hexadecimal color values to other formats
 
    :param str hex_value: The hexadecimal color value to convert.
    :rtype: IntegerRGB
+   :raises ValueError: when the supplied hex value is invalid.
 
 
 .. function:: hex_to_rgb_percent(hex_value)
@@ -458,6 +459,7 @@ Conversion from hexadecimal color values to other formats
 
    :param str hex_value: The hexadecimal color value to convert.
    :rtype: PercentRGB
+   :raises ValueError: when the supplied hex value is invalid.
 
 
 Conversions from integer `rgb()` triplets to other formats
@@ -490,7 +492,7 @@ Conversions from integer `rgb()` triplets to other formats
        u'navy'
 
    :param rgb_triplet: The `rgb()` triplet
-   :type rgb_triplet: Union[IntegerTriplet, Tuple[int, int, int]]
+   :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
    :param str spec: The specification from which to draw the list of color
       names. Default is :data:`CSS3`.
    :rtype: :data:`six.text_type`
@@ -512,7 +514,7 @@ Conversions from integer `rgb()` triplets to other formats
        u'#000080'
 
    :param rgb_triplet: The `rgb()` triplet.
-   :type rgb_triplet: Union[IntegerTriplet, Tuple[int, int, int]]
+   :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
    :rtype: :data:`six.text_type`
 
 
@@ -546,7 +548,7 @@ Conversions from integer `rgb()` triplets to other formats
        PercentRGB(red=u'85.49%', green=u'64.71%', blue=u'12.5%')
 
    :param rgb_triplet: The `rgb()` triplet.
-   :type rgb_triplet: Union[IntegerTriplet, Tuple[int, int, int]]
+   :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
    :rtype: PercentRGB
 
 
@@ -582,7 +584,7 @@ Conversions from percentage `rgb()` triplets to other formats
        u'goldenrod'
 
    :param rgb_percent_triplet: The `rgb()` triplet. 
-   :type rgb_percent_triplet: Union[PercentRGB, Tuple[str, str, str]]
+   :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
    :param str spec: The specification from which to draw the list of color
        names. Default is :data:`CSS3`.
    :rtype: :data:`six.text_type`
@@ -607,7 +609,7 @@ Conversions from percentage `rgb()` triplets to other formats
        u'#daa520'
 
    :param rgb_percent_triplet: The `rgb()` triplet.
-   :type rgb_percent_triplet: Union[PercentRGB, Tuple[str, str, str]]
+   :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
    :rtype: `str`
 
 .. function:: rgb_percent_to_rgb(rgb_percent_triplet)
@@ -632,7 +634,7 @@ Conversions from percentage `rgb()` triplets to other formats
        IntegerRGB(red=218, green=165, blue=32)
 
    :param rgb_percent_triplet: The `rgb()` triplet.
-   :type rgb_percent_triplet: Union[PercentRGB, Tuple[str, str, str]]
+   :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
    :rtype: IntegerRGB
 
 
@@ -653,8 +655,8 @@ HTML5 color algorithms
 
    Apply the HTML5 simple color parsing algorithm.
 
-   Note that `input` *must* be a Unicode string -- on Python 2,
-   bytestrings will not be accepted.
+   Note that `input` **must** be a Unicode string -- on Python 2,
+   byte strings will not be accepted.
 
    Examples:
    
@@ -690,8 +692,8 @@ HTML5 color algorithms
        u'#ffffff'
 
    :param simple_color: The color to serialize.
-   :type simple_color: Union[IntegerRGB, Tuple[int, int, int]], all
-      values in the range 0..255 inclusive
+   :type simple_color: typing.Union[IntegerRGB, HTML5SimpleColor,
+      Tuple[int, int, int]], all values in the range 0..255 inclusive
    :rtype: A valid lowercase simple color, which is a Unicode string
       exactly seven characters long, beginning with `#` and followed
       by six lowercase hexadecimal digits.
@@ -707,8 +709,8 @@ HTML5 color algorithms
    with high levels of "junk" (i.e., text other than a color value)
    may be surprising.
 
-   Note also that `input` *must* be a Unicode string -- on Python 2,
-   bytestrings will not be accepted.
+   Note also that `input` **must** be a Unicode string -- on Python 2,
+   byte strings will not be accepted.
 
    Examples:
    

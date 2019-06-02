@@ -32,9 +32,9 @@ Why aren't `rgb_to_rgb_percent()` and `rgb_percent_to_rgb()` precise?
 This is due to limitations in the representation of floating-point
 numbers in programming languages. Python, like many programming
 languages, uses `IEEE floating-point
-<http://en.wikipedia.org/wiki/IEEE_floating_point>`_, which is
-inherently imprecise for some values. This imprecision only appears
-when converting between integer and percentage `rgb()` triplets, as in
+<https://en.wikipedia.org/wiki/IEEE_754>`_, which is inherently
+imprecise for some values. This imprecision only appears when
+converting between integer and percentage `rgb()` triplets, as in
 :func:`~webcolors.rgb_to_rgb_percent` and
 :func:`~webcolors.rgb_percent_to_rgb`.
 
@@ -112,8 +112,8 @@ Python's built-in :mod:`colorsys` module which has the same style of
 interface for converting amongst color spaces.
 
 Note that if an object-oriented interface is desired, `the third-party
-colormath module <https://pypi.python.org/pypi/colormath/>`_ does have
-a class-based interface (and rightly so, as it offers a wider range of
+colormath module <https://pypi.org/project/colormath/>`_ does have a
+class-based interface (and rightly so, as it offers a wider range of
 color representation and manipulation options than webcolors).
 
 

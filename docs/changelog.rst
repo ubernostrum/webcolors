@@ -6,7 +6,7 @@ Change log
 
 This document lists the changes between each release of webcolors.
 
-Version 1.9, released 2019-05-??
+Version 1.9, released 2019-06-??
 --------------------------------
 
 No bug fixes.
@@ -23,10 +23,10 @@ Other changes
 * When asked to provide a color name, using the CSS3/SVG set of names,
   for the hexadecimal value `#808080`, the integer triplet `rgb(128,
   128, 128)`, or the percentage triplet `rgb(50%, 50%, 50%)`,
-  webcolors now always returns `u"gray"`, never `u"grey"`. Previously,
-  the behavior was inconsistent and depended on the Python version in
-  use; `u"gray"` was picked because it was the spelling variant used
-  in HTML 4, CSS1, and CSS2.
+  webcolors now always returns `u'gray'`, never `u'grey'`. Previously,
+  the behavior could be inconsistent as it depended on the Python
+  version in use; `u'gray'` was picked because it was the spelling
+  variant used in HTML 4, CSS1, and CSS2.
 
 
 Version 1.8.1, released 2018-02-12

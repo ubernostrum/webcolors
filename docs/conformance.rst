@@ -126,14 +126,14 @@ provided, for two reasons:
 2. The only rigorous definition of the format of a percentage value is
    in CSS2, `which declares a percentage to be
    <http://www.w3.org/TR/CSS2/syndata.html#percentage-units>`_ "a
-   `<number>` immediately followed by '%'". `The CSS2 definition of
-   a number
-   <http://www.w3.org/TR/CSS2/syndata.html#value-def-number>`_ places
-   no limit on the length past the decimal point, and appears to be
-   declaring any real number as a valid value. As the subset of reals
-   in the range 0.0 to 100.0 is uncountably infinite, testing all
-   legal values is not possible on current hardware in any reasonable
-   amount of time.
+   `<number>` immediately followed by '%'". `The CSS2 definition of a
+   number <http://www.w3.org/TR/CSS2/syndata.html#value-def-number>`_
+   places no limit on the length past the decimal point, and appears
+   to be declaring any real number as a valid value, though percentage
+   triplets clip their inputs to the range 0.0-100.0. As the subset of
+   reals in the range 0.0 to 100.0 is uncountably infinite, testing
+   all legal values is not possible on current hardware in any
+   reasonable amount of time.
 
 Since precise correctness and completeness are not achievable,
 webcolors instead aims to achieve *consistency* in
@@ -174,7 +174,9 @@ pass the version to test. For example, to test on Python 3.7:
    $ tox -e py37
 
 To run the full verification tests for definition correctness and
-conversions, specify the "release" test environment instead:
+conversions, specify the "release" test environment instead (so named
+because these tests are usually run only prior to a new release of
+webcolors):
 
 .. code-block:: shell
 

@@ -138,9 +138,9 @@ HTML5 provides three algorithms related to colors:
 
 The HTML5 legacy parsing algorithm does not support the non-color
 keyword `transparent` from CSS3 and will produce an error for that
-input. It also does not recognize the CSS2 "system color" keywords;
-it will convert each such keyword to simple color, consistently, but
-in a way which does not follow CSS2's definitions of these keywords
+input. It also does not recognize the CSS2 "system color" keywords; it
+will convert each such keyword to a simple color, consistently, but in
+a way which does not follow CSS2's definitions of these keywords
 (which itself was system- and configuration-dependent).
 
 The implementations in this module are based on the definitions and
