@@ -6,6 +6,18 @@ Change log
 
 This document lists the changes between each release of webcolors.
 
+Version 1.9.1, released 2019-06-07
+----------------------------------
+
+Bugs fixed
+~~~~~~~~~~
+
+* The `__version__` attribute of the installed webcolors module,
+  although not documented or referenced anywhere, was accidentally not
+  updated in the 1.9 release. It has now been updated (and now
+  indicates 1.9.1).
+
+
 Version 1.9, released 2019-06-01
 --------------------------------
 
