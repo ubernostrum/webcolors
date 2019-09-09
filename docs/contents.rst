@@ -202,7 +202,7 @@ Mappings from hexadecimal values to names
 .. data:: CSS3_HEX_TO_NAMES
 
    A :class:`dict` whose keys are the normalized hexadecimal values of
-   the 147 names CSS3 colors, and whose values are the corresponding
+   the 147 named CSS3 colors, and whose values are the corresponding
    normalized names. These colors are also identical to the 147 named
    colors of SVG.
 
@@ -386,7 +386,7 @@ Conversions from color names to other formats
 
 
 Conversion from hexadecimal color values to other formats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------------
 
 .. function:: hex_to_name(hex_value, spec=CSS3)
 
