@@ -6,6 +6,24 @@ Change log
 
 This document lists the changes between each release of webcolors.
 
+
+Version 1.10, released 2019-09-08
+---------------------------------
+
+No bug fixes or new features.
+
+Other changes
+~~~~~~~~~~~~~
+
+* Similar to the change in version 1.9 which normalized conversions to
+  named colors for `gray`/`grey` to always use the `gray` variant, the
+  other named grays of CSS3 now normalize to the `gray` spelling. This
+  affects the following colors: `darkgray`/`darkgrey`,
+  `darkslategray`/`darkslategrey`, `dimgray`/`dimgrey`,
+  `lightgray`/`lightgrey`, `lightslategray`/`lightslategrey`,
+  `slategray`/`slategrey`.
+
+
 Version 1.9.1, released 2019-06-07
 ----------------------------------
 
