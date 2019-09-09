@@ -388,15 +388,35 @@ class ConversionTests(unittest.TestCase):
     test cases.
 
     """
-    def test_spelling_variant(self):
+    def test_spelling_variants(self):
         """
         When asked to name a color value that maps to either of 'gray' or
-        'grey' in CSS3, webcolors always picks 'gray' as the spelling.
+        'grey' in CSS3, or a related color like 'darkgray'/'darkgrey',
+        webcolors always picks 'gray' as the spelling.
 
         """
-        for converter, value in (
-                (webcolors.hex_to_name, u'#808080'),
-                (webcolors.rgb_to_name, (128, 128, 128)),
-                (webcolors.rgb_percent_to_name, (u'50%', u'50%', u'50%'))
-        ):
-            assert u"gray" == converter(value, spec=webcolors.CSS3)
+        test_values = (
+            (u'#a9a9a9', (169, 169, 169),
+             (u'66.27%', u'66.27%', u'66.27%'), u'darkgray'),
+            (u'#2f4f4f', (47, 79, 79),
+             (u'18.43%', u'30.98%', u'30.98%'), u'darkslategray'),
+            (u'#696969', (105, 105, 105),
+             (u'41.18%', u'41.18%', u'41.18%'), u'dimgray'),
+            (u'#808080', (128, 128, 128),
+             (u'50%', u'50%', u'50%'), u'gray'),
+            (u'#d3d3d3', (211, 211, 211),
+             (u'82.75%', u'82.75%', u'82.75%'), u'lightgray'),
+            (u'#d3d3d3', (211, 211, 211),
+             (u'82.75%', u'82.75%', u'82.75%'), u'lightgray'),
+            (u'#778899', (119, 136, 153),
+             (u'46.67%', u'53.33%', u'60.00%'), u'lightslategray'),
+            (u'#708090', (112, 128, 144),
+             (u'43.92%', u'50%', u'56.47%'), u'slategray'),
+        )
+        for hex_value, int_tuple, percent_tuple, name in test_values:
+            for converter, value in (
+                    (webcolors.hex_to_name, hex_value),
+                    (webcolors.rgb_to_name, int_tuple),
+                    (webcolors.rgb_percent_to_name, percent_tuple)
+            ):
+                assert name == converter(value, spec=webcolors.CSS3)

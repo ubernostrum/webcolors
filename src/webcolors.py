@@ -16,7 +16,7 @@ import struct
 import six
 
 
-__version__ = '1.9.1'
+__version__ = '1.10'
 
 
 def _reversedict(d):
@@ -271,17 +271,26 @@ CSS21_HEX_TO_NAMES = _reversedict(CSS21_NAMES_TO_HEX)
 
 CSS3_HEX_TO_NAMES = _reversedict(CSS3_NAMES_TO_HEX)
 
-# Both 'gray' and 'grey' are accepted in CSS3, and both map to the
-# same 24-bit value (#808080). Reversing this requires picking one
-# spelling to be the "winner".
+# CSS3 defines both 'gray' and 'grey', as well as defining either
+# variant for other related colors like 'darkgray'/'darkgrey'. For a
+# 'forward' lookup from name to hex, this is straightforward, but a
+# 'reverse' lookup from hex to name requires picking one spelling.
 #
-# The way in which _reversedict generates these mappings will pick a
-# "winner" based on the ordering of dictionary keys, which varies
-# according to the Python version in use, and on some Python versions
-# is deliberately not to be relied on for consistency. So we manually
-# pick one. Since it was the only spelling supported by HTML 4, CSS1,
-# and CSS2, 'gray' is the winner.
+# The way in which _reversedict() generates the reverse mappings will
+# pick a spelling based on the ordering of dictionary keys, which
+# varies according to the version and implementation of Python in use,
+# and in some Python versions is explicitly not to be relied on for
+# consistency. So here we manually pick a single spelling that will
+# consistently be returned. Since 'gray' was the only spelling
+# supported in HTML 4, CSS1, and CSS2, 'gray' and its varients are
+# chosen.
+CSS3_HEX_TO_NAMES[u'#a9a9a9'] = u'darkgray'
+CSS3_HEX_TO_NAMES[u'#2f4f4f'] = u'darkslategray'
+CSS3_HEX_TO_NAMES[u'#696969'] = u'dimgray'
 CSS3_HEX_TO_NAMES[u'#808080'] = u'gray'
+CSS3_HEX_TO_NAMES[u'#d3d3d3'] = u'lightgray'
+CSS3_HEX_TO_NAMES[u'#778899'] = u'lightslategray'
+CSS3_HEX_TO_NAMES[u'#708090'] = u'slategray'
 
 
 # Aliases of the above mappings, for backwards compatibility.

@@ -208,11 +208,17 @@ Mappings from hexadecimal values to names
 
    .. note:: **Spelling variants**
 
-      CSS3 provides two names -- `gray` and `grey` -- which each map
-      to the hexadecimal value `#808080`. Reversing from the
-      hexadecimal value to a name requires picking one and only one of
-      these, and webcolors chooses `gray` as it was the spelling used
-      by HTML 4, CSS1, and CSS2.
+      HTML 4, CSS1, and CSS2 each defined a color named `gray`. In
+      CSS3, this color can be named either `gray` or `grey`, and
+      several other related color values each have two names in CSS3:
+      `darkgray`/`darkgrey`, `darkslategray`/`darkslategrey`,
+      `dimgray`/`dimgrey`, `lightgray`/`lightgrey`,
+      `lightslategray`/`lightslategrey`, `slategray`/`slategrey`.
+
+      Reversing from the hexadecimal value, integer tuple, or percent
+      tuple to a name, for these colors, requires picking one
+      spelling, and webcolors chooses the `gray` spellings for
+      consistency with HTML 4, CSS1, and CSS2.
 
 
 Normalization functions
@@ -391,10 +397,11 @@ Conversion from hexadecimal color values to other formats
 
    .. note:: **Spelling variants**
 
-      One hexadecimal value -- `#808080` -- can map to either of two
-      names in CSS3, because it supports both `gray` and `grey` as
-      color names. This function will return `u'gray'` for the input
-      `u'#808080'`. See also the note on :data:`CSS3_HEX_TO_NAMES`.
+      Some values representing named gray colors can map to either of
+      two names in CSS3, because it supports both `gray` and `grey`
+      spelling variants for those colors. This function will always
+      return the variant spelled `gray` (such as `lightgray` instead
+      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
 
    Examples:
 
@@ -476,11 +483,11 @@ Conversions from integer `rgb()` triplets to other formats
 
    .. note:: **Spelling variants**
 
-      One `rgb()` value -- `(128, 128, 128)` -- can map to either of
-      two names in CSS3, because it supports both `gray` and `grey` as
-      color names. This function will return `u'gray'` for the input
-      `(128, 128, 128)`. See also the note on
-      :data:`CSS3_HEX_TO_NAMES`.
+      Some values representing named gray colors can map to either of
+      two names in CSS3, because it supports both `gray` and `grey`
+      spelling variants for those colors. This function will always
+      return the variant spelled `gray` (such as `lightgray` instead
+      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
 
    Examples:
    
@@ -566,11 +573,11 @@ Conversions from percentage `rgb()` triplets to other formats
 
    .. note:: **Spelling variants**
 
-      One value -- `(50%, 50%, 50%)` -- can map to either of two names
-      in CSS3, because it supports both `gray` and `grey` as color
-      names. This function will return `u'gray'` for the input
-      `(u'50%', u'50%', u'50%')`. See also the note on
-      :data:`CSS3_HEX_TO_NAMES`.
+      Some values representing named gray colors can map to either of
+      two names in CSS3, because it supports both `gray` and `grey`
+      spelling variants for those colors. This function will always
+      return the variant spelled `gray` (such as `lightgray` instead
+      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
 
    Examples:
 

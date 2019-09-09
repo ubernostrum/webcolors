@@ -50,11 +50,16 @@ how this affects testing.
 Why does webcolors prefer American spellings?
 ---------------------------------------------
 
-In CSS3, two names -- `gray` and `grey` -- each map to the same color:
-`rgb(128, 128, 128)`. Using any of the conversions from names to other
-formats (:func:`~webcolors.name_to_hex`,
-:func:`~webcolors.name_to_rgb`, or
-:func:`~webcolors.name_to_rgb_percent`) will accept either name
+In CSS3, several color names are defined multiple times with identical
+values, to support both American and British spelling variants for
+`gray`/`grey`. These colors are: `darkgray`/`darkgrey`,
+`darkslategray`/`darkslategrey`, `dimgray`/`dimgrey`, `gray`/`grey`,
+`lightgray`/`lightgrey`, `lightslategray`/`lightslategrey`,
+`slategray`/`slategrey`.
+
+Using any of the conversions from names to other formats
+(:func:`~webcolors.name_to_hex`, :func:`~webcolors.name_to_rgb`, or
+:func:`~webcolors.name_to_rgb_percent`) will accept either spelling
 provided the `spec` argument is :data:`~webcolors.CSS3`.
 
 However, converting from other formats to a name requires picking one
@@ -68,17 +73,6 @@ documented as an implementation detail not to be relied on. So
 webcolors must manually pick a spelling to normalize to, and chooses
 `gray`. This choice was made for consistency with HTML 4, CSS1, and
 CSS2, each of which only allowed `gray`.
-
-As a result, the following functions each return `u'gray'` for the
-following inputs, and never `u'grey'`, even when the `spec` argument
-is :data:`~webcolors.CSS3`:
-
-* :func:`~webcolors.hex_to_name` for input `u'#808080'`
-
-* :func:`~webcolors.rgb_to_name` for input `(128, 128, 128)`
-
-* :func:`~webcolors.rgb_percent_to_name` for input `(u'50%', u'50%',
-  u'50%')`
 
 
 Why aren't HSL values supported?
