@@ -8,10 +8,10 @@ details of the supported formats, conventions and conversions.
 
 """
 
-import collections
 import re
 import string
 import struct
+from typing import NamedTuple, Tuple, Union
 
 
 __version__ = "1.10"
@@ -40,12 +40,14 @@ supported specifications are: {supported}.".format(
     supported=",".join(SUPPORTED_SPECIFICATIONS)
 )
 
+IntegerRGB = NamedTuple("IntegerRGB", [("red", int), ("green", int), ("blue", int)])
+PercentRGB = NamedTuple("PercentRGB", [("red", str), ("green", str), ("blue", str)])
+HTML5SimpleColor = NamedTuple(
+    "HTML5SimpleColor", [("red", int), ("green", int), ("blue", int)]
+)
 
-IntegerRGB = collections.namedtuple("IntegerRGB", ["red", "green", "blue"])
-
-PercentRGB = collections.namedtuple("PercentRGB", ["red", "green", "blue"])
-
-HTML5SimpleColor = collections.namedtuple("HTML5SimpleColor", ["red", "green", "blue"])
+IntTuple = Union[IntegerRGB, HTML5SimpleColor, Tuple[int, int, int]]
+PercentTuple = Union[PercentRGB, Tuple[str, str, str]]
 
 
 # Mappings of color names to normalized hexadecimal color values.
@@ -310,7 +312,7 @@ CSS3_HEX_TO_NAMES[u"#708090"] = u"slategray"
 #################################################################
 
 
-def normalize_hex(hex_value):
+def normalize_hex(hex_value: str) -> str:
     """
     Normalize a hexadecimal color value to 6 digits, lowercase.
 
@@ -326,7 +328,7 @@ def normalize_hex(hex_value):
     return u"#{}".format(hex_digits.lower())
 
 
-def _normalize_integer_rgb(value):
+def _normalize_integer_rgb(value: int) -> int:
     """
     Internal normalization function for clipping integer values into
     the permitted range (0-255, inclusive).
@@ -335,7 +337,7 @@ def _normalize_integer_rgb(value):
     return 0 if value < 0 else 255 if value > 255 else value
 
 
-def normalize_integer_triplet(rgb_triplet):
+def normalize_integer_triplet(rgb_triplet: IntTuple) -> IntegerRGB:
     """
     Normalize an integer ``rgb()`` triplet so that all values are
     within the range 0-255 inclusive.
@@ -344,21 +346,21 @@ def normalize_integer_triplet(rgb_triplet):
     return IntegerRGB._make(_normalize_integer_rgb(value) for value in rgb_triplet)
 
 
-def _normalize_percent_rgb(value):
+def _normalize_percent_rgb(value: str) -> str:
     """
     Internal normalization function for clipping percent values into
     the permitted range (0%-100%, inclusive).
 
     """
-    percent = value.split(u"%")[0]
-    percent = float(percent) if u"." in percent else int(percent)
+    value = value.split(u"%")[0]
+    percent = float(value) if u"." in value else int(value)
 
     return (
         u"0%" if percent < 0 else u"100%" if percent > 100 else u"{}%".format(percent)
     )
 
 
-def normalize_percent_triplet(rgb_triplet):
+def normalize_percent_triplet(rgb_triplet: PercentTuple) -> PercentRGB:
     """
     Normalize a percentage ``rgb()`` triplet so that all values are
     within the range 0%-100% inclusive.
@@ -371,7 +373,7 @@ def normalize_percent_triplet(rgb_triplet):
 #################################################################
 
 
-def name_to_hex(name, spec=CSS3):
+def name_to_hex(name: str, spec: str = CSS3) -> str:
     """
     Convert a color name to a normalized hexadecimal color value.
 
@@ -401,7 +403,7 @@ def name_to_hex(name, spec=CSS3):
     return hex_value
 
 
-def name_to_rgb(name, spec=CSS3):
+def name_to_rgb(name: str, spec: str = CSS3) -> IntegerRGB:
     """
     Convert a color name to a 3-tuple of integers suitable for use in
     an ``rgb()`` triplet specifying that color.
@@ -410,7 +412,7 @@ def name_to_rgb(name, spec=CSS3):
     return hex_to_rgb(name_to_hex(name, spec=spec))
 
 
-def name_to_rgb_percent(name, spec=CSS3):
+def name_to_rgb_percent(name: str, spec: str = CSS3) -> PercentRGB:
     """
     Convert a color name to a 3-tuple of percentages suitable for use
     in an ``rgb()`` triplet specifying that color.
@@ -423,7 +425,7 @@ def name_to_rgb_percent(name, spec=CSS3):
 #################################################################
 
 
-def hex_to_name(hex_value, spec=CSS3):
+def hex_to_name(hex_value: str, spec: str = CSS3) -> str:
     """
     Convert a hexadecimal color value to its corresponding normalized
     color name, if any such name exists.
@@ -452,18 +454,17 @@ def hex_to_name(hex_value, spec=CSS3):
     return name
 
 
-def hex_to_rgb(hex_value):
+def hex_to_rgb(hex_value: str) -> IntegerRGB:
     """
     Convert a hexadecimal color value to a 3-tuple of integers
     suitable for use in an ``rgb()`` triplet specifying that color.
 
     """
-    hex_value = normalize_hex(hex_value)
-    hex_value = int(hex_value[1:], 16)
-    return IntegerRGB(hex_value >> 16, hex_value >> 8 & 0xFF, hex_value & 0xFF)
+    int_value = int(normalize_hex(hex_value)[1:], 16)
+    return IntegerRGB(int_value >> 16, int_value >> 8 & 0xFF, int_value & 0xFF)
 
 
-def hex_to_rgb_percent(hex_value):
+def hex_to_rgb_percent(hex_value: str) -> PercentRGB:
     """
     Convert a hexadecimal color value to a 3-tuple of percentages
     suitable for use in an ``rgb()`` triplet representing that color.
@@ -476,7 +477,7 @@ def hex_to_rgb_percent(hex_value):
 #################################################################
 
 
-def rgb_to_name(rgb_triplet, spec=CSS3):
+def rgb_to_name(rgb_triplet: IntTuple, spec: str = CSS3) -> str:
     """
     Convert a 3-tuple of integers, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
@@ -492,7 +493,7 @@ def rgb_to_name(rgb_triplet, spec=CSS3):
     return hex_to_name(rgb_to_hex(normalize_integer_triplet(rgb_triplet)), spec=spec)
 
 
-def rgb_to_hex(rgb_triplet):
+def rgb_to_hex(rgb_triplet: IntTuple) -> str:
     """
     Convert a 3-tuple of integers, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal value for that color.
@@ -501,7 +502,7 @@ def rgb_to_hex(rgb_triplet):
     return u"#{:02x}{:02x}{:02x}".format(*normalize_integer_triplet(rgb_triplet))
 
 
-def rgb_to_rgb_percent(rgb_triplet):
+def rgb_to_rgb_percent(rgb_triplet: IntTuple) -> PercentRGB:
     """
     Convert a 3-tuple of integers, suitable for use in an ``rgb()``
     color triplet, to a 3-tuple of percentages suitable for use in
@@ -536,7 +537,7 @@ def rgb_to_rgb_percent(rgb_triplet):
 #################################################################
 
 
-def rgb_percent_to_name(rgb_percent_triplet, spec=CSS3):
+def rgb_percent_to_name(rgb_percent_triplet: PercentTuple, spec: str = CSS3) -> str:
     """
     Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
@@ -554,7 +555,7 @@ def rgb_percent_to_name(rgb_percent_triplet, spec=CSS3):
     )
 
 
-def rgb_percent_to_hex(rgb_percent_triplet):
+def rgb_percent_to_hex(rgb_percent_triplet: PercentTuple) -> str:
     """
     Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal color value for that
@@ -566,7 +567,7 @@ def rgb_percent_to_hex(rgb_percent_triplet):
     )
 
 
-def _percent_to_integer(percent):
+def _percent_to_integer(percent: str) -> int:
     """
     Internal helper for converting a percentage value to an integer
     between 0 and 255 inclusive.
@@ -575,7 +576,7 @@ def _percent_to_integer(percent):
     return int(round(float(percent.split(u"%")[0]) / 100 * 255))
 
 
-def rgb_percent_to_rgb(rgb_percent_triplet):
+def rgb_percent_to_rgb(rgb_percent_triplet: PercentTuple) -> IntegerRGB:
     """
     Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
     color triplet, to a 3-tuple of integers suitable for use in
@@ -604,7 +605,7 @@ def rgb_percent_to_rgb(rgb_percent_triplet):
 # implementation.
 
 
-def html5_parse_simple_color(input):
+def html5_parse_simple_color(input: str) -> HTML5SimpleColor:
     """
     Apply the simple color parsing algorithm from section 2.4.6 of
     HTML5.
@@ -651,7 +652,7 @@ def html5_parse_simple_color(input):
     )
 
 
-def html5_serialize_simple_color(simple_color):
+def html5_serialize_simple_color(simple_color: IntTuple) -> str:
     """
     Apply the serialization algorithm for a simple color from section
     2.4.6 of HTML5.
@@ -676,7 +677,7 @@ def html5_serialize_simple_color(simple_color):
     return result
 
 
-def html5_parse_legacy_color(input):
+def html5_parse_legacy_color(input: str) -> HTML5SimpleColor:
     """
     Apply the legacy color parsing algorithm from section 2.4.6 of
     HTML5.
