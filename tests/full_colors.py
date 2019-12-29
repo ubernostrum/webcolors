@@ -50,8 +50,7 @@ def int_colors():
 
 class FullColorTest(unittest.TestCase):
     def test_full_colors(self):
-        for hex_color, int_triplet in six.moves.zip(
-                hex_colors(), int_colors()):
+        for hex_color, int_triplet in six.moves.zip(hex_colors(), int_colors()):
             assert int_triplet == webcolors.hex_to_rgb(hex_color)
             assert hex_color == webcolors.rgb_to_hex(int_triplet)
 
@@ -63,5 +62,5 @@ class FullColorTest(unittest.TestCase):
             assert int_triplet == conversion
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

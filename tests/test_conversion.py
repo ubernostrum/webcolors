@@ -13,15 +13,16 @@ class HexConversionTests(unittest.TestCase):
     formats.
 
     """
+
     def test_hex_to_name(self):
         """
         Test conversion from hex to color name.
         """
         test_pairs = (
-            (u'#ffffff', u'white'),
-            (u'#fff', u'white'),
-            (u'#000080', u'navy'),
-            (u'#daa520', u'goldenrod')
+            (u"#ffffff", u"white"),
+            (u"#fff", u"white"),
+            (u"#000080", u"navy"),
+            (u"#daa520", u"goldenrod"),
         )
 
         for hex_value, name in test_pairs:
@@ -35,18 +36,11 @@ class HexConversionTests(unittest.TestCase):
 
         """
         # No name in any spec.
-        self.assertRaises(
-            ValueError,
-            webcolors.hex_to_name,
-            '#123456'
-        )
+        self.assertRaises(ValueError, webcolors.hex_to_name, "#123456")
 
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(
-            ValueError,
-            webcolors.hex_to_name,
-            '#daa520',
-            spec=webcolors.HTML4
+            ValueError, webcolors.hex_to_name, "#daa520", spec=webcolors.HTML4
         )
 
     def test_hex_to_name_specs(self):
@@ -56,15 +50,12 @@ class HexConversionTests(unittest.TestCase):
 
         """
         for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
-            result = webcolors.hex_to_name(u'#ffffff', spec=supported_spec)
-            assert u'white' == result
+            result = webcolors.hex_to_name(u"#ffffff", spec=supported_spec)
+            assert u"white" == result
 
-        for unsupported_spec in (u'css1', u'css4', u'html5'):
+        for unsupported_spec in (u"css1", u"css4", u"html5"):
             self.assertRaises(
-                ValueError,
-                webcolors.hex_to_name,
-                '#ffffff',
-                spec=unsupported_spec
+                ValueError, webcolors.hex_to_name, "#ffffff", spec=unsupported_spec
             )
 
     def test_hex_to_rgb(self):
@@ -73,9 +64,9 @@ class HexConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u'#fff', (255, 255, 255)),
-            (u'#ffffff', (255, 255, 255)),
-            (u'#000080', (0, 0, 128))
+            (u"#fff", (255, 255, 255)),
+            (u"#ffffff", (255, 255, 255)),
+            (u"#000080", (0, 0, 128)),
         )
 
         for hex_value, triplet in test_pairs:
@@ -89,9 +80,9 @@ class HexConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u'#fff', (u'100%', u'100%', u'100%')),
-            (u'#ffffff', (u'100%', u'100%', u'100%')),
-            (u'#000080', (u'0%', u'0%', u'50%'))
+            (u"#fff", (u"100%", u"100%", u"100%")),
+            (u"#ffffff", (u"100%", u"100%", u"100%")),
+            (u"#000080", (u"0%", u"0%", u"50%")),
         )
 
         for hex_value, triplet in test_pairs:
@@ -106,16 +97,17 @@ class IntegerRGBConversionTests(unittest.TestCase):
     other formats.
 
     """
+
     def test_rgb_to_name(self):
         """
         Test conversion from integer RGB triplet to color name.
 
         """
         test_pairs = (
-            ((255, 255, 255), u'white'),
-            ((0, 0, 128), u'navy'),
-            ((218, 165, 32), u'goldenrod'),
-            (webcolors.IntegerRGB(218, 165, 32), u'goldenrod')
+            ((255, 255, 255), u"white"),
+            ((0, 0, 128), u"navy"),
+            ((218, 165, 32), u"goldenrod"),
+            (webcolors.IntegerRGB(218, 165, 32), u"goldenrod"),
         )
 
         for triplet, name in test_pairs:
@@ -129,18 +121,11 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         """
         # No name in any spec.
-        self.assertRaises(
-            ValueError,
-            webcolors.rgb_to_name,
-            (18, 52, 86)
-        )
+        self.assertRaises(ValueError, webcolors.rgb_to_name, (18, 52, 86))
 
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(
-            ValueError,
-            webcolors.rgb_to_name,
-            (218, 165, 32),
-            spec=webcolors.HTML4
+            ValueError, webcolors.rgb_to_name, (218, 165, 32), spec=webcolors.HTML4
         )
 
     def test_rgb_to_name_specs(self):
@@ -150,17 +135,15 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         """
         for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
-            result = webcolors.rgb_to_name(
-                (255, 255, 255), spec=supported_spec
-            )
-            assert u'white' == result
+            result = webcolors.rgb_to_name((255, 255, 255), spec=supported_spec)
+            assert u"white" == result
 
-        for unsupported_spec in (u'css1', u'css4', u'html5'):
+        for unsupported_spec in (u"css1", u"css4", u"html5"):
             self.assertRaises(
                 ValueError,
                 webcolors.rgb_to_name,
                 (255, 255, 255),
-                spec=unsupported_spec
+                spec=unsupported_spec,
             )
 
     def test_rgb_to_hex(self):
@@ -169,9 +152,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            ((255, 255, 255), u'#ffffff'),
-            ((0, 0, 128), u'#000080'),
-            ((218, 165, 32), u'#daa520')
+            ((255, 255, 255), u"#ffffff"),
+            ((0, 0, 128), u"#000080"),
+            ((218, 165, 32), u"#daa520"),
         )
 
         for triplet, hex_value in test_pairs:
@@ -184,9 +167,9 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            ((255, 255, 255), (u'100%', u'100%', u'100%')),
-            ((0, 0, 128), (u'0%', u'0%', u'50%')),
-            ((218, 165, 32), (u'85.49%', u'64.71%', u'12.5%'))
+            ((255, 255, 255), (u"100%", u"100%", u"100%")),
+            ((0, 0, 128), (u"0%", u"0%", u"50%")),
+            ((218, 165, 32), (u"85.49%", u"64.71%", u"12.5%")),
         )
 
         for triplet, percent_triplet in test_pairs:
@@ -201,14 +184,15 @@ class NameConversionTests(unittest.TestCase):
     formats.
 
     """
+
     def test_name_to_hex(self):
         """
         Test correct conversion of color names to hex.
         """
         test_pairs = (
-            (u'white', u'#ffffff'),
-            (u'navy', u'#000080'),
-            (u'goldenrod', u'#daa520')
+            (u"white", u"#ffffff"),
+            (u"navy", u"#000080"),
+            (u"goldenrod", u"#daa520"),
         )
 
         for name, hex_value in test_pairs:
@@ -222,20 +206,13 @@ class NameConversionTests(unittest.TestCase):
 
         """
         test_values = (
-            {u'name': u'goldenrod',
-             u'spec': u'html4'},
-            {u'name': u'glue',
-             u'spec': u'css21'},
-            {u'name': u'breen',
-             u'spec': u'css3'},
+            {u"name": u"goldenrod", u"spec": u"html4"},
+            {u"name": u"glue", u"spec": u"css21"},
+            {u"name": u"breen", u"spec": u"css3"},
         )
 
         for kwarg_dict in test_values:
-            self.assertRaises(
-                ValueError,
-                webcolors.name_to_hex,
-                **kwarg_dict
-            )
+            self.assertRaises(ValueError, webcolors.name_to_hex, **kwarg_dict)
 
     def test_name_to_hex_specs(self):
         """
@@ -244,14 +221,12 @@ class NameConversionTests(unittest.TestCase):
 
         """
         for supported_spec in webcolors.SUPPORTED_SPECIFICATIONS:
-            result = webcolors.name_to_hex(u'white', spec=supported_spec)
-            assert u'#ffffff' == result
+            result = webcolors.name_to_hex(u"white", spec=supported_spec)
+            assert u"#ffffff" == result
 
-        for unsupported_spec in (u'css1', u'css4', u'html5'):
+        for unsupported_spec in (u"css1", u"css4", u"html5"):
             self.assertRaises(
-                ValueError,
-                webcolors.name_to_hex,
-                'white', spec=unsupported_spec
+                ValueError, webcolors.name_to_hex, "white", spec=unsupported_spec
             )
 
     def test_name_to_rgb(self):
@@ -260,9 +235,9 @@ class NameConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u'white', (255, 255, 255)),
-            (u'navy', (0, 0, 128)),
-            (u'goldenrod', (218, 165, 32))
+            (u"white", (255, 255, 255)),
+            (u"navy", (0, 0, 128)),
+            (u"goldenrod", (218, 165, 32)),
         )
 
         for name, triplet in test_pairs:
@@ -276,9 +251,9 @@ class NameConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u'white', (u'100%', u'100%', u'100%')),
-            (u'navy', (u'0%', u'0%', u'50%')),
-            (u'goldenrod', (u'85.49%', u'64.71%', u'12.5%'))
+            (u"white", (u"100%", u"100%", u"100%")),
+            (u"navy", (u"0%", u"0%", u"50%")),
+            (u"goldenrod", (u"85.49%", u"64.71%", u"12.5%")),
         )
 
         for name, triplet in test_pairs:
@@ -293,16 +268,16 @@ class PercentRGBConversionTests(unittest.TestCase):
     other formats.
 
     """
+
     def test_rgb_percent_to_name(self):
         """
         Test conversion from percent RGB triplet to color name.
         """
         test_pairs = (
-            ((u'100%', u'100%', u'100%'), u'white'),
-            ((u'0%', u'0%', u'50%'), u'navy'),
-            ((u'85.49%', u'64.71%', u'12.5%'), u'goldenrod'),
-            (webcolors.PercentRGB(u'85.49%', u'64.71%', u'12.5%'),
-             u'goldenrod')
+            ((u"100%", u"100%", u"100%"), u"white"),
+            ((u"0%", u"0%", u"50%"), u"navy"),
+            ((u"85.49%", u"64.71%", u"12.5%"), u"goldenrod"),
+            (webcolors.PercentRGB(u"85.49%", u"64.71%", u"12.5%"), u"goldenrod"),
         )
 
         for triplet, name in test_pairs:
@@ -317,17 +292,15 @@ class PercentRGBConversionTests(unittest.TestCase):
         """
         # No name in any spec.
         self.assertRaises(
-            ValueError,
-            webcolors.rgb_percent_to_name,
-            (u'7.06%', u'20.39%', u'33.73%')
+            ValueError, webcolors.rgb_percent_to_name, (u"7.06%", u"20.39%", u"33.73%")
         )
 
         # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
         self.assertRaises(
             ValueError,
             webcolors.rgb_percent_to_name,
-            (u'85.49%', u'64.71%', u'12.5%'),
-            spec=webcolors.HTML4
+            (u"85.49%", u"64.71%", u"12.5%"),
+            spec=webcolors.HTML4,
         )
 
     def test_rgb_percent_to_name_specs(self):
@@ -336,18 +309,18 @@ class PercentRGBConversionTests(unittest.TestCase):
         unsupported specification raises ValueError.
 
         """
-        for supported_spec in (u'html4', u'css2', u'css21', u'css3'):
+        for supported_spec in (u"html4", u"css2", u"css21", u"css3"):
             result = webcolors.rgb_percent_to_name(
-                (u'100%', u'100%', u'100%'), spec=supported_spec
+                (u"100%", u"100%", u"100%"), spec=supported_spec
             )
-            assert u'white' == result
+            assert u"white" == result
 
-        for unsupported_spec in (u'css1', u'css4', u'html5'):
+        for unsupported_spec in (u"css1", u"css4", u"html5"):
             self.assertRaises(
                 ValueError,
                 webcolors.rgb_percent_to_name,
-                (u'100%', u'100%', u'100%'),
-                spec=unsupported_spec
+                (u"100%", u"100%", u"100%"),
+                spec=unsupported_spec,
             )
 
     def test_rgb_percent_to_hex(self):
@@ -356,9 +329,9 @@ class PercentRGBConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            ((u'100%', u'100%', u'0%'), u'#ffff00'),
-            ((u'0%', u'0%', u'50%'), u'#000080'),
-            ((u'85.49%', u'64.71%', u'12.5%'), u'#daa520')
+            ((u"100%", u"100%", u"0%"), u"#ffff00"),
+            ((u"0%", u"0%", u"50%"), u"#000080"),
+            ((u"85.49%", u"64.71%", u"12.5%"), u"#daa520"),
         )
 
         for triplet, hex_value in test_pairs:
@@ -371,9 +344,9 @@ class PercentRGBConversionTests(unittest.TestCase):
 
         """
         test_pairs = (
-            ((u'100%', u'100%', u'0%'), (255, 255, 0)),
-            ((u'0%', u'0%', u'50%'), (0, 0, 128)),
-            ((u'85.49%', u'64.71%', u'12.5%'), (218, 165, 32))
+            ((u"100%", u"100%", u"0%"), (255, 255, 0)),
+            ((u"0%", u"0%", u"50%"), (0, 0, 128)),
+            ((u"85.49%", u"64.71%", u"12.5%"), (218, 165, 32)),
         )
 
         for triplet, int_triplet in test_pairs:
@@ -388,6 +361,7 @@ class ConversionTests(unittest.TestCase):
     test cases.
 
     """
+
     def test_spelling_variants(self):
         """
         When asked to name a color value that maps to either of 'gray' or
@@ -396,27 +370,49 @@ class ConversionTests(unittest.TestCase):
 
         """
         test_values = (
-            (u'#a9a9a9', (169, 169, 169),
-             (u'66.27%', u'66.27%', u'66.27%'), u'darkgray'),
-            (u'#2f4f4f', (47, 79, 79),
-             (u'18.43%', u'30.98%', u'30.98%'), u'darkslategray'),
-            (u'#696969', (105, 105, 105),
-             (u'41.18%', u'41.18%', u'41.18%'), u'dimgray'),
-            (u'#808080', (128, 128, 128),
-             (u'50%', u'50%', u'50%'), u'gray'),
-            (u'#d3d3d3', (211, 211, 211),
-             (u'82.75%', u'82.75%', u'82.75%'), u'lightgray'),
-            (u'#d3d3d3', (211, 211, 211),
-             (u'82.75%', u'82.75%', u'82.75%'), u'lightgray'),
-            (u'#778899', (119, 136, 153),
-             (u'46.67%', u'53.33%', u'60.00%'), u'lightslategray'),
-            (u'#708090', (112, 128, 144),
-             (u'43.92%', u'50%', u'56.47%'), u'slategray'),
+            (
+                u"#a9a9a9",
+                (169, 169, 169),
+                (u"66.27%", u"66.27%", u"66.27%"),
+                u"darkgray",
+            ),
+            (
+                u"#2f4f4f",
+                (47, 79, 79),
+                (u"18.43%", u"30.98%", u"30.98%"),
+                u"darkslategray",
+            ),
+            (
+                u"#696969",
+                (105, 105, 105),
+                (u"41.18%", u"41.18%", u"41.18%"),
+                u"dimgray",
+            ),
+            (u"#808080", (128, 128, 128), (u"50%", u"50%", u"50%"), u"gray"),
+            (
+                u"#d3d3d3",
+                (211, 211, 211),
+                (u"82.75%", u"82.75%", u"82.75%"),
+                u"lightgray",
+            ),
+            (
+                u"#d3d3d3",
+                (211, 211, 211),
+                (u"82.75%", u"82.75%", u"82.75%"),
+                u"lightgray",
+            ),
+            (
+                u"#778899",
+                (119, 136, 153),
+                (u"46.67%", u"53.33%", u"60.00%"),
+                u"lightslategray",
+            ),
+            (u"#708090", (112, 128, 144), (u"43.92%", u"50%", u"56.47%"), u"slategray"),
         )
         for hex_value, int_tuple, percent_tuple, name in test_values:
             for converter, value in (
-                    (webcolors.hex_to_name, hex_value),
-                    (webcolors.rgb_to_name, int_tuple),
-                    (webcolors.rgb_percent_to_name, percent_tuple)
+                (webcolors.hex_to_name, hex_value),
+                (webcolors.rgb_to_name, int_tuple),
+                (webcolors.rgb_percent_to_name, percent_tuple),
             ):
                 assert name == converter(value, spec=webcolors.CSS3)
