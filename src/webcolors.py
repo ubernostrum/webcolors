@@ -13,8 +13,6 @@ import re
 import string
 import struct
 
-import six
-
 
 __version__ = "1.10"
 
@@ -616,7 +614,7 @@ def html5_parse_simple_color(input):
     #
     # 2. If input is not exactly seven characters long, then return an
     #    error.
-    if not isinstance(input, six.text_type) or len(input) != 7:
+    if not isinstance(input, str) or len(input) != 7:
         raise ValueError(
             u"An HTML5 simple color must be a Unicode string "
             u"exactly seven characters long."
@@ -685,7 +683,7 @@ def html5_parse_legacy_color(input):
 
     """
     # 1. Let input be the string being parsed.
-    if not isinstance(input, six.text_type):
+    if not isinstance(input, str):
         raise ValueError(
             u"HTML5 legacy color parsing requires a Unicode string as input."
         )
@@ -777,7 +775,7 @@ def html5_parse_legacy_color(input):
     # input the generated format string will be '<LLLLLL'.
     format_string = "<" + ("L" * (int(len(encoded_input) / 4)))
     codepoints = struct.unpack(format_string, encoded_input)
-    input = "".join(u"00" if c > 0xFFFF else six.unichr(c) for c in codepoints)
+    input = "".join(u"00" if c > 0xFFFF else chr(c) for c in codepoints)
 
     # 8. If input is longer than 128 characters, truncate input,
     #    leaving only the first 128 characters.
