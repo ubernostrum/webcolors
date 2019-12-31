@@ -10,7 +10,6 @@ details of the supported formats, conventions and conversions.
 
 import re
 import string
-import struct
 from typing import NamedTuple, Tuple, Union
 
 
@@ -744,39 +743,7 @@ def html5_parse_legacy_color(input: str) -> HTML5SimpleColor:
     #    point greater than U+FFFF (i.e. any characters that are not
     #    in the basic multilingual plane) with the two-character
     #    string "00".
-
-    # This one's a bit weird due to the existence of multiple internal
-    # Unicode string representations in different versions and builds
-    # of Python.
-    #
-    # From Python 2.2 through 3.2, Python could be compiled with
-    # "narrow" or "wide" Unicode strings (see PEP 261). Narrow builds
-    # handled Unicode strings with two-byte characters and surrogate
-    # pairs for non-BMP code points. Wide builds handled Unicode
-    # strings with four-byte characters and no surrogates. This means
-    # ord() is only sufficient to identify a non-BMP character on a
-    # wide build.
-    #
-    # Starting with Python 3.3, the internal string representation
-    # (see PEP 393) is now dynamic, and Python chooses an encoding --
-    # either latin-1, UCS-2 or UCS-4 -- wide enough to handle the
-    # highest code point in the string.
-    #
-    # The code below bypasses all of that for a consistently effective
-    # method: encode the string to little-endian UTF-32, then perform
-    # a binary unpack of it as four-byte integers. Those integers will
-    # be the Unicode code points, and from there filtering out non-BMP
-    # code points is easy.
-    encoded_input = input.encode("utf_32_le")
-
-    # Format string is '<' (for little-endian byte order), then a
-    # sequence of 'L' characters (for 4-byte unsigned long integer)
-    # equal to the length of the original string, which is also
-    # one-fourth the encoded length.  For example, for a six-character
-    # input the generated format string will be '<LLLLLL'.
-    format_string = "<" + ("L" * (int(len(encoded_input) / 4)))
-    codepoints = struct.unpack(format_string, encoded_input)
-    input = "".join(u"00" if c > 0xFFFF else chr(c) for c in codepoints)
+    input = "".join("00" if ord(c) > 0xFFFF else c for c in input)
 
     # 8. If input is longer than 128 characters, truncate input,
     #    leaving only the first 128 characters.
