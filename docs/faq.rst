@@ -10,10 +10,10 @@ when using webcolors.
 What versions of Python are supported?
 --------------------------------------
 
-On Python 2, webcolors supports and is tested on Python 2.7. On Python
-3, webcolors supports and is tested on Python 3.5, 3.6, and 3.7. These
-are the only versions of Python currently receiving upstream security
-support from the Python core team.
+The webcolors module supports and is tested on Python 3.5, 3.6, 3.7,
+and 3.8. As of the release of webcolors |release|, these are the only
+versions of Python receiving upstream security support from the Python
+core team.
 
 
 How closely does this module follow the standards?
