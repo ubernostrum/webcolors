@@ -656,9 +656,6 @@ HTML5 color algorithms
 
    Apply the HTML5 simple color parsing algorithm.
 
-   Note that `input` **must** be a Unicode string -- on Python 2,
-   byte strings will not be accepted.
-
    Examples:
    
    .. code-block:: pycon
@@ -709,9 +706,6 @@ HTML5 color algorithms
    *extremely* forgiving of input, but the results of parsing inputs
    with high levels of "junk" (i.e., text other than a color value)
    may be surprising.
-
-   Note also that `input` **must** be a Unicode string -- on Python 2,
-   byte strings will not be accepted.
 
    Examples:
    
