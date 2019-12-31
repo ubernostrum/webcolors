@@ -27,7 +27,6 @@ if not on_rtd:
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    "six": ("https://six.readthedocs.io/", None),
 }
 
 if not on_rtd:

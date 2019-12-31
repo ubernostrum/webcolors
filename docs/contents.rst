@@ -34,12 +34,6 @@ hexadecimal color values, or with a request to name a color which has
 no name in the requested specification, or with an invalid
 specification identifier, will raise :exc:`ValueError`.
 
-In the documentation below, :data:`six.text_type` means the Unicode
-string type of the Python version being used; on Python 3 this is
-:class:`str` and on Python 2 it is :class:`unicode`. See :ref:`the
-documentation on use of Python string types <string-types>` for
-details.
-
 
 Data types
 ----------
@@ -72,7 +66,7 @@ return triplets or simple colors will return instances of these:
 .. class:: PercentRGB
 
    A :func:`~collections.namedtuple` representing a percentage RGB
-   triplet. Has three fields, each of type :data:`six.text_type` and
+   triplet. Has three fields, each of type :class:`str` and
    representing a percentage value in the range 0%-100% inclusive:
 
    .. attribute:: red
@@ -257,7 +251,7 @@ Normalization functions
        ValueError: '0099cc' is not a valid hexadecimal color value.
 
    :param str hex_value: The hexadecimal color value to normalize.
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
    :raises ValueError: when the input is not a valid hexadecimal color value.
 
 .. function:: normalize_integer_triplet(rgb_triplet)
@@ -329,7 +323,7 @@ Conversions from color names to other formats
    :param str name: The color name to convert.
    :param str spec: The specification from which to draw the list of color
       names. Default is :data:`CSS3`.
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
    :raises ValueError: when the given name has no definition in the given spec.
 
 
@@ -423,7 +417,7 @@ Conversion from hexadecimal color values to other formats
    :param str hex_value: The hexadecimal color value to convert.
    :param str spec: The specification from which to draw the list of color
       names. Default is :data:`CSS3`.
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
    :raises ValueError: when the given color has no name in the given
       spec, or when the supplied hex value is invalid.
 
@@ -502,7 +496,7 @@ Conversions from integer `rgb()` triplets to other formats
    :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
    :param str spec: The specification from which to draw the list of color
       names. Default is :data:`CSS3`.
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
    :raises ValueError: when the given color has no name in the given spec.
 
 
@@ -522,7 +516,7 @@ Conversions from integer `rgb()` triplets to other formats
 
    :param rgb_triplet: The `rgb()` triplet.
    :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
 
 
 .. function:: rgb_to_rgb_percent(rgb_triplet)
@@ -594,7 +588,7 @@ Conversions from percentage `rgb()` triplets to other formats
    :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
    :param str spec: The specification from which to draw the list of color
        names. Default is :data:`CSS3`.
-   :rtype: :data:`six.text_type`
+   :rtype: :class:`str`
    :raises ValueError: when the given color has no name in the given spec.
 
 
@@ -677,7 +671,7 @@ HTML5 color algorithms
        ValueError: An HTML5 simple color must be a string exactly seven characters long.
 
    :param input: The color to parse.
-   :type input: :data:`six.text_type`, which must consist of exactly
+   :type input: :class:`str`, which must consist of exactly
        the character '#' followed by six hexadecimal digits
    :rtype: HTML5SimpleColor
    :raises ValueError: when the given input is not a Unicode string of
@@ -731,7 +725,7 @@ HTML5 color algorithms
        HTML5SimpleColor(red=0, green=13, blue=0)
 
    :param input: The color to parse.
-   :type input: :data:`six.text_type`
+   :type input: :class:`str`
    :rtype: HTML5SimpleColor
    :raises ValueError: when the given input is not a Unicode string,
       or when it is precisely the string `'transparent'`.
