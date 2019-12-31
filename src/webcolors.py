@@ -16,7 +16,7 @@ from typing import NamedTuple, Tuple, Union
 __version__ = "1.10"
 
 
-def _reversedict(d):
+def _reversedict(d: dict) -> dict:
     """
     Internal helper for generating reverse mappings; given a
     dictionary, returns a new dictionary with keys and values swapped.
