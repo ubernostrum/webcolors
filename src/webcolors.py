@@ -290,23 +290,6 @@ CSS3_HEX_TO_NAMES["#778899"] = "lightslategray"
 CSS3_HEX_TO_NAMES["#708090"] = "slategray"
 
 
-# Aliases of the above mappings, for backwards compatibility.
-#################################################################
-(html4_names_to_hex, css2_names_to_hex, css21_names_to_hex, css3_names_to_hex) = (
-    HTML4_NAMES_TO_HEX,
-    CSS2_NAMES_TO_HEX,
-    CSS21_NAMES_TO_HEX,
-    CSS3_NAMES_TO_HEX,
-)
-
-(html4_hex_to_names, css2_hex_to_names, css21_hex_to_names, css3_hex_to_names) = (
-    HTML4_HEX_TO_NAMES,
-    CSS2_HEX_TO_NAMES,
-    CSS21_HEX_TO_NAMES,
-    CSS3_HEX_TO_NAMES,
-)
-
-
 # Normalization functions.
 #################################################################
 
