@@ -27,14 +27,12 @@ returns the original integer values, for consistency.
 
 import unittest
 
-import six
-
 import webcolors
 
 
 def hex_colors():
     HEX_TEMPLATE = "#%06x"
-    for i in six.moves.xrange(16777217):
+    for i in range(16777217):
         yield HEX_TEMPLATE % i
 
 
@@ -50,7 +48,7 @@ def int_colors():
 
 class FullColorTest(unittest.TestCase):
     def test_full_colors(self):
-        for hex_color, int_triplet in six.moves.zip(hex_colors(), int_colors()):
+        for hex_color, int_triplet in zip(hex_colors(), int_colors()):
             assert int_triplet == webcolors.hex_to_rgb(hex_color)
             assert hex_color == webcolors.rgb_to_hex(int_triplet)
 
