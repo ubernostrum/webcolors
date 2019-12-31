@@ -16,63 +16,11 @@ and for normalizing them.
 Python string types
 -------------------
 
-The webcolors module is written to be compatible with both Python
-2 and Python 3, which have different approaches to strings:
-
-* On Python 2, a sequence of bytes in a particular encoding (a "byte
-  string") is represented by the type :class:`str` , and Unicode
-  strings are represented by the type :class:`unicode`. Mixing of
-  :class:`str` and :class:`unicode` is possible in Python 2, but not
-  recommended as it is a frequent source of bugs.
-
-* On Python 3, a sequence of bytes in a particular encoding is
-  represented by the type :class:`bytes`, and Unicode strings are
-  represented by the type :class:`str`. Mixing of :class:`str` and
-  :class:`bytes` is not permitted in Python 3, and will usually raise
-  exceptions.
-
-The approach to string types in webcolors is as follows:
-
-* On Python 3, use of Unicode strings -- :class:`str` -- is mandatory
-  for all string arguments to functions in webcolors. Use of
-  :class:`bytes` values is forbidden and will result in errors.
-
-* All mappings from color names to hexadecimal values (and vice versa)
-  are dictionaries whose keys and values are Unicode strings
-  (:class:`str` on Python 3 and :class:`unicode` on Python 2). This
-  permits use of byte strings on Python 2, but ensures that results
-  will be Unicode strings.
-
-* All functions whose return values include strings will use Unicode
-  strings (:class:`unicode` on Python 2 and :class:`str` on Python 3).
-
-* All functions whose arguments include string values, *except* for
-  the HTML5 color algorithms (see below), will accept a sequence of
-  bytes (:class:`str`) on Python 2, but will convert to Unicode
-  strings (:class:`unicode`) for output.
-
-Because the HTML5 Recommendation specifies its color algorithms only
-in terms of Unicode strings (and in some cases, requires exact
-identification of Unicode code points to determine behavior), the
-following constraint applies to the functions implementing these
-algorithms:
-
-* Any string arguments *must* be Unicode strings (:class:`unicode` on
-  Python 2 or :class:`str` on Python 3). Use of :class:`str` on Python
-  2 or :class:`bytes` on Python 3 will raise a :exc:`ValueError`.
-
-Use of Unicode strings is strongly preferred on Python 2. To encourage
-this, all documentation for webcolors uses the `u` prefix for string
-literals. Use of the `u` prefix is required on Python 2 to mark a
-string literal as Unicode; on Python 3.3 and later, use of this prefix
-is permitted but not necessary (as all unprefixed string literals on
-Python 3 are Unicode strings).
-
-When relevant, this documentation will refer to the Unicode string
-type as :data:`six.text_type`; the :mod:`six` library provides helpers
-for writing code compatible with both Python 2 and 3, and
-:data:`six.text_type` always resolves to the Unicode string type of
-the Python version in use.
+As Python 2 is no longer supported by the Python core team, webcolors
+now supports only Python 3, where the string type is a Unicode
+string. Python 3 does still have the :class:`bytes` type, but all
+string arguments to functions in webcolors must be :class:`str` and
+never :class:`bytes`.
 
 
 Hexadecimal color values
@@ -148,7 +96,7 @@ Color names
 For colors specified via predefined names, webcolors will accept
 strings containing names case-insensitively, so long as they contain
 no spaces or non-alphabetic characters. Thus, for example,
-`u'AliceBlue'` and `u'aliceblue'` are both accepted, and both will
+`'AliceBlue'` and `'aliceblue'` are both accepted, and both will
 refer to the same color: `rgb(240, 248, 255)`.
 
 For output which consists of a color name, and for functions which

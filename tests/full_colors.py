@@ -33,7 +33,7 @@ import webcolors
 
 
 def hex_colors():
-    HEX_TEMPLATE = u"#%06x"
+    HEX_TEMPLATE = "#%06x"
     for i in six.moves.xrange(16777217):
         yield HEX_TEMPLATE % i
 

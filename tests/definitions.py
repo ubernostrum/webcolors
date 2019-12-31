@@ -32,7 +32,7 @@ class HTML4DefinitionTests(unittest.TestCase):
             "table", attrs={"summary": "Table of color names and their sRGB values"}
         )
         for td in color_table.findAll("td"):
-            if u"width" not in td.attrs:
+            if "width" not in td.attrs:
                 color_name, color_value = td.text.split(" = ")
                 self.html4_colors[color_name] = color_value.replace('"', "").strip()
 

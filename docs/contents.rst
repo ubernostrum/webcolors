@@ -123,19 +123,19 @@ with multiple specifications.
 
 .. data:: CSS2
 
-   Represents the CSS2 specification. Value is `u'css2'`.
+   Represents the CSS2 specification. Value is `'css2'`.
 
 .. data:: CSS21
 
-   Represents the CSS2.1 specification. Value is `u'css21'`.
+   Represents the CSS2.1 specification. Value is `'css21'`.
 
 .. data:: CSS3
 
-   Represents the CSS3 specification. Value is `u'css3'`.
+   Represents the CSS3 specification. Value is `'css3'`.
 
 .. data:: HTML4
 
-   Represents the HTML 4 specification. Value is `u'html4'`.
+   Represents the HTML 4 specification. Value is `'html4'`.
 
 .. _mapping-constants:
 
@@ -239,19 +239,19 @@ Normalization functions
 
    .. code-block:: pycon
 
-       >>> normalize_hex(u'#0099cc')
+       >>> normalize_hex('#0099cc')
        '#0099cc'
-       >>> normalize_hex(u'#0099CC')
+       >>> normalize_hex('#0099CC')
        '#0099cc'
-       >>> normalize_hex(u'#09c')
+       >>> normalize_hex('#09c')
        '#0099cc'
-       >>> normalize_hex(u'#09C')
+       >>> normalize_hex('#09C')
        '#0099cc'
-       >>> normalize_hex(u'#0099gg')
+       >>> normalize_hex('#0099gg')
        Traceback (most recent call last):
            ...
        ValueError: '#0099gg' is not a valid hexadecimal color value.
-       >>> normalize_hex(u'0099cc')
+       >>> normalize_hex('0099cc')
        Traceback (most recent call last):
            ...
        ValueError: '0099cc' is not a valid hexadecimal color value.
@@ -290,12 +290,12 @@ Normalization functions
 
     .. code-block:: pycon
    
-       >>> normalize_percent_triplet((u'50%', u'50%', u'50%'))
-       PercentRGB(red=u'50%', green=u'50%', blue=u'50%')
-       >>> normalize_percent_triplet((u'0%', u'100%', u'0%'))
-       PercentRGB(red=u'0%', green=u'100%', blue=u'0%')
-       >>> normalize_percent_triplet((u'-10%', u'-0%', u'500%'))
-       PercentRGB(red=u'0%', green=u'0%', blue=u'100%')
+       >>> normalize_percent_triplet(('50%', '50%', '50%'))
+       PercentRGB(red='50%', green='50%', blue='50%')
+       >>> normalize_percent_triplet(('0%', '100%', '0%'))
+       PercentRGB(red='0%', green='100%', blue='0%')
+       >>> normalize_percent_triplet(('-10%', '-0%', '500%'))
+       PercentRGB(red='0%', green='0%', blue='100%')
     
     :param tuple rgb_triplet: The percentage `rgb()` triplet to normalize.
     :rtype: PercentRGB
@@ -315,13 +315,13 @@ Conversions from color names to other formats
 
    .. code-block:: pycon
 
-       >>> name_to_hex(u'white')
-       u'#ffffff'
-       >>> name_to_hex(u'navy')
-       u'#000080'
-       >>> name_to_hex(u'goldenrod')
-       u'#daa520'
-       >>> name_to_hex(u'goldenrod', spec=HTML4)
+       >>> name_to_hex('white')
+       '#ffffff'
+       >>> name_to_hex('navy')
+       '#000080'
+       >>> name_to_hex('goldenrod')
+       '#daa520'
+       >>> name_to_hex('goldenrod', spec=HTML4)
        Traceback (most recent call last):
            ...
        ValueError: 'goldenrod' is not defined as a named color in html4.
@@ -345,11 +345,11 @@ Conversions from color names to other formats
    
    .. code-block:: pycon
 
-       >>> name_to_rgb(u'white')
+       >>> name_to_rgb('white')
        IntegerRGB(red=255, green=255, blue=255)
-       >>> name_to_rgb(u'navy')
+       >>> name_to_rgb('navy')
        IntegerRGB(red=0, green=0, blue=128)
-       >>> name_to_rgb(u'goldenrod')
+       >>> name_to_rgb('goldenrod')
        IntegerRGB(red=218, green=165, blue=32)
 
    :param str name: The color name to convert.
@@ -371,12 +371,12 @@ Conversions from color names to other formats
    
    .. code-block:: pycon
 
-       >>> name_to_rgb_percent(u'white')
-       PercentRGB(red=u'100%', green=u'100%', blue=u'100%')
-       >>> name_to_rgb_percent(u'navy')
-       PercentRGB(red=u'0%', green=u'0%', blue=u'50%')
-       >>> name_to_rgb_percent(u'goldenrod')
-       PercentRGB(red=u'85.49%', green=u'64.71%', blue=u'12.5%')
+       >>> name_to_rgb_percent('white')
+       PercentRGB(red='100%', green='100%', blue='100%')
+       >>> name_to_rgb_percent('navy')
+       PercentRGB(red='0%', green='0%', blue='50%')
+       >>> name_to_rgb_percent('goldenrod')
+       PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
    :param str name: The color name to convert.
    :param str spec: The specification from which to draw the list of color
@@ -407,15 +407,15 @@ Conversion from hexadecimal color values to other formats
 
    .. code-block:: pycon
 
-       >>> hex_to_name(u'#ffffff')
-       u'white'
-       >>> hex_to_name(u'#fff')
-       u'white'
-       >>> hex_to_name(u'#000080')
-       u'navy'
-       >>> hex_to_name(u'#daa520')
-       u'goldenrod'
-       >>> hex_to_name(u'#daa520', spec=HTML4)
+       >>> hex_to_name('#ffffff')
+       'white'
+       >>> hex_to_name('#fff')
+       'white'
+       >>> hex_to_name('#000080')
+       'navy'
+       >>> hex_to_name('#daa520')
+       'goldenrod'
+       >>> hex_to_name('#daa520', spec=HTML4)
        Traceback (most recent call last):
            ...
        ValueError: '#daa520' has no defined color name in html4.
@@ -438,9 +438,9 @@ Conversion from hexadecimal color values to other formats
 
    .. code-block:: pycon
    
-       >>> hex_to_rgb(u'#fff')
+       >>> hex_to_rgb('#fff')
        IntegerRGB(red=255, green=255, blue=255)
-       >>> hex_to_rgb(u'#000080')
+       >>> hex_to_rgb('#000080')
        IntegerRGB(red=0, green=0, blue=128)
 
    :param str hex_value: The hexadecimal color value to convert.
@@ -459,10 +459,10 @@ Conversion from hexadecimal color values to other formats
 
    .. code-block:: pycon
 
-       >>> hex_to_rgb_percent(u'#ffffff')
-       PercentRGB(red=u'100%', green=u'100%', blue=u'100%')
-       >>> hex_to_rgb_percent(u'#000080')
-       PercentRGB(red=u'0%', green=u'0%', blue=u'50%')
+       >>> hex_to_rgb_percent('#ffffff')
+       PercentRGB(red='100%', green='100%', blue='100%')
+       >>> hex_to_rgb_percent('#000080')
+       PercentRGB(red='0%', green='0%', blue='50%')
 
    :param str hex_value: The hexadecimal color value to convert.
    :rtype: PercentRGB
@@ -494,9 +494,9 @@ Conversions from integer `rgb()` triplets to other formats
    .. code-block:: pycon
 
        >>> rgb_to_name((255, 255, 255))
-       u'white'
+       'white'
        >>> rgb_to_name((0, 0, 128))
-       u'navy'
+       'navy'
 
    :param rgb_triplet: The `rgb()` triplet
    :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
@@ -516,9 +516,9 @@ Conversions from integer `rgb()` triplets to other formats
    .. code-block:: pycon
 
        >>> rgb_to_hex((255, 255, 255))
-       u'#ffffff'
+       '#ffffff'
        >>> rgb_to_hex((0, 0, 128))
-       u'#000080'
+       '#000080'
 
    :param rgb_triplet: The `rgb()` triplet.
    :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
@@ -536,8 +536,8 @@ Conversions from integer `rgb()` triplets to other formats
       This function makes some trade-offs in terms of the accuracy of
       the final representation; for some common integer values,
       special-case logic is used to ensure a precise result (e.g.,
-      integer 128 will always convert to `u'50%'`, integer 32 will
-      always convert to `u'12.5%'`), but for all other values a
+      integer 128 will always convert to `'50%'`, integer 32 will
+      always convert to `'12.5%'`), but for all other values a
       standard Python :class:`float` is used and rounded to two
       decimal places, which may result in a loss of precision for some
       values due to the inherent imprecision of `IEEE floating-point
@@ -548,11 +548,11 @@ Conversions from integer `rgb()` triplets to other formats
    .. code-block:: pycon
 
        >>> rgb_to_rgb_percent((255, 255, 255))
-       PercentRGB(red=u'100%', green=u'100%', blue=u'100%')
+       PercentRGB(red='100%', green='100%', blue='100%')
        >>> rgb_to_rgb_percent((0, 0, 128))
-       PercentRGB(red=u'0%', green=u'0%', blue=u'50%')
+       PercentRGB(red='0%', green='0%', blue='50%')
        >>> rgb_to_rgb_percent((218, 165, 32))
-       PercentRGB(red=u'85.49%', green=u'64.71%', blue=u'12.5%')
+       PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
    :param rgb_triplet: The `rgb()` triplet.
    :type rgb_triplet: typing.Union[IntegerRGB, Tuple[int, int, int]]
@@ -583,12 +583,12 @@ Conversions from percentage `rgb()` triplets to other formats
 
    .. code-block:: pycon
 
-       >>> rgb_percent_to_name((u'100%', u'100%', u'100%'))
-       u'white'
-       >>> rgb_percent_to_name((u'0%', u'0%', u'50%'))
-       u'navy'
-       >>> rgb_percent_to_name((u'85.49%', u'64.71%', u'12.5%'))
-       u'goldenrod'
+       >>> rgb_percent_to_name(('100%', '100%', '100%'))
+       'white'
+       >>> rgb_percent_to_name(('0%', '0%', '50%'))
+       'navy'
+       >>> rgb_percent_to_name(('85.49%', '64.71%', '12.5%'))
+       'goldenrod'
 
    :param rgb_percent_triplet: The `rgb()` triplet. 
    :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
@@ -608,12 +608,12 @@ Conversions from percentage `rgb()` triplets to other formats
    
    .. code-block:: pycon
 
-       >>> rgb_percent_to_hex((u'100%', u'100%', u'0%'))
-       u'#ffff00'
-       >>> rgb_percent_to_hex((u'0%', u'0%', u'50%'))
-       u'#000080'
-       >>> rgb_percent_to_hex((u'85.49%', u'64.71%', u'12.5%'))
-       u'#daa520'
+       >>> rgb_percent_to_hex(('100%', '100%', '0%'))
+       '#ffff00'
+       >>> rgb_percent_to_hex(('0%', '0%', '50%'))
+       '#000080'
+       >>> rgb_percent_to_hex(('85.49%', '64.71%', '12.5%'))
+       '#daa520'
 
    :param rgb_percent_triplet: The `rgb()` triplet.
    :type rgb_percent_triplet: typing.Union[PercentRGB, Tuple[str, str, str]]
@@ -633,11 +633,11 @@ Conversions from percentage `rgb()` triplets to other formats
    
    .. code-block:: pycon
 
-       >>> rgb_percent_to_rgb((u'100%', u'100%', u'100%'))
+       >>> rgb_percent_to_rgb(('100%', '100%', '100%'))
        IntegerRGB(red=255, green=255, blue=255)
-       >>> rgb_percent_to_rgb((u'0%', u'0%', u'50%'))
+       >>> rgb_percent_to_rgb(('0%', '0%', '50%'))
        IntegerRGB(red=0, green=0, blue=128)
-       >>> rgb_percent_to_rgb((u'85.49%', u'64.71%', u'12.5%'))
+       >>> rgb_percent_to_rgb(('85.49%', '64.71%', '12.5%'))
        IntegerRGB(red=218, green=165, blue=32)
 
    :param rgb_percent_triplet: The `rgb()` triplet.
@@ -669,9 +669,9 @@ HTML5 color algorithms
    
    .. code-block:: pycon
 
-       >>> html5_parse_simple_color(u'#ffffff')
+       >>> html5_parse_simple_color('#ffffff')
        HTML5SimpleColor(red=255, green=255, blue=255)
-       >>> html5_parse_simple_color(u'#fff')
+       >>> html5_parse_simple_color('#fff')
        Traceback (most recent call last):
            ...
        ValueError: An HTML5 simple color must be a string exactly seven characters long.
@@ -694,9 +694,9 @@ HTML5 color algorithms
    .. code-block:: pycon
 
        >>> html5_serialize_simple_color((0, 0, 0))
-       u'#000000'
+       '#000000'
        >>> html5_serialize_simple_color((255, 255, 255))
-       u'#ffffff'
+       '#ffffff'
 
    :param simple_color: The color to serialize.
    :type simple_color: typing.Union[IntegerRGB, HTML5SimpleColor,
@@ -723,15 +723,15 @@ HTML5 color algorithms
    
    .. code-block:: pycon
 
-       >>> html5_parse_legacy_color(u'black')
+       >>> html5_parse_legacy_color('black')
        HTML5SimpleColor(red=0, green=0, blue=0)
-       >>> html5_parse_legacy_color(u'chucknorris')
+       >>> html5_parse_legacy_color('chucknorris')
        HTML5SimpleColor(red=192, green=0, blue=0)
-       >>> html5_parse_legacy_color(u'Window')
+       >>> html5_parse_legacy_color('Window')
        HTML5SimpleColor(red=0, green=13, blue=0)
 
    :param input: The color to parse.
    :type input: :data:`six.text_type`
    :rtype: HTML5SimpleColor
    :raises ValueError: when the given input is not a Unicode string,
-      or when it is precisely the string `u'transparent'`.
+      or when it is precisely the string `'transparent'`.

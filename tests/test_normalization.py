@@ -17,10 +17,10 @@ class NormalizationTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u"#0099cc", u"#0099cc"),
-            (u"#0099CC", u"#0099cc"),
-            (u"#09c", u"#0099cc"),
-            (u"#09C", u"#0099cc"),
+            ("#0099cc", "#0099cc"),
+            ("#0099CC", "#0099cc"),
+            ("#09c", "#0099cc"),
+            ("#09C", "#0099cc"),
         )
 
         for raw, normalized in test_pairs:
@@ -31,7 +31,7 @@ class NormalizationTests(unittest.TestCase):
         Hex normalization raises ValueError on invalid hex color code.
 
         """
-        test_values = (u"0099cc", "#0000gg", "#0000", "#00000000")
+        test_values = ("0099cc", "#0000gg", "#0000", "#00000000")
         for value in test_values:
             self.assertRaises(ValueError, webcolors.normalize_hex, value)
 
@@ -69,13 +69,13 @@ class NormalizationTests(unittest.TestCase):
 
         """
         test_pairs = (
-            (u"0%", u"0%"),
-            (u"100%", u"100%"),
-            (u"62%", u"62%"),
-            (u"-5%", u"0%"),
-            (u"250%", u"100%"),
-            (u"85.49%", u"85.49%"),
-            (u"-0%", u"0%"),
+            ("0%", "0%"),
+            ("100%", "100%"),
+            ("62%", "62%"),
+            ("-5%", "0%"),
+            ("250%", "100%"),
+            ("85.49%", "85.49%"),
+            ("-0%", "0%"),
         )
 
         for raw, normalized in test_pairs:
@@ -87,10 +87,10 @@ class NormalizationTests(unittest.TestCase):
 
         """
         test_pairs = (
-            ((u"50%", u"50%", u"50%"), (u"50%", u"50%", u"50%")),
-            ((u"0%", u"100%", u"0%"), (u"0%", u"100%", u"0%")),
-            ((u"-10%", u"250%", u"500%"), (u"0%", u"100%", u"100%")),
-            ((u"-0%", u"-0%", u"-0%"), (u"0%", u"0%", u"0%")),
+            (("50%", "50%", "50%"), ("50%", "50%", "50%")),
+            (("0%", "100%", "0%"), ("0%", "100%", "0%")),
+            (("-10%", "250%", "500%"), ("0%", "100%", "100%")),
+            (("-0%", "-0%", "-0%"), ("0%", "0%", "0%")),
         )
 
         for triplet, normalized in test_pairs:
