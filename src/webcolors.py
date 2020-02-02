@@ -13,7 +13,7 @@ import string
 from typing import NamedTuple, Tuple, Union
 
 
-__version__ = "1.10"
+__version__ = "1.11a1"
 
 
 def _reversedict(d: dict) -> dict:
