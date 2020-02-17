@@ -85,7 +85,7 @@ HTML4_NAMES_TO_HEX = {
 CSS2_NAMES_TO_HEX = HTML4_NAMES_TO_HEX
 
 # CSS 2.1 added orange.
-CSS21_NAMES_TO_HEX = {"orange": "ffa500", **HTML4_NAMES_TO_HEX}
+CSS21_NAMES_TO_HEX = {"orange": "#ffa500", **HTML4_NAMES_TO_HEX}
 
 # The CSS 3/SVG named colors.
 #
