@@ -90,6 +90,8 @@ The functions :func:`~webcolors.normalize_integer_triplet` and
 this normalization manually if desired.
 
 
+.. _color-name-conventions:
+
 Color names
 -----------
 
@@ -103,6 +105,21 @@ For output which consists of a color name, and for functions which
 perform intermediate conversion to a predefined name before returning
 a result in another format, webcolors always normalizes such values to
 be entirely lowercase.
+
+.. note:: **Spelling variants**
+
+   HTML 4, CSS1, and CSS2 each defined a color named `gray`. In CSS3,
+   this color can be named either `gray` or `grey`, and several other
+   related color values each have two names in CSS3:
+   `darkgray`/`darkgrey`, `darkslategray`/`darkslategrey`,
+   `dimgray`/`dimgrey`, `lightgray`/`lightgrey`,
+   `lightslategray`/`lightslategrey`, `slategray`/`slategrey`.
+
+   Reversing from the hexadecimal value, integer tuple, or percent
+   tuple to a name, for these colors, requires picking one spelling,
+   and webcolors chooses the `gray` spellings for consistency with
+   HTML 4, CSS1, and CSS2.
+
 
 
 Identifying sets of named colors

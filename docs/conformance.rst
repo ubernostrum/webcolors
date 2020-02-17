@@ -19,10 +19,10 @@ which perform more comprehensive verification.
 The normal test suite
 ---------------------
 
-The normal test suite for webcolors aims for 100% code coverage, but
-does *not* aim for 100% coverage of possible color value inputs and
-outputs. Instead, it uses a small number of test values to routinely
-exercise various functions.
+The normal test suite for webcolors aims for 100% coverage of code
+paths, but does *not* aim for 100% coverage of possible color value
+inputs and outputs. Instead, it uses a small number of test values to
+routinely exercise various functions.
 
 The test values used in most test functions are chosen to provide,
 where applicable, at least one of each of the following types of

@@ -202,17 +202,12 @@ Mappings from hexadecimal values to names
 
    .. note:: **Spelling variants**
 
-      HTML 4, CSS1, and CSS2 each defined a color named `gray`. In
-      CSS3, this color can be named either `gray` or `grey`, and
-      several other related color values each have two names in CSS3:
-      `darkgray`/`darkgrey`, `darkslategray`/`darkslategrey`,
-      `dimgray`/`dimgrey`, `lightgray`/`lightgrey`,
-      `lightslategray`/`lightslategrey`, `slategray`/`slategrey`.
-
-      Reversing from the hexadecimal value, integer tuple, or percent
-      tuple to a name, for these colors, requires picking one
-      spelling, and webcolors chooses the `gray` spellings for
-      consistency with HTML 4, CSS1, and CSS2.
+      Some values representing named gray colors can map to either of
+      two names in CSS3, because it supports both `gray` and `grey`
+      spelling variants for those colors. This mapping will always
+      return the variant spelled `gray` (such as `lightgray` instead
+      of `lightgrey`). See :ref:`the documentation on name conventions
+      <color-name-conventions>` for details.
 
 
 Normalization functions
@@ -395,7 +390,8 @@ Conversion from hexadecimal color values to other formats
       two names in CSS3, because it supports both `gray` and `grey`
       spelling variants for those colors. This function will always
       return the variant spelled `gray` (such as `lightgray` instead
-      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
+      of `lightgrey`). See :ref:`the documentation on name conventions
+      <color-name-conventions>` for details.
 
    Examples:
 
@@ -481,7 +477,8 @@ Conversions from integer `rgb()` triplets to other formats
       two names in CSS3, because it supports both `gray` and `grey`
       spelling variants for those colors. This function will always
       return the variant spelled `gray` (such as `lightgray` instead
-      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
+      of `lightgrey`). See :ref:`the documentation on name conventions
+      <color-name-conventions>` for details.
 
    Examples:
    
@@ -571,7 +568,8 @@ Conversions from percentage `rgb()` triplets to other formats
       two names in CSS3, because it supports both `gray` and `grey`
       spelling variants for those colors. This function will always
       return the variant spelled `gray` (such as `lightgray` instead
-      of `lightgrey`). See also the note on :data:`CSS3_HEX_TO_NAMES`.
+      of `lightgrey`). See :ref:`the documentation on name conventions
+      <color-name-conventions>` for details.
 
    Examples:
 
