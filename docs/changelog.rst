@@ -7,6 +7,16 @@ Change log
 This document lists the changes between each release of webcolors.
 
 
+Version 1.11.1, released 2020-02-17
+-----------------------------------
+
+Bugs fixed
+~~~~~~~~~~
+
+* Corrected an error regarding supported Python versions in the
+  README file.
+
+
 Version 1.11, released 2020-02-17
 ---------------------------------
 
