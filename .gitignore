@@ -7,3 +7,4 @@ dist/
 .python-version
 .tox/
 .mypy_cache
+build/
