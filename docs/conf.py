@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 
 extensions = ["sphinx.ext.intersphinx"]
@@ -14,7 +13,6 @@ version = "1.11"
 release = "1.11.1"
 exclude_trees = ["_build"]
 pygments_style = "sphinx"
-html_static_path = ["_static"]
 htmlhelp_basename = "webcolorsdoc"
 latex_documents = [
     ("index", "webcolors.tex", u"webcolors Documentation", u"James Bennett", "manual"),

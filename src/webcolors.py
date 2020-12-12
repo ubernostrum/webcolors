@@ -12,7 +12,6 @@ import re
 import string
 from typing import NamedTuple, Tuple, Union
 
-
 __version__ = "1.11.1"
 
 

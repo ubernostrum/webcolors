@@ -14,7 +14,6 @@ import unittest
 
 import webcolors
 
-
 # The mappings of color names to values below are used for conformance
 # testing; while the main webcolors module makes use of alphabetized,
 # normalized mappings to hex values, the mappings below are the

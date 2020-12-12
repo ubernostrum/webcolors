@@ -1,7 +1,7 @@
 .. -*-restructuredtext-*-
 
-.. image:: https://travis-ci.org/ubernostrum/webcolors.svg?branch=master
-    :target: https://travis-ci.org/ubernostrum/webcolors
+.. image:: https://github.com/ubernostrum/pwned-passwords-django/workflows/CI/badge.svg
+   :alt: CI status image
 
 ``webcolors`` is a module for working with HTML/CSS color definitions.
 
