@@ -2,6 +2,7 @@
 
 .. image:: https://github.com/ubernostrum/webcolors/workflows/CI/badge.svg
    :alt: CI status image
+   :target: https://github.com/ubernostrum/webcolors/actions?query=workflow%3ACI
 
 ``webcolors`` is a module for working with HTML/CSS color definitions.
 
