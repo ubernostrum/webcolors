@@ -1,6 +1,6 @@
 .. -*-restructuredtext-*-
 
-.. image:: https://github.com/ubernostrum/pwned-passwords-django/workflows/CI/badge.svg
+.. image:: https://github.com/ubernostrum/webcolors/workflows/CI/badge.svg
    :alt: CI status image
 
 ``webcolors`` is a module for working with HTML/CSS color definitions.
