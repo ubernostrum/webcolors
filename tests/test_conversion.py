@@ -28,6 +28,20 @@ class HexConversionTests(unittest.TestCase):
         for hex_value, name in test_pairs:
             assert name == webcolors.hex_to_name(hex_value)
 
+    def test_hex_to_name_closest(self):
+        """
+        Test conversion from hex to closest color name.
+        """
+        test_pairs = (
+            ("#fffffe", "white"),
+            ("#ffe", "ivory"),
+            ("#000081", "navy"),
+            ("#daa521", "goldenrod"),
+        )
+
+        for hex_value, name in test_pairs:
+            assert name == webcolors.hex_to_name_closest(hex_value)
+
     def test_hex_to_name_unnamed(self):
         """
         A hex code which does not correspond to a named color, or does
@@ -112,6 +126,21 @@ class IntegerRGBConversionTests(unittest.TestCase):
 
         for triplet, name in test_pairs:
             assert name == webcolors.rgb_to_name(triplet)
+
+    def test_rgb_to_name_closest(self):
+        """
+        Test conversion from integer RGB triplet to closest color name.
+
+        """
+        test_pairs = (
+            ((255, 255, 250), "white"),
+            ((0, 0, 120), "navy"),
+            ((218, 165, 30), "goldenrod"),
+            (webcolors.IntegerRGB(218, 165, 30), "goldenrod"),
+        )
+
+        for triplet, name in test_pairs:
+            assert name == webcolors.rgb_to_name_closest(triplet)
 
     def test_rgb_to_name_unnamed(self):
         """
@@ -282,6 +311,20 @@ class PercentRGBConversionTests(unittest.TestCase):
 
         for triplet, name in test_pairs:
             assert name == webcolors.rgb_percent_to_name(triplet)
+
+    def test_rgb_percent_to_name_closest(self):
+        """
+        Test conversion from percent RGB triplet to closest color name.
+        """
+        test_pairs = (
+            (("100%", "100%", "98%"), "white"),
+            (("0%", "0%", "48%"), "navy"),
+            (("85.49%", "64.71%", "10.5%"), "goldenrod"),
+            (webcolors.PercentRGB("85.49%", "64.71%", "10.5%"), "goldenrod"),
+        )
+
+        for triplet, name in test_pairs:
+            assert name == webcolors.rgb_percent_to_name_closest(triplet)
 
     def test_rgb_percent_to_name_unnamed(self):
         """

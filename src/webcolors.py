@@ -48,6 +48,31 @@ IntTuple = Union[IntegerRGB, HTML5SimpleColor, Tuple[int, int, int]]
 PercentTuple = Union[PercentRGB, Tuple[str, str, str]]
 
 
+def _get_closest(rgb_triplet: IntTuple, spec: str, f) -> str:
+    """
+    Internal utility for calculating the closest normalised color
+    name based on a function f; given an rgb_triplet, returns the
+    closest normalised color name.
+
+    """
+    if spec not in SUPPORTED_SPECIFICATIONS:
+        raise ValueError(SPECIFICATION_ERROR_TEMPLATE.format(spec=spec))
+
+    name = {
+        CSS2: CSS2_HEX_TO_NAMES,
+        CSS21: CSS21_HEX_TO_NAMES,
+        CSS3: CSS3_HEX_TO_NAMES,
+        HTML4: HTML4_HEX_TO_NAMES,
+    }[spec]
+    distances = {}
+
+    for k, v in name.items():
+        distances[
+            f(rgb_triplet, hex_to_rgb(k))] = v
+
+    return distances[min(distances.keys())]
+
+
 # Mappings of color names to normalized hexadecimal color values.
 #################################################################
 
@@ -431,6 +456,29 @@ def hex_to_name(hex_value: str, spec: str = CSS3) -> str:
     return name
 
 
+def hex_to_name_closest(
+        hex_value: str, spec: str = CSS3,
+        f=lambda v1, v2: (v1[0]-v2[0])**2 + (v1[1]-v2[1])**2 + (v1[2]-v2[2])**2
+) -> str:
+    """
+    Convert a hexadecimal color value to its corresponding normalized
+    color name. If no such name exists, return the normalized color
+    name corresponding to the closest hex_value, calculated based on
+    a function f whose default is squared error (mean has no effect
+    in this case).
+
+    The optional keyword argument ``spec`` determines which
+    specification's list of color names will be used. The default is
+    CSS3.
+
+    """
+    try:
+        closest = hex_to_name(hex_value, spec)
+    except ValueError:
+        closest = _get_closest(hex_to_rgb(hex_value), spec, f)
+    return closest
+
+
 def hex_to_rgb(hex_value: str) -> IntegerRGB:
     """
     Convert a hexadecimal color value to a 3-tuple of integers
@@ -468,6 +516,29 @@ def rgb_to_name(rgb_triplet: IntTuple, spec: str = CSS3) -> str:
 
     """
     return hex_to_name(rgb_to_hex(normalize_integer_triplet(rgb_triplet)), spec=spec)
+
+
+def rgb_to_name_closest(
+        rgb_triplet: IntTuple, spec: str = CSS3,
+        f=lambda v1, v2: (v1[0]-v2[0])**2 + (v1[1]-v2[1])**2 + (v1[2]-v2[2])**2
+) -> str:
+    """
+    Convert a 3-tuple of integers, suitable for use in an ``rgb()``
+    color triplet, to its corresponding normalized color name. If no
+    such name exists, return the normalized color name corresponding
+    to the closest rgb triplet, calculated based on a function f
+    whose default is squared error (mean has no effect in this case).
+
+    The optional keyword argument ``spec`` determines which
+    specification's list of color names will be used. The default is
+    CSS3.
+
+    """
+    try:
+        closest = rgb_to_name(rgb_triplet, spec)
+    except ValueError:
+        closest = _get_closest(rgb_triplet, spec, f)
+    return closest
 
 
 def rgb_to_hex(rgb_triplet: IntTuple) -> str:
@@ -530,6 +601,29 @@ def rgb_percent_to_name(rgb_percent_triplet: PercentTuple, spec: str = CSS3) -> 
     return rgb_to_name(
         rgb_percent_to_rgb(normalize_percent_triplet(rgb_percent_triplet)), spec=spec
     )
+
+
+def rgb_percent_to_name_closest(
+        rgb_percent_triplet: PercentTuple, spec: str = CSS3,
+        f=lambda v1, v2: (v1[0]-v2[0])**2 + (v1[1]-v2[1])**2 + (v1[2]-v2[2])**2
+) -> str:
+    """
+    Convert a 3-tuple of percentages, suitable for use in an ``rgb()``
+    color triplet, to its corresponding normalized color name. If no
+    such name exists, return the normalized color name corresponding
+    to the closest rgb_percent_triplet, calculated based on a function
+    f whose default is squared error (mean has no effect in this case).
+
+    The optional keyword argument ``spec`` determines which
+    specification's list of color names will be used. The default is
+    CSS3.
+
+    """
+    try:
+        closest = rgb_percent_to_name(rgb_percent_triplet, spec)
+    except ValueError:
+        closest = _get_closest(rgb_percent_to_rgb(rgb_percent_triplet), spec, f)
+    return closest
 
 
 def rgb_percent_to_hex(rgb_percent_triplet: PercentTuple) -> str:
