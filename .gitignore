@@ -1,3 +1,4 @@
+.idea/
 *.pyc
 __pycache__
 *.egg-info
@@ -8,3 +9,4 @@ dist/
 .tox/
 .mypy_cache
 build/
+venv/
