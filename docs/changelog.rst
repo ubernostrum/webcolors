@@ -7,6 +7,17 @@ Change log
 This document lists the changes between each release of webcolors.
 
 
+Version 1.12, released 2022-05-25
+---------------------------------
+
+No bug fixes or new features.
+
+Other changes
+~~~~~~~~~~~~~
+
+* Supported Python versions are now 3.7, 3.8, 3.9, and 3.10.
+
+
 Version 1.11.1, released 2020-02-17
 -----------------------------------
 

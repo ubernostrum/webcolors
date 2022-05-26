@@ -10,8 +10,8 @@ when using webcolors.
 What versions of Python are supported?
 --------------------------------------
 
-The webcolors module supports and is tested on Python 3.5, 3.6, 3.7,
-and 3.8. As of the release of webcolors |release|, these are the only
+The webcolors module supports and is tested on Python 3.7, 3.8, 3.9,
+and 3.10. As of the release of webcolors |release|, these are the only
 versions of Python receiving upstream security support from the Python
 core team.
 

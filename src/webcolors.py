@@ -676,9 +676,7 @@ def html5_parse_legacy_color(input: str) -> HTML5SimpleColor:
     # 4. If input is an ASCII case-insensitive match for the string
     #    "transparent", then return an error.
     if input.lower() == "transparent":
-        raise ValueError(
-            u'HTML5 legacy color parsing forbids "transparent" as a value.'
-        )
+        raise ValueError('HTML5 legacy color parsing forbids "transparent" as a value.')
 
     # 5. If input is an ASCII case-insensitive match for one of the
     #    keywords listed in the SVG color keywords section of the CSS3
