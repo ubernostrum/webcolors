@@ -32,11 +32,7 @@ jobs:
       - name: Harden Runner
         uses: step-security/harden-runner@v1
         with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-            objects.githubusercontent.com:443
+          egress-policy: audit
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
