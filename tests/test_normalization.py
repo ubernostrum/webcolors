@@ -1,3 +1,7 @@
+"""
+Test the color-value normalization functions.
+
+"""
 import unittest
 
 import webcolors
@@ -40,10 +44,11 @@ class NormalizationTests(unittest.TestCase):
         Integer normalization clips to 0-255.
 
         """
+        # pylint: disable=protected-access
         test_pairs = ((255, 255), (0, 0), (128, 128), (-20, 0), (270, 255), (-0, 0))
 
         for raw, normalized in test_pairs:
-            assert normalized == webcolors._normalize_integer_rgb(raw)
+            assert normalized == webcolors.normalization._normalize_integer_rgb(raw)
 
     def test_normalize_integer_triplet(self):
         """
@@ -68,6 +73,7 @@ class NormalizationTests(unittest.TestCase):
         Percent normalization clips to 0%-100%.
 
         """
+        # pylint: disable=protected-access
         test_pairs = (
             ("0%", "0%"),
             ("100%", "100%"),
@@ -79,7 +85,7 @@ class NormalizationTests(unittest.TestCase):
         )
 
         for raw, normalized in test_pairs:
-            assert normalized == webcolors._normalize_percent_rgb(raw)
+            assert normalized == webcolors.normalization._normalize_percent_rgb(raw)
 
     def test_normalize_percent_triplet(self):
         """

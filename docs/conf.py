@@ -3,14 +3,14 @@ import sys
 
 on_rtd = os.environ.get("READTHEDOCS", None) == "True"
 
-extensions = ["sphinx.ext.intersphinx"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.intersphinx"]
 templates_path = ["_templates"]
 source_suffix = ".rst"
 master_doc = "index"
 project = "webcolors"
 copyright = "2008-2022, James Bennett"
-version = "1.12"
-release = "1.12"
+version = "1.13"
+release = "1.13"
 exclude_trees = ["_build"]
 pygments_style = "sphinx"
 htmlhelp_basename = "webcolorsdoc"

@@ -13,7 +13,6 @@ env:
   FORCE_COLOR: "1"
   TOX_TESTENV_PASSENV: FORCE_COLOR
   PIP_DISABLE_VERSION_CHECK: "1"
-  PYTHON_LATEST: "3.11"
 
 permissions:
   contents: read
@@ -26,7 +25,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
     steps:
       - name: Harden Runner
@@ -47,5 +46,5 @@ jobs:
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade virtualenv tox tox-gh-actions
+          python -m pip install --upgrade tox tox-gh-actions
       - run: "python -m tox"

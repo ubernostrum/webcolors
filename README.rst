@@ -25,8 +25,8 @@ For example:
 .. code-block:: python
 
     >>> import webcolors
-    >>> webcolors.hex_to_name(u'#daa520')
-    u'goldenrod'
+    >>> webcolors.hex_to_name("#daa520")
+    "goldenrod"
 
 Implementations are also provided for the HTML5 color parsing and
 serialization algorithms. For example, parsing the infamous
@@ -35,7 +35,7 @@ serialization algorithms. For example, parsing the infamous
 .. code-block:: python
 
     >>> import webcolors
-    >>> webcolors.html5_parse_legacy_color(u'chucknorris')
+    >>> webcolors.html5_parse_legacy_color("chucknorris")
     HTML5SimpleColor(red=192, green=0, blue=0)
 
 Full documentation is `available online <https://webcolors.readthedocs.io/>`_.

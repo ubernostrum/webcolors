@@ -8,11 +8,13 @@ HSL
 identifiably
 incrementing
 internet
+losslessly
 online
 sRGB
 rgb
 superset
 tox
+trichromatic
 tuple
 tuples
 uncountably

@@ -31,12 +31,22 @@ import webcolors
 
 
 def hex_colors():
-    HEX_TEMPLATE = "#%06x"
+    """
+    Generator which yields all 2**24 hexadecimal color values, in
+    order starting from #000000.
+
+    """
+    hex_template = "#%06x"
     for i in range(16777217):
-        yield HEX_TEMPLATE % i
+        yield hex_template % i
 
 
 def int_colors():
+    """
+    Generator which yields all 2**24 integer rgb() triplets, in
+    order starting from (0,0,0).
+
+    """
     red_counter = tuple(range(256))
     green_counter = tuple(range(256))
     blue_counter = tuple(range(256))
@@ -47,12 +57,32 @@ def int_colors():
 
 
 class FullColorTest(unittest.TestCase):
+    """
+    Exercise color conversion on all testable values.
+
+    """
+
     def test_full_colors(self):
+        """
+        Test conversion between hexadecimal and integer rgb() for
+        all 2**24 possible values.
+
+        """
         for hex_color, int_triplet in zip(hex_colors(), int_colors()):
             assert int_triplet == webcolors.hex_to_rgb(hex_color)
             assert hex_color == webcolors.rgb_to_hex(int_triplet)
 
     def test_triplet_conversion(self):
+        """
+        Test conversion between integer and percentage rgb() as
+        fully as possible.
+
+        Because exhaustive testing is not possible (the set of valid
+        percentgae rgb() triplets is uncountably infinite), this test
+        ensures that for each of the 2**24 possible integer triplets,
+        conversion to percentage and back gives the starting value.
+
+        """
         for int_triplet in int_colors():
             conversion = webcolors.rgb_percent_to_rgb(
                 webcolors.rgb_to_rgb_percent(int_triplet)

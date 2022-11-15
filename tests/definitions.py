@@ -7,7 +7,7 @@ the definitions of the colors from the relevant standards documents.
 import re
 import unittest
 
-import html5lib  # noqa: F401
+import html5lib  # noqa: F401 pylint: disable=unused-import
 import requests
 from bs4 import BeautifulSoup
 
@@ -25,18 +25,23 @@ class HTML4DefinitionTests(unittest.TestCase):
     def setUp(self):
         self.html4_colors = {}
         soup = BeautifulSoup(
-            requests.get("http://www.w3.org/TR/html401/types.html").content,
+            requests.get("http://www.w3.org/TR/html401/types.html", timeout=5).content,
             "html.parser",
         )
         color_table = soup.find(
             "table", attrs={"summary": "Table of color names and their sRGB values"}
         )
-        for td in color_table.findAll("td"):
-            if "width" not in td.attrs:
-                color_name, color_value = td.text.split(" = ")
+        for cell in color_table.findAll("td"):
+            if "width" not in cell.attrs:
+                color_name, color_value = cell.text.split(" = ")
                 self.html4_colors[color_name] = color_value.replace('"', "").strip()
 
     def test_color_definitions(self):
+        """
+        Ensure the values in this module match those in the HTML 4
+        specification.
+
+        """
         for color_name, color_value in self.html4_colors.items():
             extracted = webcolors.HTML4_NAMES_TO_HEX[color_name.lower()]
             assert color_value.lower() == extracted
@@ -54,7 +59,7 @@ class CSS21DefinitionTests(unittest.TestCase):
         self.color_matching_re = re.compile(r"^([a-z]+) (#[a-fA-F0-9]{6})$")
         self.css21_colors = {}
         soup = BeautifulSoup(
-            requests.get("http://www.w3.org/TR/CSS2/syndata.html").content,
+            requests.get("http://www.w3.org/TR/CSS2/syndata.html", timeout=5).content,
             "html.parser",
         )
         color_table = soup.find("div", attrs={"id": "TanteksColorDiagram20020613"})
@@ -65,6 +70,11 @@ class CSS21DefinitionTests(unittest.TestCase):
             self.css21_colors[color_name] = color_value
 
     def test_color_definitions(self):
+        """
+        Ensure thie values in this module match those in the
+        CSS2.1 specification.
+
+        """
         for color_name, color_value in self.css21_colors.items():
             extracted = webcolors.CSS21_NAMES_TO_HEX[color_name.lower()]
             assert color_value.lower() == extracted
@@ -81,7 +91,8 @@ class CSS3DefinitionTests(unittest.TestCase):
     def setUp(self):
         self.css3_colors = {}
         soup = BeautifulSoup(
-            requests.get("http://www.w3.org/TR/css3-color/").content, "html5lib"
+            requests.get("http://www.w3.org/TR/css3-color/", timeout=5).content,
+            "html5lib",
         )
         color_table = soup.findAll("table", attrs={"class": "colortable"})[1]
         color_names = [dfn.text for dfn in color_table.findAll("dfn")]
@@ -108,6 +119,11 @@ class CSS3DefinitionTests(unittest.TestCase):
             }
 
     def test_color_definitions(self):
+        """
+        Ensure the values in this module match those in the CSS3
+        specification.
+
+        """
         for color_name, color_values in self.css3_colors.items():
             extracted_hex = webcolors.CSS3_NAMES_TO_HEX[color_name.lower()]
             extracted_rgb = webcolors.name_to_rgb(color_name)

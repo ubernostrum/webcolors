@@ -1,6 +1,8 @@
 include LICENSE
 include MANIFEST.in
 recursive-include docs *
+include .flake8
+include pyproject.toml
 include tox.ini
 graft src
 graft tests

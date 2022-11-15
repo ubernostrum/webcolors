@@ -7,8 +7,6 @@ Installation guide
 The |release| version of webcolors is officially tested and supported
 on the following versions of Python:
 
-* Python 3.6
-
 * Python 3.7
 
 * Python 3.8
@@ -16,6 +14,8 @@ on the following versions of Python:
 * Python 3.9
 
 * Python 3.10
+
+* Python 3.11
 
 
 Normal installation
