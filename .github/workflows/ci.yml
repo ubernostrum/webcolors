@@ -5,7 +5,7 @@ on:
   push:
     branches: [trunk]
     tags: ["*"]
-  pull_requests:
+  pull_request:
     branches: [trunk]
   workflow_dispatch:
 
