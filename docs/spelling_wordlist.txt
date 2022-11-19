@@ -1,7 +1,9 @@
 amongst
 bugfixes
 bytestrings
+declaratively
 chucknorris
+codebase
 colorspace
 gz
 HSL
@@ -12,6 +14,8 @@ losslessly
 online
 sRGB
 rgb
+submodule
+submodules
 superset
 tox
 trichromatic

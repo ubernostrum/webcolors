@@ -7,8 +7,8 @@ Change log
 This document lists the changes between each release of webcolors.
 
 
-Verision 1.13, released 2022-??-??
-----------------------------------
+Version 1.13, released 2022-??-??
+---------------------------------
 
 No bug fixes or new features.
 
