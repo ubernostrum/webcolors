@@ -21,14 +21,14 @@ on the following versions of Python:
 Normal installation
 -------------------
 
-The preferred method of installing webcolors is via `pip`, the
-standard Python package-installation tool. If you don't have `pip`,
+The preferred method of installing webcolors is via ``pip``, the
+standard Python package-installation tool. If you don't have ``pip``,
 instructions are available for `how to obtain and install it
 <https://pip.pypa.io/en/latest/installing.html>`_. If you're using a
-supported version of Python, `pip` came bundled with your installation
+supported version of Python, ``pip`` came bundled with your installation
 of Python.
 
-Once you have `pip`, type::
+Once you have ``pip``, type::
 
     pip install webcolors
 

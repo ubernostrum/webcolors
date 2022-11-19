@@ -10,8 +10,8 @@ valid values for each format and the values corresponding to defined
 color names. Maintaining correct conversions and conformance to those
 standards is crucial.
 
-The source distribution of webcolors (the `.tar.gz` file you can
-download from the Python Package Index) includes a `tests/` directory
+The source distribution of webcolors (the ``.tar.gz`` file you can
+download from the Python Package Index) includes a ``tests/`` directory
 containing a normal test suite as well as supplemental test files
 which perform more comprehensive verification.
 
@@ -28,8 +28,8 @@ The test values used in most test functions are chosen to provide,
 where applicable, at least one of each of the following types of
 values:
 
-* An endpoint of the acceptable range of values (i.e., `#ffffff`
-  and/or `#000000` for hexadecimal).
+* An endpoint of the acceptable range of values (i.e., ``#ffffff``
+  and/or ``#000000`` for hexadecimal).
 
 * A value beyond the high end of the acceptable range (i.e., greater
   than 255 in an integer triplet, or greater than 100% for a
@@ -42,17 +42,17 @@ values:
   a percentage triplet).
 
 * An arbitrary value not from an endpoint of the acceptable range
-  (usually `#000080`, chosen because the author likes navy blue).
+  (usually ``#000080``, chosen because the author likes navy blue).
 
 * A value which corresponds to a named color in CSS3/SVG but not in
-  earlier standards (usually `#daa520`, which is `goldenrod` in
+  earlier standards (usually ``#daa520``, which is ``goldenrod`` in
   CSS3/SVG).
 
 Since this covers the cases most likely to produce problems, this test
 suite provides good basic confidence in the correctness of the tested
 functions. It runs on every commit to the repository, and on every
-release tag. You can see the results of test runs online `at Travis CI
-<https://travis-ci.org/ubernostrum/webcolors/>`_.
+release tag. You can see the results of test runs online `iat GitHub
+<https://github.com/ubernostrum/webcolors/actions/workflows/ci.yml/>`_.
 
 However, the normal test suite cannot guarantee that the color
 definitions included in webcolors correspond to those in the
@@ -67,15 +67,15 @@ Full verification tests
 -----------------------
 
 These tests are contained in two files which are not executed during
-normal test runs: `tests/definitions.py` and
-`tests/full_colors.py`. They are not run as part of the normal test
+normal test runs: ``tests/definitions.py`` and
+``tests/full_colors.py``. They are not run as part of the normal test
 suite, but are run prior to each release of webcolors.
 
 
 Verifying color definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The `definitions.py` test file verifies that the color definitions in
+The ``definitions.py`` test file verifies that the color definitions in
 webcolors are correct. It does this by downloading the relevant
 standards documents as HTML, parsing out the color definitions in
 them, and comparing them to the definitions in webcolors. That
@@ -106,19 +106,19 @@ The `full_colors.py` test file exercises
 :func:`~webcolors.rgb_to_rgb_percent` and
 :func:`~webcolors.rgb_percent_to_rgb` as fully as is practical.
 
-For conversions between hexadecimal and integer `rgb()`, it generates
+For conversions between hexadecimal and integer ``rgb()``, it generates
 all 16,777,216 possible color values for each format in order
-(starting at `#000000` and `(0, 0, 0)` and incrementing), and verifies
+(starting at ``#000000`` and ``(0,0,0)`` and incrementing), and verifies
 that each one converts to the corresponding value in the other
 format. Thus, it is possible to be confident that webcolors provides
 correct conversions between all possible color values in those
 formats.
 
 Testing the correctness of conversion to and from percentage
-`rgb()`, however, is more difficult, and a full test is not
+``rgb()``, however, is more difficult, and a full test is not
 provided, for two reasons:
 
-1. Because percentage `rgb()` values can make use of floating-point
+1. Because percentage ``rgb()`` values can make use of floating-point
    values, and because standard floating-point types in most common
    programming languages (Python included) are inherently imprecise,
    exact verification is not possible.
@@ -137,8 +137,8 @@ provided, for two reasons:
 
 Since precise correctness and completeness are not achievable,
 webcolors instead aims to achieve *consistency* in
-conversions. Specifically, the `full_colors.py` test generates all
-16,777,216 integer `rgb()` triplets, and for each such triplet `t`
+conversions. Specifically, the ``full_colors.py`` test generates all
+16,777,216 integer ``rgb()`` triplets, and for each such triplet `t`
 verifies that the following assertion holds:
 
 .. code-block:: python

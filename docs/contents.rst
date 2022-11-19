@@ -34,6 +34,20 @@ hexadecimal color values, or with a request to name a color which has
 no name in the requested specification, or with an invalid
 specification identifier, will raise :exc:`ValueError`.
 
+.. admonition:: **Imports and submodules**
+
+   The public, supported API of webcolors is exported from its
+   top-level module, ``webcolors``. Although the codebase is
+   internally organized into several submodules for easier
+   maintenance, the existence, names, and organization of these
+   submodules is *not* part of webcolors' public API and cannot be
+   relied upon.
+
+   For example: although :func:`normalize_hex` is actually implemented
+   in a submodule named ``webcolors.normalization``, it must always be
+   referred to as ``webcolors.normalize_hex``, **never** as
+   ``webcolors.normlization.normalize_hex``.
+
 
 Data types
 ----------
@@ -72,19 +86,19 @@ with multiple specifications.
 
 .. data:: CSS2
 
-   Represents the CSS2 specification. Value is `'css2'`.
+   Represents the CSS2 specification. Value is ``"css2"``.
 
 .. data:: CSS21
 
-   Represents the CSS2.1 specification. Value is `'css21'`.
+   Represents the CSS2.1 specification. Value is ``"css21"``.
 
 .. data:: CSS3
 
-   Represents the CSS3 specification. Value is `'css3'`.
+   Represents the CSS3 specification. Value is ``"css3"``.
 
 .. data:: HTML4
 
-   Represents the HTML 4 specification. Value is `'html4'`.
+   Represents the HTML 4 specification. Value is ``"html4"``.
 
 .. _mapping-constants:
 

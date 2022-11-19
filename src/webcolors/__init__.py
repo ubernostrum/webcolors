@@ -47,6 +47,8 @@ from .normalization import (
 )
 from .types import HTML5SimpleColor, IntegerRGB, IntTuple, PercentRGB, PercentTuple
 
+__version__ = "1.13a1"
+
 __all__ = [
     "HTML4",
     "CSS2",
@@ -83,4 +85,5 @@ __all__ = [
     "HTML5SimpleColor",
     "IntTuple",
     "PercentTuple",
+    "__version__",
 ]

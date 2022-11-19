@@ -16,9 +16,9 @@ library):
 
 * Three-digit hexadecimal
 
-* Integer `rgb()` triplet
+* Integer ``rgb()`` triplet
 
-* Percentage `rgb()` triplet
+* Percentage ``rgb()`` triplet
 
 For example::
 

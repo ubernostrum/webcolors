@@ -98,7 +98,7 @@ Color names
 For colors specified via predefined names, webcolors will accept
 strings containing names case-insensitively, so long as they contain
 no spaces or non-alphabetic characters. Thus, for example,
-`"'AliceBlue"`` and ``"aliceblue"`` are both accepted, and both will
+``"AliceBlue"`` and ``"aliceblue"`` are both accepted, and both will
 refer to the same color: ``rgb(240, 248, 255)``.
 
 For output which consists of a color name, and for functions which

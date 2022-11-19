@@ -23,14 +23,17 @@ classifiers = [
 ]
 name = "webcolors"
 description = "A library for working with the color formats defined by HTML and CSS."
+dynamic = ["version"]
 license = {file = "LICENSE"}
 readme = "README.rst"
 requires-python = ">=3.7"
-version = "1.13a1"
 
 [project.urls]
 documentation = "https://webcolors.readthedocs.io"
 homepage = "https://github.com/ubernostrum/webcolors"
+
+[tool.bandit]
+skips = ["B101"]
 
 [tool.black]
 target-version = ["py37"]
@@ -42,3 +45,6 @@ fail_under = 100
 known_first_party = ["webcolors"]
 known_third_party = ["bs4", "html5lib", "requests"]
 profile = "black"
+
+[tool.setuptools.dynamic]
+version = {attr = "webcolors.__version__"}

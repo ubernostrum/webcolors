@@ -7,6 +7,23 @@ Change log
 This document lists the changes between each release of webcolors.
 
 
+Verision 1.13, released 2022-??-??
+----------------------------------
+
+No bug fixes or new features.
+
+Other changes
+~~~~~~~~~~~~~
+
+* The codebase was significantly reorganized and modernized. Public
+  API is unchanged. Imports should continue to be directly from the
+  top-level ``webcolors`` module; attempting to import from submodules
+  is not supported.
+
+* Now packaging declaratively via ``pyproject.toml`` with PEP 517
+  support from ``setuptools``.
+  
+
 Version 1.12, released 2022-05-25
 ---------------------------------
 
@@ -50,12 +67,12 @@ Other changes
 ~~~~~~~~~~~~~
 
 * Similar to the change in version 1.9 which normalized conversions to
-  named colors for `gray`/`grey` to always use the `gray` variant, the
-  other named grays of CSS3 now normalize to the `gray` spelling. This
-  affects the following colors: `darkgray`/`darkgrey`,
-  `darkslategray`/`darkslategrey`, `dimgray`/`dimgrey`,
-  `lightgray`/`lightgrey`, `lightslategray`/`lightslategrey`,
-  `slategray`/`slategrey`.
+  named colors for ``gray``/``grey`` to always use the ``gray`` variant, the
+  other named grays of CSS3 now normalize to the ``gray`` spelling. This
+  affects the following colors: ``darkgray``/``darkgrey``,
+  ``darkslategray``/``darkslategrey``, ``dimgray``/``dimgrey``,
+  ``lightgray``/``lightgrey``, ``lightslategray``/``lightslategrey``,
+  ``slategray``/``slategrey``.
 
 
 Version 1.9.1, released 2019-06-07
@@ -64,7 +81,7 @@ Version 1.9.1, released 2019-06-07
 Bugs fixed
 ~~~~~~~~~~
 
-* The `__version__` attribute of the installed webcolors module,
+* The ``__version__`` attribute of the installed webcolors module,
   although not documented or referenced anywhere, was accidentally not
   updated in the 1.9 release. It has now been updated (and now
   indicates 1.9.1).
@@ -85,11 +102,11 @@ Other changes
 ~~~~~~~~~~~~~
 
 * When asked to provide a color name, using the CSS3/SVG set of names,
-  for the hexadecimal value `#808080`, the integer triplet `rgb(128,
-  128, 128)`, or the percentage triplet `rgb(50%, 50%, 50%)`,
-  webcolors now always returns `u'gray'`, never `u'grey'`. Previously,
+  for the hexadecimal value ``#808080``, the integer triplet ``rgb(128,
+  128, 128)``, or the percentage triplet ``rgb(50%, 50%, 50%)``,
+  webcolors now always returns ``u'gray'``, never ``u'grey'``. Previously,
   the behavior could be inconsistent as it depended on the Python
-  version in use; `u'gray'` was picked because it was the spelling
+  version in use; ``u'gray'`` was picked because it was the spelling
   variant used in HTML 4, CSS1, and CSS2.
 
 
@@ -185,7 +202,7 @@ No new features.
 Bugs fixed
 ~~~~~~~~~~
 
-* Integer and percentage `rgb()` triplets now normalized in accordance
+* Integer and percentage ``rgb()`` triplets now normalized in accordance
   with CSS clipping rules.
 
 Other changes
@@ -227,7 +244,7 @@ Version 1.2, 2009-03-01
 Bugs fixed:
 ~~~~~~~~~~~
 
-* Corrected the download URL in the `setup.py` script.
+* Corrected the download URL in the ``setup.py`` script.
 
 
 Version 1.1, released 2008-12-19

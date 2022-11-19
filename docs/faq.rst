@@ -137,7 +137,7 @@ The webcolors module is distributed under a `three-clause BSD
 license <http://opensource.org/licenses/BSD-3-Clause>`_. This is an
 open-source license which grants you broad freedom to use,
 redistribute, modify and distribute modified versions of
-webcolors. For details, see the file `LICENSE` in the source
+webcolors. For details, see the file ``LICENSE`` in the source
 distribution of webcolors.
 
 .. _three-clause BSD license: http://opensource.org/licenses/BSD-3-Clause

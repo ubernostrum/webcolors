@@ -34,9 +34,9 @@ def html5_parse_simple_color(value: str) -> types.HTML5SimpleColor:
 
     :param value: The color to parse.
     :type value: :class:`str`, which must consist of exactly
-        the character "#" followed by six hexadecimal digits
+        the character ``"#"`` followed by six hexadecimal digits
     :raises ValueError: when the given value is not a Unicode string of
-       length 7, consisting of exactly the character `#` followed by
+       length 7, consisting of exactly the character ``#`` followed by
        six hexadecimal digits.
 
 
@@ -139,7 +139,7 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
 
     :param value: The color to parse.
     :raises ValueError: when the given value is not a Unicode string,
-       or when it is precisely the string `"transparent"`.
+       or when it is precisely the string ``"transparent"``.
 
     """
     # 1. Let input be the string being parsed.
