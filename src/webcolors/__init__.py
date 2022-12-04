@@ -85,5 +85,4 @@ __all__ = [
     "HTML5SimpleColor",
     "IntTuple",
     "PercentTuple",
-    "__version__",
 ]
