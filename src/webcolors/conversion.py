@@ -4,7 +4,6 @@ Functions which convert between various types of color values.
 """
 from . import constants, normalization, types
 
-
 # Conversions from color names to other formats.
 # --------------------------------------------------------------------------------
 
