@@ -23,7 +23,7 @@ def html5_parse_simple_color(value: str) -> types.HTML5SimpleColor:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> html5_parse_simple_color("#ffffff")
         HTML5SimpleColor(red=255, green=255, blue=255)
@@ -87,12 +87,12 @@ def html5_serialize_simple_color(simple_color: types.IntTuple) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> html5_serialize_simple_color((0, 0, 0))
-        "#000000"
+        '#000000'
         >>> html5_serialize_simple_color((255, 255, 255))
-        "#ffffff"
+        '#ffffff'
 
     :param simple_color: The color to serialize.
 
@@ -128,7 +128,7 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> html5_parse_legacy_color("black")
         HTML5SimpleColor(red=0, green=0, blue=0)

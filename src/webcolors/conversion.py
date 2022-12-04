@@ -4,6 +4,7 @@ Functions which convert between various types of color values.
 """
 from . import constants, normalization, types
 
+
 # Conversions from color names to other formats.
 # --------------------------------------------------------------------------------
 
@@ -17,14 +18,14 @@ def name_to_hex(name: str, spec: str = constants.CSS3) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> name_to_hex("white")
-        "#ffffff"
+        '#ffffff'
         >>> name_to_hex("navy")
-        "#000080"
+        '#000080'
         >>> name_to_hex("goldenrod")
-        "#daa520"
+        '#daa520'
         >>> name_to_hex("goldenrod", spec=HTML4)
         Traceback (most recent call last):
             ...
@@ -54,7 +55,7 @@ def name_to_rgb(name: str, spec: str = constants.CSS3) -> types.IntegerRGB:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> name_to_rgb("white")
         IntegerRGB(red=255, green=255, blue=255)
@@ -82,14 +83,14 @@ def name_to_rgb_percent(name: str, spec: str = constants.CSS3) -> types.PercentR
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> name_to_rgb_percent("white")
-        PercentRGB(red="100%", green="100%", blue="100%")
+        PercentRGB(red='100%', green='100%', blue='100%')
         >>> name_to_rgb_percent("navy")
-        PercentRGB(red="0%", green="0%", blue="50%")
+        PercentRGB(red='0%', green='0%', blue='50%')
         >>> name_to_rgb_percent("goldenrod")
-        PercentRGB(red="85.49%", green="64.71%", blue="12.5%")
+        PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
     :param name: The color name to convert.
     :param spec: The specification from which to draw the list of color
@@ -122,16 +123,16 @@ def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> hex_to_name("#ffffff")
-        "white"
+        'white'
         >>> hex_to_name("#fff")
-        "white"
+        'white'
         >>> hex_to_name("#000080")
-        "navy"
+        'navy'
         >>> hex_to_name("#daa520")
-        "goldenrod"
+        'goldenrod'
         >>> hex_to_name("#daa520", spec=HTML4)
         Traceback (most recent call last):
             ...
@@ -163,7 +164,7 @@ def hex_to_rgb(hex_value: str) -> types.IntegerRGB:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> hex_to_rgb("#fff")
         IntegerRGB(red=255, green=255, blue=255)
@@ -187,12 +188,12 @@ def hex_to_rgb_percent(hex_value: str) -> types.PercentRGB:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> hex_to_rgb_percent("#ffffff")
-        PercentRGB(red="100%", green="100%", blue="100%")
+        PercentRGB(red='100%', green='100%', blue='100%')
         >>> hex_to_rgb_percent("#000080")
-        PercentRGB(red="0%", green="0%", blue="50%")
+        PercentRGB(red='0%', green='0%', blue='50%')
 
     :param hex_value: The hexadecimal color value to convert.
     :raises ValueError: when the supplied hex value is invalid.
@@ -225,12 +226,12 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_to_name((255, 255, 255))
-        "white"
+        'white'
         >>> rgb_to_name((0, 0, 128))
-        "navy"
+        'navy'
 
     :param rgb_triplet: The `rgb()` triplet.
     :param spec: The specification from which to draw the list of color
@@ -250,12 +251,12 @@ def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_to_hex((255, 255, 255))
-        "#ffffff"
+        '#ffffff'
         >>> rgb_to_hex((0, 0, 128))
-        "#000080"
+        '#000080'
 
     :param rgb_triplet: The `rgb()` triplet.
 
@@ -284,14 +285,14 @@ def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_to_rgb_percent((255, 255, 255))
-        PercentRGB(red="100%", green="100%", blue="100%")
+        PercentRGB(red='100%', green='100%', blue='100%')
         >>> rgb_to_rgb_percent((0, 0, 128))
-        PercentRGB(red="0%", green="0%", blue="50%")
+        PercentRGB(red='0%', green='0%', blue='50%')
         >>> rgb_to_rgb_percent((218, 165, 32))
-        PercentRGB(red="85.49%", green="64.71%", blue="12.5%")
+        PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
     :param rgb_triplet: The `rgb()` triplet.
 
@@ -338,14 +339,14 @@ def rgb_percent_to_name(
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_percent_to_name(("100%", "100%", "100%"))
-        "white"
+        'white'
         >>> rgb_percent_to_name(("0%", "0%", "50%"))
-        "navy"
+        'navy'
         >>> rgb_percent_to_name(("85.49%", "64.71%", "12.5%"))
-        "goldenrod"
+        'goldenrod'
 
     :param rgb_percent_triplet: The `rgb()` triplet.
     :param spec: The specification from which to draw the list of color
@@ -369,14 +370,14 @@ def rgb_percent_to_hex(rgb_percent_triplet: types.PercentTuple) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_percent_to_hex(("100%", "100%", "0%"))
-        "#ffff00"
+        '#ffff00'
         >>> rgb_percent_to_hex(("0%", "0%", "50%"))
-        "#000080"
+        '#000080'
         >>> rgb_percent_to_hex(("85.49%", "64.71%", "12.5%"))
-        "#daa520"
+        '#daa520'
 
     :param rgb_percent_triplet: The `rgb()` triplet.
 
@@ -401,7 +402,7 @@ def rgb_percent_to_rgb(
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> rgb_percent_to_rgb(("100%", "100%", "100%"))
         IntegerRGB(red=255, green=255, blue=255)

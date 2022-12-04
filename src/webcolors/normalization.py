@@ -18,21 +18,21 @@ def normalize_hex(hex_value: str) -> str:
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
-        >>> normalize_hex('#0099cc')
+        >>> normalize_hex("#0099cc")
         '#0099cc'
-        >>> normalize_hex('#0099CC')
+        >>> normalize_hex("#0099CC")
         '#0099cc'
-        >>> normalize_hex('#09c')
+        >>> normalize_hex("#09c")
         '#0099cc'
-        >>> normalize_hex('#09C')
+        >>> normalize_hex("#09C")
         '#0099cc'
-        >>> normalize_hex('#0099gg')
+        >>> normalize_hex("#0099gg")
         Traceback (most recent call last):
             ...
         ValueError: '#0099gg' is not a valid hexadecimal color value.
-        >>> normalize_hex('0099cc')
+        >>> normalize_hex("0099cc")
         Traceback (most recent call last):
             ...
         ValueError: '0099cc' is not a valid hexadecimal color value.
@@ -68,7 +68,7 @@ def normalize_integer_triplet(
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
         >>> normalize_integer_triplet((128, 128, 128))
         IntegerRGB(red=128, green=128, blue=128)
@@ -108,13 +108,13 @@ def normalize_percent_triplet(
 
     Examples:
 
-    .. code-block:: pycon
+    .. doctest::
 
-       >>> normalize_percent_triplet(('50%', '50%', '50%'))
+       >>> normalize_percent_triplet(("50%", "50%", "50%"))
        PercentRGB(red='50%', green='50%', blue='50%')
-       >>> normalize_percent_triplet(('0%', '100%', '0%'))
+       >>> normalize_percent_triplet(("0%", "100%", "0%"))
        PercentRGB(red='0%', green='100%', blue='0%')
-       >>> normalize_percent_triplet(('-10%', '-0%', '500%'))
+       >>> normalize_percent_triplet(("-10%", "-0%", "500%"))
        PercentRGB(red='0%', green='0%', blue='100%')
 
     :param rgb_triplet: The percentage `rgb()` triplet to normalize.

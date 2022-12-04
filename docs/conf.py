@@ -1,6 +1,11 @@
 import sys
 
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.intersphinx", "sphinx.ext.viewcode"]
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.doctest",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
+]
 templates_path = ["_templates"]
 source_suffix = ".rst"
 master_doc = "index"
@@ -30,3 +35,7 @@ spelling_lang = "en_US"
 
 # Location of word list.
 spelling_word_list_filename = "spelling_wordlist.txt"
+
+
+# Doctest configuration.
+doctest_global_setup = "from webcolors import *"
