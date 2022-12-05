@@ -42,8 +42,6 @@ target-version = ["py37"]
 fail_under = 100
 
 [tool.isort]
-known_first_party = ["webcolors"]
-known_third_party = ["bs4", "html5lib", "requests"]
 profile = "black"
 
 [tool.setuptools.dynamic]
