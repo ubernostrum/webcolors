@@ -6,3 +6,4 @@ include pyproject.toml
 include tox.ini
 graft src
 graft tests
+global-exclude *.pyc
