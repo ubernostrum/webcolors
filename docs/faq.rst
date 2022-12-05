@@ -149,4 +149,3 @@ I found a bug or want to make an improvement!
 The canonical development repository for webcolors is online at
 <https://github.com/ubernostrum/webcolors>. Issues and pull requests
 can both be filed there.
-

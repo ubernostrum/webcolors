@@ -22,7 +22,7 @@ Other changes
 
 * Now packaging declaratively via ``pyproject.toml`` with PEP 517
   support from ``setuptools``.
-  
+
 
 Version 1.12, released 2022-05-25
 ---------------------------------

@@ -1,5 +1,7 @@
 include LICENSE
 include MANIFEST.in
+include .editorconfig
+include .pre-commit-config.yaml
 recursive-include docs *
 include .flake8
 include pyproject.toml

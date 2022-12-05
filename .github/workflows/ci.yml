@@ -16,7 +16,7 @@ env:
 
 permissions:
   contents: read
-  
+
 jobs:
   tests:
     name: tox on ${{ matrix.python-version }}

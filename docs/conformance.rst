@@ -155,7 +155,7 @@ multiple Python versions and executing a variety of different test
 tasks. The source distribution of webcolors includes its `tox.ini`
 file. To run the tests, install tox (`pip install tox`), then download
 and unpack `a source distribution of webcolors from the Python Package
-Index <https://pypi.org/project/webcolors/>`_. 
+Index <https://pypi.org/project/webcolors/>`_.
 
 To run the normal test suite against the complete set of supported
 Python versions:

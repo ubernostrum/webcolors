@@ -234,4 +234,3 @@ HTML5 color algorithms
 .. autofunction:: html5_parse_simple_color
 .. autofunction:: html5_serialize_simple_color
 .. autofunction:: html5_parse_legacy_color
-
