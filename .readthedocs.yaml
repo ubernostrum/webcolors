@@ -16,7 +16,4 @@ python:
   install:
     - method: pip
       path: .
-    - method: pip
-      path: furo
-    - method: pip
-      path: sphinx-notfound-page
+    - requirements: docs/requirements.txt
