@@ -24,7 +24,7 @@ For example::
 
     >>> import webcolors
     >>> webcolors.hex_to_name("#daa520")
-    "goldenrod"
+    'goldenrod'
 
 Implementations are also provided for the HTML5 color parsing and
 serialization algorithms. For example, parsing the infamous
