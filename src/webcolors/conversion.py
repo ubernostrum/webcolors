@@ -47,7 +47,7 @@ def name_to_hex(name: str, spec: str = constants.CSS3) -> str:
 def name_to_rgb(name: str, spec: str = constants.CSS3) -> types.IntegerRGB:
     """
     Convert a color name to a 3-:class:`tuple` of :class:`int` suitable for use in
-    an `rgb()` triplet specifying that color.
+    an ``rgb()`` triplet specifying that color.
 
     The color name will be normalized to lower-case before being looked
     up.
@@ -75,7 +75,7 @@ def name_to_rgb(name: str, spec: str = constants.CSS3) -> types.IntegerRGB:
 def name_to_rgb_percent(name: str, spec: str = constants.CSS3) -> types.PercentRGB:
     """
     Convert a color name to a 3-:class:`tuple` of percentages suitable for use
-    in an `rgb()` triplet specifying that color.
+    in an ``rgb()`` triplet specifying that color.
 
     The color name will be normalized to lower-case before being looked
     up.
@@ -113,12 +113,11 @@ def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
 
     .. note:: **Spelling variants**
 
-       Some values representing named gray colors can map to either of
-       two names in CSS3, because it supports both `gray` and `grey`
-       spelling variants for those colors. This function will always
-       return the variant spelled `gray` (such as `lightgray` instead
-       of `lightgrey`). See :ref:`the documentation on name conventions
-       <color-name-conventions>` for details.
+       Some values representing named gray colors can map to either of two names in
+       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       those colors. This function will always return the variant spelled ``"gray"``
+       (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
+       on name conventions <color-name-conventions>` for details.
 
     Examples:
 
@@ -157,7 +156,7 @@ def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
 def hex_to_rgb(hex_value: str) -> types.IntegerRGB:
     """
     Convert a hexadecimal color value to a 3-:class:`tuple` of :class:`int` suitable
-    for use in an `rgb()` triplet specifying that color.
+    for use in an ``rgb()`` triplet specifying that color.
 
     The hexadecimal value will be normalized before being converted.
 
@@ -181,7 +180,7 @@ def hex_to_rgb(hex_value: str) -> types.IntegerRGB:
 def hex_to_rgb_percent(hex_value: str) -> types.PercentRGB:
     """
     Convert a hexadecimal color value to a 3-:class:`tuple` of percentages
-    suitable for use in an `rgb()` triplet representing that color.
+    suitable for use in an ``rgb()`` triplet representing that color.
 
     The hexadecimal value will be normalized before being converted.
 
@@ -207,7 +206,7 @@ def hex_to_rgb_percent(hex_value: str) -> types.PercentRGB:
 
 def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
     """
-    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
     such name exists.
 
@@ -216,12 +215,11 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
 
     .. note:: **Spelling variants**
 
-       Some values representing named gray colors can map to either of
-       two names in CSS3, because it supports both `gray` and `grey`
-       spelling variants for those colors. This function will always
-       return the variant spelled `gray` (such as `lightgray` instead
-       of `lightgrey`). See :ref:`the documentation on name conventions
-       <color-name-conventions>` for details.
+       Some values representing named gray colors can map to either of two names in
+       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       those colors. This function will always return the variant spelled ``"gray"``
+       (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
+       on name conventions <color-name-conventions>` for details.
 
     Examples:
 
@@ -232,7 +230,7 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
         >>> rgb_to_name((0, 0, 128))
         'navy'
 
-    :param rgb_triplet: The `rgb()` triplet.
+    :param rgb_triplet: The ``rgb()`` triplet.
     :param spec: The specification from which to draw the list of color
        names. Default is :data:`CSS3`.
     :raises ValueError: when the given color has no name in the given spec.
@@ -245,7 +243,7 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
 
 def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
     """
-    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal value for that color.
 
     Examples:
@@ -257,7 +255,7 @@ def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
         >>> rgb_to_hex((0, 0, 128))
         '#000080'
 
-    :param rgb_triplet: The `rgb()` triplet.
+    :param rgb_triplet: The ``rgb()`` triplet.
 
     """
     red, green, blue = normalization.normalize_integer_triplet(rgb_triplet)
@@ -266,21 +264,19 @@ def rgb_to_hex(rgb_triplet: types.IntTuple) -> str:
 
 def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
     """
-    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to a 3-:class:`tuple` of percentages suitable for use in
     representing that color.
 
     .. note:: **Floating-point precision**
 
-       This function makes some trade-offs in terms of the accuracy of
-       the final representation. For some common integer values,
-       special-case logic is used to ensure a precise result (e.g.,
-       integer 128 will always convert to `"50%"`, integer 32 will
-       always convert to `"12.5%"`), but for all other values a
-       standard Python :class:`float` is used and rounded to two
-       decimal places, which may result in a loss of precision for some
-       values due to the inherent imprecision of `IEEE floating-point
-       numbers <https://en.wikipedia.org/wiki/IEEE_754>`_.
+       This function makes some trade-offs in terms of the accuracy of the final
+       representation. For some common integer values, special-case logic is used to
+       ensure a precise result (e.g., integer 128 will always convert to ``"50%"``,
+       integer 32 will always convert to ``"12.5%"``), but for all other values a
+       standard Python :class:`float` is used and rounded to two decimal places, which
+       may result in a loss of precision for some values due to the inherent imprecision
+       of `IEEE floating-point numbers <https://en.wikipedia.org/wiki/IEEE_754>`_.
 
     Examples:
 
@@ -293,7 +289,7 @@ def rgb_to_rgb_percent(rgb_triplet: types.IntTuple) -> types.PercentRGB:
         >>> rgb_to_rgb_percent((218, 165, 32))
         PercentRGB(red='85.49%', green='64.71%', blue='12.5%')
 
-    :param rgb_triplet: The `rgb()` triplet.
+    :param rgb_triplet: The ``rgb()`` triplet.
 
     """
     # In order to maintain precision for common values,
@@ -320,7 +316,7 @@ def rgb_percent_to_name(
     rgb_percent_triplet: types.PercentTuple, spec: str = constants.CSS3
 ) -> str:
     """
-    Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any
     such name exists.
 
@@ -329,12 +325,11 @@ def rgb_percent_to_name(
 
     .. note:: **Spelling variants**
 
-       Some values representing named gray colors can map to either of
-       two names in CSS3, because it supports both `gray` and `grey`
-       spelling variants for those colors. This function will always
-       return the variant spelled `gray` (such as `lightgray` instead
-       of `lightgrey`). See :ref:`the documentation on name conventions
-       <color-name-conventions>` for details.
+       Some values representing named gray colors can map to either of two names in
+       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       those colors. This function will always return the variant spelled ``"gray"``
+       (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
+       on name conventions <color-name-conventions>` for details.
 
     Examples:
 
@@ -347,7 +342,7 @@ def rgb_percent_to_name(
         >>> rgb_percent_to_name(("85.49%", "64.71%", "12.5%"))
         'goldenrod'
 
-    :param rgb_percent_triplet: The `rgb()` triplet.
+    :param rgb_percent_triplet: The ``rgb()`` triplet.
     :param spec: The specification from which to draw the list of color
         names. Default is :data:`CSS3`.
     :raises ValueError: when the given color has no name in the given spec.
@@ -363,7 +358,7 @@ def rgb_percent_to_name(
 
 def rgb_percent_to_hex(rgb_percent_triplet: types.PercentTuple) -> str:
     """
-    Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to a normalized hexadecimal color value for that
     color.
 
@@ -378,7 +373,7 @@ def rgb_percent_to_hex(rgb_percent_triplet: types.PercentTuple) -> str:
         >>> rgb_percent_to_hex(("85.49%", "64.71%", "12.5%"))
         '#daa520'
 
-    :param rgb_percent_triplet: The `rgb()` triplet.
+    :param rgb_percent_triplet: The ``rgb()`` triplet.
 
     """
     return rgb_to_hex(
@@ -391,7 +386,7 @@ def rgb_percent_to_rgb(
 ) -> types.IntegerRGB:
     """
 
-    Convert a 3-:class:`tuple` of percentages, suitable for use in an `rgb()`
+    Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to a 3-:class:`tuple` of :class:`int` suitable for use in
     representing that color.
 
@@ -410,7 +405,7 @@ def rgb_percent_to_rgb(
         >>> rgb_percent_to_rgb(("85.49%", "64.71%", "12.5%"))
         IntegerRGB(red=218, green=165, blue=32)
 
-    :param rgb_percent_triplet: The `rgb()` triplet.
+    :param rgb_percent_triplet: The ``rgb()`` triplet.
 
     """
     return types.IntegerRGB._make(

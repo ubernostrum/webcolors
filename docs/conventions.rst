@@ -103,7 +103,7 @@ lowercase.
 
 .. note:: **Spelling variants**
 
-   HTML 4, CSS1, and CSS2 each defined a color named *gray*. In CSS3, this
+   HTML 4, CSS1, and CSS2 each defined a color named ``"gray"``. In CSS3, this
    color can be named either ``"gray"`` or ``"grey"``, and several other
    related color values each have two names in CSS3:
    ``"darkgray"``/``"darkgrey"``, ``"darkslategray"``/``"darkslategrey"``,

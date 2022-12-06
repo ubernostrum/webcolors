@@ -63,7 +63,7 @@ def normalize_integer_triplet(
     rgb_triplet: types.IntTuple,
 ) -> types.IntegerRGB:
     """
-    Normalize an integer `rgb()` triplet so that all values are
+    Normalize an integer ``rgb()`` triplet so that all values are
     within the range 0..255.
 
     Examples:
@@ -103,7 +103,7 @@ def normalize_percent_triplet(
     rgb_triplet: types.PercentTuple,
 ) -> types.PercentRGB:
     """
-    Normalize a percentage `rgb()` triplet so that all values are
+    Normalize a percentage ``rgb()`` triplet so that all values are
     within the range 0%..100%.
 
     Examples:
