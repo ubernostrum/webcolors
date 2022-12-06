@@ -46,7 +46,7 @@ specification identifier, will raise :exc:`ValueError`.
    For example: although :func:`normalize_hex` is actually implemented
    in a submodule named ``webcolors.normalization``, it must always be
    referred to as ``webcolors.normalize_hex``, **never** as
-   ``webcolors.normlization.normalize_hex``.
+   ``webcolors.normalization.normalize_hex``.
 
 
 Data types
