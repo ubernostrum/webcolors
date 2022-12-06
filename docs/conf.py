@@ -1,6 +1,13 @@
+"""
+Configuration file for the Sphinx documentation builder:
+
+https://www.sphinx-doc.org/
+
+"""
 import sys
 
 extensions = [
+    "notfound.extension",
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
