@@ -1,14 +1,13 @@
 webcolors |release|
 ===================
 
-This module provides utility functions for working with the color
-names and color value formats defined by the HTML and CSS
-specifications for use in documents on the web.
+This module provides utility functions for working with the color names and
+color value formats defined by the HTML and CSS specifications for use in
+documents on the web.
 
-Support is included for normalizing and converting between the
-following formats (RGB colorspace only; conversion to/from HSL can be
-handled by the :mod:`colorsys` module in the Python standard
-library):
+Support is included for normalizing and converting between the following
+formats (RGB colorspace only; conversion to/from HSL can be handled by the
+:mod:`colorsys` module in the Python standard library):
 
 * Specification-defined color names
 
@@ -26,9 +25,9 @@ For example::
     >>> webcolors.hex_to_name("#daa520")
     'goldenrod'
 
-Implementations are also provided for the HTML5 color parsing and
-serialization algorithms. For example, parsing the infamous
-"chucknorris" string into an rgb() triplet::
+Implementations are also provided for the HTML5 color parsing and serialization
+algorithms. For example, parsing the infamous "chucknorris" string into an
+``rgb()`` triplet::
 
     >>> import webcolors
     >>> webcolors.html5_parse_legacy_color("chucknorris")
