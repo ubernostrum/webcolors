@@ -24,7 +24,7 @@ Normal installation
 The preferred method of installing webcolors is via ``pip``, the
 standard Python package-installation tool. If you don't have ``pip``,
 instructions are available for `how to obtain and install it
-<https://pip.pypa.io/en/latest/installing.html>`_. If you're using a
+<https://pip.pypa.io/en/latest/installation/>`_. If you're using a
 supported version of Python, ``pip`` came bundled with your installation
 of Python.
 
