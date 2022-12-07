@@ -2,3 +2,4 @@
 
 furo
 sphinx-notfound-page
+sphinxext-opengraph

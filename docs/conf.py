@@ -12,6 +12,7 @@ extensions = [
     "sphinx.ext.doctest",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
+    "sphinxext.opengraph",
 ]
 templates_path = ["_templates"]
 source_suffix = ".rst"
@@ -43,6 +44,9 @@ spelling_lang = "en_US"
 # Location of word list.
 spelling_word_list_filename = "spelling_wordlist.txt"
 
-
 # Doctest configuration.
 doctest_global_setup = "from webcolors import *"
+
+# OGP metadata configuration.
+ogp_enable_meta_description = True
+ogp_site_url = "https://webcolors.readthedocs.io/"
