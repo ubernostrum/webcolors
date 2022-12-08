@@ -36,9 +36,8 @@ def hex_colors():
     order starting from #000000.
 
     """
-    hex_template = "#%06x"
     for i in range(16777217):
-        yield hex_template % i
+        yield f"#{i:06x}"
 
 
 def int_colors():
