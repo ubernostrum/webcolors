@@ -138,8 +138,9 @@ def html5_parse_legacy_color(value: str) -> types.HTML5SimpleColor:
         HTML5SimpleColor(red=0, green=13, blue=0)
 
     :param value: The color to parse.
-    :raises ValueError: when the given value is not a Unicode string,
-       or when it is precisely the string ``"transparent"``.
+
+    :raises ValueError: when the given value is not a Unicode string, when it is the
+       empty string, or when it is precisely the string ``"transparent"``.
 
     """
     # 1. Let input be the string being parsed.
