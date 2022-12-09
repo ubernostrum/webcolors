@@ -149,16 +149,16 @@ versions:
 
 .. code-block:: shell
 
-   $ tox
+   $ tox run
 
 This requires that you have each supported version of Python (for webcolors
-|release|, this is 2.7, 3.5, 3.6, and 3.7) available. To test only against a
-specific version of Python, use the `-e` flag and pass the version to test. For
-example, to test on Python 3.7:
+|release|, this is 3.7, 3.8, 3.9, 3.10, and 3.11) available. To test only
+against a specific version of Python, use the `-e` flag and pass the version to
+test. For example, to test on Python 3.7:
 
 .. code-block:: shell
 
-   $ tox -e py37
+   $ tox run -e py37
 
 To run the full verification tests for definition correctness and conversions,
 specify the "release" test environment instead (so named because these tests
@@ -166,6 +166,6 @@ are usually run only prior to a new release of webcolors):
 
 .. code-block:: shell
 
-   $ tox -e release
+   $ tox run -e release
 
 Note that this requires an internet connection, and is CPU-intensive.
