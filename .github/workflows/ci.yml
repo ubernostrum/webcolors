@@ -47,4 +47,4 @@ jobs:
           python -m site
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install --upgrade tox>=4.0 tox-gh-actions
-      - run: "python -m tox"
+      - run: "python -m tox run"
