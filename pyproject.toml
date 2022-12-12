@@ -24,7 +24,8 @@ classifiers = [
 name = "webcolors"
 description = "A library for working with the color formats defined by HTML and CSS."
 dynamic = ["version"]
-license = {file = "LICENSE"}
+keywords = ["color", "css", "html", "web"]
+license = {text = "BSD-3-Clause"}
 readme = "README.rst"
 requires-python = ">=3.7"
 
