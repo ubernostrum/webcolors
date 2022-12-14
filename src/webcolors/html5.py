@@ -5,7 +5,9 @@ Note that these functions are written in a way that may seem strange to
 developers familiar with Python, because they do not use the most
 efficient or idiomatic way of accomplishing their tasks. This is
 because, for compliance, these functions are written as literal
-translations into Python of the algorithms in HTML5.
+translations into Python of the algorithms in HTML5:
+
+https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#colours
 
 For ease of understanding, the relevant steps of the algorithm from
 the standard are included as comments interspersed in the
