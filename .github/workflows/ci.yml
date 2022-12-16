@@ -51,4 +51,4 @@ jobs:
       - name: "Set up test environments"
         run: python -m tox run -vv --notest
       - name: "Run tests"
-      - run: "python -m tox run"
+        run: "python -m tox run"
