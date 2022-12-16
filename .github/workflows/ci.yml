@@ -48,4 +48,7 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install --upgrade tox tox-gh
           python -m tox --version
+      - name: "Set up test environments"
+        run: python -m tox run -vv --notest
+      - name: "Run tests"
       - run: "python -m tox run"
