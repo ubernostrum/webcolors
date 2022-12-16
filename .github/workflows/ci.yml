@@ -46,9 +46,7 @@ jobs:
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel
-          python -m pip install --upgrade tox tox-gh
+          python -m pip install --upgrade tox tox-gh-actions
           python -m tox --version
-      - name: "Set up test environments"
-        run: python -m tox run -vv --notest
-      - name: "Run tests"
+      - name: "Run tests with tox"
         run: "python -m tox run --skip-pkg-install"
