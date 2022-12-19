@@ -32,6 +32,7 @@ def tests_with_coverage(session: nox.Session) -> None:
     session.install("pytest", "pytest-cov", ".")
     session.run(
         "python",
+        "-Wonce::DeprecationWarning",
         "-Im",
         "pytest",
         "-vv",
