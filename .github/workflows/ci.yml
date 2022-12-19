@@ -49,4 +49,4 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: "Run CI suite with nox"
-        run: "python -Im nox --non-interactive ${{ matrix.python-version }}"
+        run: "python -Im nox --non-interactive --python ${{ matrix.python-version }}"
