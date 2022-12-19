@@ -71,6 +71,18 @@ def docs_build(session: nox.Session) -> None:
 
 
 @nox.session(python=["3.11"], tags=["docs"])
+def docs_docstrings(session: nox.Session) -> None:
+    """
+    Enforce the presence of docstrings on all modules, classes, functions, and
+    methods.
+
+    """
+    session.install("interrogate")
+    session.run("python", "-Im", "interrogate", "--version")
+    session.run("python", "-Im", "interrogate", "src/")
+
+
+@nox.session(python=["3.11"], tags=["docs"])
 def docs_spellcheck(session: nox.Session) -> None:
     """
     Spell-check the package's documentation.
@@ -126,18 +138,6 @@ def docs_test(session: nox.Session) -> None:
         "docs/",
         "docs/_build/html",
     )
-
-
-@nox.session(python=["3.11"], tags=["docs"])
-def docs_docstrings(session: nox.Session) -> None:
-    """
-    Enforce the presence of docstrings on all modules, classes, functions, and
-    methods.
-
-    """
-    session.install("interrogate")
-    session.run("python", "-Im", "interrogate", "--version")
-    session.run("python", "-Im", "interrogate", "src/")
 
 
 # Code formatting checks.
