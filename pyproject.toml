@@ -42,6 +42,9 @@ target-version = ["py37"]
 [tool.coverage.report]
 fail_under = 100
 
+[tool.interrogate]
+ignore-init-module = true
+
 [tool.isort]
 profile = "black"
 

@@ -23,6 +23,10 @@ class HTML4DefinitionTests(unittest.TestCase):
     """
 
     def setUp(self):
+        """
+        Fetch the HTML 4 color definitions and store them on self.html4_colors.
+
+        """
         self.html4_colors = {}
         soup = BeautifulSoup(
             requests.get("http://www.w3.org/TR/html401/types.html", timeout=5).content,
@@ -56,6 +60,10 @@ class CSS21DefinitionTests(unittest.TestCase):
     """
 
     def setUp(self):
+        """
+        Fetch the CSS2.1 color definitions and store them on self.css21_colors.
+
+        """
         self.color_matching_re = re.compile(r"^([a-z]+) (#[a-fA-F0-9]{6})$")
         self.css21_colors = {}
         soup = BeautifulSoup(
@@ -89,6 +97,9 @@ class CSS3DefinitionTests(unittest.TestCase):
     """
 
     def setUp(self):
+        """
+        Fetch the CSS3 color definitions and store them on self.css3_colors.
+        """
         self.css3_colors = {}
         soup = BeautifulSoup(
             requests.get("http://www.w3.org/TR/css3-color/", timeout=5).content,

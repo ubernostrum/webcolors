@@ -79,7 +79,7 @@ def docs_docstrings(session: nox.Session) -> None:
     """
     session.install("interrogate")
     session.run("python", "-Im", "interrogate", "--version")
-    session.run("python", "-Im", "interrogate", "src/")
+    session.run("python", "-Im", "interrogate", "-v", "src/", "tests/", "noxfile.py")
 
 
 @nox.session(python=["3.11"], tags=["docs"])
