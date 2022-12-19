@@ -11,13 +11,13 @@ identifiably
 incrementing
 internet
 losslessly
+nox
 online
 sRGB
 rgb
 submodule
 submodules
 superset
-tox
 trichromatic
 tuple
 tuples

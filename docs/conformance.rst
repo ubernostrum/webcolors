@@ -137,19 +137,18 @@ and for each such triplet `t` verifies that the following assertion holds:
 Running the tests
 -----------------
 
-The standard test runner for webcolors is `tox <https://tox.readthedocs.io/>`_,
+The standard test runner for webcolors is `nox <https://nox.thea.codes/>`_,
 which supports testing against multiple Python versions and executing a variety
 of different test tasks. The source distribution of webcolors includes its
-`tox.ini` file. To run the tests, install tox (`pip install tox`), then
-download and unpack `a source distribution of webcolors from the Python Package
-Index <https://pypi.org/project/webcolors/>`_.
+``noxfile.py`` file. To run the tests, install nox (`pip install nox`), then
+download and unpack a git checkout or source package of webcolors.
 
 To run the normal test suite against the complete set of supported Python
 versions:
 
 .. code-block:: shell
 
-   $ tox run
+   $ python -m nox
 
 This requires that you have each supported version of Python (for webcolors
 |release|, this is 3.7, 3.8, 3.9, 3.10, and 3.11) available. To test only
@@ -158,7 +157,7 @@ test. For example, to test on Python 3.7:
 
 .. code-block:: shell
 
-   $ tox run -e py37
+   $ python -m nox --python 3.7
 
 To run the full verification tests for definition correctness and conversions,
 specify the "release" test environment instead (so named because these tests
@@ -166,6 +165,6 @@ are usually run only prior to a new release of webcolors):
 
 .. code-block:: shell
 
-   $ tox run -e release
+   $ python -m nox -s release
 
 Note that this requires an internet connection, and is CPU-intensive.
