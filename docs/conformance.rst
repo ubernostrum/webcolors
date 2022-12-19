@@ -47,7 +47,7 @@ applicable, at least one of each of the following types of values:
 Since this covers the cases most likely to produce problems, this test suite
 provides good basic confidence in the correctness of the tested functions. It
 runs on every commit to the repository, and on every release tag. You can see
-the results of test runs online `iat GitHub
+the results of test runs online `at GitHub
 <https://github.com/ubernostrum/webcolors/actions/workflows/ci.yml/>`_.
 
 However, the normal test suite cannot guarantee that the color definitions
@@ -140,7 +140,7 @@ Running the tests
 The standard test runner for webcolors is `nox <https://nox.thea.codes/>`_,
 which supports testing against multiple Python versions and executing a variety
 of different test tasks. The source distribution of webcolors includes its
-``noxfile.py`` file. To run the tests, install nox (`pip install nox`), then
+``noxfile.py`` file. To run the tests, install nox (``pip install nox``), then
 download and unpack a git checkout or source package of webcolors.
 
 To run the normal test suite against the complete set of supported Python
@@ -152,19 +152,19 @@ versions:
 
 This requires that you have each supported version of Python (for webcolors
 |release|, this is 3.7, 3.8, 3.9, 3.10, and 3.11) available. To test only
-against a specific version of Python, use the `-e` flag and pass the version to
-test. For example, to test on Python 3.7:
+against a specific version of Python, use the ``--python`` flag and pass the
+version to test. For example, to test on Python 3.10:
 
 .. code-block:: shell
 
-   $ python -m nox --python 3.7
+   $ python -m nox --python 3.10
 
 To run the full verification tests for definition correctness and conversions,
-specify the "release" test environment instead (so named because these tests
+specify the "release" test keyword instead (so named because these tests
 are usually run only prior to a new release of webcolors):
 
 .. code-block:: shell
 
-   $ python -m nox -s release
+   $ python -m nox --keyword release
 
 Note that this requires an internet connection, and is CPU-intensive.

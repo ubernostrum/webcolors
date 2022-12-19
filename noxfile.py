@@ -15,11 +15,11 @@ import os
 import nox
 
 nox.options.default_venv_backend = "venv"
+nox.options.keywords = "not release"
 nox.options.reuse_existing_virtualenvs = True
 
 
-# The core task: run tests, with coverage, on the full matrix of supported Python
-# versions.
+# Tasks which run the package's test suites.
 # -----------------------------------------------------------------------------------
 
 
@@ -40,6 +40,26 @@ def tests_with_coverage(session: nox.Session) -> None:
         "--cov-report",
         "term-missing",
     )
+
+
+@nox.session(python=["3.11"], tags=["tests", "release"])
+def tests_definitions(session: nox.Session) -> None:
+    """
+    Run the full color definitions test suite (requires an internet connection).
+
+    """
+    session.install("pytest", "bs4", "html5lib", "requests", ".")
+    session.run("python", "-Im", "pytest", "-vv", "tests/definitions.py")
+
+
+@nox.session(python=["3.11"], tags=["tests", "release"])
+def tests_full_colors(session: nox.Session) -> None:
+    """
+    Run the full color conversion test suite (slow/CPU-intensive).
+
+    """
+    session.install("pytest", ".")
+    session.run("python", "-Im", "pytest", "-vv", "tests/full_colors.py")
 
 
 # Tasks which test the package's documentation.
