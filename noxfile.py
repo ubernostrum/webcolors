@@ -31,7 +31,7 @@ def tests_with_coverage(session: nox.Session) -> None:
     """
     session.install("pytest", "pytest-cov", ".")
     session.run(
-        "python",
+        f"python{session.python}",
         "-Wonce::DeprecationWarning",
         "-Im",
         "pytest",
@@ -50,7 +50,9 @@ def tests_definitions(session: nox.Session) -> None:
 
     """
     session.install("pytest", "bs4", "html5lib", "requests", ".")
-    session.run("python", "-Im", "pytest", "-vv", "tests/definitions.py")
+    session.run(
+        f"python{session.python}", "-Im", "pytest", "-vv", "tests/definitions.py"
+    )
 
 
 @nox.session(python=["3.11"], tags=["tests", "release"])
@@ -60,7 +62,9 @@ def tests_full_colors(session: nox.Session) -> None:
 
     """
     session.install("pytest", ".")
-    session.run("python", "-Im", "pytest", "-vv", "tests/full_colors.py")
+    session.run(
+        f"python{session.python}", "-Im", "pytest", "-vv", "tests/full_colors.py"
+    )
 
 
 # Tasks which test the package's documentation.
@@ -77,7 +81,7 @@ def docs_build(session: nox.Session) -> None:
         "furo", "sphinx", "sphinx-notfound-page", "sphinxext-opengraph", "."
     )
     session.run(
-        "python",
+        f"python{session.python}",
         "-Im",
         "sphinx",
         "-c",
@@ -99,8 +103,16 @@ def docs_docstrings(session: nox.Session) -> None:
 
     """
     session.install("interrogate")
-    session.run("python", "-Im", "interrogate", "--version")
-    session.run("python", "-Im", "interrogate", "-v", "src/", "tests/", "noxfile.py")
+    session.run(f"python{session.python}", "-Im", "interrogate", "--version")
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "interrogate",
+        "-v",
+        "src/",
+        "tests/",
+        "noxfile.py",
+    )
 
 
 @nox.session(python=["3.11"], tags=["docs"])
@@ -119,7 +131,7 @@ def docs_spellcheck(session: nox.Session) -> None:
         ".",
     )
     session.run(
-        "python",
+        f"python{session.python}",
         "-Im",
         "sphinx",
         "-W",  # Promote warnings to errors, so that misspelled words fail the build.
@@ -147,7 +159,7 @@ def docs_test(session: nox.Session) -> None:
     """
     session.install("sphinx", "sphinx-notfound-page", "sphinxext-opengraph", ".")
     session.run(
-        "python",
+        f"python{session.python}",
         "-Im",
         "sphinx",
         "-c",
@@ -175,9 +187,9 @@ def format_black(session: nox.Session) -> None:
 
     """
     session.install("black")
-    session.run("python", "-Im", "black", "--version")
+    session.run(f"python{session.python}", "-Im", "black", "--version")
     session.run(
-        "python",
+        f"python{session.python}",
         "-Im",
         "black",
         "--check",
@@ -196,9 +208,9 @@ def format_isort(session: nox.Session) -> None:
 
     """
     session.install("isort")
-    session.run("python", "-Im", "isort", "--version")
+    session.run(f"python{session.python}", "-Im", "isort", "--version")
     session.run(
-        "python",
+        f"python{session.python}",
         "-Im",
         "isort",
         "--check-only",
@@ -221,9 +233,16 @@ def lint_bandit(session: nox.Session) -> None:
 
     """
     session.install("bandit[toml]")
-    session.run("python", "-Im", "bandit", "--version")
+    session.run(f"python{session.python}", "-Im", "bandit", "--version")
     session.run(
-        "python", "-Im", "bandit", "-c", "./pyproject.toml", "-r", "src/", "tests/"
+        f"python{session.python}",
+        "-Im",
+        "bandit",
+        "-c",
+        "./pyproject.toml",
+        "-r",
+        "src/",
+        "tests/",
     )
 
 
@@ -234,8 +253,16 @@ def lint_flake8(session: nox.Session) -> None:
 
     """
     session.install("flake8", "flake8-bugbear")
-    session.run("python", "-Im", "flake8", "--version")
-    session.run("python", "-Im", "flake8", "src/", "tests/", "docs/", "noxfile.py")
+    session.run(f"python{session.python}", "-Im", "flake8", "--version")
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "flake8",
+        "src/",
+        "tests/",
+        "docs/",
+        "noxfile.py",
+    )
 
 
 @nox.session(python=["3.11"], tags=["linters"])
@@ -249,8 +276,8 @@ def lint_pylint(session: nox.Session) -> None:
     # full conformance suite does require a few extra libraries, so they're installed
     # here.
     session.install("pylint", "bs4", "html5lib", "requests")
-    session.run("python", "-Im", "pylint", "--version")
-    session.run("python", "-Im", "pylint", "src/", "tests/")
+    session.run(f"python{session.python}", "-Im", "pylint", "--version")
+    session.run(f"python{session.python}", "-Im", "pylint", "src/", "tests/")
 
 
 # Packaging checks.
@@ -264,8 +291,8 @@ def package_build(session: nox.Session) -> None:
 
     """
     session.install("build")
-    session.run("python", "-Im", "build", "--version")
-    session.run("python", "-Im", "build")
+    session.run(f"python{session.python}", "-Im", "build", "--version")
+    session.run(f"python{session.python}", "-Im", "build")
 
 
 @nox.session(python=["3.11"], tags=["packaging"])
@@ -276,10 +303,19 @@ def package_description(session: nox.Session) -> None:
     """
     package_dir = session.create_tmp()
     session.install("build", "twine")
-    session.run("python", "-Im", "build", "--version")
-    session.run("python", "-Im", "twine", "--version")
-    session.run("python", "-Im", "build", "--wheel", "--outdir", f"{package_dir}/build")
-    session.run("python", "-Im", "twine", "check", f"{package_dir}/build/*")
+    session.run(f"python{session.python}", "-Im", "build", "--version")
+    session.run(f"python{session.python}", "-Im", "twine", "--version")
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "build",
+        "--wheel",
+        "--outdir",
+        f"{package_dir}/build",
+    )
+    session.run(
+        f"python{session.python}", "-Im", "twine", "check", f"{package_dir}/build/*"
+    )
 
 
 @nox.session(python=["3.11"], tags=["packaging"])
@@ -289,8 +325,8 @@ def package_manifest(session: nox.Session) -> None:
 
     """
     session.install("check-manifest")
-    session.run("python", "-Im", "check_manifest", "--version")
-    session.run("python", "-Im", "check_manifest", "--verbose")
+    session.run(f"python{session.python}", "-Im", "check_manifest", "--version")
+    session.run(f"python{session.python}", "-Im", "check_manifest", "--verbose")
 
 
 @nox.session(python=["3.11"], tags=["packaging"])
@@ -300,7 +336,7 @@ def package_pyroma(session: nox.Session) -> None:
 
     """
     session.install("pyroma")
-    session.run("python", "-Im", "pyroma", ".")
+    session.run(f"python{session.python}", "-Im", "pyroma", ".")
 
 
 @nox.session(python=["3.11"], tags=["packaging"])
@@ -311,7 +347,16 @@ def package_wheel(session: nox.Session) -> None:
     """
     package_dir = session.create_tmp()
     session.install("build", "check-wheel-contents")
-    session.run("python", "-Im", "build", "--version")
-    session.run("python", "-Im", "check_wheel_contents", "--version")
-    session.run("python", "-Im", "build", "--wheel", "--outdir", f"{package_dir}/build")
-    session.run("python", "-Im", "check_wheel_contents", f"{package_dir}/build")
+    session.run(f"python{session.python}", "-Im", "build", "--version")
+    session.run(f"python{session.python}", "-Im", "check_wheel_contents", "--version")
+    session.run(
+        f"python{session.python}",
+        "-Im",
+        "build",
+        "--wheel",
+        "--outdir",
+        f"{package_dir}/build",
+    )
+    session.run(
+        f"python{session.python}", "-Im", "check_wheel_contents", f"{package_dir}/build"
+    )
