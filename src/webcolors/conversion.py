@@ -114,7 +114,7 @@ def hex_to_name(hex_value: str, spec: str = constants.CSS3) -> str:
     .. note:: **Spelling variants**
 
        Some values representing named gray colors can map to either of two names in
-       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       CSS3, because it supports both ``"gray"`` and ``"grey"`` spelling variants for
        those colors. This function will always return the variant spelled ``"gray"``
        (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
        on name conventions <color-name-conventions>` for details.
@@ -216,7 +216,7 @@ def rgb_to_name(rgb_triplet: types.IntTuple, spec: str = constants.CSS3) -> str:
     .. note:: **Spelling variants**
 
        Some values representing named gray colors can map to either of two names in
-       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       CSS3, because it supports both ``"gray"`` and ``"grey"`` spelling variants for
        those colors. This function will always return the variant spelled ``"gray"``
        (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
        on name conventions <color-name-conventions>` for details.
@@ -326,7 +326,7 @@ def rgb_percent_to_name(
     .. note:: **Spelling variants**
 
        Some values representing named gray colors can map to either of two names in
-       CSS3, because it supports both ``"gray"`` and `"grey"` spelling variants for
+       CSS3, because it supports both ``"gray"`` and ``"grey"`` spelling variants for
        those colors. This function will always return the variant spelled ``"gray"``
        (such as ``"lightgray"`` instead of ``"lightgrey"``). See :ref:`the documentation
        on name conventions <color-name-conventions>` for details.
