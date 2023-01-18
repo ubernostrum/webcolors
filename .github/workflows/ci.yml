@@ -11,7 +11,6 @@ on:
 
 env:
   FORCE_COLOR: "1"
-  TOX_TESTENV_PASSENV: FORCE_COLOR
   PIP_DISABLE_VERSION_CHECK: "1"
 
 permissions:

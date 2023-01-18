@@ -13,6 +13,8 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "sphinxext.opengraph",
+    "sphinx_copybutton",
+    "sphinx_inline_tabs",
 ]
 templates_path = ["_templates"]
 source_suffix = ".rst"

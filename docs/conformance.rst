@@ -146,25 +146,51 @@ download and unpack a git checkout or source package of webcolors.
 To run the normal test suite against the complete set of supported Python
 versions:
 
-.. code-block:: shell
+.. tab:: macOS/Linux/other Unix
 
-   $ python -m nox
+   .. code-block:: shell
+
+      python -m pip install nox
+      python -m nox
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m pip install nox
+      py -m nox
 
 This requires that you have each supported version of Python (for webcolors
 |release|, this is 3.7, 3.8, 3.9, 3.10, and 3.11) available. To test only
 against a specific version of Python, use the ``--python`` flag and pass the
 version to test. For example, to test on Python 3.10:
 
-.. code-block:: shell
+.. tab:: macOS/Linux/other Unix
 
-   $ python -m nox --python 3.10
+   .. code-block:: shell
+
+      python -m nox --python 3.10
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m nox --python 3.10
 
 To run the full verification tests for definition correctness and conversions,
 specify the "release" test keyword instead (so named because these tests
 are usually run only prior to a new release of webcolors):
 
-.. code-block:: shell
+.. tab:: macOS/Linux/other Unix
 
-   $ python -m nox --keyword release
+   .. code-block:: shell
+
+      python -m nox --keyword release
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m nox --keyword release
 
 Note that this requires an internet connection, and is CPU-intensive.

@@ -18,18 +18,47 @@ on the following versions of Python:
 * Python 3.11
 
 
-Normal installation
--------------------
+Installing webcolors
+--------------------
 
-The preferred method of installing webcolors is via ``pip``, the standard
-Python package-installation tool. If you don't have ``pip``, instructions are
-available for `how to obtain and install it
-<https://pip.pypa.io/en/latest/installation/>`_. If you're using a supported
-version of Python, ``pip`` came bundled with your installation of Python.
+To install webcolors, run the following command from a command
+prompt/terminal:
 
-Once you have ``pip``, type::
+.. tab:: macOS/Linux/other Unix
 
-    pip install webcolors
+   .. code-block:: shell
+
+      python -m pip install webcolors
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m pip install webcolors
+
+This will use ``pip``, the standard Python package-installation tool. If you
+are using a supported version of Python, your installation of Python should
+have come with ``pip`` bundled. If ``pip`` does not appear to be present, you
+can try running the following from a command prompt/terminal:
+
+.. tab:: macOS/Linux/other Unix
+
+   .. code-block:: shell
+
+      python -m ensurepip --upgrade
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m ensurepip --upgrade
+
+Instructions are also available for `how to obtain and manually install or
+upgrade pip <https://pip.pypa.io/en/latest/installation/>`_.
+
+If you don't already have a supported version of Django installed, using
+``pip`` to install webcolors will also install the latest supported version of
+Django.
 
 
 Installing from a source checkout

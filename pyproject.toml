@@ -33,6 +33,20 @@ requires-python = ">=3.7"
 documentation = "https://webcolors.readthedocs.io"
 homepage = "https://github.com/ubernostrum/webcolors"
 
+[project.optional-dependencies]
+docs = [
+  "furo",
+  "sphinx",
+  "sphinx-copybutton",
+  "sphinx-inline-tabs",
+  "sphinx-notfound-page",
+  "sphinxext-opengraph",
+]
+tests = [
+  "pytest",
+  "pytest-cov",
+]
+
 [tool.bandit]
 skips = ["B101"]
 
