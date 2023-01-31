@@ -7,7 +7,7 @@ Change log
 This document lists the changes between each release of webcolors.
 
 
-Version 1.13, released 2022-??-??
+Version 1.13, released 2023-??-??
 ---------------------------------
 
 No bug fixes or new features.
@@ -19,8 +19,8 @@ Other changes
   unchanged. Imports should continue to be directly from the top-level
   ``webcolors`` module; attempting to import from submodules is not supported.
 
-* Now packaging declaratively via ``pyproject.toml`` with PEP 517 support from
-  ``setuptools``.
+* Now packaging declaratively via ``pyproject.toml`` with `PEP 517
+  <https://peps.python.org/pep-0517/>`_ support from ``setuptools``.
 
 
 Version 1.12, released 2022-05-25
