@@ -169,13 +169,13 @@ version to test. For example, to test on Python 3.10:
 
    .. code-block:: shell
 
-      python -m nox --python 3.10
+      python -m nox --python "3.10"
 
 .. tab:: Windows
 
    .. code-block:: shell
 
-      py -m nox --python 3.10
+      py -m nox --python "3.10"
 
 To run the full verification tests for definition correctness and conversions,
 specify the "release" test keyword instead (so named because these tests
