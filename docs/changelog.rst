@@ -15,6 +15,8 @@ No bug fixes or new features.
 Other changes
 ~~~~~~~~~~~~~
 
+* Supported Python versions are now 3.7, 3.8, 3.9, 3.10, and 3.11
+
 * The codebase was significantly reorganized and modernized. Public API is
   unchanged. Imports should continue to be directly from the top-level
   ``webcolors`` module; attempting to import from submodules is not supported.
