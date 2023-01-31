@@ -75,6 +75,16 @@ typing::
 
 From there, you can use git commands to check out the specific revision you
 want, and perform an "editable" install (allowing you to change code as you
-work on it) by typing::
+work on it) by typing:
 
-    pip install -e .
+.. tab:: macOS/Linux/other Unix
+
+   .. code-block:: shell
+
+      python -m pip install -e .
+
+.. tab:: Windows
+
+   .. code-block:: shell
+
+      py -m pip install -e .
