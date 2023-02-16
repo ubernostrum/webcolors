@@ -4,12 +4,17 @@ the definitions of the colors from the relevant standards documents.
 
 """
 
+import sys
 import re
+from pathlib import Path
 import unittest
 
 import html5lib  # noqa: F401 pylint: disable=unused-import
 import requests
 from bs4 import BeautifulSoup
+
+thisDir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(thisDir.parent))
 
 import webcolors
 

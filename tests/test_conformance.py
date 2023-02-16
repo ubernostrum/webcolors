@@ -10,7 +10,12 @@ connection and an HTML parsing library), see the file
 
 """
 
+import sys
+from pathlib import Path
 import unittest
+
+thisDir = Path(__file__).parent.absolute()
+sys.path.insert(0, str(thisDir.parent))
 
 import webcolors
 
