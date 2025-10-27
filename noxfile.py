@@ -19,7 +19,6 @@ import typing
 import nox
 
 nox.options.default_venv_backend = "venv"
-nox.options.keywords = "not release"
 nox.options.reuse_existing_virtualenvs = True
 
 PACKAGE_NAME = "webcolors"
@@ -58,7 +57,7 @@ def clean(paths: typing.Iterable[pathlib.Path] = ARTIFACT_PATHS) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.9", "3.10", "3.11", "3.12", "3.13"], tags=["tests"])
+@nox.session(python=["3.10", "3.11", "3.12", "3.13", "3.14"], tags=["tests"])
 def tests_with_coverage(session: nox.Session) -> None:
     """
     Run the package's unit tests, with coverage instrumentation.
@@ -75,8 +74,6 @@ def tests_with_coverage(session: nox.Session) -> None:
         "-Im",
         "coverage",
         "run",
-        "--source",
-        PACKAGE_NAME,
         "-m",
         "unittest",
         "discover",
@@ -227,7 +224,7 @@ def format_black(session: nox.Session) -> None:
     Check code formatting with Black.
 
     """
-    session.install("black>=24.0,<25.0")
+    session.install("black>=25.0,<26.0")
     session.run(f"python{session.python}", "-Im", "black", "--version")
     session.run(
         f"python{session.python}",
