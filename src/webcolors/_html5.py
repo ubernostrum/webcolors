@@ -101,25 +101,20 @@ def html5_serialize_simple_color(simple_color: IntTuple) -> str:
     red, green, blue = simple_color
 
     # 1. Let result be a string consisting of a single "#" (U+0023) character.
-    result = "#"
-
+    #
     # 2. Convert the red, green, and blue components in turn to two-digit hexadecimal
     #    numbers using lowercase ASCII hex digits, zero-padding if necessary, and append
     #    these numbers to result, in the order red, green, blue.
-    format_string = "{:02x}"
-    result += format_string.format(red)
-    result += format_string.format(green)
-    result += format_string.format(blue)
-
+    #
     # 3. Return result, which will be a valid lowercase simple color.
-    return result
+    return f"#{red:02x}{green:02x}{blue:02x}"
 
 
 def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     """
     Apply the HTML5 legacy color parsing algorithm.
 
-    Note that, since this algorithm is intended to handle many _types of
+    Note that, since this algorithm is intended to handle many types of
     malformed color values present in real-world Web documents, it is
     *extremely* forgiving of input, but the results of parsing inputs
     with high levels of "junk" (i.e., text other than a color value)
