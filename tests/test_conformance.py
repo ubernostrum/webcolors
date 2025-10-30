@@ -10,7 +10,7 @@ library), see the file ``definitions.py`` in this directory.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
-import unittest
+import pytest
 
 import webcolors
 
@@ -199,28 +199,30 @@ SVG_COLOR_DEFINITIONS = {
 }
 
 
-class ConformanceTests(unittest.TestCase):
+@pytest.mark.parametrize(
+    ["color", "hex_value"],
+    HTML4_COLOR_DEFINITIONS.items(),
+    ids=HTML4_COLOR_DEFINITIONS.keys(),
+)
+def test_html4_definition_conformance(color: str, hex_value: str):
     """
-    Demonstrate that this module conforms to the relevant standards documents
-    governing colors on the web.
+    Compare the results of name-to-hex conversion to the canonical hex values
+    provided in the HTML 4 specification.
 
     """
 
-    def test_html_definition_conformance(self):
-        """
-        Compare the results of name-to-hex conversion to the canonical hex values
-        provided in the HTML 4 specification.
+    assert webcolors.normalize_hex(hex_value) == webcolors.name_to_hex(color)
 
-        """
-        for color, hex_value in HTML4_COLOR_DEFINITIONS.items():
-            normalized = webcolors.normalize_hex(hex_value)
-            assert normalized == webcolors.name_to_hex(color)
 
-    def test_svg_definition_conformance(self):
-        """
-        Compare the results of name-to-rgb-triplet conversion to the canonical
-        triplet values provided in the SVG specification.
+@pytest.mark.parametrize(
+    ["color", "triplet"],
+    SVG_COLOR_DEFINITIONS.items(),
+    ids=SVG_COLOR_DEFINITIONS.keys(),
+)
+def test_svg_definition_conformance(color: str, triplet: webcolors.IntTuple):
+    """
+    Compare the results of name-to-rgb-triplet conversion to the canonical
+    triplet values provided in the SVG specification.
 
-        """
-        for color, triplet in SVG_COLOR_DEFINITIONS.items():
-            assert triplet == webcolors.name_to_rgb(color)
+    """
+    assert triplet == webcolors.name_to_rgb(color)

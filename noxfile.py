@@ -63,11 +63,7 @@ def tests_with_coverage(session: nox.Session) -> None:
     Run the package's unit tests, with coverage instrumentation.
 
     """
-    session.install(
-        ".[tests]",
-        "coverage",
-        'tomli; python_full_version < "3.11.0a7"',
-    )
+    session.install(".", "pytest", "coverage[toml]")
     session.run(
         f"python{session.python}",
         "-Wonce::DeprecationWarning",
@@ -75,8 +71,8 @@ def tests_with_coverage(session: nox.Session) -> None:
         "coverage",
         "run",
         "-m",
-        "unittest",
-        "discover",
+        "pytest",
+        "-vv",
     )
     clean()
 
@@ -293,7 +289,7 @@ def lint_flake8(session: nox.Session) -> None:
     Lint code with flake8.
 
     """
-    session.install("flake8", "flake8-bugbear")
+    session.install("flake8", "flake8-bugbear", "flake8-pytest-style")
     session.run(f"python{session.python}", "-Im", "flake8", "--version")
     session.run(
         f"python{session.python}",

@@ -5,103 +5,128 @@ Test the color-value normalization functions.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
-import unittest
+import pytest
 
 import webcolors
 
 
-class NormalizationTests(unittest.TestCase):
+@pytest.mark.parametrize(
+    ["raw", "normalized"],
+    [
+        ("#0099cc", "#0099cc"),
+        ("#0099CC", "#0099cc"),
+        ("#09c", "#0099cc"),
+        ("#09C", "#0099cc"),
+    ],
+    ids=["lowercase", "uppercase", "three-digit-lowercase", "three-digit-uppercase"],
+)
+def test_normalize_hex(raw: str, normalized: str):
     """
-    Test both the publicly-exposed and internal normalization functions.
+    Hexadecimal normalization normalizes valid hex color codes to 6 digits,
+    lowercase.
 
     """
+    assert normalized == webcolors.normalize_hex(raw)
 
-    def test_normalize_hex(self):
-        """
-        Hexadecimal normalization normalizes valid hex color codes to 6 digits,
-        lowercase.
 
-        """
-        test_pairs = (
-            ("#0099cc", "#0099cc"),
-            ("#0099CC", "#0099cc"),
-            ("#09c", "#0099cc"),
-            ("#09C", "#0099cc"),
-        )
+@pytest.mark.parametrize(
+    "hex_value",
+    ["0099cc", "#0000gg", "#0000", "#00000000"],
+    ids=["no-hash", "not-hex", "too-short", "too-long"],
+)
+def test_normalize_hex_format(hex_value: str):
+    """
+    Hex normalization raises ValueError on invalid hex color code.
 
-        for raw, normalized in test_pairs:
-            assert normalized == webcolors.normalize_hex(raw)
+    """
+    with pytest.raises(ValueError):
+        webcolors.normalize_hex(hex_value)
 
-    def test_normalize_hex_format(self):
-        """
-        Hex normalization raises ValueError on invalid hex color code.
 
-        """
-        test_values = ("0099cc", "#0000gg", "#0000", "#00000000")
-        for value in test_values:
-            self.assertRaises(ValueError, webcolors.normalize_hex, value)
+@pytest.mark.parametrize(
+    ["raw", "normalized"],
+    [(255, 255), (0, 0), (128, 128), (-20, 0), (270, 255), (-0, 0)],
+    ids=["max", "min", "middle", "clipped-to-min", "clipped-to-max", "negative-zero"],
+)
+def test_normalize_integer_rgb(raw: int, normalized: int):
+    """
+    Integer normalization clips to 0-255.
 
-    def test_normalize_integer_rgb(self):
-        """
-        Integer normalization clips to 0-255.
+    """
+    # pylint: disable=protected-access
+    assert normalized == webcolors._normalization._normalize_integer_rgb(raw)
 
-        """
-        # pylint: disable=protected-access
-        test_pairs = ((255, 255), (0, 0), (128, 128), (-20, 0), (270, 255), (-0, 0))
 
-        for raw, normalized in test_pairs:
-            assert normalized == webcolors._normalization._normalize_integer_rgb(raw)
+@pytest.mark.parametrize(
+    ["triplet", "normalized"],
+    [
+        ((128, 128, 128), (128, 128, 128)),
+        ((0, 0, 0), (0, 0, 0)),
+        ((255, 255, 255), (255, 255, 255)),
+        ((270, -20, 128), (255, 0, 128)),
+        ((-0, -0, -0), (0, 0, 0)),
+    ],
+    ids=["navy", "black", "white", "clipped", "negative-zero"],
+)
+def test_normalize_integer_triplet(
+    triplet: webcolors.IntTuple, normalized: webcolors.IntTuple
+):
+    """
+    Integer triplet normalization clips all values to 0-255.
 
-    def test_normalize_integer_triplet(self):
-        """
-        Integer triplet normalization clips all values to 0-255.
+    """
+    result = webcolors.normalize_integer_triplet(triplet)
+    assert isinstance(result, webcolors.IntegerRGB)
+    assert normalized == result
 
-        """
-        test_pairs = (
-            ((128, 128, 128), (128, 128, 128)),
-            ((0, 0, 0), (0, 0, 0)),
-            ((255, 255, 255), (255, 255, 255)),
-            ((270, -20, 128), (255, 0, 128)),
-            ((-0, -0, -0), (0, 0, 0)),
-        )
 
-        for triplet, normalized in test_pairs:
-            result = webcolors.normalize_integer_triplet(triplet)
-            assert isinstance(result, webcolors.IntegerRGB)
-            assert normalized == result
+@pytest.mark.parametrize(
+    ["raw", "normalized"],
+    [
+        ("0%", "0%"),
+        ("100%", "100%"),
+        ("62%", "62%"),
+        ("-5%", "0%"),
+        ("250%", "100%"),
+        ("85.49%", "85.49%"),
+        ("-0%", "0%"),
+    ],
+    ids=[
+        "min",
+        "max",
+        "not-special",
+        "clipped-to-min",
+        "clipped-to-max",
+        "floating-point",
+        "negative-zero",
+    ],
+)
+def test_normalize_percent_rgb(raw: str, normalized: str):
+    """
+    Percent normalization clips to 0%-100%.
 
-    def test_normalize_percent_rgb(self):
-        """
-        Percent normalization clips to 0%-100%.
+    """
+    # pylint: disable=protected-access
+    assert normalized == webcolors._normalization._normalize_percent_rgb(raw)
 
-        """
-        # pylint: disable=protected-access
-        test_pairs = (
-            ("0%", "0%"),
-            ("100%", "100%"),
-            ("62%", "62%"),
-            ("-5%", "0%"),
-            ("250%", "100%"),
-            ("85.49%", "85.49%"),
-            ("-0%", "0%"),
-        )
 
-        for raw, normalized in test_pairs:
-            assert normalized == webcolors._normalization._normalize_percent_rgb(raw)
+@pytest.mark.parametrize(
+    ["triplet", "normalized"],
+    [
+        (("50%", "50%", "50%"), ("50%", "50%", "50%")),
+        (("0%", "100%", "0%"), ("0%", "100%", "0%")),
+        (("-10%", "250%", "500%"), ("0%", "100%", "100%")),
+        (("-0%", "-0%", "-0%"), ("0%", "0%", "0%")),
+    ],
+    ids=["gray", "green", "clipped", "negative-zero"],
+)
+def test_normalize_percent_triplet(
+    triplet: webcolors.PercentTuple, normalized: webcolors.PercentTuple
+):
+    """
+    Percent triplet normalization clips all values to 0%-100%.
 
-    def test_normalize_percent_triplet(self):
-        """
-        Percent triplet normalization clips all values to 0%-100%.
-
-        """
-        test_pairs = (
-            (("50%", "50%", "50%"), ("50%", "50%", "50%")),
-            (("0%", "100%", "0%"), ("0%", "100%", "0%")),
-            (("-10%", "250%", "500%"), ("0%", "100%", "100%")),
-            (("-0%", "-0%", "-0%"), ("0%", "0%", "0%")),
-        )
-
-        for triplet, normalized in test_pairs:
-            result = webcolors.normalize_percent_triplet(triplet)
-            assert isinstance(result, webcolors.PercentRGB)
-            assert normalized == result
+    """
+    result = webcolors.normalize_percent_triplet(triplet)
+    assert isinstance(result, webcolors.PercentRGB)
+    assert normalized == result
