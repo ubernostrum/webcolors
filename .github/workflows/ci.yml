@@ -58,7 +58,7 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Run tests
-        run: "python -Im nox --non-interactive --error-on-external-run --tag tests --python ${{ matrix.python-version }}"
+        run: "python -Im nox --non-interactive --error-on-external-run -t tests --python ${{ matrix.python-version }}"
       - name: Upload coverage data
         uses: actions/upload-artifact@v4
         with:
@@ -127,7 +127,7 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Run documentation checks
-        run: "python -Im nox --non-interactive --error-on-external-run --tag docs"
+        run: "python -Im nox --non-interactive --error-on-external-run -t docs"
 
 
   lint-format:
@@ -151,9 +151,9 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Check code formatting
-        run: "python -Im nox --non-interactive --error-on-external-run --tag formatters --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t formatters --python 3.13"
       - name: Lint code
-        run: "python -Im nox --non-interactive --error-on-external-run --tag linters --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t linters --python 3.13"
 
 
   check-package:
@@ -177,7 +177,7 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Check package
-        run: "python -Im nox --non-interactive --error-on-external-run --tag packaging --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t packaging --python 3.13"
 
 
   required-checks-pass:
