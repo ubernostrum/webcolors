@@ -39,7 +39,7 @@ def test_normalize_hex_format(hex_value: str):
     Hex normalization raises ValueError on invalid hex color code.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a valid hexadecimal color value"):
         webcolors.normalize_hex(hex_value)
 
 

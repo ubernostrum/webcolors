@@ -6,6 +6,8 @@ Tests for the HTML5 color algorithms.
 # SPDX-License-Identifier: BSD-3-Claus
 # pylint: disable=protected-access
 
+import re
+
 import pytest
 
 import webcolors
@@ -31,8 +33,32 @@ def test_parse_simple_color(raw: str, parsed: webcolors.IntTuple):
 
 
 @pytest.mark.parametrize(
-    "value",
-    ["0099ccc", "#09c", "#0000", "#0000000", "#0000gg", "#000000".encode("ascii")],
+    ["value", "match"],
+    [
+        (
+            "0099ccc",
+            re.escape(
+                "An HTML5 simple color must begin with the character '#' (U+0023)"
+            ),
+        ),
+        (
+            "#09c",
+            "An HTML5 simple color must be a Unicode string seven characters long",
+        ),
+        (
+            "#0000",
+            "An HTML5 simple color must be a Unicode string seven characters long",
+        ),
+        (
+            "#0000000",
+            "An HTML5 simple color must be a Unicode string seven characters long",
+        ),
+        ("#0000gg", "An HTML5 simple color must contain exactly six ASCII hex digits"),
+        (
+            "#000000".encode("ascii"),
+            "An HTML5 simple color must be a Unicode string seven characters long",
+        ),
+    ],
     ids=[
         "too-long-no-hash",
         "three-digit",
@@ -42,12 +68,12 @@ def test_parse_simple_color(raw: str, parsed: webcolors.IntTuple):
         "not-unicode",
     ],
 )
-def test_parse_simple_color_error(value: str):
+def test_parse_simple_color_error(value: str, match: str):
     """
     Test error conditions of the HTML5 simple color parsing algorithm.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match=match):
         webcolors.html5_parse_simple_color(value)
 
 
@@ -121,14 +147,21 @@ def test_parse_legacy_color_hex(value: str):
 
 
 @pytest.mark.parametrize(
-    "value",
-    ["#000000".encode("ascii"), "transparent", ""],
+    ["value", "match"],
+    [
+        (
+            "#000000".encode("ascii"),
+            "HTML5 legacy color parsing requires a Unicode string as input.",
+        ),
+        ("transparent", 'HTML5 legacy color parsing forbids "transparent" as a value.'),
+        ("", "HTML5 legacy color parsing forbids empty string as a value."),
+    ],
     ids=["non-unicode", "transparent", "empty"],
 )
-def test_parse_legacy_color_error(value: str):
+def test_parse_legacy_color_error(value: str, match: str):
     """
     Test error conditions of the HTML5 legacy color parsing algorithm.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match=match):
         webcolors.html5_parse_legacy_color(value)

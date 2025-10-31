@@ -34,7 +34,7 @@ def test_hex_to_name_unnamed_in_any():
     A hex code which does not correspond to a named color raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.hex_to_name("#123456")
 
 
@@ -45,7 +45,7 @@ def test_hex_to_name_unnamed_in_spec():
 
     """
     # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.hex_to_name("#daa520", spec=webcolors.HTML4)
 
 
@@ -64,7 +64,7 @@ def test_hex_to_name_unspported_spec(spec: str):
     Using an unsupported specification raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a supported specification"):
         webcolors.hex_to_name("#ffffff", spec=spec)
 
 
@@ -125,7 +125,7 @@ def test_rgb_to_name_unnamed_in_any():
     An integer RGB triplet which does not correspond to a named color raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.rgb_to_name((18, 52, 86))
 
 
@@ -136,7 +136,7 @@ def test_rgb_to_name_unnamed_in_spec():
 
     """
     # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.rgb_to_name((218, 165, 32), spec=webcolors.HTML4)
 
 
@@ -155,7 +155,7 @@ def test_rgb_to_name_unsupported_spec(spec: str):
     Using an unsupported specification raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a supported specification"):
         webcolors.rgb_to_name((255, 255, 255), spec=spec)
 
 
@@ -219,7 +219,7 @@ def test_name_to_hex_unnamed(name: str, spec: str):
     color in the given specification, raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="is not defined as a named color"):
         webcolors.name_to_hex(name, spec=spec)
 
 
@@ -238,7 +238,7 @@ def test_name_to_hex_usupported_spec(spec: str):
     Using an unsupported specification raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a supported specification"):
         webcolors.name_to_hex("white", spec=spec)
 
 
@@ -299,7 +299,7 @@ def test_rgb_percent_to_name_unnamed_in_any():
     A percent RGB triplet which does not correspond to a named color raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.rgb_percent_to_name(("7.06%", "20.39%", "33.73%"))
 
 
@@ -310,7 +310,7 @@ def test_rgb_percent_to_name_unnamed_in_spec():
 
     """
     # This is 'goldenrod' in CSS 3 list, unnamed in HTML 4.
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="has no defined color name"):
         webcolors.rgb_percent_to_name(
             ("85.49%", "64.71%", "12.5%"), spec=webcolors.HTML4
         )
@@ -331,7 +331,7 @@ def test_rgb_percent_to_name_unsupported_spec(spec: str):
     Using an unsupported specification raises ValueError.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a supported specification"):
         webcolors.rgb_percent_to_name(("100%", "100%", "100%"), spec=spec)
 
 
@@ -489,5 +489,5 @@ def test_names_invalid(spec: str):
     names() raises ValueError when asked for an unsupported spec.
 
     """
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="not a supported specification"):
         webcolors.names(spec)

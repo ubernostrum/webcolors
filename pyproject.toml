@@ -74,6 +74,7 @@ source-includes = [
     "AUTHORS",
     "CONTRIBUTING.rst",
     "docs/",
+    "Makefile",
     "noxfile.py",
     "pdm.lock",
     "runtests.py",

@@ -310,7 +310,7 @@ def lint_pylint(session: nox.Session) -> None:
 
     """
     # Pylint requires that all dependencies be importable during the run.
-    session.install("pylint", "bs4", "html5lib", "requests")
+    session.install("pylint", "bs4", "html5lib", "requests", "pytest")
     session.run(f"python{session.python}", "-Im", "pylint", "--version")
     session.run(f"python{session.python}", "-Im", "pylint", "src/", "tests/")
     clean()
