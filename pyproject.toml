@@ -27,7 +27,7 @@ keywords = ["color", "css", "html", "web"]
 license = {text = "BSD-3-Clause"}
 readme = "README.rst"
 requires-python = ">=3.10"
-version = "25.10.0a0"
+version = "25.10.0"
 
 [project.urls]
 "Documentation" = "https://webcolors.readthedocs.io"
