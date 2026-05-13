@@ -206,6 +206,7 @@ _CSS3_NAMES_TO_HEX = {
     "powderblue": "#b0e0e6",
     "purple": "#800080",
     "red": "#ff0000",
+    "rebeccapurple": "#663399",
     "rosybrown": "#bc8f8f",
     "royalblue": "#4169e1",
     "saddlebrown": "#8b4513",
