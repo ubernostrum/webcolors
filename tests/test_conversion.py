@@ -58,7 +58,7 @@ def test_hex_to_name_supported_spec(spec: str):
     assert "white" == webcolors.hex_to_name("#ffffff", spec=spec)
 
 
-@pytest.mark.parametrize("spec", ["css1", "css4", "html5"])
+@pytest.mark.parametrize("spec", ["css1", "css5", "html5"])
 def test_hex_to_name_unspported_spec(spec: str):
     """
     Using an unsupported specification raises ValueError.
@@ -149,7 +149,7 @@ def test_rgb_to_name_supported_spec(spec: str):
     assert "white" == webcolors.rgb_to_name((255, 255, 255), spec=spec)
 
 
-@pytest.mark.parametrize("spec", ["css1", "css4", "html5"])
+@pytest.mark.parametrize("spec", ["css1", "css5", "html5"])
 def test_rgb_to_name_unsupported_spec(spec: str):
     """
     Using an unsupported specification raises ValueError.
@@ -232,7 +232,7 @@ def test_name_to_hex_supported_spec(spec: str):
     assert "#ffffff" == webcolors.name_to_hex("white", spec=spec)
 
 
-@pytest.mark.parametrize("spec", ["css1", "css4", "html5"])
+@pytest.mark.parametrize("spec", ["css1", "css5", "html5"])
 def test_name_to_hex_usupported_spec(spec: str):
     """
     Using an unsupported specification raises ValueError.
@@ -325,7 +325,7 @@ def test_rgb_percent_to_name_supported_spec(spec: str):
     assert "white" == webcolors.rgb_percent_to_name(("100%", "100%", "100%"), spec=spec)
 
 
-@pytest.mark.parametrize("spec", ["css1", "css4", "html5"])
+@pytest.mark.parametrize("spec", ["css1", "css5", "html5"])
 def test_rgb_percent_to_name_unsupported_spec(spec: str):
     """
     Using an unsupported specification raises ValueError.

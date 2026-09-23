@@ -5,7 +5,7 @@ Functions which convert between various types of color values.
 
 # SPDX-License-Identifier: BSD-3-Clause
 
-from ._definitions import CSS3, _get_hex_to_name_map, _get_name_to_hex_map
+from ._definitions import CSS4, _get_hex_to_name_map, _get_name_to_hex_map
 from ._normalization import (
     _percent_to_integer,
     normalize_hex,
@@ -18,7 +18,7 @@ from ._types import IntegerRGB, IntTuple, PercentRGB, PercentTuple
 # --------------------------------------------------------------------------------
 
 
-def name_to_hex(name: str, spec: str = CSS3) -> str:
+def name_to_hex(name: str, spec: str = CSS4) -> str:
     """
     Convert a color name to a normalized hexadecimal color value.
 
@@ -51,7 +51,7 @@ def name_to_hex(name: str, spec: str = CSS3) -> str:
     raise ValueError(f'"{name}" is not defined as a named color in {spec}')
 
 
-def name_to_rgb(name: str, spec: str = CSS3) -> IntegerRGB:
+def name_to_rgb(name: str, spec: str = CSS4) -> IntegerRGB:
     """
     Convert a color name to a 3-:class:`tuple` of :class:`int` suitable for use in
     an ``rgb()`` triplet specifying that color.
@@ -78,7 +78,7 @@ def name_to_rgb(name: str, spec: str = CSS3) -> IntegerRGB:
     return hex_to_rgb(name_to_hex(name, spec=spec))
 
 
-def name_to_rgb_percent(name: str, spec: str = CSS3) -> PercentRGB:
+def name_to_rgb_percent(name: str, spec: str = CSS4) -> PercentRGB:
     """
     Convert a color name to a 3-:class:`tuple` of percentages suitable for use in an
     ``rgb()`` triplet specifying that color.
@@ -109,7 +109,7 @@ def name_to_rgb_percent(name: str, spec: str = CSS3) -> PercentRGB:
 # --------------------------------------------------------------------------------
 
 
-def hex_to_name(hex_value: str, spec: str = CSS3) -> str:
+def hex_to_name(hex_value: str, spec: str = CSS4) -> str:
     """
     Convert a hexadecimal color value to its corresponding normalized color name, if
     any such name exists.
@@ -205,7 +205,7 @@ def hex_to_rgb_percent(hex_value: str) -> PercentRGB:
 # --------------------------------------------------------------------------------
 
 
-def rgb_to_name(rgb_triplet: IntTuple, spec: str = CSS3) -> str:
+def rgb_to_name(rgb_triplet: IntTuple, spec: str = CSS4) -> str:
     """
     Convert a 3-:class:`tuple` of :class:`int`, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any such name exists.
@@ -310,7 +310,7 @@ def rgb_to_rgb_percent(rgb_triplet: IntTuple) -> PercentRGB:
 # --------------------------------------------------------------------------------
 
 
-def rgb_percent_to_name(rgb_percent_triplet: PercentTuple, spec: str = CSS3) -> str:
+def rgb_percent_to_name(rgb_percent_triplet: PercentTuple, spec: str = CSS4) -> str:
     """
     Convert a 3-:class:`tuple` of percentages, suitable for use in an ``rgb()``
     color triplet, to its corresponding normalized color name, if any such name exists.

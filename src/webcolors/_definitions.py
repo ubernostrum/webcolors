@@ -24,8 +24,9 @@ HTML4 = "html4"
 CSS2 = "css2"
 CSS21 = "css21"
 CSS3 = "css3"
+CSS4 = "css4"
 
-_SUPPORTED_SPECIFICATIONS = (HTML4, CSS2, CSS21, CSS3)
+_SUPPORTED_SPECIFICATIONS = (HTML4, CSS2, CSS21, CSS3, CSS4)
 
 _SPECIFICATION_ERROR_TEMPLATE = (
     f"{{spec}} is not a supported specification for color name lookups; "
@@ -235,6 +236,9 @@ _CSS3_NAMES_TO_HEX = {
     "yellowgreen": "#9acd32",
 }
 
+# CSS Colors Level 4 added one new named color.
+_CSS4_NAMES_TO_HEX = {"rebeccapurple": "#663399", **_CSS3_NAMES_TO_HEX}
+
 
 # Mappings of normalized hexadecimal color values to color names.
 # --------------------------------------------------------------------------------
@@ -247,7 +251,7 @@ _CSS21_HEX_TO_NAMES = _reversedict(_CSS21_NAMES_TO_HEX)
 
 _CSS3_HEX_TO_NAMES = _reversedict(_CSS3_NAMES_TO_HEX)
 
-# CSS3 defines both "gray" and "grey", as well as defining either spelling variant for
+# CSS3 defined both "gray" and "grey", as well as defining either spelling variant for
 # other related colors like "darkgray"/"darkgrey", etc. For a "forward" lookup from
 # name to hex, this is straightforward, but a "reverse" lookup from hex to name requires
 # picking one spelling and being consistent about it.
@@ -262,12 +266,15 @@ _CSS3_HEX_TO_NAMES["#d3d3d3"] = "lightgray"
 _CSS3_HEX_TO_NAMES["#778899"] = "lightslategray"
 _CSS3_HEX_TO_NAMES["#708090"] = "slategray"
 
+_CSS4_HEX_TO_NAMES = {"#663399": "rebeccapurple", **_CSS3_HEX_TO_NAMES}
+
 
 _names_to_hex = {
     HTML4: _HTML4_NAMES_TO_HEX,
     CSS2: _CSS2_NAMES_TO_HEX,
     CSS21: _CSS21_NAMES_TO_HEX,
     CSS3: _CSS3_NAMES_TO_HEX,
+    CSS4: _CSS3_NAMES_TO_HEX,
 }
 
 _hex_to_names = {
@@ -275,6 +282,7 @@ _hex_to_names = {
     CSS2: _CSS2_HEX_TO_NAMES,
     CSS21: _CSS21_HEX_TO_NAMES,
     CSS3: _CSS3_HEX_TO_NAMES,
+    CSS4: _CSS4_HEX_TO_NAMES,
 }
 
 

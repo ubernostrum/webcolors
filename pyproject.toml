@@ -4,30 +4,30 @@ build-backend = "pdm.backend"
 
 [project]
 authors = [
-  {name = "James Bennett"}
+    { name = "James Bennett" }
 ]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
-  "Environment :: Web Environment",
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: BSD License",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
-  "Programming Language :: Python :: 3.14",
-  "Topic :: Utilities",
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Utilities",
 ]
 name = "webcolors"
 description = "A library for working with the color formats defined by HTML and CSS."
 keywords = ["color", "css", "html", "web"]
-license = {text = "BSD-3-Clause"}
+license = { text = "BSD-3-Clause" }
 readme = "README.rst"
 requires-python = ">=3.10"
-version = "25.10.0"
+version = "26.10.0a0"
 
 [project.urls]
 "Documentation" = "https://webcolors.readthedocs.io"
@@ -89,6 +89,6 @@ source-includes = [
 
 [tool.pylint]
 disable = [
-  "duplicate-code",
-  "protected-access",
+    "duplicate-code",
+    "protected-access",
 ]
