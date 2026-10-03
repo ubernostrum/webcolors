@@ -20,6 +20,8 @@ import string
 from ._definitions import _CSS3_NAMES_TO_HEX
 from ._types import HTML5SimpleColor, IntTuple
 
+_ASCII_WHITESPACE = "\t\n\f\r "
+
 
 def html5_parse_simple_color(value: str) -> HTML5SimpleColor:
     """
@@ -148,7 +150,7 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
         raise ValueError("HTML5 legacy color parsing forbids empty string as a value.")
 
     # 3. Strip leading and trailing ASCII whitespace from input.
-    value = value.strip()
+    value = value.strip(_ASCII_WHITESPACE)
 
     # 4. If input is an ASCII case-insensitive match for the string "transparent", then
     #    return an error.

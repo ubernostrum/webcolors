@@ -117,6 +117,12 @@ def test_parse_legacy_color(raw: str, parsed: webcolors.IntTuple):
     assert parsed == result
 
 
+def test_parse_legacy_color_strips_only_ascii_whitespace():
+    """The HTML5 algorithm trims ASCII whitespace, not all Unicode whitespace."""
+    assert webcolors.html5_parse_legacy_color("\tred\n") == (255, 0, 0)
+    assert webcolors.html5_parse_legacy_color("\u00a0red\u00a0") == (0, 237, 0)
+
+
 @pytest.mark.parametrize("name", webcolors._definitions._CSS3_NAMES_TO_HEX)
 def test_parse_legacy_color_names(name: str):
     """
