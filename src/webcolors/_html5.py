@@ -118,7 +118,7 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
     malformed color values present in real-world Web documents, it is
     *extremely* forgiving of input, but the results of parsing inputs
     with high levels of "junk" (i.e., text other than a color value)
-    may be surprising.
+    may be surprising. Only leading and trailing HTML ASCII whitespace is ignored.
 
     Examples:
 
@@ -148,7 +148,7 @@ def html5_parse_legacy_color(value: str) -> HTML5SimpleColor:
         raise ValueError("HTML5 legacy color parsing forbids empty string as a value.")
 
     # 3. Strip leading and trailing ASCII whitespace from input.
-    value = value.strip()
+    value = value.strip(" \t\n\r\f")
 
     # 4. If input is an ASCII case-insensitive match for the string "transparent", then
     #    return an error.

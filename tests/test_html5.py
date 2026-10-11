@@ -165,3 +165,23 @@ def test_parse_legacy_color_error(value: str, match: str):
     """
     with pytest.raises(ValueError, match=match):
         webcolors.html5_parse_legacy_color(value)
+
+
+@pytest.mark.parametrize("whitespace", ["\v", "\u00a0", "\u2003", "\u2028"])
+def test_legacy_color_preserves_other_whitespace(whitespace: str):
+    """Only HTML ASCII whitespace is stripped before legacy color parsing."""
+    assert webcolors.html5_parse_legacy_color(f"{whitespace}red{whitespace}") == (
+        0,
+        237,
+        0,
+    )
+
+
+@pytest.mark.parametrize("whitespace", [" ", "\t", "\n", "\r", "\f"])
+def test_legacy_color_strips_ascii_whitespace(whitespace: str):
+    """HTML ASCII whitespace around a named color remains insignificant."""
+    assert webcolors.html5_parse_legacy_color(f"{whitespace}red{whitespace}") == (
+        255,
+        0,
+        0,
+    )
