@@ -161,22 +161,22 @@ To run the normal test suite:
       py -m nox
 
 This will attempt to test against each supported version of Python (for
-``webcolors`` |release|, this is 3.10, 3.11, 3.12, 3.13, and 3.14), skipping any
+``webcolors`` |release|, this is 3.11, 3.12, 3.13, 3.14, and 3.15), skipping any
 which are missing on your machine. To test only against a specific version of
 Python, use the ``--python`` flag and pass the version to test. For example, to
-test only on Python 3.10:
+test only on Python 3.15:
 
 .. tab:: macOS/Linux/other Unix
 
    .. code-block:: shell
 
-      python -m nox -t tests --python "3.10"
+      python -m nox -t tests --python "3.15"
 
 .. tab:: Windows
 
    .. code-block:: shell
 
-      py -m nox -t tests --python "3.10"
+      py -m nox -t tests --python "3.15"
 
 To run the full verification tests for definition correctness and conversions,
 specify the "release" test keyword instead (so named because these tests are
