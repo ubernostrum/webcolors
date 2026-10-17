@@ -90,6 +90,24 @@ CSS3 also defines a new set of 147 color names. This set is taken directly from
 superset of the named colors defined in CSS2.1.
 
 
+CSS Level 4
+-----------
+
+There is no single "CSS4" specification. Instead, CSS now consists of multiple
+"modules" which each can be updated and versioned independently. For colors,
+`the CSS Color Module Level 4`_ is the key document. Although it has not yet
+reached the stage of a W3C Recommendation, significant progress has been made
+on adoption by browser vendors.
+
+The Level 4 version of CSS Color introduces a new variant of the RGB triplet
+syntax, allowing the commas between the color components to be omitted. Thus,
+``rgb(255, 255, 255)`` and ``rgb(255 255 255)`` are now both valid and both
+indicate the same color, and the same is true of ``rgb(100%, 100%, 100%)`` and
+``rgb(100% 100% 100%)``. The same syntax is also available for the ``rgba()``,
+``hsl()``, and ``hsla()`` constructs. The comma-less syntax is now referred to
+as "modern color syntax"
+
+
 HTML5
 -----
 
@@ -141,6 +159,7 @@ of `the HTML5 specification's section on colors`_.
 .. _one additional named color: https://www.w3.org/TR/CSS21/changes.html#q21.2
 .. _The CSS3 color module: http://www.w3.org/TR/css3-color/
 .. _the named colors defined for SVG (Scalable Vector Graphics): http://www.w3.org/TR/SVG11/types.html#ColorKeywords
+.. _the CSS Color Module Level 4: https://www.w3.org/TR/css-color-4/
 .. _the HTML5 specification's section on colors: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#colours
 
 

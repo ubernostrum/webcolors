@@ -286,7 +286,7 @@ _hex_to_names = {
 }
 
 
-def _get_name_to_hex_map(spec: str) -> dict:
+def _get_name_to_hex_map(spec: str) -> dict[str, str]:
     """
     Return the name-to-hex mapping for the given specification.
 
@@ -298,7 +298,7 @@ def _get_name_to_hex_map(spec: str) -> dict:
     return _names_to_hex[spec]
 
 
-def _get_hex_to_name_map(spec: str) -> dict:
+def _get_hex_to_name_map(spec: str) -> dict[str, str]:
     """
     Return the hex-to-name mapping for the given specification.
 

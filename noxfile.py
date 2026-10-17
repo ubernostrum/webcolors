@@ -57,7 +57,7 @@ def clean(paths: typing.Iterable[pathlib.Path] = ARTIFACT_PATHS) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.10", "3.11", "3.12", "3.13", "3.14"], tags=["tests"])
+@nox.session(python=["3.11", "3.12", "3.13", "3.14", "3.15"], tags=["tests"])
 def tests_with_coverage(session: nox.Session) -> None:
     """
     Run the package's unit tests, with coverage instrumentation.
@@ -77,7 +77,7 @@ def tests_with_coverage(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["tests"])
+@nox.session(python=["3.15"], tags=["tests"])
 def coverage_report(session: nox.Session) -> None:
     """
     Combine coverage from the various test runs and output the report.
@@ -97,7 +97,7 @@ def coverage_report(session: nox.Session) -> None:
     session.run(f"python{session.python}", "-Im", "coverage", "erase")
 
 
-@nox.session(python=["3.13"], tags=["release"])
+@nox.session(python=["3.15"], tags=["release"])
 def tests_definitions(session: nox.Session) -> None:
     """
     Run the full color definitions test suite (requires an internet connection).
@@ -110,7 +110,7 @@ def tests_definitions(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["release"])
+@nox.session(python=["3.15"], tags=["release"])
 def tests_full_colors(session: nox.Session) -> None:
     """
     Run the full color conversion test suite (slow/CPU-intensive).
@@ -127,11 +127,7 @@ def tests_full_colors(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-# The documentation jobs ordinarily would want to use the latest Python version, but
-# currently that's 3.13 and Read The Docs doesn't yet support it. So to ensure the
-# documentation jobs are as closely matched to what would happen on RTD, these jobs stay
-# on 3.12 for now.
-@nox.session(python=["3.12"], tags=["docs"])
+@nox.session(python=["3.15"], tags=["docs"])
 def docs_build(session: nox.Session) -> None:
     """
     Build the package's documentation as HTML.
@@ -156,7 +152,7 @@ def docs_build(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.12"], tags=["docs"])
+@nox.session(python=["3.15"], tags=["docs"])
 def docs_docstrings(session: nox.Session) -> None:
     """
     Enforce the presence of docstrings on all modules, classes, functions, and
@@ -177,7 +173,7 @@ def docs_docstrings(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.12"], tags=["docs"])
+@nox.session(python=["3.15"], tags=["docs"])
 def docs_spellcheck(session: nox.Session) -> None:
     """
     Spell-check the package's documentation.
@@ -214,13 +210,13 @@ def docs_spellcheck(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.13"], tags=["formatters"])
+@nox.session(python=["3.15"], tags=["formatters"])
 def format_black(session: nox.Session) -> None:
     """
     Check code formatting with Black.
 
     """
-    session.install("black>=25.0,<26.0")
+    session.install("black")
     session.run(f"python{session.python}", "-Im", "black", "--version")
     session.run(
         f"python{session.python}",
@@ -236,7 +232,7 @@ def format_black(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["formatters"])
+@nox.session(python=["3.15"], tags=["formatters"])
 def format_isort(session: nox.Session) -> None:
     """
     Check import order with isort.
@@ -262,7 +258,7 @@ def format_isort(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.13"], tags=["linters", "security"])
+@nox.session(python=["3.15"], tags=["linters", "security"])
 def lint_bandit(session: nox.Session) -> None:
     """
     Lint code with the Bandit security analyzer.
@@ -283,7 +279,7 @@ def lint_bandit(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["linters"])
+@nox.session(python=["3.15"], tags=["linters"])
 def lint_flake8(session: nox.Session) -> None:
     """
     Lint code with flake8.
@@ -303,7 +299,7 @@ def lint_flake8(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["linters"])
+@nox.session(python=["3.15"], tags=["linters"])
 def lint_pylint(session: nox.Session) -> None:
     """
     Lint code with Pylint.
@@ -320,7 +316,7 @@ def lint_pylint(session: nox.Session) -> None:
 # -----------------------------------------------------------------------------------
 
 
-@nox.session(python=["3.13"], tags=["packaging"])
+@nox.session(python=["3.15"], tags=["packaging"])
 def package_build(session: nox.Session) -> None:
     """
     Check that the package builds.
@@ -332,7 +328,7 @@ def package_build(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["packaging"])
+@nox.session(python=["3.15"], tags=["packaging"])
 def package_description(session: nox.Session) -> None:
     """
     Check that the package description will render on the Python Package Index.
@@ -356,7 +352,7 @@ def package_description(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["packaging"])
+@nox.session(python=["3.15"], tags=["packaging"])
 def package_manifest(session: nox.Session) -> None:
     """
     Check that the set of files in the package matches the set under version control.
@@ -370,7 +366,7 @@ def package_manifest(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["packaging"])
+@nox.session(python=["3.15"], tags=["packaging"])
 def package_pyroma(session: nox.Session) -> None:
     """
     Check package quality with pyroma.
@@ -381,7 +377,7 @@ def package_pyroma(session: nox.Session) -> None:
     clean()
 
 
-@nox.session(python=["3.13"], tags=["packaging"])
+@nox.session(python=["3.15"], tags=["packaging"])
 def package_wheel(session: nox.Session) -> None:
     """
     Check the built wheel package for common errors.

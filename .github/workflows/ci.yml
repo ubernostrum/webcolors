@@ -14,18 +14,22 @@ env:
 
 permissions: { }
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-package:
     name: Build and verify package
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - uses: hynek/build-and-inspect-python-package@2abe76da66d0a6a4a227101f9348ee855797cfa5 # v3.0.1
         id: baipp
 
     outputs:
@@ -42,12 +46,12 @@ jobs:
 
     steps:
       - name: Download pre-built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
@@ -58,9 +62,11 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Run tests
-        run: "python -Im nox --non-interactive --error-on-external-run -t tests --python ${{ matrix.python-version }}"
+        run: "python -Im nox --non-interactive --error-on-external-run -t tests --python ${MATRIX_PYTHON_VERSION}"
+        env:
+          MATRIX_PYTHON_VERSION: ${{ matrix.python-version }}
       - name: Upload coverage data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: coverage-data-${{ matrix.python-version }}
           path: .coverage.*
@@ -74,13 +80,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           pattern: coverage-data-*
           merge-multiple: true
@@ -99,7 +105,7 @@ jobs:
           coverage report --fail-under=100
 
       - name: Upload HTML report if check failed.
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: html-report
           path: htmlcov
@@ -112,12 +118,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download pre-built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
       - name: Set up test runner
@@ -136,14 +142,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download pre-built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: "3.13"
+          python-version: "3.15"
       - name: Set up test runner
         run: |
           python -VV
@@ -151,9 +157,9 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Check code formatting
-        run: "python -Im nox --non-interactive --error-on-external-run -t formatters --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t formatters --python 3.15"
       - name: Lint code
-        run: "python -Im nox --non-interactive --error-on-external-run -t linters --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t linters --python 3.15"
 
 
   check-package:
@@ -162,14 +168,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download pre-built packages
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: Packages
           path: dist
       - run: tar xf dist/*.tar.gz --strip-components=1
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-          python-version: "3.13"
+          python-version: "3.15"
       - name: Set up test runner
         run: |
           python -VV
@@ -177,7 +183,7 @@ jobs:
           python -Im pip install --upgrade nox
           python -Im nox --version
       - name: Check package
-        run: "python -Im nox --non-interactive --error-on-external-run -t packaging --python 3.13"
+        run: "python -Im nox --non-interactive --error-on-external-run -t packaging --python 3.15"
 
 
   required-checks-pass:
@@ -194,6 +200,6 @@ jobs:
 
     steps:
       - name: Decide whether the jobs succeeded or failed
-        uses: re-actors/alls-green@release/v1
+        uses: re-actors/alls-green@b5b5b37504aa4183270bd3d855c52a67f212be35 # v1.3.0
         with:
           jobs: ${{ toJSON(needs) }}

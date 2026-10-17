@@ -73,8 +73,8 @@ representation and manipulation options than ``webcolors``).
 Why does ``webcolors`` prefer American spellings?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In CSS3, several color names are defined multiple times with identical values,
-to support both American and British spelling variants for
+Beginning in CSS3, several color names were defined multiple times with
+identical values, to support both American and British spelling variants for
 ``"gray"``/``"grey"``. These colors are: ``"darkgray"``/``"darkgrey"``,
 ``"darkslategray"``/``"darkslategrey"``, ``"dimgray"``/``"dimgrey"``,
 ``"gray"``/``"grey"``, ``"lightgray"``/``"lightgrey"``,
@@ -83,12 +83,12 @@ to support both American and British spelling variants for
 Using any of the conversions from names to other formats
 (:func:`~webcolors.name_to_hex`, :func:`~webcolors.name_to_rgb`, or
 :func:`~webcolors.name_to_rgb_percent`) will accept either spelling provided
-the `spec` argument is :data:`~webcolors.CSS3`.
+the ``spec`` argument is :data:`~webcolors.CSS3` or :data:`~webcolors.CSS4`.
 
 However, converting from other formats to a name requires choosing which
 spelling to return, and should return the same choice each time. So
 ``webcolors`` chooses the ``gray`` variants, for consistency with HTML 4, CSS1,
-and CSS2, each of which only allowed `gray`.
+and CSS2, each of which only allowed ``gray``.
 
 
 Why aren't HSL values supported?
@@ -108,7 +108,7 @@ This is due to limitations in the representation of floating-point numbers in
 programming languages. Python, like many programming languages, uses `IEEE
 floating-point <https://en.wikipedia.org/wiki/IEEE_754>`_, which is inherently
 imprecise for some values. This imprecision only appears when converting
-between integer and percentage ```rgb()``` triplets, as in
+between integer and percentage ``rgb()`` triplets, as in
 :func:`~webcolors.rgb_to_rgb_percent` and
 :func:`~webcolors.rgb_percent_to_rgb`.
 
