@@ -14,7 +14,7 @@ What versions of Python are supported?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Version |release| of ``webcolors`` supports and is tested on Python
-3.11, 3.12, 3.13, 3.14, and 3.15
+3.11, 3.12, 3.13, 3.14, and 3.15.
 
 
 How am I allowed to use this module?
