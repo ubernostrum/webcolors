@@ -18,7 +18,7 @@ def _reversedict(dict_to_reverse: dict) -> dict:
     return {value: key for key, value in dict_to_reverse.items()}
 
 
-_HEX_COLOR_RE = re.compile(r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$")
+_HEX_COLOR_RE = re.compile(r"^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})\Z")
 
 HTML4 = "html4"
 CSS2 = "css2"
