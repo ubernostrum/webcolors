@@ -31,8 +31,15 @@ def test_normalize_hex(raw: str, normalized: str):
 
 @pytest.mark.parametrize(
     "hex_value",
-    ["0099cc", "#0000gg", "#0000", "#00000000"],
-    ids=["no-hash", "not-hex", "too-short", "too-long"],
+    ["0099cc", "#0000gg", "#0000", "#00000000", "#0099cc\n", "#09c\n"],
+    ids=[
+        "no-hash",
+        "not-hex",
+        "too-short",
+        "too-long",
+        "trailing-newline",
+        "trailing-newline-three-digit",
+    ],
 )
 def test_normalize_hex_format(hex_value: str):
     """
